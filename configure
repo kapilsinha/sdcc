@@ -752,9 +752,11 @@ PACKAGE_NAME
 PATH_SEPARATOR
 SHELL'
 ac_subst_files=''
+
 ac_user_opts='
 enable_option_checking
 with_ccache
+enable_avr_port
 enable_mcs51_port
 enable_z80_port
 enable_z180_port
@@ -1440,6 +1442,7 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --disable-avr-port      Excludes the AVR port 
   --disable-mcs51-port    Excludes the Intel mcs51 port
   --disable-z80-port      Excludes the Z80 port
   --disable-z180-port     Excludes the Z180 port
@@ -8267,9 +8270,19 @@ _ACEOF
   fi
 
 
-# Unsupported targets
-####AC_DO_PORT_ENABLER(avr,   avr,   AVR,   [Includes the AVR port (disabled by default)])
-OPT_DISABLE_AVR=1
+  # Check whether --enable-avr-port was given.
+if test "${enable_avr_port+set}" = set; then :
+  enableval=$enable_avr_port;
+fi
+
+
+  if test "$enable_avr_port" = "no"; then
+    OPT_DISABLE_AVR=1
+  else
+    enable_avr_port="yes"
+    OPT_DISABLE_AVR=0
+  fi
+
 
 cat >>confdefs.h <<_ACEOF
 #define OPT_DISABLE_AVR ${OPT_DISABLE_AVR}
@@ -8277,7 +8290,13 @@ _ACEOF
 
 
 
+  echo avr >>ports.all
+  if test $OPT_DISABLE_AVR = 0; then
+    echo avr >>ports.build
+  fi
 
+
+# Unsupported targets
   # Check whether --enable-ucsim was given.
 if test "${enable_ucsim+set}" = set; then :
   enableval=$enable_ucsim;
@@ -8798,7 +8817,9 @@ test $OPT_DISABLE_SDBINUTILS = 0 && subdirs="$subdirs support/sdbinutils"
 ac_config_files="$ac_config_files doc/Makefile"
 
 
-####test $OPT_DISABLE_AVR = 0 && AC_CONFIG_FILES([src/avr/Makefile])
+if test $OPT_DISABLE_AVR = 0; then
+  ac_config_files="$ac_config_files src/avr/Makefile"
+fi
 
 if test $OPT_DISABLE_DS390 = 0 || test $OPT_DISABLE_DS400; then
   ac_config_files="$ac_config_files src/ds390/Makefile sdas/as8xcxxx/Makefile"
@@ -9614,6 +9635,7 @@ do
     "sdccconf.h") CONFIG_HEADERS="$CONFIG_HEADERS sdccconf.h:sdccconf_in.h" ;;
     "sdas/linksrc/asxxxx_config.h") CONFIG_HEADERS="$CONFIG_HEADERS sdas/linksrc/asxxxx_config.h" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+    "src/avr/Makefile") CONFIG_FILES="$CONFIG_FILES src/avr/Makefile" ;;
     "src/ds390/Makefile") CONFIG_FILES="$CONFIG_FILES src/ds390/Makefile" ;;
     "sdas/as8xcxxx/Makefile") CONFIG_FILES="$CONFIG_FILES sdas/as8xcxxx/Makefile" ;;
     "device/lib/ds390/Makefile") CONFIG_FILES="$CONFIG_FILES device/lib/ds390/Makefile" ;;
@@ -10637,6 +10659,7 @@ sdcc ${VERSION} is now configured for
   MAKEDEP:              ${MAKEDEP}
 
   ENABLED Ports:
+    avr                 ${enable_avr_port}
     ds390               ${enable_ds390_port}
     ds400               ${enable_ds400_port}
     hc08                ${enable_hc08_port}
@@ -10711,6 +10734,7 @@ sdcc ${VERSION} is now configured for
   MAKEDEP:              ${MAKEDEP}
 
   ENABLED Ports:
+    avr                 ${enable_avr_port}
     ds390               ${enable_ds390_port}
     ds400               ${enable_ds400_port}
     hc08                ${enable_hc08_port}
