@@ -1,0 +1,11 @@
+bin/*
+debugger/*
+device/*
+sdas/*
+sim/*
+support/*
+
+*.o
+*.rul
+*.a
+*.dep
