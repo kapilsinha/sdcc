@@ -1,0 +1,146 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module calloc
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _memset
+                                     17 	.globl _malloc
+                                     18 	.globl _calloc_PARM_2
+                                     19 	.globl _calloc_PARM_1
+                                     20 	.globl _calloc
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _calloc_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _calloc_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _calloc_sloc0_1_0:
+      000004                         35 	.ds 4
+      000008                         36 _calloc_sloc1_1_0:
+      000008                         37 	.ds 4
+      00000C                         38 _calloc_sloc2_1_0:
+      00000C                         39 	.ds 2
+      00000E                         40 _calloc_sloc3_1_0:
+      00000E                         41 	.ds 1
+                                     42 ;--------------------------------------------------------
+                                     43 ; overlayable items in ram 
+                                     44 ;--------------------------------------------------------
+                                     45 ;--------------------------------------------------------
+                                     46 ; absolute external ram data
+                                     47 ;--------------------------------------------------------
+                                     48 	.area DABS (ABS)
+                                     49 ;--------------------------------------------------------
+                                     50 ; global & static initialisations
+                                     51 ;--------------------------------------------------------
+                                     52 	.area HOME
+                                     53 	.area GSINIT
+                                     54 	.area GSFINAL
+                                     55 	.area GSINIT
+                                     56 ;--------------------------------------------------------
+                                     57 ; Home
+                                     58 ;--------------------------------------------------------
+                                     59 	.area HOME
+                                     60 	.area HOME
+                                     61 ;--------------------------------------------------------
+                                     62 ; code
+                                     63 ;--------------------------------------------------------
+                                     64 	.area CODE
+                                     65 ;	../calloc.c: 44: void *calloc (size_t nmemb, size_t size)
+                                     66 ;	-----------------------------------------
+                                     67 ;	 function calloc
+                                     68 ;	-----------------------------------------
+      000000                         69 _calloc:
+                                     70 ;	../calloc.c: 49: unsigned long msize = (unsigned long)nmemb * (unsigned long)size;
+      000000r80r0F                   71 	mov	a, _calloc_PARM_1+0
+      000002r80r0B                   72 	mov	__mullong_PARM_1+0, a
+      000004r81r0F                   73 	mov	a, _calloc_PARM_1+1
+      000006r81r0B                   74 	mov	__mullong_PARM_1+1, a
+      000008r02r13                   75 	clear	__mullong_PARM_1+2
+      00000Ar03r13                   76 	clear	__mullong_PARM_1+3
+      00000Cr82r0F                   77 	mov	a, _calloc_PARM_2+0
+      00000Er80r0B                   78 	mov	__mullong_PARM_2+0, a
+      000010r83r0F                   79 	mov	a, _calloc_PARM_2+1
+      000012r81r0B                   80 	mov	__mullong_PARM_2+1, a
+      000014r02r13                   81 	clear	__mullong_PARM_2+2
+      000016r03r13                   82 	clear	__mullong_PARM_2+3
+      000018r04r2F                   83 	mov	a, #_calloc_sloc0_1_0
+      00001A 72 00                   84 	push	af
+      00001Cr00r38                   85 	call	__mullong
+      00001E C2 01                   86 	mov	a, sp
+      000020 FE 28                   87 	add	a, #-2
+      000022 82 01                   88 	mov	sp, a
+      000024r84r0F                   89 	mov	a, _calloc_sloc0_1_0+0
+      000026r88r0B                   90 	mov	_calloc_sloc1_1_0+0, a
+      000028r85r0F                   91 	mov	a, _calloc_sloc0_1_0+1
+      00002Ar89r0B                   92 	mov	_calloc_sloc1_1_0+1, a
+      00002Cr86r0F                   93 	mov	a, _calloc_sloc0_1_0+2
+      00002Er8Ar0B                   94 	mov	_calloc_sloc1_1_0+2, a
+      000030r87r0F                   95 	mov	a, _calloc_sloc0_1_0+3
+      000032r8Br0B                   96 	mov	_calloc_sloc1_1_0+3, a
+                                     97 ;	../calloc.c: 54: if (msize > SIZE_MAX)
+      000034 FF 2F                   98 	mov	a, #0xff
+      000036r88r0C                   99 	sub	a, _calloc_sloc1_1_0+0
+      000038 FF 2F                  100 	mov	a, #0xff
+      00003Ar89r0D                  101 	subc	a, _calloc_sloc1_1_0+1
+      00003C 00 2F                  102 	mov	a, #0x00
+      00003Er8Ar0D                  103 	subc	a, _calloc_sloc1_1_0+2
+      000040 00 2F                  104 	mov	a, #0x00
+      000042r8Br0D                  105 	subc	a, _calloc_sloc1_1_0+3
+      000044 40 1A                  106 	t1sn	f, c
+      000046r4Cr30                  107 	goto	00102$
+                                    108 ;	../calloc.c: 55: return(0);
+      000048r00r13                  109 	clear	p
+      00004A 00 02                  110 	ret	#0x00
+      00004C                        111 00102$:
+                                    112 ;	../calloc.c: 57: if (ptr = malloc(msize))
+      00004Cr88r0F                  113 	mov	a, _calloc_sloc1_1_0+0
+      00004Er8Cr0B                  114 	mov	_calloc_sloc2_1_0+0, a
+      000050r89r0F                  115 	mov	a, _calloc_sloc1_1_0+1
+      000052r8Dr0B                  116 	mov	_calloc_sloc2_1_0+1, a
+      000054r8Cr0F                  117 	mov	a, _calloc_sloc2_1_0+0
+      000056r80r0B                  118 	mov	_malloc_PARM_1+0, a
+      000058r8Dr0F                  119 	mov	a, _calloc_sloc2_1_0+1
+      00005Ar81r0B                  120 	mov	_malloc_PARM_1+1, a
+      00005Cr00r38                  121 	call	_malloc
+      00005Er8Er0B                  122 	mov	_calloc_sloc3_1_0+0, a
+      000060 00 2B                  123 	cneqsn	a, #0x00
+      000062r78r30                  124 	goto	00104$
+                                    125 ;	../calloc.c: 58: memset(ptr, 0, msize);
+      000064r8Er0F                  126 	mov	a, _calloc_sloc3_1_0+0
+      000066r80r0B                  127 	mov	_memset_PARM_1+0, a
+      000068r01r13                  128 	clear	_memset_PARM_1+1
+      00006Ar00r13                  129 	clear	_memset_PARM_2+0
+      00006Cr01r13                  130 	clear	_memset_PARM_2+1
+      00006Er8Cr0F                  131 	mov	a, _calloc_sloc2_1_0+0
+      000070r80r0B                  132 	mov	_memset_PARM_3+0, a
+      000072r8Dr0F                  133 	mov	a, _calloc_sloc2_1_0+1
+      000074r81r0B                  134 	mov	_memset_PARM_3+1, a
+      000076r00r38                  135 	call	_memset
+      000078                        136 00104$:
+                                    137 ;	../calloc.c: 60: return(ptr);
+      000078r8Er0F                  138 	mov	a, _calloc_sloc3_1_0+0
+      00007Ar80r0B                  139 	mov	p, a
+      00007C 00 2F                  140 	mov	a, #0x00
+      00007Er80r13                  141 	xch	a, p
+                                    142 ;	../calloc.c: 61: }
+      000080 7A 00                  143 	ret
+                                    144 	.area CODE
+                                    145 	.area CONST
+                                    146 	.area CABS (ABS)

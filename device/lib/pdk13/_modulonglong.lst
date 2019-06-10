@@ -1,0 +1,220 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _modulonglong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __modulonglong_PARM_2
+                                     17 	.globl __modulonglong_PARM_1
+                                     18 	.globl __modulonglong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __modulonglong_PARM_1:
+      000000                         29 	.ds 8
+      000008                         30 __modulonglong_PARM_2:
+      000008                         31 	.ds 8
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __modulonglong_sloc0_1_0:
+      000000                         37 	.ds 1
+      000001                         38 __modulonglong_sloc1_1_0:
+      000001                         39 	.ds 8
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_modulonglong.c: 38: _modulonglong (unsigned long long a, unsigned long long b)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function _modulonglong
+                                     63 ;	-----------------------------------------
+      000000                         64 __modulonglong:
+                                     65 ;	../_modulonglong.c: 40: unsigned char count = 0;
+      000000r00r13                   66 	clear	p
+                                     67 ;	../_modulonglong.c: 42: while (!MSB_SET(b))
+      000002r00r13                   68 	clear	__modulonglong_sloc0_1_0+0
+      000004                         69 00103$:
+      000004r8Fr0F                   70 	mov	a, __modulonglong_PARM_2+7
+      000006r81r0B                   71 	mov	__modulonglong_sloc1_1_0+0, a
+      000008r02r13                   72 	clear	__modulonglong_sloc1_1_0+1
+      00000Ar03r13                   73 	clear	__modulonglong_sloc1_1_0+2
+      00000Cr04r13                   74 	clear	__modulonglong_sloc1_1_0+3
+      00000Er05r13                   75 	clear	__modulonglong_sloc1_1_0+4
+      000010r06r13                   76 	clear	__modulonglong_sloc1_1_0+5
+      000012r07r13                   77 	clear	__modulonglong_sloc1_1_0+6
+      000014r08r13                   78 	clear	__modulonglong_sloc1_1_0+7
+      000016 07 2F                   79 	mov	a, #7
+      000018                         80 00138$:
+      000018r01r15                   81 	sr	__modulonglong_sloc1_1_0+0
+      00001A 63 00                   82 	dzsn	a
+      00001Cr18r30                   83 	goto	00138$
+      00001Er81r0F                   84 	mov	a, __modulonglong_sloc1_1_0+0
+      000020 01 2C                   85 	and	a, #0x01
+      000022 00 2A                   86 	ceqsn	a, #0x00
+      000024r74r30                   87 	goto	00117$
+                                     88 ;	../_modulonglong.c: 44: b <<= 1;
+      000026r88r15                   89 	sl	__modulonglong_PARM_2+0
+      000028r89r16                   90 	slc	__modulonglong_PARM_2+1
+      00002Ar8Ar16                   91 	slc	__modulonglong_PARM_2+2
+      00002Cr8Br16                   92 	slc	__modulonglong_PARM_2+3
+      00002Er8Cr16                   93 	slc	__modulonglong_PARM_2+4
+      000030r8Dr16                   94 	slc	__modulonglong_PARM_2+5
+      000032r8Er16                   95 	slc	__modulonglong_PARM_2+6
+      000034r8Fr16                   96 	slc	__modulonglong_PARM_2+7
+                                     97 ;	../_modulonglong.c: 45: if (b > a)
+      000036r80r0F                   98 	mov	a, __modulonglong_PARM_1+0
+      000038r88r0C                   99 	sub	a, __modulonglong_PARM_2+0
+      00003Ar81r0F                  100 	mov	a, __modulonglong_PARM_1+1
+      00003Cr89r0D                  101 	subc	a, __modulonglong_PARM_2+1
+      00003Er82r0F                  102 	mov	a, __modulonglong_PARM_1+2
+      000040r8Ar0D                  103 	subc	a, __modulonglong_PARM_2+2
+      000042r83r0F                  104 	mov	a, __modulonglong_PARM_1+3
+      000044r8Br0D                  105 	subc	a, __modulonglong_PARM_2+3
+      000046r84r0F                  106 	mov	a, __modulonglong_PARM_1+4
+      000048r8Cr0D                  107 	subc	a, __modulonglong_PARM_2+4
+      00004Ar85r0F                  108 	mov	a, __modulonglong_PARM_1+5
+      00004Cr8Dr0D                  109 	subc	a, __modulonglong_PARM_2+5
+      00004Er86r0F                  110 	mov	a, __modulonglong_PARM_1+6
+      000050r8Er0D                  111 	subc	a, __modulonglong_PARM_2+6
+      000052r87r0F                  112 	mov	a, __modulonglong_PARM_1+7
+      000054r8Fr0D                  113 	subc	a, __modulonglong_PARM_2+7
+      000056 40 1A                  114 	t1sn	f, c
+      000058r6Cr30                  115 	goto	00102$
+                                    116 ;	../_modulonglong.c: 47: b >>=1;
+      00005Ar0Fr15                  117 	sr	__modulonglong_PARM_2+7
+      00005Cr0Er16                  118 	src	__modulonglong_PARM_2+6
+      00005Er0Dr16                  119 	src	__modulonglong_PARM_2+5
+      000060r0Cr16                  120 	src	__modulonglong_PARM_2+4
+      000062r0Br16                  121 	src	__modulonglong_PARM_2+3
+      000064r0Ar16                  122 	src	__modulonglong_PARM_2+2
+      000066r09r16                  123 	src	__modulonglong_PARM_2+1
+      000068r08r16                  124 	src	__modulonglong_PARM_2+0
+                                    125 ;	../_modulonglong.c: 48: break;
+      00006Ar74r30                  126 	goto	00117$
+      00006C                        127 00102$:
+                                    128 ;	../_modulonglong.c: 50: count++;
+      00006Cr00r12                  129 	inc	__modulonglong_sloc0_1_0+0
+      00006Er80r0F                  130 	mov	a, __modulonglong_sloc0_1_0+0
+      000070r80r0B                  131 	mov	p, a
+      000072r04r30                  132 	goto	00103$
+                                    133 ;	../_modulonglong.c: 52: do
+      000074                        134 00117$:
+      000074                        135 00108$:
+                                    136 ;	../_modulonglong.c: 54: if (a >= b)
+      000074r80r0F                  137 	mov	a, __modulonglong_PARM_1+0
+      000076r88r0C                  138 	sub	a, __modulonglong_PARM_2+0
+      000078r81r0F                  139 	mov	a, __modulonglong_PARM_1+1
+      00007Ar89r0D                  140 	subc	a, __modulonglong_PARM_2+1
+      00007Cr82r0F                  141 	mov	a, __modulonglong_PARM_1+2
+      00007Er8Ar0D                  142 	subc	a, __modulonglong_PARM_2+2
+      000080r83r0F                  143 	mov	a, __modulonglong_PARM_1+3
+      000082r8Br0D                  144 	subc	a, __modulonglong_PARM_2+3
+      000084r84r0F                  145 	mov	a, __modulonglong_PARM_1+4
+      000086r8Cr0D                  146 	subc	a, __modulonglong_PARM_2+4
+      000088r85r0F                  147 	mov	a, __modulonglong_PARM_1+5
+      00008Ar8Dr0D                  148 	subc	a, __modulonglong_PARM_2+5
+      00008Cr86r0F                  149 	mov	a, __modulonglong_PARM_1+6
+      00008Er8Er0D                  150 	subc	a, __modulonglong_PARM_2+6
+      000090r87r0F                  151 	mov	a, __modulonglong_PARM_1+7
+      000092r8Fr0D                  152 	subc	a, __modulonglong_PARM_2+7
+      000094 40 18                  153 	t0sn	f, c
+      000096rB8r30                  154 	goto	00107$
+                                    155 ;	../_modulonglong.c: 55: a -= b;
+      000098r88r0F                  156 	mov	a, __modulonglong_PARM_2+0
+      00009Ar80r08                  157 	sub	__modulonglong_PARM_1+0, a
+      00009Cr89r0F                  158 	mov	a, __modulonglong_PARM_2+1
+      00009Er81r09                  159 	subc	__modulonglong_PARM_1+1, a
+      0000A0r8Ar0F                  160 	mov	a, __modulonglong_PARM_2+2
+      0000A2r82r09                  161 	subc	__modulonglong_PARM_1+2, a
+      0000A4r8Br0F                  162 	mov	a, __modulonglong_PARM_2+3
+      0000A6r83r09                  163 	subc	__modulonglong_PARM_1+3, a
+      0000A8r8Cr0F                  164 	mov	a, __modulonglong_PARM_2+4
+      0000AAr84r09                  165 	subc	__modulonglong_PARM_1+4, a
+      0000ACr8Dr0F                  166 	mov	a, __modulonglong_PARM_2+5
+      0000AEr85r09                  167 	subc	__modulonglong_PARM_1+5, a
+      0000B0r8Er0F                  168 	mov	a, __modulonglong_PARM_2+6
+      0000B2r86r09                  169 	subc	__modulonglong_PARM_1+6, a
+      0000B4r8Fr0F                  170 	mov	a, __modulonglong_PARM_2+7
+      0000B6r87r09                  171 	subc	__modulonglong_PARM_1+7, a
+      0000B8                        172 00107$:
+                                    173 ;	../_modulonglong.c: 56: b >>= 1;
+      0000B8r0Fr15                  174 	sr	__modulonglong_PARM_2+7
+      0000BAr0Er16                  175 	src	__modulonglong_PARM_2+6
+      0000BCr0Dr16                  176 	src	__modulonglong_PARM_2+5
+      0000BEr0Cr16                  177 	src	__modulonglong_PARM_2+4
+      0000C0r0Br16                  178 	src	__modulonglong_PARM_2+3
+      0000C2r0Ar16                  179 	src	__modulonglong_PARM_2+2
+      0000C4r09r16                  180 	src	__modulonglong_PARM_2+1
+      0000C6r08r16                  181 	src	__modulonglong_PARM_2+0
+                                    182 ;	../_modulonglong.c: 58: while (count--);
+      0000C8r80r0F                  183 	mov	a, p
+      0000CAr80r12                  184 	dec	p
+      0000CC 00 2A                  185 	ceqsn	a, #0x00
+      0000CEr74r30                  186 	goto	00108$
+                                    187 ;	../_modulonglong.c: 60: return a;
+      0000D0 C2 01                  188 	mov	a, sp
+      0000D2 FC 28                  189 	add	a, #0xfc
+      0000D4r80r0B                  190 	mov	p, a
+      0000D6r81r03                  191 	idxm	a, p
+      0000D8r80r0B                  192 	mov	p, a
+      0000DAr80r0F                  193 	mov	a, __modulonglong_PARM_1+0
+      0000DCr80r03                  194 	idxm	p, a
+      0000DEr00r12                  195 	inc	p
+      0000E0r81r0F                  196 	mov	a, __modulonglong_PARM_1+1
+      0000E2r80r03                  197 	idxm	p, a
+      0000E4r00r12                  198 	inc	p
+      0000E6r82r0F                  199 	mov	a, __modulonglong_PARM_1+2
+      0000E8r80r03                  200 	idxm	p, a
+      0000EAr00r12                  201 	inc	p
+      0000ECr83r0F                  202 	mov	a, __modulonglong_PARM_1+3
+      0000EEr80r03                  203 	idxm	p, a
+      0000F0r00r12                  204 	inc	p
+      0000F2r84r0F                  205 	mov	a, __modulonglong_PARM_1+4
+      0000F4r80r03                  206 	idxm	p, a
+      0000F6r00r12                  207 	inc	p
+      0000F8r85r0F                  208 	mov	a, __modulonglong_PARM_1+5
+      0000FAr80r03                  209 	idxm	p, a
+      0000FCr00r12                  210 	inc	p
+      0000FEr86r0F                  211 	mov	a, __modulonglong_PARM_1+6
+      000100r80r03                  212 	idxm	p, a
+      000102r00r12                  213 	inc	p
+      000104r87r0F                  214 	mov	a, __modulonglong_PARM_1+7
+      000106r80r03                  215 	idxm	p, a
+                                    216 ;	../_modulonglong.c: 61: }
+      000108 7A 00                  217 	ret
+                                    218 	.area CODE
+                                    219 	.area CONST
+                                    220 	.area CABS (ABS)

@@ -1,0 +1,165 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  9 _CheckTime                                                     00008E R
+  1 _CheckTime_PARM_1                                              00003A R
+  2 _CheckTime_sloc3_1_0                                           000000 R
+  2 _CheckTime_sloc4_1_0                                           000002 R
+  2 _CheckTime_sloc5_1_0                                           000004 R
+  2 _CheckTime_sloc6_1_0                                           000006 R
+  2 _CheckTime_sloc7_1_0                                           000008 R
+  2 _CheckTime_sloc8_1_0                                           00000A R
+  2 _CheckTime_sloc9_1_0                                           00000C R
+  9 _RtcRead                                                       000000 GR
+  1 _RtcRead_PARM_1                                                000000 GR
+  A ___day                                                         000048 GR
+  A ___month                                                       000018 GR
+  A ___str_0                                                       000064 R
+    __divulong                                                     ****** GX
+    __divulong_PARM_1                                              ****** GX
+    __divulong_PARM_2                                              ****** GX
+    __gptrget                                                      ****** GX
+    __gptrget2                                                     ****** GX
+    __modsint                                                      ****** GX
+    __modsint_PARM_1                                               ****** GX
+    __modsint_PARM_2                                               ****** GX
+    __modulong                                                     ****** GX
+    __modulong_PARM_1                                              ****** GX
+    __modulong_PARM_2                                              ****** GX
+    __mulint                                                       ****** GX
+    __mulint_PARM_1                                                ****** GX
+    __mulint_PARM_2                                                ****** GX
+    __mullong                                                      ****** GX
+    __mullong_PARM_1                                               ****** GX
+    __mullong_PARM_2                                               ****** GX
+    __muluchar                                                     ****** GX
+    __muluchar_PARM_1                                              ****** GX
+    __muluchar_PARM_2                                              ****** GX
+  A __str_1                                                        0000A2 R
+  A __str_10                                                       0000EA R
+  A __str_11                                                       0000F2 R
+  A __str_12                                                       0000FA R
+  A __str_13                                                       000102 R
+  A __str_14                                                       00010A R
+  A __str_15                                                       000112 R
+  A __str_16                                                       00011A R
+  A __str_17                                                       000122 R
+  A __str_18                                                       00012A R
+  A __str_19                                                       000132 R
+  A __str_2                                                        0000AA R
+  A __str_3                                                        0000B2 R
+  A __str_4                                                        0000BA R
+  A __str_5                                                        0000C2 R
+  A __str_6                                                        0000CA R
+  A __str_7                                                        0000D2 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  A __str_8                                                        0000DA R
+  A __str_9                                                        0000E2 R
+  1 _ascTimeBuffer                                                 00001A R
+  9 _asctime                                                       00019E GR
+  1 _asctime_PARM_1                                                00003C GR
+  1 _asctime_sloc10_1_0                                            00003E R
+  1 _asctime_sloc11_1_0                                            000040 R
+  1 _asctime_sloc12_1_0                                            000042 R
+  1 _asctime_sloc13_1_0                                            000044 R
+  1 _asctime_sloc14_1_0                                            000046 R
+  1 _asctime_sloc15_1_0                                            000048 R
+  1 _asctime_sloc16_1_0                                            00004A R
+  1 _asctime_sloc17_1_0                                            00004C R
+  9 _ctime                                                         0002C6 GR
+  1 _ctime_PARM_1                                                  00004E GR
+  9 _gmtime                                                        0002E6 GR
+  1 _gmtime_PARM_1                                                 00005E GR
+  1 _gmtime_sloc18_1_0                                             000060 R
+  1 _gmtime_sloc19_1_0                                             000064 R
+  1 _gmtime_sloc20_1_0                                             000068 R
+  1 _gmtime_sloc21_1_0                                             00006C R
+  1 _gmtime_sloc22_1_0                                             000070 R
+  1 _gmtime_sloc23_1_0                                             000074 R
+  1 _gmtime_sloc24_1_0                                             000078 R
+  1 _gmtime_sloc25_1_0                                             00007C R
+  1 _gmtime_sloc26_1_0                                             00007E R
+  1 _gmtime_sloc27_1_0                                             000082 R
+  1 _gmtime_sloc28_1_0                                             000086 R
+  1 _gmtime_sloc29_1_0                                             00008A R
+  1 _gmtime_sloc30_1_0                                             00008E R
+  1 _gmtime_sloc31_1_0                                             000092 R
+  1 _gmtime_sloc32_1_0                                             000094 R
+  1 _gmtime_sloc33_1_0                                             000096 R
+  1 _gmtime_sloc34_1_0                                             00009A R
+  1 _gmtime_sloc35_1_0                                             00009E R
+  1 _gmtime_sloc36_1_0                                             0000A0 R
+  1 _gmtime_sloc37_1_0                                             0000A2 R
+  1 _gmtime_sloc38_1_0                                             0000A6 R
+  1 _gmtime_sloc39_1_0                                             0000AA R
+  1 _gmtime_sloc40_1_0                                             0000AE R
+  1 _gmtime_sloc41_1_0                                             0000AF R
+  1 _lastTime                                                      000050 R
+  9 _localtime                                                     0002DA GR
+  1 _localtime_PARM_1                                              00005C GR
+  9 _mktime                                                        0005E8 GR
+  1 _mktime_PARM_1                                                 0000B3 GR
+  1 _mktime_sloc42_1_0                                             0000B5 R
+  1 _mktime_sloc43_1_0                                             0000B9 R
+  1 _mktime_sloc44_1_0                                             0000BD R
+  1 _mktime_sloc45_1_0                                             0000C1 R
+  1 _mktime_sloc46_1_0                                             0000C5 R
+  1 _mktime_sloc47_1_0                                             0000C7 R
+  1 _mktime_sloc48_1_0                                             0000C9 R
+  1 _mktime_sloc49_1_0                                             0000CB R
+  1 _mktime_sloc50_1_0                                             0000CF R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 3.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  1 _mktime_sloc51_1_0                                             0000D1 R
+  1 _mktime_sloc52_1_0                                             0000D5 R
+  1 _mktime_sloc53_1_0                                             0000D7 R
+  1 _mktime_sloc54_1_0                                             0000D9 R
+  1 _mktime_sloc55_1_0                                             0000DB R
+  1 _mktime_sloc56_1_0                                             0000DD R
+  1 _mktime_sloc57_1_0                                             0000E1 R
+  1 _mktime_sloc58_1_0                                             0000E5 R
+  1 _mktime_sloc59_1_0                                             0000E9 R
+  1 _mktime_sloc60_1_0                                             0000ED R
+  1 _mktime_sloc61_1_0                                             0000F1 R
+  A _monthDays                                                     000000 R
+    _sprintf                                                       ****** GX
+  9 _time                                                          000004 GR
+  1 _time_PARM_1                                                   000002 GR
+  1 _time_now_65536_20                                             000004 R
+  1 _time_sloc0_1_0                                                000010 R
+  1 _time_sloc1_1_0                                                000014 R
+  1 _time_sloc2_1_0                                                000018 R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 4.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     F5   flags    0
+   2 OSEG                                       size      E   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    88E   flags    0
+   A CONST                                      size    13A   flags    0
+   B CABS                                       size      0   flags    8
+

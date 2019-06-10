@@ -1,0 +1,247 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module powf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _logf
+                                     17 	.globl _expf
+                                     18 	.globl _powf_PARM_2
+                                     19 	.globl _powf_PARM_1
+                                     20 	.globl _powf
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _powf_PARM_1:
+      000000                         31 	.ds 4
+      000004                         32 _powf_PARM_2:
+      000004                         33 	.ds 4
+      000008                         34 _powf_sloc0_1_0:
+      000008                         35 	.ds 4
+      00000C                         36 _powf_sloc1_1_0:
+      00000C                         37 	.ds 4
+      000010                         38 _powf_sloc2_1_0:
+      000010                         39 	.ds 4
+                                     40 ;--------------------------------------------------------
+                                     41 ; overlayable items in ram 
+                                     42 ;--------------------------------------------------------
+                                     43 ;--------------------------------------------------------
+                                     44 ; absolute external ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DABS (ABS)
+                                     47 ;--------------------------------------------------------
+                                     48 ; global & static initialisations
+                                     49 ;--------------------------------------------------------
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area GSINIT
+                                     54 ;--------------------------------------------------------
+                                     55 ; Home
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area HOME
+                                     59 ;--------------------------------------------------------
+                                     60 ; code
+                                     61 ;--------------------------------------------------------
+                                     62 	.area CODE
+                                     63 ;	../powf.c: 35: float powf(float x, float y)
+                                     64 ;	-----------------------------------------
+                                     65 ;	 function powf
+                                     66 ;	-----------------------------------------
+      000000                         67 _powf:
+                                     68 ;	../powf.c: 37: if(y == 0.0) return 1.0;
+      000000r87r0F                   69 	mov	a, _powf_PARM_2+3
+      000002 7F 2C                   70 	and	a, #0x7f
+      000004r84r0E                   71 	or	a, _powf_PARM_2+0
+      000006r85r0E                   72 	or	a, _powf_PARM_2+1
+      000008r86r0E                   73 	or	a, _powf_PARM_2+2
+      00000A 00 2A                   74 	ceqsn	a, #0x00
+      00000Cr30r30                   75 	goto	00102$
+      00000E C2 01                   76 	mov	a, sp
+      000010 FC 28                   77 	add	a, #0xfc
+      000012r80r0B                   78 	mov	p, a
+      000014r81r03                   79 	idxm	a, p
+      000016r80r0B                   80 	mov	p, a
+      000018 00 2F                   81 	mov	a, #0x00
+      00001Ar80r03                   82 	idxm	p, a
+      00001Cr00r12                   83 	inc	p
+      00001E 00 2F                   84 	mov	a, #0x00
+      000020r80r03                   85 	idxm	p, a
+      000022r00r12                   86 	inc	p
+      000024 80 2F                   87 	mov	a, #0x80
+      000026r80r03                   88 	idxm	p, a
+      000028r00r12                   89 	inc	p
+      00002A 3F 2F                   90 	mov	a, #0x3f
+      00002Cr80r03                   91 	idxm	p, a
+      00002E 7A 00                   92 	ret
+      000030                         93 00102$:
+                                     94 ;	../powf.c: 38: if(y == 1.0) return x;
+      000030r84r0F                   95 	mov	a, _powf_PARM_2+0
+      000032r80r0B                   96 	mov	___fseq_PARM_1+0, a
+      000034r85r0F                   97 	mov	a, _powf_PARM_2+1
+      000036r81r0B                   98 	mov	___fseq_PARM_1+1, a
+      000038r86r0F                   99 	mov	a, _powf_PARM_2+2
+      00003Ar82r0B                  100 	mov	___fseq_PARM_1+2, a
+      00003Cr87r0F                  101 	mov	a, _powf_PARM_2+3
+      00003Er83r0B                  102 	mov	___fseq_PARM_1+3, a
+      000040r00r13                  103 	clear	___fseq_PARM_2+0
+      000042r01r13                  104 	clear	___fseq_PARM_2+1
+      000044 80 2F                  105 	mov	a, #0x80
+      000046r82r0B                  106 	mov	___fseq_PARM_2+2, a
+      000048 3F 2F                  107 	mov	a, #0x3f
+      00004Ar83r0B                  108 	mov	___fseq_PARM_2+3, a
+      00004Cr00r38                  109 	call	___fseq
+      00004E 00 2B                  110 	cneqsn	a, #0x00
+      000050r74r30                  111 	goto	00104$
+      000052 C2 01                  112 	mov	a, sp
+      000054 FC 28                  113 	add	a, #0xfc
+      000056r80r0B                  114 	mov	p, a
+      000058r81r03                  115 	idxm	a, p
+      00005Ar80r0B                  116 	mov	p, a
+      00005Cr80r0F                  117 	mov	a, _powf_PARM_1+0
+      00005Er80r03                  118 	idxm	p, a
+      000060r00r12                  119 	inc	p
+      000062r81r0F                  120 	mov	a, _powf_PARM_1+1
+      000064r80r03                  121 	idxm	p, a
+      000066r00r12                  122 	inc	p
+      000068r82r0F                  123 	mov	a, _powf_PARM_1+2
+      00006Ar80r03                  124 	idxm	p, a
+      00006Cr00r12                  125 	inc	p
+      00006Er83r0F                  126 	mov	a, _powf_PARM_1+3
+      000070r80r03                  127 	idxm	p, a
+      000072 7A 00                  128 	ret
+      000074                        129 00104$:
+                                    130 ;	../powf.c: 39: if(x <= 0.0) return 0.0;
+      000074r00r13                  131 	clear	___fslt_PARM_1+0
+      000076r01r13                  132 	clear	___fslt_PARM_1+1
+      000078r02r13                  133 	clear	___fslt_PARM_1+2
+      00007Ar03r13                  134 	clear	___fslt_PARM_1+3
+      00007Cr80r0F                  135 	mov	a, _powf_PARM_1+0
+      00007Er80r0B                  136 	mov	___fslt_PARM_2+0, a
+      000080r81r0F                  137 	mov	a, _powf_PARM_1+1
+      000082r81r0B                  138 	mov	___fslt_PARM_2+1, a
+      000084r82r0F                  139 	mov	a, _powf_PARM_1+2
+      000086r82r0B                  140 	mov	___fslt_PARM_2+2, a
+      000088r83r0F                  141 	mov	a, _powf_PARM_1+3
+      00008Ar83r0B                  142 	mov	___fslt_PARM_2+3, a
+      00008Cr00r38                  143 	call	___fslt
+      00008E 00 2A                  144 	ceqsn	a, #0x00
+      000090rB4r30                  145 	goto	00106$
+      000092 C2 01                  146 	mov	a, sp
+      000094 FC 28                  147 	add	a, #0xfc
+      000096r80r0B                  148 	mov	p, a
+      000098r81r03                  149 	idxm	a, p
+      00009Ar80r0B                  150 	mov	p, a
+      00009C 00 2F                  151 	mov	a, #0x00
+      00009Er80r03                  152 	idxm	p, a
+      0000A0r00r12                  153 	inc	p
+      0000A2 00 2F                  154 	mov	a, #0x00
+      0000A4r80r03                  155 	idxm	p, a
+      0000A6r00r12                  156 	inc	p
+      0000A8 00 2F                  157 	mov	a, #0x00
+      0000AAr80r03                  158 	idxm	p, a
+      0000ACr00r12                  159 	inc	p
+      0000AE 00 2F                  160 	mov	a, #0x00
+      0000B0r80r03                  161 	idxm	p, a
+      0000B2 7A 00                  162 	ret
+      0000B4                        163 00106$:
+                                    164 ;	../powf.c: 40: return expf(logf(x) * y);
+      0000B4 C2 01                  165 	mov	a, sp
+      0000B6r80r0B                  166 	mov	p, a
+      0000B8 72 00                  167 	push	af
+      0000BA 72 00                  168 	push	af
+      0000BCr80r0F                  169 	mov	a, _powf_PARM_1+0
+      0000BEr80r03                  170 	idxm	p, a
+      0000C0r00r12                  171 	inc	p
+      0000C2r81r0F                  172 	mov	a, _powf_PARM_1+1
+      0000C4r80r03                  173 	idxm	p, a
+      0000C6r00r12                  174 	inc	p
+      0000C8r82r0F                  175 	mov	a, _powf_PARM_1+2
+      0000CAr80r03                  176 	idxm	p, a
+      0000CCr00r12                  177 	inc	p
+      0000CEr83r0F                  178 	mov	a, _powf_PARM_1+3
+      0000D0r80r03                  179 	idxm	p, a
+      0000D2r08r2F                  180 	mov	a, #_powf_sloc0_1_0
+      0000D4 72 00                  181 	push	af
+      0000D6r00r38                  182 	call	_logf
+      0000D8 C2 01                  183 	mov	a, sp
+      0000DA FA 28                  184 	add	a, #-6
+      0000DC 82 01                  185 	mov	sp, a
+      0000DEr88r0F                  186 	mov	a, _powf_sloc0_1_0+0
+      0000E0r80r0B                  187 	mov	___fsmul_PARM_1+0, a
+      0000E2r89r0F                  188 	mov	a, _powf_sloc0_1_0+1
+      0000E4r81r0B                  189 	mov	___fsmul_PARM_1+1, a
+      0000E6r8Ar0F                  190 	mov	a, _powf_sloc0_1_0+2
+      0000E8r82r0B                  191 	mov	___fsmul_PARM_1+2, a
+      0000EAr8Br0F                  192 	mov	a, _powf_sloc0_1_0+3
+      0000ECr83r0B                  193 	mov	___fsmul_PARM_1+3, a
+      0000EEr84r0F                  194 	mov	a, _powf_PARM_2+0
+      0000F0r80r0B                  195 	mov	___fsmul_PARM_2+0, a
+      0000F2r85r0F                  196 	mov	a, _powf_PARM_2+1
+      0000F4r81r0B                  197 	mov	___fsmul_PARM_2+1, a
+      0000F6r86r0F                  198 	mov	a, _powf_PARM_2+2
+      0000F8r82r0B                  199 	mov	___fsmul_PARM_2+2, a
+      0000FAr87r0F                  200 	mov	a, _powf_PARM_2+3
+      0000FCr83r0B                  201 	mov	___fsmul_PARM_2+3, a
+      0000FEr0Cr2F                  202 	mov	a, #_powf_sloc1_1_0
+      000100 72 00                  203 	push	af
+      000102r00r38                  204 	call	___fsmul
+      000104 C2 01                  205 	mov	a, sp
+      000106 FE 28                  206 	add	a, #-2
+      000108 82 01                  207 	mov	sp, a
+      00010Ar80r0B                  208 	mov	p, a
+      00010C 72 00                  209 	push	af
+      00010E 72 00                  210 	push	af
+      000110r8Cr0F                  211 	mov	a, _powf_sloc1_1_0+0
+      000112r80r03                  212 	idxm	p, a
+      000114r00r12                  213 	inc	p
+      000116r8Dr0F                  214 	mov	a, _powf_sloc1_1_0+1
+      000118r80r03                  215 	idxm	p, a
+      00011Ar00r12                  216 	inc	p
+      00011Cr8Er0F                  217 	mov	a, _powf_sloc1_1_0+2
+      00011Er80r03                  218 	idxm	p, a
+      000120r00r12                  219 	inc	p
+      000122r8Fr0F                  220 	mov	a, _powf_sloc1_1_0+3
+      000124r80r03                  221 	idxm	p, a
+      000126r10r2F                  222 	mov	a, #_powf_sloc2_1_0
+      000128 72 00                  223 	push	af
+      00012Ar00r38                  224 	call	_expf
+      00012C C2 01                  225 	mov	a, sp
+      00012E FA 28                  226 	add	a, #-6
+      000130 82 01                  227 	mov	sp, a
+      000132 FC 28                  228 	add	a, #0xfc
+      000134r80r0B                  229 	mov	p, a
+      000136r81r03                  230 	idxm	a, p
+      000138r80r0B                  231 	mov	p, a
+      00013Ar90r0F                  232 	mov	a, _powf_sloc2_1_0+0
+      00013Cr80r03                  233 	idxm	p, a
+      00013Er00r12                  234 	inc	p
+      000140r91r0F                  235 	mov	a, _powf_sloc2_1_0+1
+      000142r80r03                  236 	idxm	p, a
+      000144r00r12                  237 	inc	p
+      000146r92r0F                  238 	mov	a, _powf_sloc2_1_0+2
+      000148r80r03                  239 	idxm	p, a
+      00014Ar00r12                  240 	inc	p
+      00014Cr93r0F                  241 	mov	a, _powf_sloc2_1_0+3
+      00014Er80r03                  242 	idxm	p, a
+                                    243 ;	../powf.c: 41: }
+      000150 7A 00                  244 	ret
+                                    245 	.area CODE
+                                    246 	.area CONST
+                                    247 	.area CABS (ABS)

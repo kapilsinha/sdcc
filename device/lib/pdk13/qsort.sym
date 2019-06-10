@@ -1,0 +1,57 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    __gptrget                                                      ****** GX
+    __mulint                                                       ****** GX
+    __mulint_PARM_1                                                ****** GX
+    __mulint_PARM_2                                                ****** GX
+  9 _qsort                                                         000056 GR
+  1 _qsort_PARM_1                                                  000006 GR
+  1 _qsort_PARM_2                                                  000008 GR
+  1 _qsort_PARM_3                                                  00000A GR
+  1 _qsort_PARM_4                                                  00000C GR
+  1 _qsort_sloc10_1_0                                              00001A R
+  1 _qsort_sloc11_1_0                                              00001C R
+  1 _qsort_sloc12_1_0                                              00001E R
+  1 _qsort_sloc13_1_0                                              000020 R
+  1 _qsort_sloc4_1_0                                               00000E R
+  1 _qsort_sloc5_1_0                                               000010 R
+  1 _qsort_sloc6_1_0                                               000012 R
+  1 _qsort_sloc7_1_0                                               000014 R
+  1 _qsort_sloc8_1_0                                               000016 R
+  1 _qsort_sloc9_1_0                                               000018 R
+  9 _swap                                                          000000 R
+  1 _swap_PARM_1                                                   000000 R
+  1 _swap_PARM_2                                                   000002 R
+  1 _swap_PARM_3                                                   000004 R
+  2 _swap_sloc0_1_0                                                000000 R
+  2 _swap_sloc1_1_0                                                000002 R
+  2 _swap_sloc2_1_0                                                000004 R
+  2 _swap_sloc3_1_0                                                000006 R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     22   flags    0
+   2 OSEG                                       size      7   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    15C   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

@@ -1,0 +1,232 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divslong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divslong_PARM_2
+                                     17 	.globl __divslong_PARM_1
+                                     18 	.globl __divslong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divslong_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 __divslong_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 __divslong_sloc0_1_0:
+      000008                         33 	.ds 4
+      00000C                         34 __divslong_sloc1_1_0:
+      00000C                         35 	.ds 1
+      00000D                         36 __divslong_sloc2_1_0:
+      00000D                         37 	.ds 4
+      000011                         38 __divslong_sloc3_1_0:
+      000011                         39 	.ds 4
+      000015                         40 __divslong_sloc4_1_0:
+      000015                         41 	.ds 1
+      000016                         42 __divslong_sloc5_1_0:
+      000016                         43 	.ds 4
+      00001A                         44 __divslong_sloc6_1_0:
+      00001A                         45 	.ds 4
+      00001E                         46 __divslong_sloc7_1_0:
+      00001E                         47 	.ds 4
+                                     48 ;--------------------------------------------------------
+                                     49 ; overlayable items in ram 
+                                     50 ;--------------------------------------------------------
+                                     51 ;--------------------------------------------------------
+                                     52 ; absolute external ram data
+                                     53 ;--------------------------------------------------------
+                                     54 	.area DABS (ABS)
+                                     55 ;--------------------------------------------------------
+                                     56 ; global & static initialisations
+                                     57 ;--------------------------------------------------------
+                                     58 	.area HOME
+                                     59 	.area GSINIT
+                                     60 	.area GSFINAL
+                                     61 	.area GSINIT
+                                     62 ;--------------------------------------------------------
+                                     63 ; Home
+                                     64 ;--------------------------------------------------------
+                                     65 	.area HOME
+                                     66 	.area HOME
+                                     67 ;--------------------------------------------------------
+                                     68 ; code
+                                     69 ;--------------------------------------------------------
+                                     70 	.area CODE
+                                     71 ;	../_divslong.c: 259: _divslong (long x, long y)
+                                     72 ;	-----------------------------------------
+                                     73 ;	 function _divslong
+                                     74 ;	-----------------------------------------
+      000000                         75 __divslong:
+                                     76 ;	../_divslong.c: 263: r = (unsigned long)(x < 0 ? -x : x) / (unsigned long)(y < 0 ? -y : y);
+      000000r83r0F                   77 	mov	a, __divslong_PARM_1+3
+      000002 6B 00                   78 	sl	a
+      000004 00 2F                   79 	mov	a, #0x00
+      000006 6D 00                   80 	slc	a
+      000008r8Cr0B                   81 	mov	__divslong_sloc1_1_0+0, a
+      00000A 00 2B                   82 	cneqsn	a, #0x00
+      00000Cr28r30                   83 	goto	00106$
+      00000E 00 2F                   84 	mov	a, #0x00
+      000010r80r0C                   85 	sub	a, __divslong_PARM_1+0
+      000012r8Dr0B                   86 	mov	__divslong_sloc2_1_0+0, a
+      000014 00 2F                   87 	mov	a, #0x00
+      000016r81r0D                   88 	subc	a, __divslong_PARM_1+1
+      000018r8Er0B                   89 	mov	__divslong_sloc2_1_0+1, a
+      00001A 00 2F                   90 	mov	a, #0x00
+      00001Cr82r0D                   91 	subc	a, __divslong_PARM_1+2
+      00001Er8Fr0B                   92 	mov	__divslong_sloc2_1_0+2, a
+      000020 00 2F                   93 	mov	a, #0x00
+      000022r83r0D                   94 	subc	a, __divslong_PARM_1+3
+      000024r90r0B                   95 	mov	__divslong_sloc2_1_0+3, a
+      000026r38r30                   96 	goto	00107$
+      000028                         97 00106$:
+      000028r80r0F                   98 	mov	a, __divslong_PARM_1+0
+      00002Ar8Dr0B                   99 	mov	__divslong_sloc2_1_0+0, a
+      00002Cr81r0F                  100 	mov	a, __divslong_PARM_1+1
+      00002Er8Er0B                  101 	mov	__divslong_sloc2_1_0+1, a
+      000030r82r0F                  102 	mov	a, __divslong_PARM_1+2
+      000032r8Fr0B                  103 	mov	__divslong_sloc2_1_0+2, a
+      000034r83r0F                  104 	mov	a, __divslong_PARM_1+3
+      000036r90r0B                  105 	mov	__divslong_sloc2_1_0+3, a
+      000038                        106 00107$:
+      000038r8Dr0F                  107 	mov	a, __divslong_sloc2_1_0+0
+      00003Ar91r0B                  108 	mov	__divslong_sloc3_1_0+0, a
+      00003Cr8Er0F                  109 	mov	a, __divslong_sloc2_1_0+1
+      00003Er92r0B                  110 	mov	__divslong_sloc3_1_0+1, a
+      000040r8Fr0F                  111 	mov	a, __divslong_sloc2_1_0+2
+      000042r93r0B                  112 	mov	__divslong_sloc3_1_0+2, a
+      000044r90r0F                  113 	mov	a, __divslong_sloc2_1_0+3
+      000046r94r0B                  114 	mov	__divslong_sloc3_1_0+3, a
+      000048r87r0F                  115 	mov	a, __divslong_PARM_2+3
+      00004A 6B 00                  116 	sl	a
+      00004C 00 2F                  117 	mov	a, #0x00
+      00004E 6D 00                  118 	slc	a
+      000050r95r0B                  119 	mov	__divslong_sloc4_1_0+0, a
+      000052 00 2B                  120 	cneqsn	a, #0x00
+      000054r70r30                  121 	goto	00108$
+      000056 00 2F                  122 	mov	a, #0x00
+      000058r84r0C                  123 	sub	a, __divslong_PARM_2+0
+      00005Ar96r0B                  124 	mov	__divslong_sloc5_1_0+0, a
+      00005C 00 2F                  125 	mov	a, #0x00
+      00005Er85r0D                  126 	subc	a, __divslong_PARM_2+1
+      000060r97r0B                  127 	mov	__divslong_sloc5_1_0+1, a
+      000062 00 2F                  128 	mov	a, #0x00
+      000064r86r0D                  129 	subc	a, __divslong_PARM_2+2
+      000066r98r0B                  130 	mov	__divslong_sloc5_1_0+2, a
+      000068 00 2F                  131 	mov	a, #0x00
+      00006Ar87r0D                  132 	subc	a, __divslong_PARM_2+3
+      00006Cr99r0B                  133 	mov	__divslong_sloc5_1_0+3, a
+      00006Er80r30                  134 	goto	00109$
+      000070                        135 00108$:
+      000070r84r0F                  136 	mov	a, __divslong_PARM_2+0
+      000072r96r0B                  137 	mov	__divslong_sloc5_1_0+0, a
+      000074r85r0F                  138 	mov	a, __divslong_PARM_2+1
+      000076r97r0B                  139 	mov	__divslong_sloc5_1_0+1, a
+      000078r86r0F                  140 	mov	a, __divslong_PARM_2+2
+      00007Ar98r0B                  141 	mov	__divslong_sloc5_1_0+2, a
+      00007Cr87r0F                  142 	mov	a, __divslong_PARM_2+3
+      00007Er99r0B                  143 	mov	__divslong_sloc5_1_0+3, a
+      000080                        144 00109$:
+      000080r96r0F                  145 	mov	a, __divslong_sloc5_1_0+0
+      000082r80r0B                  146 	mov	__divulong_PARM_2+0, a
+      000084r97r0F                  147 	mov	a, __divslong_sloc5_1_0+1
+      000086r81r0B                  148 	mov	__divulong_PARM_2+1, a
+      000088r98r0F                  149 	mov	a, __divslong_sloc5_1_0+2
+      00008Ar82r0B                  150 	mov	__divulong_PARM_2+2, a
+      00008Cr99r0F                  151 	mov	a, __divslong_sloc5_1_0+3
+      00008Er83r0B                  152 	mov	__divulong_PARM_2+3, a
+      000090r91r0F                  153 	mov	a, __divslong_sloc3_1_0+0
+      000092r80r0B                  154 	mov	__divulong_PARM_1+0, a
+      000094r92r0F                  155 	mov	a, __divslong_sloc3_1_0+1
+      000096r81r0B                  156 	mov	__divulong_PARM_1+1, a
+      000098r93r0F                  157 	mov	a, __divslong_sloc3_1_0+2
+      00009Ar82r0B                  158 	mov	__divulong_PARM_1+2, a
+      00009Cr94r0F                  159 	mov	a, __divslong_sloc3_1_0+3
+      00009Er83r0B                  160 	mov	__divulong_PARM_1+3, a
+      0000A0r08r2F                  161 	mov	a, #__divslong_sloc0_1_0
+      0000A2 72 00                  162 	push	af
+      0000A4r00r38                  163 	call	__divulong
+      0000A6 C2 01                  164 	mov	a, sp
+      0000A8 FE 28                  165 	add	a, #-2
+      0000AA 82 01                  166 	mov	sp, a
+      0000ACr88r0F                  167 	mov	a, __divslong_sloc0_1_0+0
+      0000AEr9Ar0B                  168 	mov	__divslong_sloc6_1_0+0, a
+      0000B0r89r0F                  169 	mov	a, __divslong_sloc0_1_0+1
+      0000B2r9Br0B                  170 	mov	__divslong_sloc6_1_0+1, a
+      0000B4r8Ar0F                  171 	mov	a, __divslong_sloc0_1_0+2
+      0000B6r9Cr0B                  172 	mov	__divslong_sloc6_1_0+2, a
+      0000B8r8Br0F                  173 	mov	a, __divslong_sloc0_1_0+3
+      0000BAr9Dr0B                  174 	mov	__divslong_sloc6_1_0+3, a
+                                    175 ;	../_divslong.c: 264: if ((x < 0) ^ (y < 0))
+      0000BCr8Cr0F                  176 	mov	a, __divslong_sloc1_1_0+0
+      0000BEr15r0F                  177 	xor	a, __divslong_sloc4_1_0+0
+      0000C0 00 2B                  178 	cneqsn	a, #0x00
+      0000C2rFEr30                  179 	goto	00102$
+                                    180 ;	../_divslong.c: 265: return -r;
+      0000C4 00 2F                  181 	mov	a, #0x00
+      0000C6r9Ar0C                  182 	sub	a, __divslong_sloc6_1_0+0
+      0000C8r9Er0B                  183 	mov	__divslong_sloc7_1_0+0, a
+      0000CA 00 2F                  184 	mov	a, #0x00
+      0000CCr9Br0D                  185 	subc	a, __divslong_sloc6_1_0+1
+      0000CEr9Fr0B                  186 	mov	__divslong_sloc7_1_0+1, a
+      0000D0 00 2F                  187 	mov	a, #0x00
+      0000D2r9Cr0D                  188 	subc	a, __divslong_sloc6_1_0+2
+      0000D4rA0r0B                  189 	mov	__divslong_sloc7_1_0+2, a
+      0000D6 00 2F                  190 	mov	a, #0x00
+      0000D8r9Dr0D                  191 	subc	a, __divslong_sloc6_1_0+3
+      0000DArA1r0B                  192 	mov	__divslong_sloc7_1_0+3, a
+      0000DC C2 01                  193 	mov	a, sp
+      0000DE FC 28                  194 	add	a, #0xfc
+      0000E0r80r0B                  195 	mov	p, a
+      0000E2r81r03                  196 	idxm	a, p
+      0000E4r80r0B                  197 	mov	p, a
+      0000E6r9Er0F                  198 	mov	a, __divslong_sloc7_1_0+0
+      0000E8r80r03                  199 	idxm	p, a
+      0000EAr00r12                  200 	inc	p
+      0000ECr9Fr0F                  201 	mov	a, __divslong_sloc7_1_0+1
+      0000EEr80r03                  202 	idxm	p, a
+      0000F0r00r12                  203 	inc	p
+      0000F2rA0r0F                  204 	mov	a, __divslong_sloc7_1_0+2
+      0000F4r80r03                  205 	idxm	p, a
+      0000F6r00r12                  206 	inc	p
+      0000F8rA1r0F                  207 	mov	a, __divslong_sloc7_1_0+3
+      0000FAr80r03                  208 	idxm	p, a
+      0000FC 7A 00                  209 	ret
+      0000FE                        210 00102$:
+                                    211 ;	../_divslong.c: 267: return r;
+      0000FE C2 01                  212 	mov	a, sp
+      000100 FC 28                  213 	add	a, #0xfc
+      000102r80r0B                  214 	mov	p, a
+      000104r81r03                  215 	idxm	a, p
+      000106r80r0B                  216 	mov	p, a
+      000108r9Ar0F                  217 	mov	a, __divslong_sloc6_1_0+0
+      00010Ar80r03                  218 	idxm	p, a
+      00010Cr00r12                  219 	inc	p
+      00010Er9Br0F                  220 	mov	a, __divslong_sloc6_1_0+1
+      000110r80r03                  221 	idxm	p, a
+      000112r00r12                  222 	inc	p
+      000114r9Cr0F                  223 	mov	a, __divslong_sloc6_1_0+2
+      000116r80r03                  224 	idxm	p, a
+      000118r00r12                  225 	inc	p
+      00011Ar9Dr0F                  226 	mov	a, __divslong_sloc6_1_0+3
+      00011Cr80r03                  227 	idxm	p, a
+                                    228 ;	../_divslong.c: 268: }
+      00011E 7A 00                  229 	ret
+                                    230 	.area CODE
+                                    231 	.area CONST
+                                    232 	.area CABS (ABS)

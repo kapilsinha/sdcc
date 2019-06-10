@@ -1,0 +1,309 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module c16stombs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___memcpy
+                                     17 	.globl _wctomb
+                                     18 	.globl ___c16stombs_PARM_3
+                                     19 	.globl ___c16stombs_PARM_2
+                                     20 	.globl ___c16stombs_PARM_1
+                                     21 	.globl ___c16stombs
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 ___c16stombs_PARM_1:
+      000000                         32 	.ds 2
+      000002                         33 ___c16stombs_PARM_2:
+      000002                         34 	.ds 2
+      000004                         35 ___c16stombs_PARM_3:
+      000004                         36 	.ds 2
+      000006                         37 ___c16stombs_b_65536_66:
+      000006                         38 	.ds 4
+      00000A                         39 ___c16stombs_sloc0_1_0:
+      00000A                         40 	.ds 2
+      00000C                         41 ___c16stombs_sloc1_1_0:
+      00000C                         42 	.ds 2
+      00000E                         43 ___c16stombs_sloc2_1_0:
+      00000E                         44 	.ds 2
+      000010                         45 ___c16stombs_sloc3_1_0:
+      000010                         46 	.ds 2
+      000012                         47 ___c16stombs_sloc4_1_0:
+      000012                         48 	.ds 4
+      000016                         49 ___c16stombs_sloc5_1_0:
+      000016                         50 	.ds 2
+      000018                         51 ___c16stombs_sloc6_1_0:
+      000018                         52 	.ds 4
+      00001C                         53 ___c16stombs_sloc7_1_0:
+      00001C                         54 	.ds 4
+      000020                         55 ___c16stombs_sloc8_1_0:
+      000020                         56 	.ds 2
+      000022                         57 ___c16stombs_sloc9_1_0:
+      000022                         58 	.ds 2
+                                     59 ;--------------------------------------------------------
+                                     60 ; overlayable items in ram 
+                                     61 ;--------------------------------------------------------
+                                     62 ;--------------------------------------------------------
+                                     63 ; absolute external ram data
+                                     64 ;--------------------------------------------------------
+                                     65 	.area DABS (ABS)
+                                     66 ;--------------------------------------------------------
+                                     67 ; global & static initialisations
+                                     68 ;--------------------------------------------------------
+                                     69 	.area HOME
+                                     70 	.area GSINIT
+                                     71 	.area GSFINAL
+                                     72 	.area GSINIT
+                                     73 ;--------------------------------------------------------
+                                     74 ; Home
+                                     75 ;--------------------------------------------------------
+                                     76 	.area HOME
+                                     77 	.area HOME
+                                     78 ;--------------------------------------------------------
+                                     79 ; code
+                                     80 ;--------------------------------------------------------
+                                     81 	.area CODE
+                                     82 ;	../c16stombs.c: 44: size_t __c16stombs(char *restrict s, const char16_t *restrict c16s, size_t n)
+                                     83 ;	-----------------------------------------
+                                     84 ;	 function __c16stombs
+                                     85 ;	-----------------------------------------
+      000000                         86 ___c16stombs:
+                                     87 ;	../c16stombs.c: 46: size_t m = 0;
+      000000r0Ar13                   88 	clear	___c16stombs_sloc0_1_0+0
+      000002r0Br13                   89 	clear	___c16stombs_sloc0_1_0+1
+                                     90 ;	../c16stombs.c: 87: return(m);
+      000004                         91 00119$:
+                                     92 ;	../c16stombs.c: 54: if(c16s[0] < 0xd800 || c16s[0] >= 0xe000) // Basic multilingual plane
+      000004r82r0F                   93 	mov	a, ___c16stombs_PARM_2+0
+      000006r8Cr0B                   94 	mov	___c16stombs_sloc1_1_0+0, a
+      000008r83r0F                   95 	mov	a, ___c16stombs_PARM_2+1
+      00000Ar8Dr0B                   96 	mov	___c16stombs_sloc1_1_0+1, a
+      00000Cr8Cr0F                   97 	mov	a, ___c16stombs_sloc1_1_0+0
+      00000Er80r0B                   98 	mov	p, a
+      000010r8Dr0F                   99 	mov	a, ___c16stombs_sloc1_1_0+1
+      000012r00r38                  100 	call	__gptrget2
+      000014r8Er0B                  101 	mov	___c16stombs_sloc2_1_0+0, a
+      000016r80r0F                  102 	mov	a, p
+      000018r8Fr0B                  103 	mov	___c16stombs_sloc2_1_0+1, a
+      00001A D8 29                  104 	sub	a, #0xd8
+      00001C 40 18                  105 	t0sn	f, c
+      00001Er28r30                  106 	goto	00106$
+      000020r8Fr0F                  107 	mov	a, ___c16stombs_sloc2_1_0+1
+      000022 E0 29                  108 	sub	a, #0xe0
+      000024 40 18                  109 	t0sn	f, c
+      000026r50r30                  110 	goto	00107$
+      000028                        111 00106$:
+                                    112 ;	../c16stombs.c: 56: codepoint = c16s[0];
+      000028r82r0F                  113 	mov	a, ___c16stombs_PARM_2+0
+      00002Ar90r0B                  114 	mov	___c16stombs_sloc3_1_0+0, a
+      00002Cr83r0F                  115 	mov	a, ___c16stombs_PARM_2+1
+      00002Er91r0B                  116 	mov	___c16stombs_sloc3_1_0+1, a
+      000030r90r0F                  117 	mov	a, ___c16stombs_sloc3_1_0+0
+      000032r80r0B                  118 	mov	p, a
+      000034r91r0F                  119 	mov	a, ___c16stombs_sloc3_1_0+1
+      000036r00r38                  120 	call	__gptrget2
+      000038r92r0B                  121 	mov	___c16stombs_sloc4_1_0+0, a
+      00003Ar80r0F                  122 	mov	a, p
+      00003Cr93r0B                  123 	mov	___c16stombs_sloc4_1_0+1, a
+      00003Er14r13                  124 	clear	___c16stombs_sloc4_1_0+2
+      000040r15r13                  125 	clear	___c16stombs_sloc4_1_0+3
+                                    126 ;	../c16stombs.c: 57: c16s++;
+      000042r90r0F                  127 	mov	a, ___c16stombs_sloc3_1_0+0
+      000044 02 28                  128 	add	a, #0x02
+      000046r82r0B                  129 	mov	___c16stombs_PARM_2+0, a
+      000048r91r0F                  130 	mov	a, ___c16stombs_sloc3_1_0+1
+      00004A 60 00                  131 	addc	a
+      00004Cr83r0B                  132 	mov	___c16stombs_PARM_2+1, a
+      00004ErDEr30                  133 	goto	00108$
+      000050                        134 00107$:
+                                    135 ;	../c16stombs.c: 59: else if(c16s[0] > 0xdbff || c16s[1] < 0xdc00 || c16s[1] > 0xdfff) // Unpaired surrogate
+      000050 FF 2F                  136 	mov	a, #0xff
+      000052r8Er0C                  137 	sub	a, ___c16stombs_sloc2_1_0+0
+      000054 DB 2F                  138 	mov	a, #0xdb
+      000056r8Fr0D                  139 	subc	a, ___c16stombs_sloc2_1_0+1
+      000058 40 18                  140 	t0sn	f, c
+      00005Ar80r30                  141 	goto	00101$
+      00005Cr8Cr0F                  142 	mov	a, ___c16stombs_sloc1_1_0+0
+      00005E 02 28                  143 	add	a, #0x02
+      000060r80r0B                  144 	mov	p, a
+      000062r8Dr0F                  145 	mov	a, ___c16stombs_sloc1_1_0+1
+      000064 60 00                  146 	addc	a
+      000066r00r38                  147 	call	__gptrget2
+      000068r96r0B                  148 	mov	___c16stombs_sloc5_1_0+0, a
+      00006Ar80r0F                  149 	mov	a, p
+      00006Cr97r0B                  150 	mov	___c16stombs_sloc5_1_0+1, a
+      00006E DC 29                  151 	sub	a, #0xdc
+      000070 40 18                  152 	t0sn	f, c
+      000072r80r30                  153 	goto	00101$
+      000074 FF 2F                  154 	mov	a, #0xff
+      000076r96r0C                  155 	sub	a, ___c16stombs_sloc5_1_0+0
+      000078 DF 2F                  156 	mov	a, #0xdf
+      00007Ar97r0D                  157 	subc	a, ___c16stombs_sloc5_1_0+1
+      00007C 40 1A                  158 	t1sn	f, c
+      00007Er86r30                  159 	goto	00102$
+      000080                        160 00101$:
+                                    161 ;	../c16stombs.c: 60: return(-1);
+      000080 FF 2F                  162 	mov	a, #0xff
+      000082r80r0B                  163 	mov	p, a
+      000084 FF 02                  164 	ret	#0xff
+      000086                        165 00102$:
+                                    166 ;	../c16stombs.c: 63: codepoint = ((unsigned long)(c16s[0]) << 10) -(0xd800ul << 10) + (unsigned long)(c16s[1]) - 0xdc00ul + 0x10000ul;
+      000086r8Er0F                  167 	mov	a, ___c16stombs_sloc2_1_0+0
+      000088r99r0B                  168 	mov	___c16stombs_sloc6_1_0+1, a
+      00008Ar8Fr0F                  169 	mov	a, ___c16stombs_sloc2_1_0+1
+      00008Cr9Ar0B                  170 	mov	___c16stombs_sloc6_1_0+2, a
+      00008Er1Br13                  171 	clear	___c16stombs_sloc6_1_0+3
+      000090r18r13                  172 	clear	___c16stombs_sloc6_1_0+0
+      000092r99r15                  173 	sl	___c16stombs_sloc6_1_0+1
+      000094r9Ar16                  174 	slc	___c16stombs_sloc6_1_0+2
+      000096r9Br16                  175 	slc	___c16stombs_sloc6_1_0+3
+      000098r99r15                  176 	sl	___c16stombs_sloc6_1_0+1
+      00009Ar9Ar16                  177 	slc	___c16stombs_sloc6_1_0+2
+      00009Cr9Br16                  178 	slc	___c16stombs_sloc6_1_0+3
+      00009Er98r0F                  179 	mov	a, ___c16stombs_sloc6_1_0+0
+      0000A0r16r0C                  180 	add	a, ___c16stombs_sloc5_1_0+0
+      0000A2r9Cr0B                  181 	mov	___c16stombs_sloc7_1_0+0, a
+      0000A4r99r0F                  182 	mov	a, ___c16stombs_sloc6_1_0+1
+      0000A6r17r0D                  183 	addc	a, ___c16stombs_sloc5_1_0+1
+      0000A8r9Dr0B                  184 	mov	___c16stombs_sloc7_1_0+1, a
+      0000AAr9Ar0F                  185 	mov	a, ___c16stombs_sloc6_1_0+2
+      0000AC 60 00                  186 	addc	a
+      0000AEr9Er0B                  187 	mov	___c16stombs_sloc7_1_0+2, a
+      0000B0r9Br0F                  188 	mov	a, ___c16stombs_sloc6_1_0+3
+      0000B2 60 00                  189 	addc	a
+      0000B4r9Fr0B                  190 	mov	___c16stombs_sloc7_1_0+3, a
+      0000B6r9Cr0F                  191 	mov	a, ___c16stombs_sloc7_1_0+0
+      0000B8r92r0B                  192 	mov	___c16stombs_sloc4_1_0+0, a
+      0000BAr9Dr0F                  193 	mov	a, ___c16stombs_sloc7_1_0+1
+      0000BC 24 28                  194 	add	a, #0x24
+      0000BEr93r0B                  195 	mov	___c16stombs_sloc4_1_0+1, a
+      0000C0 A0 2F                  196 	mov	a, #0xa0
+      0000C2r80r0B                  197 	mov	p, a
+      0000C4r9Er0F                  198 	mov	a, ___c16stombs_sloc7_1_0+2
+      0000C6r00r0D                  199 	addc	a, p
+      0000C8r94r0B                  200 	mov	___c16stombs_sloc4_1_0+2, a
+      0000CAr9Fr0F                  201 	mov	a, ___c16stombs_sloc7_1_0+3
+      0000CC 60 00                  202 	addc	a
+      0000CE FC 28                  203 	add	a, #0xfc
+      0000D0r95r0B                  204 	mov	___c16stombs_sloc4_1_0+3, a
+                                    205 ;	../c16stombs.c: 64: c16s += 2;
+      0000D2r8Cr0F                  206 	mov	a, ___c16stombs_sloc1_1_0+0
+      0000D4 04 28                  207 	add	a, #0x04
+      0000D6r82r0B                  208 	mov	___c16stombs_PARM_2+0, a
+      0000D8r8Dr0F                  209 	mov	a, ___c16stombs_sloc1_1_0+1
+      0000DA 60 00                  210 	addc	a
+      0000DCr83r0B                  211 	mov	___c16stombs_PARM_2+1, a
+      0000DE                        212 00108$:
+                                    213 ;	../c16stombs.c: 67: if(!codepoint)
+      0000DEr92r0F                  214 	mov	a, ___c16stombs_sloc4_1_0+0
+      0000E0r93r0E                  215 	or	a, ___c16stombs_sloc4_1_0+1
+      0000E2r94r0E                  216 	or	a, ___c16stombs_sloc4_1_0+2
+      0000E4r95r0E                  217 	or	a, ___c16stombs_sloc4_1_0+3
+      0000E6 00 2A                  218 	ceqsn	a, #0x00
+      0000E8r02r31                  219 	goto	00113$
+                                    220 ;	../c16stombs.c: 69: if(m < n)
+      0000EAr8Ar0F                  221 	mov	a, ___c16stombs_sloc0_1_0+0
+      0000ECr84r0C                  222 	sub	a, ___c16stombs_PARM_3+0
+      0000EEr8Br0F                  223 	mov	a, ___c16stombs_sloc0_1_0+1
+      0000F0r85r0D                  224 	subc	a, ___c16stombs_PARM_3+1
+      0000F2 40 1A                  225 	t1sn	f, c
+      0000F4r72r31                  226 	goto	00118$
+                                    227 ;	../c16stombs.c: 70: *s = 0;
+      0000F6r80r0F                  228 	mov	a, ___c16stombs_PARM_1+0
+      0000F8r80r0B                  229 	mov	p, a
+      0000FAr81r0F                  230 	mov	a, ___c16stombs_PARM_1+1
+      0000FC 00 2F                  231 	mov	a, #0x00
+      0000FEr80r03                  232 	idxm	p, a
+                                    233 ;	../c16stombs.c: 71: break;
+      000100r72r31                  234 	goto	00118$
+      000102                        235 00113$:
+                                    236 ;	../c16stombs.c: 74: l = wctomb(b, codepoint);
+      000102r06r2F                  237 	mov	a, #(___c16stombs_b_65536_66 + 0)
+      000104r80r0B                  238 	mov	_wctomb_PARM_1+0, a
+      000106r01r13                  239 	clear	_wctomb_PARM_1+1
+      000108r92r0F                  240 	mov	a, ___c16stombs_sloc4_1_0+0
+      00010Ar80r0B                  241 	mov	_wctomb_PARM_2+0, a
+      00010Cr93r0F                  242 	mov	a, ___c16stombs_sloc4_1_0+1
+      00010Er81r0B                  243 	mov	_wctomb_PARM_2+1, a
+      000110r94r0F                  244 	mov	a, ___c16stombs_sloc4_1_0+2
+      000112r82r0B                  245 	mov	_wctomb_PARM_2+2, a
+      000114r95r0F                  246 	mov	a, ___c16stombs_sloc4_1_0+3
+      000116r83r0B                  247 	mov	_wctomb_PARM_2+3, a
+      000118r00r38                  248 	call	_wctomb
+      00011ArA0r0B                  249 	mov	___c16stombs_sloc8_1_0+0, a
+      00011Cr80r0F                  250 	mov	a, p
+                                    251 ;	../c16stombs.c: 76: if(l < 0)
+      00011ErA1r0B                  252 	mov	___c16stombs_sloc8_1_0+1, a
+      000120 80 29                  253 	sub	a, #0x80
+      000122 40 18                  254 	t0sn	f, c
+      000124r2Cr31                  255 	goto	00115$
+                                    256 ;	../c16stombs.c: 77: return(-1);
+      000126 FF 2F                  257 	mov	a, #0xff
+      000128r80r0B                  258 	mov	p, a
+      00012A FF 02                  259 	ret	#0xff
+      00012C                        260 00115$:
+                                    261 ;	../c16stombs.c: 79: if(m + l > n)
+      00012CrA1r0F                  262 	mov	a, ___c16stombs_sloc8_1_0+1
+      00012Er80r0B                  263 	mov	p, a
+      000130rA0r0F                  264 	mov	a, ___c16stombs_sloc8_1_0+0
+      000132r0Ar0C                  265 	add	a, ___c16stombs_sloc0_1_0+0
+      000134rA2r0B                  266 	mov	___c16stombs_sloc9_1_0+0, a
+      000136r8Br0F                  267 	mov	a, ___c16stombs_sloc0_1_0+1
+      000138r00r0D                  268 	addc	a, p
+      00013ArA3r0B                  269 	mov	___c16stombs_sloc9_1_0+1, a
+      00013Cr84r0F                  270 	mov	a, ___c16stombs_PARM_3+0
+      00013ErA2r0C                  271 	sub	a, ___c16stombs_sloc9_1_0+0
+      000140r85r0F                  272 	mov	a, ___c16stombs_PARM_3+1
+      000142rA3r0D                  273 	subc	a, ___c16stombs_sloc9_1_0+1
+      000144 40 18                  274 	t0sn	f, c
+      000146r72r31                  275 	goto	00118$
+                                    276 ;	../c16stombs.c: 82: memcpy(s, b, l);
+      000148r80r0F                  277 	mov	a, ___c16stombs_PARM_1+0
+      00014Ar80r0B                  278 	mov	___memcpy_PARM_1+0, a
+      00014Cr81r0F                  279 	mov	a, ___c16stombs_PARM_1+1
+      00014Er81r0B                  280 	mov	___memcpy_PARM_1+1, a
+      000150r06r2F                  281 	mov	a, #(___c16stombs_b_65536_66 + 0)
+      000152r80r0B                  282 	mov	___memcpy_PARM_2+0, a
+      000154r01r13                  283 	clear	___memcpy_PARM_2+1
+      000156rA0r0F                  284 	mov	a, ___c16stombs_sloc8_1_0+0
+      000158r80r0B                  285 	mov	___memcpy_PARM_3+0, a
+      00015ArA1r0F                  286 	mov	a, ___c16stombs_sloc8_1_0+1
+      00015Cr81r0B                  287 	mov	___memcpy_PARM_3+1, a
+      00015Er00r38                  288 	call	___memcpy
+                                    289 ;	../c16stombs.c: 83: s += l;
+      000160rA0r0F                  290 	mov	a, ___c16stombs_sloc8_1_0+0
+      000162r00r08                  291 	add	___c16stombs_PARM_1+0, a
+      000164rA1r0F                  292 	mov	a, ___c16stombs_sloc8_1_0+1
+      000166r01r09                  293 	addc	___c16stombs_PARM_1+1, a
+                                    294 ;	../c16stombs.c: 84: m += l;
+      000168rA2r0F                  295 	mov	a, ___c16stombs_sloc9_1_0+0
+      00016Ar8Ar0B                  296 	mov	___c16stombs_sloc0_1_0+0, a
+      00016CrA3r0F                  297 	mov	a, ___c16stombs_sloc9_1_0+1
+      00016Er8Br0B                  298 	mov	___c16stombs_sloc0_1_0+1, a
+      000170r04r30                  299 	goto	00119$
+      000172                        300 00118$:
+                                    301 ;	../c16stombs.c: 87: return(m);
+      000172r8Br0F                  302 	mov	a, ___c16stombs_sloc0_1_0+1
+      000174r80r0B                  303 	mov	p, a
+      000176r8Ar0F                  304 	mov	a, ___c16stombs_sloc0_1_0+0
+                                    305 ;	../c16stombs.c: 88: }
+      000178 7A 00                  306 	ret
+                                    307 	.area CODE
+                                    308 	.area CONST
+                                    309 	.area CABS (ABS)

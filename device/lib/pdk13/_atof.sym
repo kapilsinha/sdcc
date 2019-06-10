@@ -1,0 +1,63 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___fsadd                                                       ****** GX
+    ___fsadd_PARM_1                                                ****** GX
+    ___fsadd_PARM_2                                                ****** GX
+    ___fsmul                                                       ****** GX
+    ___fsmul_PARM_1                                                ****** GX
+    ___fsmul_PARM_2                                                ****** GX
+    ___sint2fs                                                     ****** GX
+    ___sint2fs_PARM_1                                              ****** GX
+    __gptrget                                                      ****** GX
+  9 _atof                                                          000000 GR
+  1 _atof_PARM_1                                                   000000 GR
+  1 _atof_sloc0_1_0                                                000002 R
+  1 _atof_sloc10_1_0                                               000028 R
+  1 _atof_sloc11_1_0                                               000029 R
+  1 _atof_sloc12_1_0                                               00002D R
+  1 _atof_sloc13_1_0                                               00002F R
+  1 _atof_sloc14_1_0                                               000031 R
+  1 _atof_sloc15_1_0                                               000035 R
+  1 _atof_sloc16_1_0                                               000037 R
+  1 _atof_sloc1_1_0                                                000006 R
+  1 _atof_sloc2_1_0                                                00000A R
+  1 _atof_sloc3_1_0                                                00000E R
+  1 _atof_sloc4_1_0                                                000012 R
+  1 _atof_sloc5_1_0                                                000016 R
+  1 _atof_sloc6_1_0                                                00001A R
+  1 _atof_sloc7_1_0                                                00001E R
+  1 _atof_sloc8_1_0                                                000022 R
+  1 _atof_sloc9_1_0                                                000026 R
+    _atoi                                                          ****** GX
+    _atoi_PARM_1                                                   ****** GX
+    _isspace                                                       ****** GX
+    _isspace_PARM_1                                                ****** GX
+    _toupper                                                       ****** GX
+    _toupper_PARM_1                                                ****** GX
+    p                                                              ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     38   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    30E   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

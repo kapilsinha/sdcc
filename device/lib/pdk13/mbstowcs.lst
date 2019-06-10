@@ -1,0 +1,150 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbstowcs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbtowc
+                                     17 	.globl _mbstowcs_PARM_3
+                                     18 	.globl _mbstowcs_PARM_2
+                                     19 	.globl _mbstowcs_PARM_1
+                                     20 	.globl _mbstowcs
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _mbstowcs_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _mbstowcs_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _mbstowcs_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _mbstowcs_sloc0_1_0:
+      000006                         37 	.ds 2
+      000008                         38 _mbstowcs_sloc1_1_0:
+      000008                         39 	.ds 2
+      00000A                         40 _mbstowcs_sloc2_1_0:
+      00000A                         41 	.ds 2
+      00000C                         42 _mbstowcs_sloc3_1_0:
+      00000C                         43 	.ds 2
+                                     44 ;--------------------------------------------------------
+                                     45 ; overlayable items in ram 
+                                     46 ;--------------------------------------------------------
+                                     47 ;--------------------------------------------------------
+                                     48 ; absolute external ram data
+                                     49 ;--------------------------------------------------------
+                                     50 	.area DABS (ABS)
+                                     51 ;--------------------------------------------------------
+                                     52 ; global & static initialisations
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area GSINIT
+                                     56 	.area GSFINAL
+                                     57 	.area GSINIT
+                                     58 ;--------------------------------------------------------
+                                     59 ; Home
+                                     60 ;--------------------------------------------------------
+                                     61 	.area HOME
+                                     62 	.area HOME
+                                     63 ;--------------------------------------------------------
+                                     64 ; code
+                                     65 ;--------------------------------------------------------
+                                     66 	.area CODE
+                                     67 ;	../mbstowcs.c: 33: size_t mbstowcs(wchar_t *restrict pwcs, const char *restrict s, size_t n)
+                                     68 ;	-----------------------------------------
+                                     69 ;	 function mbstowcs
+                                     70 ;	-----------------------------------------
+      000000                         71 _mbstowcs:
+                                     72 ;	../mbstowcs.c: 35: size_t m = 0;
+      000000r06r13                   73 	clear	_mbstowcs_sloc0_1_0+0
+      000002r07r13                   74 	clear	_mbstowcs_sloc0_1_0+1
+                                     75 ;	../mbstowcs.c: 36: while(n--)
+      000004r80r0F                   76 	mov	a, _mbstowcs_PARM_1+0
+      000006r88r0B                   77 	mov	_mbstowcs_sloc1_1_0+0, a
+      000008r81r0F                   78 	mov	a, _mbstowcs_PARM_1+1
+      00000Ar89r0B                   79 	mov	_mbstowcs_sloc1_1_0+1, a
+      00000Cr0Ar13                   80 	clear	_mbstowcs_sloc2_1_0+0
+      00000Er0Br13                   81 	clear	_mbstowcs_sloc2_1_0+1
+      000010r84r0F                   82 	mov	a, _mbstowcs_PARM_3+0
+      000012r8Cr0B                   83 	mov	_mbstowcs_sloc3_1_0+0, a
+      000014r85r0F                   84 	mov	a, _mbstowcs_PARM_3+1
+      000016r8Dr0B                   85 	mov	_mbstowcs_sloc3_1_0+1, a
+      000018                         86 00105$:
+      000018r8Dr0F                   87 	mov	a, _mbstowcs_sloc3_1_0+1
+      00001Ar80r0B                   88 	mov	p, a
+      00001Cr8Cr0F                   89 	mov	a, _mbstowcs_sloc3_1_0+0
+      00001Er8Cr12                   90 	dec	_mbstowcs_sloc3_1_0+0
+      000020r8Dr10                   91 	subc	_mbstowcs_sloc3_1_0+1
+      000022r80r0E                   92 	or	a, p
+      000024 00 2B                   93 	cneqsn	a, #0x00
+      000026r74r30                   94 	goto	00107$
+                                     95 ;	../mbstowcs.c: 38: int b = mbtowc(pwcs++, s, MB_LEN_MAX);
+      000028r88r0F                   96 	mov	a, _mbstowcs_sloc1_1_0+0
+      00002Ar80r0B                   97 	mov	_mbtowc_PARM_1+0, a
+      00002Cr89r0F                   98 	mov	a, _mbstowcs_sloc1_1_0+1
+      00002Er81r0B                   99 	mov	_mbtowc_PARM_1+1, a
+      000030 04 2F                  100 	mov	a, #0x04
+      000032r08r08                  101 	add	_mbstowcs_sloc1_1_0+0, a
+      000034r09r10                  102 	addc	_mbstowcs_sloc1_1_0+1
+      000036r82r0F                  103 	mov	a, _mbstowcs_PARM_2+0
+      000038r80r0B                  104 	mov	_mbtowc_PARM_2+0, a
+      00003Ar83r0F                  105 	mov	a, _mbstowcs_PARM_2+1
+      00003Cr81r0B                  106 	mov	_mbtowc_PARM_2+1, a
+      00003E 04 2F                  107 	mov	a, #0x04
+      000040r80r0B                  108 	mov	_mbtowc_PARM_3+0, a
+      000042r01r13                  109 	clear	_mbtowc_PARM_3+1
+      000044r00r38                  110 	call	_mbtowc
+                                    111 ;	../mbstowcs.c: 39: if(!b)
+      000046 00 2A                  112 	ceqsn	a, #0
+      000048r4Er30                  113 	goto	#00126$
+      00004Ar80r17                  114 	cneqsn	a, p
+      00004Cr74r30                  115 	goto	00107$
+      00004E                        116 00126$:
+                                    117 ;	../mbstowcs.c: 41: if(b < 0)
+      00004Er80r0F                  118 	mov	a, p
+      000050 80 29                  119 	sub	a, #0x80
+      000052 40 18                  120 	t0sn	f, c
+      000054r5Cr30                  121 	goto	00104$
+                                    122 ;	../mbstowcs.c: 42: return(-1);
+      000056 FF 2F                  123 	mov	a, #0xff
+      000058r80r0B                  124 	mov	p, a
+      00005A FF 02                  125 	ret	#0xff
+      00005C                        126 00104$:
+                                    127 ;	../mbstowcs.c: 43: s += b;
+      00005Cr02r0C                  128 	add	a, _mbstowcs_PARM_2+0
+      00005Er82r0B                  129 	mov	_mbstowcs_PARM_2+0, a
+      000060r83r0F                  130 	mov	a, _mbstowcs_PARM_2+1
+      000062r00r0D                  131 	addc	a, p
+      000064r83r0B                  132 	mov	_mbstowcs_PARM_2+1, a
+                                    133 ;	../mbstowcs.c: 44: m++;
+      000066r0Ar12                  134 	inc	_mbstowcs_sloc2_1_0+0
+      000068r0Br10                  135 	addc	_mbstowcs_sloc2_1_0+1
+      00006Ar8Ar0F                  136 	mov	a, _mbstowcs_sloc2_1_0+0
+      00006Cr86r0B                  137 	mov	_mbstowcs_sloc0_1_0+0, a
+      00006Er8Br0F                  138 	mov	a, _mbstowcs_sloc2_1_0+1
+      000070r87r0B                  139 	mov	_mbstowcs_sloc0_1_0+1, a
+      000072r18r30                  140 	goto	00105$
+      000074                        141 00107$:
+                                    142 ;	../mbstowcs.c: 47: return(m);
+      000074r87r0F                  143 	mov	a, _mbstowcs_sloc0_1_0+1
+      000076r80r0B                  144 	mov	p, a
+      000078r86r0F                  145 	mov	a, _mbstowcs_sloc0_1_0+0
+                                    146 ;	../mbstowcs.c: 48: }
+      00007A 7A 00                  147 	ret
+                                    148 	.area CODE
+                                    149 	.area CONST
+                                    150 	.area CABS (ABS)

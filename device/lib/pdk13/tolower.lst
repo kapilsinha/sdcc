@@ -1,0 +1,91 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module tolower
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _tolower_PARM_1
+                                     17 	.globl _tolower
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _tolower_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _tolower_sloc0_1_0:
+      000000                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../tolower.c: 33: int tolower (int c)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function tolower
+                                     58 ;	-----------------------------------------
+      000000                         59 _tolower:
+                                     60 ;	../tolower.c: 35: return (isupper (c) ? c + ('a' - 'A') : c);
+      000000r80r0F                   61 	mov	a, _tolower_PARM_1+0
+      000002r80r0B                   62 	mov	_tolower_sloc0_1_0+0, a
+      000004r81r0F                   63 	mov	a, _tolower_PARM_1+1
+      000006r81r0B                   64 	mov	_tolower_sloc0_1_0+1, a
+                                     65 ;	./../../include/ctype.h: 80: return ((unsigned char)c >= 'A' && (unsigned char)c <= 'Z');
+      000008r80r0F                   66 	mov	a, _tolower_sloc0_1_0+0
+      00000A 41 2A                   67 	ceqsn	a, #0x41
+      00000C 00 00                   68 	nop
+      00000E 40 18                   69 	t0sn	f, c
+      000010r24r30                   70 	goto	00104$
+      000012 5B 2A                   71 	ceqsn	a, #0x5b
+      000014 40 1A                   72 	t1sn	f, c
+      000016r24r30                   73 	goto	00104$
+                                     74 ;	../tolower.c: 35: return (isupper (c) ? c + ('a' - 'A') : c);
+      000018r80r0F                   75 	mov	a, _tolower_sloc0_1_0+0
+      00001A 20 28                   76 	add	a, #0x20
+      00001Cr80r0B                   77 	mov	p, a
+      00001Er81r0F                   78 	mov	a, _tolower_sloc0_1_0+1
+      000020 60 00                   79 	addc	a
+      000022r2Ar30                   80 	goto	00105$
+      000024                         81 00104$:
+      000024r80r0F                   82 	mov	a, _tolower_sloc0_1_0+0
+      000026r80r0B                   83 	mov	p, a
+      000028r81r0F                   84 	mov	a, _tolower_sloc0_1_0+1
+      00002A                         85 00105$:
+      00002Ar80r13                   86 	xch	a, p
+                                     87 ;	../tolower.c: 36: }
+      00002C 7A 00                   88 	ret
+                                     89 	.area CODE
+                                     90 	.area CONST
+                                     91 	.area CABS (ABS)

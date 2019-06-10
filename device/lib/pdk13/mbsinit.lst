@@ -1,0 +1,104 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbsinit
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbsinit_PARM_1
+                                     17 	.globl _mbsinit
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _mbsinit_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _mbsinit_sloc0_1_0:
+      000000                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../mbsinit.c: 31: int mbsinit(const mbstate_t *ps)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function mbsinit
+                                     58 ;	-----------------------------------------
+      000000                         59 _mbsinit:
+                                     60 ;	../mbsinit.c: 33: return(!ps || !ps->c[0] && !ps->c[1] && !ps->c[2]);
+      000000r80r0F                   61 	mov	a, _mbsinit_PARM_1+0
+      000002r81r0E                   62 	or	a, _mbsinit_PARM_1+1
+      000004 00 2B                   63 	cneqsn	a, #0x00
+      000006r40r30                   64 	goto	00104$
+      000008r80r0F                   65 	mov	a, _mbsinit_PARM_1+0
+      00000Ar80r0B                   66 	mov	_mbsinit_sloc0_1_0+0, a
+      00000Cr81r0F                   67 	mov	a, _mbsinit_PARM_1+1
+      00000Er81r0B                   68 	mov	_mbsinit_sloc0_1_0+1, a
+      000010r80r0F                   69 	mov	a, _mbsinit_sloc0_1_0+0
+      000012r80r0B                   70 	mov	p, a
+      000014r81r0F                   71 	mov	a, _mbsinit_sloc0_1_0+1
+      000016r00r38                   72 	call	__gptrget
+      000018 00 2A                   73 	ceqsn	a, #0x00
+      00001Ar3Cr30                   74 	goto	00103$
+      00001Cr80r0F                   75 	mov	a, _mbsinit_sloc0_1_0+0
+      00001E 01 28                   76 	add	a, #0x01
+      000020r80r0B                   77 	mov	p, a
+      000022r81r0F                   78 	mov	a, _mbsinit_sloc0_1_0+1
+      000024 60 00                   79 	addc	a
+      000026r00r38                   80 	call	__gptrget
+      000028 00 2A                   81 	ceqsn	a, #0x00
+      00002Ar3Cr30                   82 	goto	00103$
+      00002Cr80r0F                   83 	mov	a, _mbsinit_sloc0_1_0+0
+      00002E 02 28                   84 	add	a, #0x02
+      000030r80r0B                   85 	mov	p, a
+      000032r81r0F                   86 	mov	a, _mbsinit_sloc0_1_0+1
+      000034 60 00                   87 	addc	a
+      000036r00r38                   88 	call	__gptrget
+      000038 00 2B                   89 	cneqsn	a, #0x00
+      00003Ar40r30                   90 	goto	00104$
+      00003C                         91 00103$:
+      00003Cr00r13                   92 	clear	p
+      00003Er44r30                   93 	goto	00105$
+      000040                         94 00104$:
+      000040 01 2F                   95 	mov	a, #0x01
+      000042r80r0B                   96 	mov	p, a
+      000044                         97 00105$:
+      000044 00 2F                   98 	mov	a, #0x00
+      000046r80r13                   99 	xch	a, p
+                                    100 ;	../mbsinit.c: 34: }
+      000048 7A 00                  101 	ret
+                                    102 	.area CODE
+                                    103 	.area CONST
+                                    104 	.area CABS (ABS)

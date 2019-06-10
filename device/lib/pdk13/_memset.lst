@@ -1,0 +1,106 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _memset
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _memset_PARM_3
+                                     17 	.globl _memset_PARM_2
+                                     18 	.globl _memset_PARM_1
+                                     19 	.globl _memset
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _memset_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _memset_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _memset_PARM_3:
+      000004                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 	.area	OSEG (OVR,DATA)
+      000000                         39 _memset_sloc0_1_0:
+      000000                         40 	.ds 2
+      000002                         41 _memset_sloc1_1_0:
+      000002                         42 	.ds 2
+                                     43 ;--------------------------------------------------------
+                                     44 ; absolute external ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DABS (ABS)
+                                     47 ;--------------------------------------------------------
+                                     48 ; global & static initialisations
+                                     49 ;--------------------------------------------------------
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area GSINIT
+                                     54 ;--------------------------------------------------------
+                                     55 ; Home
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area HOME
+                                     59 ;--------------------------------------------------------
+                                     60 ; code
+                                     61 ;--------------------------------------------------------
+                                     62 	.area CODE
+                                     63 ;	../_memset.c: 41: void *memset (void *s, int c, size_t n)
+                                     64 ;	-----------------------------------------
+                                     65 ;	 function memset
+                                     66 ;	-----------------------------------------
+      000000                         67 _memset:
+                                     68 ;	../_memset.c: 44: register unsigned char *ret = s;
+      000000r80r0F                   69 	mov	a, _memset_PARM_1+0
+      000002r80r0B                   70 	mov	_memset_sloc0_1_0+0, a
+      000004r81r0F                   71 	mov	a, _memset_PARM_1+1
+      000006r81r0B                   72 	mov	_memset_sloc0_1_0+1, a
+                                     73 ;	../_memset.c: 46: while (n--)
+      000008r84r0F                   74 	mov	a, _memset_PARM_3+0
+      00000Ar82r0B                   75 	mov	_memset_sloc1_1_0+0, a
+      00000Cr85r0F                   76 	mov	a, _memset_PARM_3+1
+      00000Er83r0B                   77 	mov	_memset_sloc1_1_0+1, a
+      000010                         78 00101$:
+      000010r83r0F                   79 	mov	a, _memset_sloc1_1_0+1
+      000012r80r0B                   80 	mov	p, a
+      000014r82r0F                   81 	mov	a, _memset_sloc1_1_0+0
+      000016r82r12                   82 	dec	_memset_sloc1_1_0+0
+      000018r83r10                   83 	subc	_memset_sloc1_1_0+1
+      00001Ar80r0E                   84 	or	a, p
+      00001C 00 2B                   85 	cneqsn	a, #0x00
+      00001Er30r30                   86 	goto	00103$
+                                     87 ;	../_memset.c: 48: *(unsigned char *) ret = c;
+      000020r82r0F                   88 	mov	a, _memset_PARM_2+0
+      000022r80r0B                   89 	mov	p, a
+      000024r80r0F                   90 	mov	a, _memset_sloc0_1_0+0
+      000026r80r13                   91 	xch	a, p
+      000028r80r03                   92 	idxm	p, a
+                                     93 ;	../_memset.c: 49: ret = ((unsigned char *) ret) + 1;
+      00002Ar00r12                   94 	inc	_memset_sloc0_1_0+0
+      00002Cr01r10                   95 	addc	_memset_sloc0_1_0+1
+      00002Er10r30                   96 	goto	00101$
+      000030                         97 00103$:
+                                     98 ;	../_memset.c: 52: return s;
+      000030r81r0F                   99 	mov	a, _memset_PARM_1+1
+      000032r80r0B                  100 	mov	p, a
+      000034r80r0F                  101 	mov	a, _memset_PARM_1+0
+                                    102 ;	../_memset.c: 53: }
+      000036 7A 00                  103 	ret
+                                    104 	.area CODE
+                                    105 	.area CONST
+                                    106 	.area CABS (ABS)

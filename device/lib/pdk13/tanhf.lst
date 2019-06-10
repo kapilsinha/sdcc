@@ -1,0 +1,902 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module tanhf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _fabsf
+                                     17 	.globl _expf
+                                     18 	.globl _tanhf
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+                                     28 ;--------------------------------------------------------
+                                     29 ; overlayable items in ram 
+                                     30 ;--------------------------------------------------------
+                                     31 ;--------------------------------------------------------
+                                     32 ; absolute external ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area DABS (ABS)
+                                     35 ;--------------------------------------------------------
+                                     36 ; global & static initialisations
+                                     37 ;--------------------------------------------------------
+                                     38 	.area HOME
+                                     39 	.area GSINIT
+                                     40 	.area GSFINAL
+                                     41 	.area GSINIT
+                                     42 ;--------------------------------------------------------
+                                     43 ; Home
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area HOME
+                                     47 ;--------------------------------------------------------
+                                     48 ; code
+                                     49 ;--------------------------------------------------------
+                                     50 	.area CODE
+                                     51 ;	../tanhf.c: 50: float tanhf(float x) _FLOAT_FUNC_REENTRANT
+                                     52 ;	-----------------------------------------
+                                     53 ;	 function tanhf
+                                     54 ;	-----------------------------------------
+      000000                         55 _tanhf:
+      000000 C2 01                   56 	mov	a, sp
+      000002 4E 28                   57 	add	a, #78
+      000004 82 01                   58 	mov	sp, a
+                                     59 ;	../tanhf.c: 54: f=fabsf(x);
+      000006 72 00                   60 	push	af
+      000008 72 00                   61 	push	af
+      00000A C2 01                   62 	mov	a, sp
+      00000C A9 28                   63 	add	a, #0xa9
+      00000Er80r0B                   64 	mov	p, a
+      000010r81r03                   65 	idxm	a, p
+      000012r80r13                   66 	xch	a, p
+      000014 56 28                   67 	add	a, #86
+      000016r80r13                   68 	xch	a, p
+      000018r80r03                   69 	idxm	p, a
+      00001A A9 2F                   70 	mov	a, #-87
+      00001Cr00r08                   71 	add	p, a
+      00001Er81r03                   72 	idxm	a, p
+      000020r80r13                   73 	xch	a, p
+      000022 56 28                   74 	add	a, #86
+      000024r80r13                   75 	xch	a, p
+      000026r80r03                   76 	idxm	p, a
+      000028 A9 2F                   77 	mov	a, #-87
+      00002Ar00r08                   78 	add	p, a
+      00002Cr81r03                   79 	idxm	a, p
+      00002Er80r13                   80 	xch	a, p
+      000030 56 28                   81 	add	a, #86
+      000032r80r13                   82 	xch	a, p
+      000034r80r03                   83 	idxm	p, a
+      000036 A9 2F                   84 	mov	a, #-87
+      000038r00r08                   85 	add	p, a
+      00003Ar81r03                   86 	idxm	a, p
+      00003Cr80r13                   87 	xch	a, p
+      00003E 56 28                   88 	add	a, #86
+      000040r80r13                   89 	xch	a, p
+      000042r80r03                   90 	idxm	p, a
+      000044 C2 01                   91 	mov	a, sp
+      000046 AE 28                   92 	add	a, #0xae
+      000048 72 00                   93 	push	af
+      00004Ar00r38                   94 	call	_fabsf
+      00004C C2 01                   95 	mov	a, sp
+      00004E FA 28                   96 	add	a, #-6
+      000050 82 01                   97 	mov	sp, a
+      000052 B2 28                   98 	add	a, #0xb2
+      000054r80r0B                   99 	mov	p, a
+      000056r81r03                  100 	idxm	a, p
+      000058r80r13                  101 	xch	a, p
+      00005A 48 28                  102 	add	a, #72
+      00005Cr80r13                  103 	xch	a, p
+      00005Er80r03                  104 	idxm	p, a
+      000060 B9 2F                  105 	mov	a, #-71
+      000062r00r08                  106 	add	p, a
+      000064r81r03                  107 	idxm	a, p
+      000066r80r13                  108 	xch	a, p
+      000068 48 28                  109 	add	a, #72
+      00006Ar80r13                  110 	xch	a, p
+      00006Cr80r03                  111 	idxm	p, a
+      00006E B9 2F                  112 	mov	a, #-71
+      000070r00r08                  113 	add	p, a
+      000072r81r03                  114 	idxm	a, p
+      000074r80r13                  115 	xch	a, p
+      000076 48 28                  116 	add	a, #72
+      000078r80r13                  117 	xch	a, p
+      00007Ar80r03                  118 	idxm	p, a
+      00007C B9 2F                  119 	mov	a, #-71
+      00007Er00r08                  120 	add	p, a
+      000080r81r03                  121 	idxm	a, p
+      000082r80r13                  122 	xch	a, p
+      000084 48 28                  123 	add	a, #72
+      000086r80r13                  124 	xch	a, p
+      000088r80r03                  125 	idxm	p, a
+                                    126 ;	../tanhf.c: 55: if(f>SBIG) r=1.0;
+      00008A B0 2F                  127 	mov	a, #0xb0
+      00008Cr80r0B                  128 	mov	___fslt_PARM_1+0, a
+      00008E 2C 2F                  129 	mov	a, #0x2c
+      000090r81r0B                  130 	mov	___fslt_PARM_1+1, a
+      000092 10 2F                  131 	mov	a, #0x10
+      000094r82r0B                  132 	mov	___fslt_PARM_1+2, a
+      000096 41 2F                  133 	mov	a, #0x41
+      000098r83r0B                  134 	mov	___fslt_PARM_1+3, a
+      00009A FD 2F                  135 	mov	a, #-3
+      00009Cr00r08                  136 	add	p, a
+      00009Er81r03                  137 	idxm	a, p
+      0000A0r80r0B                  138 	mov	___fslt_PARM_2+0, a
+      0000A2r00r12                  139 	inc	p
+      0000A4r81r03                  140 	idxm	a, p
+      0000A6r81r0B                  141 	mov	___fslt_PARM_2+1, a
+      0000A8r00r12                  142 	inc	p
+      0000AAr81r03                  143 	idxm	a, p
+      0000ACr82r0B                  144 	mov	___fslt_PARM_2+2, a
+      0000AEr00r12                  145 	inc	p
+      0000B0r81r03                  146 	idxm	a, p
+      0000B2r83r0B                  147 	mov	___fslt_PARM_2+3, a
+      0000B4r00r38                  148 	call	___fslt
+      0000B6r80r13                  149 	xch	a, p
+      0000B8 C2 01                  150 	mov	a, sp
+      0000BA FE 28                  151 	add	a, #0xfe
+      0000BCr80r13                  152 	xch	a, p
+      0000BEr80r03                  153 	idxm	p, a
+      0000C0r81r03                  154 	idxm	a, p
+      0000C2 00 2B                  155 	cneqsn	a, #0x00
+      0000C4rE4r30                  156 	goto	00108$
+      0000C6 00 2F                  157 	mov	a, #0x00
+      0000C8r80r13                  158 	xch	a, p
+      0000CA F4 28                  159 	add	a, #-12
+      0000CCr80r13                  160 	xch	a, p
+      0000CEr80r03                  161 	idxm	p, a
+      0000D0 00 2F                  162 	mov	a, #0x00
+      0000D2r00r12                  163 	inc	p
+      0000D4r80r03                  164 	idxm	p, a
+      0000D6 80 2F                  165 	mov	a, #0x80
+      0000D8r00r12                  166 	inc	p
+      0000DAr80r03                  167 	idxm	p, a
+      0000DC 3F 2F                  168 	mov	a, #0x3f
+      0000DEr00r12                  169 	inc	p
+      0000E0r80r03                  170 	idxm	p, a
+      0000E2rC4r35                  171 	goto	00109$
+      0000E4                        172 00108$:
+                                    173 ;	../tanhf.c: 56: else if(f>K1)
+      0000E4 54 2F                  174 	mov	a, #0x54
+      0000E6r80r0B                  175 	mov	___fslt_PARM_1+0, a
+      0000E8 9F 2F                  176 	mov	a, #0x9f
+      0000EAr81r0B                  177 	mov	___fslt_PARM_1+1, a
+      0000EC 0C 2F                  178 	mov	a, #0x0c
+      0000EEr82r0B                  179 	mov	___fslt_PARM_1+2, a
+      0000F0 3F 2F                  180 	mov	a, #0x3f
+      0000F2r83r0B                  181 	mov	___fslt_PARM_1+3, a
+      0000F4 C2 01                  182 	mov	a, sp
+      0000F6 FA 28                  183 	add	a, #0xfa
+      0000F8r80r0B                  184 	mov	p, a
+      0000FAr81r03                  185 	idxm	a, p
+      0000FCr80r0B                  186 	mov	___fslt_PARM_2+0, a
+      0000FEr00r12                  187 	inc	p
+      000100r81r03                  188 	idxm	a, p
+      000102r81r0B                  189 	mov	___fslt_PARM_2+1, a
+      000104r00r12                  190 	inc	p
+      000106r81r03                  191 	idxm	a, p
+      000108r82r0B                  192 	mov	___fslt_PARM_2+2, a
+      00010Ar00r12                  193 	inc	p
+      00010Cr81r03                  194 	idxm	a, p
+      00010Er83r0B                  195 	mov	___fslt_PARM_2+3, a
+      000110r00r38                  196 	call	___fslt
+      000112 00 2B                  197 	cneqsn	a, #0x00
+      000114rF8r32                  198 	goto	00105$
+                                    199 ;	../tanhf.c: 58: r=0.5-1.0/(expf(f+f)+1.0);
+      000116 C2 01                  200 	mov	a, sp
+      000118 FA 28                  201 	add	a, #0xfa
+      00011Ar80r0B                  202 	mov	p, a
+      00011Cr81r03                  203 	idxm	a, p
+      00011Er80r0B                  204 	mov	___fsadd_PARM_1+0, a
+      000120r00r12                  205 	inc	p
+      000122r81r03                  206 	idxm	a, p
+      000124r81r0B                  207 	mov	___fsadd_PARM_1+1, a
+      000126r00r12                  208 	inc	p
+      000128r81r03                  209 	idxm	a, p
+      00012Ar82r0B                  210 	mov	___fsadd_PARM_1+2, a
+      00012Cr00r12                  211 	inc	p
+      00012Er81r03                  212 	idxm	a, p
+      000130r83r0B                  213 	mov	___fsadd_PARM_1+3, a
+      000132 FD 2F                  214 	mov	a, #-3
+      000134r00r08                  215 	add	p, a
+      000136r81r03                  216 	idxm	a, p
+      000138r80r0B                  217 	mov	___fsadd_PARM_2+0, a
+      00013Ar00r12                  218 	inc	p
+      00013Cr81r03                  219 	idxm	a, p
+      00013Er81r0B                  220 	mov	___fsadd_PARM_2+1, a
+      000140r00r12                  221 	inc	p
+      000142r81r03                  222 	idxm	a, p
+      000144r82r0B                  223 	mov	___fsadd_PARM_2+2, a
+      000146r00r12                  224 	inc	p
+      000148r81r03                  225 	idxm	a, p
+      00014Ar83r0B                  226 	mov	___fsadd_PARM_2+3, a
+      00014C C2 01                  227 	mov	a, sp
+      00014E B6 28                  228 	add	a, #0xb6
+      000150 72 00                  229 	push	af
+      000152r00r38                  230 	call	___fsadd
+      000154 C2 01                  231 	mov	a, sp
+      000156 FE 28                  232 	add	a, #-2
+      000158 82 01                  233 	mov	sp, a
+      00015A 72 00                  234 	push	af
+      00015C 72 00                  235 	push	af
+      00015E C2 01                  236 	mov	a, sp
+      000160 B5 28                  237 	add	a, #0xb5
+      000162r80r0B                  238 	mov	p, a
+      000164r81r03                  239 	idxm	a, p
+      000166r80r13                  240 	xch	a, p
+      000168 4A 28                  241 	add	a, #74
+      00016Ar80r13                  242 	xch	a, p
+      00016Cr80r03                  243 	idxm	p, a
+      00016E B5 2F                  244 	mov	a, #-75
+      000170r00r08                  245 	add	p, a
+      000172r81r03                  246 	idxm	a, p
+      000174r80r13                  247 	xch	a, p
+      000176 4A 28                  248 	add	a, #74
+      000178r80r13                  249 	xch	a, p
+      00017Ar80r03                  250 	idxm	p, a
+      00017C B5 2F                  251 	mov	a, #-75
+      00017Er00r08                  252 	add	p, a
+      000180r81r03                  253 	idxm	a, p
+      000182r80r13                  254 	xch	a, p
+      000184 4A 28                  255 	add	a, #74
+      000186r80r13                  256 	xch	a, p
+      000188r80r03                  257 	idxm	p, a
+      00018A B5 2F                  258 	mov	a, #-75
+      00018Cr00r08                  259 	add	p, a
+      00018Er81r03                  260 	idxm	a, p
+      000190r80r13                  261 	xch	a, p
+      000192 4A 28                  262 	add	a, #74
+      000194r80r13                  263 	xch	a, p
+      000196r80r03                  264 	idxm	p, a
+      000198 C2 01                  265 	mov	a, sp
+      00019A B6 28                  266 	add	a, #0xb6
+      00019C 72 00                  267 	push	af
+      00019Er00r38                  268 	call	_expf
+      0001A0 C2 01                  269 	mov	a, sp
+      0001A2 FA 28                  270 	add	a, #-6
+      0001A4 82 01                  271 	mov	sp, a
+      0001A6 BA 28                  272 	add	a, #0xba
+      0001A8r80r0B                  273 	mov	p, a
+      0001AAr81r03                  274 	idxm	a, p
+      0001ACr80r0B                  275 	mov	___fsadd_PARM_1+0, a
+      0001AEr00r12                  276 	inc	p
+      0001B0r81r03                  277 	idxm	a, p
+      0001B2r81r0B                  278 	mov	___fsadd_PARM_1+1, a
+      0001B4r00r12                  279 	inc	p
+      0001B6r81r03                  280 	idxm	a, p
+      0001B8r82r0B                  281 	mov	___fsadd_PARM_1+2, a
+      0001BAr00r12                  282 	inc	p
+      0001BCr81r03                  283 	idxm	a, p
+      0001BEr83r0B                  284 	mov	___fsadd_PARM_1+3, a
+      0001C0r00r13                  285 	clear	___fsadd_PARM_2+0
+      0001C2r01r13                  286 	clear	___fsadd_PARM_2+1
+      0001C4 80 2F                  287 	mov	a, #0x80
+      0001C6r82r0B                  288 	mov	___fsadd_PARM_2+2, a
+      0001C8 3F 2F                  289 	mov	a, #0x3f
+      0001CAr83r0B                  290 	mov	___fsadd_PARM_2+3, a
+      0001CC C2 01                  291 	mov	a, sp
+      0001CE BE 28                  292 	add	a, #0xbe
+      0001D0 72 00                  293 	push	af
+      0001D2r00r38                  294 	call	___fsadd
+      0001D4 C2 01                  295 	mov	a, sp
+      0001D6 FE 28                  296 	add	a, #-2
+      0001D8 82 01                  297 	mov	sp, a
+      0001DAr00r13                  298 	clear	___fsdiv_PARM_1+0
+      0001DCr01r13                  299 	clear	___fsdiv_PARM_1+1
+      0001DE 80 2F                  300 	mov	a, #0x80
+      0001E0r82r0B                  301 	mov	___fsdiv_PARM_1+2, a
+      0001E2 3F 2F                  302 	mov	a, #0x3f
+      0001E4r83r0B                  303 	mov	___fsdiv_PARM_1+3, a
+      0001E6 C2 01                  304 	mov	a, sp
+      0001E8 BE 28                  305 	add	a, #0xbe
+      0001EAr80r0B                  306 	mov	p, a
+      0001ECr81r03                  307 	idxm	a, p
+      0001EEr80r0B                  308 	mov	___fsdiv_PARM_2+0, a
+      0001F0r00r12                  309 	inc	p
+      0001F2r81r03                  310 	idxm	a, p
+      0001F4r81r0B                  311 	mov	___fsdiv_PARM_2+1, a
+      0001F6r00r12                  312 	inc	p
+      0001F8r81r03                  313 	idxm	a, p
+      0001FAr82r0B                  314 	mov	___fsdiv_PARM_2+2, a
+      0001FCr00r12                  315 	inc	p
+      0001FEr81r03                  316 	idxm	a, p
+      000200r83r0B                  317 	mov	___fsdiv_PARM_2+3, a
+      000202 C2 01                  318 	mov	a, sp
+      000204 C2 28                  319 	add	a, #0xc2
+      000206 72 00                  320 	push	af
+      000208r00r38                  321 	call	___fsdiv
+      00020A C2 01                  322 	mov	a, sp
+      00020C FE 28                  323 	add	a, #-2
+      00020E 82 01                  324 	mov	sp, a
+      000210r00r13                  325 	clear	___fssub_PARM_1+0
+      000212r01r13                  326 	clear	___fssub_PARM_1+1
+      000214r02r13                  327 	clear	___fssub_PARM_1+2
+      000216 3F 2F                  328 	mov	a, #0x3f
+      000218r83r0B                  329 	mov	___fssub_PARM_1+3, a
+      00021A C2 01                  330 	mov	a, sp
+      00021C C2 28                  331 	add	a, #0xc2
+      00021Er80r0B                  332 	mov	p, a
+      000220r81r03                  333 	idxm	a, p
+      000222r80r0B                  334 	mov	___fssub_PARM_2+0, a
+      000224r00r12                  335 	inc	p
+      000226r81r03                  336 	idxm	a, p
+      000228r81r0B                  337 	mov	___fssub_PARM_2+1, a
+      00022Ar00r12                  338 	inc	p
+      00022Cr81r03                  339 	idxm	a, p
+      00022Er82r0B                  340 	mov	___fssub_PARM_2+2, a
+      000230r00r12                  341 	inc	p
+      000232r81r03                  342 	idxm	a, p
+      000234r83r0B                  343 	mov	___fssub_PARM_2+3, a
+      000236 C2 01                  344 	mov	a, sp
+      000238 C6 28                  345 	add	a, #0xc6
+      00023A 72 00                  346 	push	af
+      00023Cr00r38                  347 	call	___fssub
+      00023E C2 01                  348 	mov	a, sp
+      000240 FE 28                  349 	add	a, #-2
+      000242 82 01                  350 	mov	sp, a
+      000244 C6 28                  351 	add	a, #0xc6
+      000246r80r0B                  352 	mov	p, a
+      000248r81r03                  353 	idxm	a, p
+      00024Ar80r13                  354 	xch	a, p
+      00024C 30 28                  355 	add	a, #48
+      00024Er80r13                  356 	xch	a, p
+      000250r80r03                  357 	idxm	p, a
+      000252 D1 2F                  358 	mov	a, #-47
+      000254r00r08                  359 	add	p, a
+      000256r81r03                  360 	idxm	a, p
+      000258r80r13                  361 	xch	a, p
+      00025A 30 28                  362 	add	a, #48
+      00025Cr80r13                  363 	xch	a, p
+      00025Er80r03                  364 	idxm	p, a
+      000260 D1 2F                  365 	mov	a, #-47
+      000262r00r08                  366 	add	p, a
+      000264r81r03                  367 	idxm	a, p
+      000266r80r13                  368 	xch	a, p
+      000268 30 28                  369 	add	a, #48
+      00026Ar80r13                  370 	xch	a, p
+      00026Cr80r03                  371 	idxm	p, a
+      00026E D1 2F                  372 	mov	a, #-47
+      000270r00r08                  373 	add	p, a
+      000272r81r03                  374 	idxm	a, p
+      000274r80r13                  375 	xch	a, p
+      000276 30 28                  376 	add	a, #48
+      000278r80r13                  377 	xch	a, p
+      00027Ar80r03                  378 	idxm	p, a
+                                    379 ;	../tanhf.c: 59: r+=r;
+      00027C FD 2F                  380 	mov	a, #-3
+      00027Er00r08                  381 	add	p, a
+      000280r81r03                  382 	idxm	a, p
+      000282r80r0B                  383 	mov	___fsadd_PARM_1+0, a
+      000284r00r12                  384 	inc	p
+      000286r81r03                  385 	idxm	a, p
+      000288r81r0B                  386 	mov	___fsadd_PARM_1+1, a
+      00028Ar00r12                  387 	inc	p
+      00028Cr81r03                  388 	idxm	a, p
+      00028Er82r0B                  389 	mov	___fsadd_PARM_1+2, a
+      000290r00r12                  390 	inc	p
+      000292r81r03                  391 	idxm	a, p
+      000294r83r0B                  392 	mov	___fsadd_PARM_1+3, a
+      000296 FD 2F                  393 	mov	a, #-3
+      000298r00r08                  394 	add	p, a
+      00029Ar81r03                  395 	idxm	a, p
+      00029Cr80r0B                  396 	mov	___fsadd_PARM_2+0, a
+      00029Er00r12                  397 	inc	p
+      0002A0r81r03                  398 	idxm	a, p
+      0002A2r81r0B                  399 	mov	___fsadd_PARM_2+1, a
+      0002A4r00r12                  400 	inc	p
+      0002A6r81r03                  401 	idxm	a, p
+      0002A8r82r0B                  402 	mov	___fsadd_PARM_2+2, a
+      0002AAr00r12                  403 	inc	p
+      0002ACr81r03                  404 	idxm	a, p
+      0002AEr83r0B                  405 	mov	___fsadd_PARM_2+3, a
+      0002B0 C2 01                  406 	mov	a, sp
+      0002B2 CA 28                  407 	add	a, #0xca
+      0002B4 72 00                  408 	push	af
+      0002B6r00r38                  409 	call	___fsadd
+      0002B8 C2 01                  410 	mov	a, sp
+      0002BA FE 28                  411 	add	a, #-2
+      0002BC 82 01                  412 	mov	sp, a
+      0002BE CA 28                  413 	add	a, #0xca
+      0002C0r80r0B                  414 	mov	p, a
+      0002C2r81r03                  415 	idxm	a, p
+      0002C4r80r13                  416 	xch	a, p
+      0002C6 28 28                  417 	add	a, #40
+      0002C8r80r13                  418 	xch	a, p
+      0002CAr80r03                  419 	idxm	p, a
+      0002CC D9 2F                  420 	mov	a, #-39
+      0002CEr00r08                  421 	add	p, a
+      0002D0r81r03                  422 	idxm	a, p
+      0002D2r80r13                  423 	xch	a, p
+      0002D4 28 28                  424 	add	a, #40
+      0002D6r80r13                  425 	xch	a, p
+      0002D8r80r03                  426 	idxm	p, a
+      0002DA D9 2F                  427 	mov	a, #-39
+      0002DCr00r08                  428 	add	p, a
+      0002DEr81r03                  429 	idxm	a, p
+      0002E0r80r13                  430 	xch	a, p
+      0002E2 28 28                  431 	add	a, #40
+      0002E4r80r13                  432 	xch	a, p
+      0002E6r80r03                  433 	idxm	p, a
+      0002E8 D9 2F                  434 	mov	a, #-39
+      0002EAr00r08                  435 	add	p, a
+      0002ECr81r03                  436 	idxm	a, p
+      0002EEr80r13                  437 	xch	a, p
+      0002F0 28 28                  438 	add	a, #40
+      0002F2r80r13                  439 	xch	a, p
+      0002F4r80r03                  440 	idxm	p, a
+      0002F6rC4r35                  441 	goto	00109$
+      0002F8                        442 00105$:
+                                    443 ;	../tanhf.c: 61: else if(f<EPS) r=f;
+      0002F8 C2 01                  444 	mov	a, sp
+      0002FA FA 28                  445 	add	a, #0xfa
+      0002FCr80r0B                  446 	mov	p, a
+      0002FEr81r03                  447 	idxm	a, p
+      000300r80r0B                  448 	mov	___fslt_PARM_1+0, a
+      000302r00r12                  449 	inc	p
+      000304r81r03                  450 	idxm	a, p
+      000306r81r0B                  451 	mov	___fslt_PARM_1+1, a
+      000308r00r12                  452 	inc	p
+      00030Ar81r03                  453 	idxm	a, p
+      00030Cr82r0B                  454 	mov	___fslt_PARM_1+2, a
+      00030Er00r12                  455 	inc	p
+      000310r81r03                  456 	idxm	a, p
+      000312r83r0B                  457 	mov	___fslt_PARM_1+3, a
+      000314r00r13                  458 	clear	___fslt_PARM_2+0
+      000316r01r13                  459 	clear	___fslt_PARM_2+1
+      000318 80 2F                  460 	mov	a, #0x80
+      00031Ar82r0B                  461 	mov	___fslt_PARM_2+2, a
+      00031C 39 2F                  462 	mov	a, #0x39
+      00031Er83r0B                  463 	mov	___fslt_PARM_2+3, a
+      000320r00r38                  464 	call	___fslt
+      000322 00 2B                  465 	cneqsn	a, #0x00
+      000324r62r33                  466 	goto	00102$
+      000326 C2 01                  467 	mov	a, sp
+      000328 FA 28                  468 	add	a, #0xfa
+      00032Ar80r0B                  469 	mov	p, a
+      00032Cr81r03                  470 	idxm	a, p
+      00032Er80r13                  471 	xch	a, p
+      000330 F8 28                  472 	add	a, #-8
+      000332r80r13                  473 	xch	a, p
+      000334r80r03                  474 	idxm	p, a
+      000336 09 2F                  475 	mov	a, #9
+      000338r00r08                  476 	add	p, a
+      00033Ar81r03                  477 	idxm	a, p
+      00033Cr80r13                  478 	xch	a, p
+      00033E F8 28                  479 	add	a, #-8
+      000340r80r13                  480 	xch	a, p
+      000342r80r03                  481 	idxm	p, a
+      000344 09 2F                  482 	mov	a, #9
+      000346r00r08                  483 	add	p, a
+      000348r81r03                  484 	idxm	a, p
+      00034Ar80r13                  485 	xch	a, p
+      00034C F8 28                  486 	add	a, #-8
+      00034Er80r13                  487 	xch	a, p
+      000350r80r03                  488 	idxm	p, a
+      000352 09 2F                  489 	mov	a, #9
+      000354r00r08                  490 	add	p, a
+      000356r81r03                  491 	idxm	a, p
+      000358r80r13                  492 	xch	a, p
+      00035A F8 28                  493 	add	a, #-8
+      00035Cr80r13                  494 	xch	a, p
+      00035Er80r03                  495 	idxm	p, a
+      000360rC4r35                  496 	goto	00109$
+      000362                        497 00102$:
+                                    498 ;	../tanhf.c: 64: g=f*f;
+      000362 C2 01                  499 	mov	a, sp
+      000364 FA 28                  500 	add	a, #0xfa
+      000366r80r0B                  501 	mov	p, a
+      000368r81r03                  502 	idxm	a, p
+      00036Ar80r0B                  503 	mov	___fsmul_PARM_1+0, a
+      00036Cr00r12                  504 	inc	p
+      00036Er81r03                  505 	idxm	a, p
+      000370r81r0B                  506 	mov	___fsmul_PARM_1+1, a
+      000372r00r12                  507 	inc	p
+      000374r81r03                  508 	idxm	a, p
+      000376r82r0B                  509 	mov	___fsmul_PARM_1+2, a
+      000378r00r12                  510 	inc	p
+      00037Ar81r03                  511 	idxm	a, p
+      00037Cr83r0B                  512 	mov	___fsmul_PARM_1+3, a
+      00037E FD 2F                  513 	mov	a, #-3
+      000380r00r08                  514 	add	p, a
+      000382r81r03                  515 	idxm	a, p
+      000384r80r0B                  516 	mov	___fsmul_PARM_2+0, a
+      000386r00r12                  517 	inc	p
+      000388r81r03                  518 	idxm	a, p
+      00038Ar81r0B                  519 	mov	___fsmul_PARM_2+1, a
+      00038Cr00r12                  520 	inc	p
+      00038Er81r03                  521 	idxm	a, p
+      000390r82r0B                  522 	mov	___fsmul_PARM_2+2, a
+      000392r00r12                  523 	inc	p
+      000394r81r03                  524 	idxm	a, p
+      000396r83r0B                  525 	mov	___fsmul_PARM_2+3, a
+      000398 C2 01                  526 	mov	a, sp
+      00039A CE 28                  527 	add	a, #0xce
+      00039C 72 00                  528 	push	af
+      00039Er00r38                  529 	call	___fsmul
+      0003A0 C2 01                  530 	mov	a, sp
+      0003A2 FE 28                  531 	add	a, #-2
+      0003A4 82 01                  532 	mov	sp, a
+      0003A6 CE 28                  533 	add	a, #0xce
+      0003A8r80r0B                  534 	mov	p, a
+      0003AAr81r03                  535 	idxm	a, p
+      0003ACr80r13                  536 	xch	a, p
+      0003AE 20 28                  537 	add	a, #32
+      0003B0r80r13                  538 	xch	a, p
+      0003B2r80r03                  539 	idxm	p, a
+      0003B4 E1 2F                  540 	mov	a, #-31
+      0003B6r00r08                  541 	add	p, a
+      0003B8r81r03                  542 	idxm	a, p
+      0003BAr80r13                  543 	xch	a, p
+      0003BC 20 28                  544 	add	a, #32
+      0003BEr80r13                  545 	xch	a, p
+      0003C0r80r03                  546 	idxm	p, a
+      0003C2 E1 2F                  547 	mov	a, #-31
+      0003C4r00r08                  548 	add	p, a
+      0003C6r81r03                  549 	idxm	a, p
+      0003C8r80r13                  550 	xch	a, p
+      0003CA 20 28                  551 	add	a, #32
+      0003CCr80r13                  552 	xch	a, p
+      0003CEr80r03                  553 	idxm	p, a
+      0003D0 E1 2F                  554 	mov	a, #-31
+      0003D2r00r08                  555 	add	p, a
+      0003D4r81r03                  556 	idxm	a, p
+      0003D6r80r13                  557 	xch	a, p
+      0003D8 20 28                  558 	add	a, #32
+      0003DAr80r13                  559 	xch	a, p
+      0003DCr80r03                  560 	idxm	p, a
+                                    561 ;	../tanhf.c: 65: r=f+f*(P(g)/Q(g));
+      0003DE B2 2F                  562 	mov	a, #0xb2
+      0003E0r80r0B                  563 	mov	___fsmul_PARM_1+0, a
+      0003E2 11 2F                  564 	mov	a, #0x11
+      0003E4r81r0B                  565 	mov	___fsmul_PARM_1+1, a
+      0003E6 7B 2F                  566 	mov	a, #0x7b
+      0003E8r82r0B                  567 	mov	___fsmul_PARM_1+2, a
+      0003EA BB 2F                  568 	mov	a, #0xbb
+      0003ECr83r0B                  569 	mov	___fsmul_PARM_1+3, a
+      0003EE FD 2F                  570 	mov	a, #-3
+      0003F0r00r08                  571 	add	p, a
+      0003F2r81r03                  572 	idxm	a, p
+      0003F4r80r0B                  573 	mov	___fsmul_PARM_2+0, a
+      0003F6r00r12                  574 	inc	p
+      0003F8r81r03                  575 	idxm	a, p
+      0003FAr81r0B                  576 	mov	___fsmul_PARM_2+1, a
+      0003FCr00r12                  577 	inc	p
+      0003FEr81r03                  578 	idxm	a, p
+      000400r82r0B                  579 	mov	___fsmul_PARM_2+2, a
+      000402r00r12                  580 	inc	p
+      000404r81r03                  581 	idxm	a, p
+      000406r83r0B                  582 	mov	___fsmul_PARM_2+3, a
+      000408 C2 01                  583 	mov	a, sp
+      00040A D2 28                  584 	add	a, #0xd2
+      00040C 72 00                  585 	push	af
+      00040Er00r38                  586 	call	___fsmul
+      000410 C2 01                  587 	mov	a, sp
+      000412 FE 28                  588 	add	a, #-2
+      000414 82 01                  589 	mov	sp, a
+      000416 D2 28                  590 	add	a, #0xd2
+      000418r80r0B                  591 	mov	p, a
+      00041Ar81r03                  592 	idxm	a, p
+      00041Cr80r0B                  593 	mov	___fsadd_PARM_1+0, a
+      00041Er00r12                  594 	inc	p
+      000420r81r03                  595 	idxm	a, p
+      000422r81r0B                  596 	mov	___fsadd_PARM_1+1, a
+      000424r00r12                  597 	inc	p
+      000426r81r03                  598 	idxm	a, p
+      000428r82r0B                  599 	mov	___fsadd_PARM_1+2, a
+      00042Ar00r12                  600 	inc	p
+      00042Cr81r03                  601 	idxm	a, p
+      00042Er83r0B                  602 	mov	___fsadd_PARM_1+3, a
+      000430 C6 2F                  603 	mov	a, #0xc6
+      000432r80r0B                  604 	mov	___fsadd_PARM_2+0, a
+      000434 E2 2F                  605 	mov	a, #0xe2
+      000436r81r0B                  606 	mov	___fsadd_PARM_2+1, a
+      000438 52 2F                  607 	mov	a, #0x52
+      00043Ar82r0B                  608 	mov	___fsadd_PARM_2+2, a
+      00043C BF 2F                  609 	mov	a, #0xbf
+      00043Er83r0B                  610 	mov	___fsadd_PARM_2+3, a
+      000440 C2 01                  611 	mov	a, sp
+      000442 D6 28                  612 	add	a, #0xd6
+      000444 72 00                  613 	push	af
+      000446r00r38                  614 	call	___fsadd
+      000448 C2 01                  615 	mov	a, sp
+      00044A FE 28                  616 	add	a, #-2
+      00044C 82 01                  617 	mov	sp, a
+      00044E D6 28                  618 	add	a, #0xd6
+      000450r80r0B                  619 	mov	p, a
+      000452r81r03                  620 	idxm	a, p
+      000454r80r0B                  621 	mov	___fsmul_PARM_1+0, a
+      000456r00r12                  622 	inc	p
+      000458r81r03                  623 	idxm	a, p
+      00045Ar81r0B                  624 	mov	___fsmul_PARM_1+1, a
+      00045Cr00r12                  625 	inc	p
+      00045Er81r03                  626 	idxm	a, p
+      000460r82r0B                  627 	mov	___fsmul_PARM_1+2, a
+      000462r00r12                  628 	inc	p
+      000464r81r03                  629 	idxm	a, p
+      000466r83r0B                  630 	mov	___fsmul_PARM_1+3, a
+      000468 15 2F                  631 	mov	a, #21
+      00046Ar00r08                  632 	add	p, a
+      00046Cr81r03                  633 	idxm	a, p
+      00046Er80r0B                  634 	mov	___fsmul_PARM_2+0, a
+      000470r00r12                  635 	inc	p
+      000472r81r03                  636 	idxm	a, p
+      000474r81r0B                  637 	mov	___fsmul_PARM_2+1, a
+      000476r00r12                  638 	inc	p
+      000478r81r03                  639 	idxm	a, p
+      00047Ar82r0B                  640 	mov	___fsmul_PARM_2+2, a
+      00047Cr00r12                  641 	inc	p
+      00047Er81r03                  642 	idxm	a, p
+      000480r83r0B                  643 	mov	___fsmul_PARM_2+3, a
+      000482 C2 01                  644 	mov	a, sp
+      000484 DA 28                  645 	add	a, #0xda
+      000486 72 00                  646 	push	af
+      000488r00r38                  647 	call	___fsmul
+      00048A C2 01                  648 	mov	a, sp
+      00048C FE 28                  649 	add	a, #-2
+      00048E 82 01                  650 	mov	sp, a
+      000490 EE 28                  651 	add	a, #0xee
+      000492r80r0B                  652 	mov	p, a
+      000494r81r03                  653 	idxm	a, p
+      000496r80r0B                  654 	mov	___fsadd_PARM_1+0, a
+      000498r00r12                  655 	inc	p
+      00049Ar81r03                  656 	idxm	a, p
+      00049Cr81r0B                  657 	mov	___fsadd_PARM_1+1, a
+      00049Er00r12                  658 	inc	p
+      0004A0r81r03                  659 	idxm	a, p
+      0004A2r82r0B                  660 	mov	___fsadd_PARM_1+2, a
+      0004A4r00r12                  661 	inc	p
+      0004A6r81r03                  662 	idxm	a, p
+      0004A8r83r0B                  663 	mov	___fsadd_PARM_1+3, a
+      0004AA 1A 2F                  664 	mov	a, #0x1a
+      0004ACr80r0B                  665 	mov	___fsadd_PARM_2+0, a
+      0004AE 2A 2F                  666 	mov	a, #0x2a
+      0004B0r81r0B                  667 	mov	___fsadd_PARM_2+1, a
+      0004B2 1E 2F                  668 	mov	a, #0x1e
+      0004B4r82r0B                  669 	mov	___fsadd_PARM_2+2, a
+      0004B6 40 2F                  670 	mov	a, #0x40
+      0004B8r83r0B                  671 	mov	___fsadd_PARM_2+3, a
+      0004BA C2 01                  672 	mov	a, sp
+      0004BC DE 28                  673 	add	a, #0xde
+      0004BE 72 00                  674 	push	af
+      0004C0r00r38                  675 	call	___fsadd
+      0004C2 C2 01                  676 	mov	a, sp
+      0004C4 FE 28                  677 	add	a, #-2
+      0004C6 82 01                  678 	mov	sp, a
+      0004C8 DA 28                  679 	add	a, #0xda
+      0004CAr80r0B                  680 	mov	p, a
+      0004CCr81r03                  681 	idxm	a, p
+      0004CEr80r0B                  682 	mov	___fsdiv_PARM_1+0, a
+      0004D0r00r12                  683 	inc	p
+      0004D2r81r03                  684 	idxm	a, p
+      0004D4r81r0B                  685 	mov	___fsdiv_PARM_1+1, a
+      0004D6r00r12                  686 	inc	p
+      0004D8r81r03                  687 	idxm	a, p
+      0004DAr82r0B                  688 	mov	___fsdiv_PARM_1+2, a
+      0004DCr00r12                  689 	inc	p
+      0004DEr81r03                  690 	idxm	a, p
+      0004E0r83r0B                  691 	mov	___fsdiv_PARM_1+3, a
+      0004E2r00r12                  692 	inc	p
+      0004E4r81r03                  693 	idxm	a, p
+      0004E6r80r0B                  694 	mov	___fsdiv_PARM_2+0, a
+      0004E8r00r12                  695 	inc	p
+      0004EAr81r03                  696 	idxm	a, p
+      0004ECr81r0B                  697 	mov	___fsdiv_PARM_2+1, a
+      0004EEr00r12                  698 	inc	p
+      0004F0r81r03                  699 	idxm	a, p
+      0004F2r82r0B                  700 	mov	___fsdiv_PARM_2+2, a
+      0004F4r00r12                  701 	inc	p
+      0004F6r81r03                  702 	idxm	a, p
+      0004F8r83r0B                  703 	mov	___fsdiv_PARM_2+3, a
+      0004FA C2 01                  704 	mov	a, sp
+      0004FC E2 28                  705 	add	a, #0xe2
+      0004FE 72 00                  706 	push	af
+      000500r00r38                  707 	call	___fsdiv
+      000502 C2 01                  708 	mov	a, sp
+      000504 FE 28                  709 	add	a, #-2
+      000506 82 01                  710 	mov	sp, a
+      000508 FA 28                  711 	add	a, #0xfa
+      00050Ar80r0B                  712 	mov	p, a
+      00050Cr81r03                  713 	idxm	a, p
+      00050Er80r0B                  714 	mov	___fsmul_PARM_1+0, a
+      000510r00r12                  715 	inc	p
+      000512r81r03                  716 	idxm	a, p
+      000514r81r0B                  717 	mov	___fsmul_PARM_1+1, a
+      000516r00r12                  718 	inc	p
+      000518r81r03                  719 	idxm	a, p
+      00051Ar82r0B                  720 	mov	___fsmul_PARM_1+2, a
+      00051Cr00r12                  721 	inc	p
+      00051Er81r03                  722 	idxm	a, p
+      000520r83r0B                  723 	mov	___fsmul_PARM_1+3, a
+      000522 E5 2F                  724 	mov	a, #-27
+      000524r00r08                  725 	add	p, a
+      000526r81r03                  726 	idxm	a, p
+      000528r80r0B                  727 	mov	___fsmul_PARM_2+0, a
+      00052Ar00r12                  728 	inc	p
+      00052Cr81r03                  729 	idxm	a, p
+      00052Er81r0B                  730 	mov	___fsmul_PARM_2+1, a
+      000530r00r12                  731 	inc	p
+      000532r81r03                  732 	idxm	a, p
+      000534r82r0B                  733 	mov	___fsmul_PARM_2+2, a
+      000536r00r12                  734 	inc	p
+      000538r81r03                  735 	idxm	a, p
+      00053Ar83r0B                  736 	mov	___fsmul_PARM_2+3, a
+      00053C C2 01                  737 	mov	a, sp
+      00053E E6 28                  738 	add	a, #0xe6
+      000540 72 00                  739 	push	af
+      000542r00r38                  740 	call	___fsmul
+      000544 C2 01                  741 	mov	a, sp
+      000546 FE 28                  742 	add	a, #-2
+      000548 82 01                  743 	mov	sp, a
+      00054A FA 28                  744 	add	a, #0xfa
+      00054Cr80r0B                  745 	mov	p, a
+      00054Er81r03                  746 	idxm	a, p
+      000550r80r0B                  747 	mov	___fsadd_PARM_1+0, a
+      000552r00r12                  748 	inc	p
+      000554r81r03                  749 	idxm	a, p
+      000556r81r0B                  750 	mov	___fsadd_PARM_1+1, a
+      000558r00r12                  751 	inc	p
+      00055Ar81r03                  752 	idxm	a, p
+      00055Cr82r0B                  753 	mov	___fsadd_PARM_1+2, a
+      00055Er00r12                  754 	inc	p
+      000560r81r03                  755 	idxm	a, p
+      000562r83r0B                  756 	mov	___fsadd_PARM_1+3, a
+      000564 E9 2F                  757 	mov	a, #-23
+      000566r00r08                  758 	add	p, a
+      000568r81r03                  759 	idxm	a, p
+      00056Ar80r0B                  760 	mov	___fsadd_PARM_2+0, a
+      00056Cr00r12                  761 	inc	p
+      00056Er81r03                  762 	idxm	a, p
+      000570r81r0B                  763 	mov	___fsadd_PARM_2+1, a
+      000572r00r12                  764 	inc	p
+      000574r81r03                  765 	idxm	a, p
+      000576r82r0B                  766 	mov	___fsadd_PARM_2+2, a
+      000578r00r12                  767 	inc	p
+      00057Ar81r03                  768 	idxm	a, p
+      00057Cr83r0B                  769 	mov	___fsadd_PARM_2+3, a
+      00057E C2 01                  770 	mov	a, sp
+      000580 EA 28                  771 	add	a, #0xea
+      000582 72 00                  772 	push	af
+      000584r00r38                  773 	call	___fsadd
+      000586 C2 01                  774 	mov	a, sp
+      000588 FE 28                  775 	add	a, #-2
+      00058A 82 01                  776 	mov	sp, a
+      00058C EA 28                  777 	add	a, #0xea
+      00058Er80r0B                  778 	mov	p, a
+      000590r81r03                  779 	idxm	a, p
+      000592r80r13                  780 	xch	a, p
+      000594 08 28                  781 	add	a, #8
+      000596r80r13                  782 	xch	a, p
+      000598r80r03                  783 	idxm	p, a
+      00059A F9 2F                  784 	mov	a, #-7
+      00059Cr00r08                  785 	add	p, a
+      00059Er81r03                  786 	idxm	a, p
+      0005A0r80r13                  787 	xch	a, p
+      0005A2 08 28                  788 	add	a, #8
+      0005A4r80r13                  789 	xch	a, p
+      0005A6r80r03                  790 	idxm	p, a
+      0005A8 F9 2F                  791 	mov	a, #-7
+      0005AAr00r08                  792 	add	p, a
+      0005ACr81r03                  793 	idxm	a, p
+      0005AEr80r13                  794 	xch	a, p
+      0005B0 08 28                  795 	add	a, #8
+      0005B2r80r13                  796 	xch	a, p
+      0005B4r80r03                  797 	idxm	p, a
+      0005B6 F9 2F                  798 	mov	a, #-7
+      0005B8r00r08                  799 	add	p, a
+      0005BAr81r03                  800 	idxm	a, p
+      0005BCr80r13                  801 	xch	a, p
+      0005BE 08 28                  802 	add	a, #8
+      0005C0r80r13                  803 	xch	a, p
+      0005C2r80r03                  804 	idxm	p, a
+      0005C4                        805 00109$:
+                                    806 ;	../tanhf.c: 67: if(x<0.0) r=-r;
+      0005C4 C2 01                  807 	mov	a, sp
+      0005C6 AA 28                  808 	add	a, #0xaa
+      0005C8r80r0B                  809 	mov	p, a
+      0005CAr81r03                  810 	idxm	a, p
+      0005CCr80r0B                  811 	mov	___fslt_PARM_1+0, a
+      0005CEr00r12                  812 	inc	p
+      0005D0r81r03                  813 	idxm	a, p
+      0005D2r81r0B                  814 	mov	___fslt_PARM_1+1, a
+      0005D4r00r12                  815 	inc	p
+      0005D6r81r03                  816 	idxm	a, p
+      0005D8r82r0B                  817 	mov	___fslt_PARM_1+2, a
+      0005DAr00r12                  818 	inc	p
+      0005DCr81r03                  819 	idxm	a, p
+      0005DEr83r0B                  820 	mov	___fslt_PARM_1+3, a
+      0005E0r00r13                  821 	clear	___fslt_PARM_2+0
+      0005E2r01r13                  822 	clear	___fslt_PARM_2+1
+      0005E4r02r13                  823 	clear	___fslt_PARM_2+2
+      0005E6r03r13                  824 	clear	___fslt_PARM_2+3
+      0005E8r00r38                  825 	call	___fslt
+      0005EA 00 2B                  826 	cneqsn	a, #0x00
+      0005ECr0Cr36                  827 	goto	00111$
+      0005EE C2 01                  828 	mov	a, sp
+      0005F0 F2 28                  829 	add	a, #0xf2
+      0005F2r80r0B                  830 	mov	p, a
+      0005F4r81r03                  831 	idxm	a, p
+      0005F6r80r03                  832 	idxm	p, a
+      0005F8r00r12                  833 	inc	p
+      0005FAr81r03                  834 	idxm	a, p
+      0005FCr80r03                  835 	idxm	p, a
+      0005FEr00r12                  836 	inc	p
+      000600r81r03                  837 	idxm	a, p
+      000602r80r03                  838 	idxm	p, a
+      000604r00r12                  839 	inc	p
+      000606r81r03                  840 	idxm	a, p
+      000608 80 2E                  841 	xor	a, #0x80
+      00060Ar80r03                  842 	idxm	p, a
+      00060C                        843 00111$:
+                                    844 ;	../tanhf.c: 68: return r;
+      00060C C2 01                  845 	mov	a, sp
+      00060E F2 28                  846 	add	a, #0xf2
+      000610r80r0B                  847 	mov	p, a
+      000612r81r03                  848 	idxm	a, p
+      000614 72 00                  849 	push	af
+      000616 BC 2F                  850 	mov	a, #-68
+      000618r00r08                  851 	add	p, a
+      00061Ar81r03                  852 	idxm	a, p
+      00061Cr80r0B                  853 	mov	p, a
+      00061E 73 00                  854 	pop	af
+      000620r80r03                  855 	idxm	p, a
+      000622 C2 01                  856 	mov	a, sp
+      000624 F3 28                  857 	add	a, #0xf3
+      000626r80r0B                  858 	mov	p, a
+      000628r81r03                  859 	idxm	a, p
+      00062A 72 00                  860 	push	af
+      00062C BB 2F                  861 	mov	a, #-69
+      00062Er00r08                  862 	add	p, a
+      000630r81r03                  863 	idxm	a, p
+      000632r80r0B                  864 	mov	p, a
+      000634 73 00                  865 	pop	af
+      000636r00r12                  866 	inc	p
+      000638r80r03                  867 	idxm	p, a
+      00063A C2 01                  868 	mov	a, sp
+      00063C F4 28                  869 	add	a, #0xf4
+      00063Er80r0B                  870 	mov	p, a
+      000640r81r03                  871 	idxm	a, p
+      000642 72 00                  872 	push	af
+      000644 BA 2F                  873 	mov	a, #-70
+      000646r00r08                  874 	add	p, a
+      000648r81r03                  875 	idxm	a, p
+      00064Ar80r0B                  876 	mov	p, a
+      00064C 73 00                  877 	pop	af
+      00064Er00r12                  878 	inc	p
+      000650r00r12                  879 	inc	p
+      000652r80r03                  880 	idxm	p, a
+      000654 C2 01                  881 	mov	a, sp
+      000656 F5 28                  882 	add	a, #0xf5
+      000658r80r0B                  883 	mov	p, a
+      00065Ar81r03                  884 	idxm	a, p
+      00065C 72 00                  885 	push	af
+      00065E B9 2F                  886 	mov	a, #-71
+      000660r00r08                  887 	add	p, a
+      000662r81r03                  888 	idxm	a, p
+      000664r80r0B                  889 	mov	p, a
+      000666 73 00                  890 	pop	af
+      000668r00r12                  891 	inc	p
+      00066Ar00r12                  892 	inc	p
+      00066Cr00r12                  893 	inc	p
+      00066Er80r03                  894 	idxm	p, a
+                                    895 ;	../tanhf.c: 69: }
+      000670 C2 01                  896 	mov	a, sp
+      000672 B2 28                  897 	add	a, #-78
+      000674 82 01                  898 	mov	sp, a
+      000676 7A 00                  899 	ret
+                                    900 	.area CODE
+                                    901 	.area CONST
+                                    902 	.area CABS (ABS)

@@ -1,0 +1,244 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fslt
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fslt_PARM_2
+                                     17 	.globl ___fslt_PARM_1
+                                     18 	.globl ___fslt
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fslt_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fslt_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 ___fslt_fl1_65536_21:
+      000008                         33 	.ds 4
+      00000C                         34 ___fslt_fl2_65536_21:
+      00000C                         35 	.ds 4
+                                     36 ;--------------------------------------------------------
+                                     37 ; overlayable items in ram 
+                                     38 ;--------------------------------------------------------
+                                     39 	.area	OSEG (OVR,DATA)
+      000000                         40 ___fslt_sloc0_1_0:
+      000000                         41 	.ds 4
+      000004                         42 ___fslt_sloc1_1_0:
+      000004                         43 	.ds 4
+      000008                         44 ___fslt_sloc2_1_0:
+      000008                         45 	.ds 4
+      00000C                         46 ___fslt_sloc3_1_0:
+      00000C                         47 	.ds 4
+      000010                         48 ___fslt_sloc4_1_0:
+      000010                         49 	.ds 4
+      000014                         50 ___fslt_sloc5_1_0:
+      000014                         51 	.ds 4
+      000018                         52 ___fslt_sloc6_1_0:
+      000018                         53 	.ds 4
+      00001C                         54 ___fslt_sloc7_1_0:
+      00001C                         55 	.ds 4
+      000020                         56 ___fslt_sloc8_1_0:
+      000020                         57 	.ds 4
+                                     58 ;--------------------------------------------------------
+                                     59 ; absolute external ram data
+                                     60 ;--------------------------------------------------------
+                                     61 	.area DABS (ABS)
+                                     62 ;--------------------------------------------------------
+                                     63 ; global & static initialisations
+                                     64 ;--------------------------------------------------------
+                                     65 	.area HOME
+                                     66 	.area GSINIT
+                                     67 	.area GSFINAL
+                                     68 	.area GSINIT
+                                     69 ;--------------------------------------------------------
+                                     70 ; Home
+                                     71 ;--------------------------------------------------------
+                                     72 	.area HOME
+                                     73 	.area HOME
+                                     74 ;--------------------------------------------------------
+                                     75 ; code
+                                     76 ;--------------------------------------------------------
+                                     77 	.area CODE
+                                     78 ;	../_fslt.c: 108: char __fslt (float a1, float a2)
+                                     79 ;	-----------------------------------------
+                                     80 ;	 function __fslt
+                                     81 ;	-----------------------------------------
+      000000                         82 ___fslt:
+                                     83 ;	../_fslt.c: 112: fl1.f = a1;
+      000000r80r0F                   84 	mov	a, ___fslt_PARM_1+0
+      000002r88r0B                   85 	mov	___fslt_fl1_65536_21+0, a
+      000004r81r0F                   86 	mov	a, ___fslt_PARM_1+1
+      000006r89r0B                   87 	mov	___fslt_fl1_65536_21+1, a
+      000008r82r0F                   88 	mov	a, ___fslt_PARM_1+2
+      00000Ar8Ar0B                   89 	mov	___fslt_fl1_65536_21+2, a
+      00000Cr83r0F                   90 	mov	a, ___fslt_PARM_1+3
+      00000Er8Br0B                   91 	mov	___fslt_fl1_65536_21+3, a
+                                     92 ;	../_fslt.c: 113: fl2.f = a2;
+      000010r84r0F                   93 	mov	a, ___fslt_PARM_2+0
+      000012r8Cr0B                   94 	mov	___fslt_fl2_65536_21+0, a
+      000014r85r0F                   95 	mov	a, ___fslt_PARM_2+1
+      000016r8Dr0B                   96 	mov	___fslt_fl2_65536_21+1, a
+      000018r86r0F                   97 	mov	a, ___fslt_PARM_2+2
+      00001Ar8Er0B                   98 	mov	___fslt_fl2_65536_21+2, a
+      00001Cr87r0F                   99 	mov	a, ___fslt_PARM_2+3
+      00001Er8Fr0B                  100 	mov	___fslt_fl2_65536_21+3, a
+                                    101 ;	../_fslt.c: 115: if (((fl1.l | fl2.l) & 0x7FFFFFFF) == 0)
+      000020r88r0F                  102 	mov	a, ___fslt_fl1_65536_21+0
+      000022r80r0B                  103 	mov	___fslt_sloc0_1_0+0, a
+      000024r89r0F                  104 	mov	a, ___fslt_fl1_65536_21+1
+      000026r81r0B                  105 	mov	___fslt_sloc0_1_0+1, a
+      000028r8Ar0F                  106 	mov	a, ___fslt_fl1_65536_21+2
+      00002Ar82r0B                  107 	mov	___fslt_sloc0_1_0+2, a
+      00002Cr8Br0F                  108 	mov	a, ___fslt_fl1_65536_21+3
+      00002Er83r0B                  109 	mov	___fslt_sloc0_1_0+3, a
+      000030r8Cr0F                  110 	mov	a, ___fslt_fl2_65536_21+0
+      000032r84r0B                  111 	mov	___fslt_sloc1_1_0+0, a
+      000034r8Dr0F                  112 	mov	a, ___fslt_fl2_65536_21+1
+      000036r85r0B                  113 	mov	___fslt_sloc1_1_0+1, a
+      000038r8Er0F                  114 	mov	a, ___fslt_fl2_65536_21+2
+      00003Ar86r0B                  115 	mov	___fslt_sloc1_1_0+2, a
+      00003Cr8Fr0F                  116 	mov	a, ___fslt_fl2_65536_21+3
+      00003Er87r0B                  117 	mov	___fslt_sloc1_1_0+3, a
+      000040r80r0F                  118 	mov	a, ___fslt_sloc0_1_0+0
+      000042r84r0E                  119 	or	a, ___fslt_sloc1_1_0+0
+      000044r88r0B                  120 	mov	___fslt_sloc2_1_0+0, a
+      000046r81r0F                  121 	mov	a, ___fslt_sloc0_1_0+1
+      000048r85r0E                  122 	or	a, ___fslt_sloc1_1_0+1
+      00004Ar89r0B                  123 	mov	___fslt_sloc2_1_0+1, a
+      00004Cr82r0F                  124 	mov	a, ___fslt_sloc0_1_0+2
+      00004Er86r0E                  125 	or	a, ___fslt_sloc1_1_0+2
+      000050r8Ar0B                  126 	mov	___fslt_sloc2_1_0+2, a
+      000052r83r0F                  127 	mov	a, ___fslt_sloc0_1_0+3
+      000054r87r0E                  128 	or	a, ___fslt_sloc1_1_0+3
+      000056r8Br0B                  129 	mov	___fslt_sloc2_1_0+3, a
+      000058r88r0F                  130 	mov	a, ___fslt_sloc2_1_0+0
+      00005A 00 2A                  131 	ceqsn	a, #0x00
+      00005Cr74r30                  132 	goto	00102$
+      00005Er89r0F                  133 	mov	a, ___fslt_sloc2_1_0+1
+      000060 00 2A                  134 	ceqsn	a, #0x00
+      000062r74r30                  135 	goto	00102$
+      000064r8Ar0F                  136 	mov	a, ___fslt_sloc2_1_0+2
+      000066 00 2A                  137 	ceqsn	a, #0x00
+      000068r74r30                  138 	goto	00102$
+      00006Ar8Br0F                  139 	mov	a, ___fslt_sloc2_1_0+3
+      00006C 7F 2C                  140 	and	a, #0x7f
+      00006E 00 2A                  141 	ceqsn	a, #0x00
+      000070r74r30                  142 	goto	00102$
+                                    143 ;	../_fslt.c: 116: return (0);
+      000072 00 02                  144 	ret	#0x00
+      000074                        145 00102$:
+                                    146 ;	../_fslt.c: 118: if (fl1.l<0 && fl2.l<0) {
+      000074r88r0F                  147 	mov	a, ___fslt_fl1_65536_21+0
+      000076r8Cr0B                  148 	mov	___fslt_sloc3_1_0+0, a
+      000078r89r0F                  149 	mov	a, ___fslt_fl1_65536_21+1
+      00007Ar8Dr0B                  150 	mov	___fslt_sloc3_1_0+1, a
+      00007Cr8Ar0F                  151 	mov	a, ___fslt_fl1_65536_21+2
+      00007Er8Er0B                  152 	mov	___fslt_sloc3_1_0+2, a
+      000080r8Br0F                  153 	mov	a, ___fslt_fl1_65536_21+3
+      000082r8Fr0B                  154 	mov	___fslt_sloc3_1_0+3, a
+      000084 80 29                  155 	sub	a, #0x80
+      000086 40 18                  156 	t0sn	f, c
+      000088rDEr30                  157 	goto	00106$
+      00008Ar8Cr0F                  158 	mov	a, ___fslt_fl2_65536_21+0
+      00008Cr90r0B                  159 	mov	___fslt_sloc4_1_0+0, a
+      00008Er8Dr0F                  160 	mov	a, ___fslt_fl2_65536_21+1
+      000090r91r0B                  161 	mov	___fslt_sloc4_1_0+1, a
+      000092r8Er0F                  162 	mov	a, ___fslt_fl2_65536_21+2
+      000094r92r0B                  163 	mov	___fslt_sloc4_1_0+2, a
+      000096r8Fr0F                  164 	mov	a, ___fslt_fl2_65536_21+3
+      000098r93r0B                  165 	mov	___fslt_sloc4_1_0+3, a
+      00009A 80 29                  166 	sub	a, #0x80
+      00009C 40 18                  167 	t0sn	f, c
+      00009ErDEr30                  168 	goto	00106$
+                                    169 ;	../_fslt.c: 119: if (fl2.l < fl1.l)
+      0000A0r8Cr0F                  170 	mov	a, ___fslt_fl2_65536_21+0
+      0000A2r94r0B                  171 	mov	___fslt_sloc5_1_0+0, a
+      0000A4r8Dr0F                  172 	mov	a, ___fslt_fl2_65536_21+1
+      0000A6r95r0B                  173 	mov	___fslt_sloc5_1_0+1, a
+      0000A8r8Er0F                  174 	mov	a, ___fslt_fl2_65536_21+2
+      0000AAr96r0B                  175 	mov	___fslt_sloc5_1_0+2, a
+      0000ACr8Fr0F                  176 	mov	a, ___fslt_fl2_65536_21+3
+      0000AEr97r0B                  177 	mov	___fslt_sloc5_1_0+3, a
+      0000B0r88r0F                  178 	mov	a, ___fslt_fl1_65536_21+0
+      0000B2r98r0B                  179 	mov	___fslt_sloc6_1_0+0, a
+      0000B4r89r0F                  180 	mov	a, ___fslt_fl1_65536_21+1
+      0000B6r99r0B                  181 	mov	___fslt_sloc6_1_0+1, a
+      0000B8r8Ar0F                  182 	mov	a, ___fslt_fl1_65536_21+2
+      0000BAr9Ar0B                  183 	mov	___fslt_sloc6_1_0+2, a
+      0000BCr8Br0F                  184 	mov	a, ___fslt_fl1_65536_21+3
+      0000BEr9Br0B                  185 	mov	___fslt_sloc6_1_0+3, a
+      0000C0r94r0F                  186 	mov	a, ___fslt_sloc5_1_0+0
+      0000C2r98r0C                  187 	sub	a, ___fslt_sloc6_1_0+0
+      0000C4r95r0F                  188 	mov	a, ___fslt_sloc5_1_0+1
+      0000C6r99r0D                  189 	subc	a, ___fslt_sloc6_1_0+1
+      0000C8r96r0F                  190 	mov	a, ___fslt_sloc5_1_0+2
+      0000CAr9Ar0D                  191 	subc	a, ___fslt_sloc6_1_0+2
+      0000CCr97r0F                  192 	mov	a, ___fslt_sloc5_1_0+3
+      0000CEr9Br0D                  193 	subc	a, ___fslt_sloc6_1_0+3
+      0000D0 C0 18                  194 	t0sn	f, ov
+      0000D2 80 2E                  195 	xor	a, #0x80
+      0000D4 6B 00                  196 	sl	a
+      0000D6 40 1A                  197 	t1sn	f, c
+      0000D8rDCr30                  198 	goto	00104$
+                                    199 ;	../_fslt.c: 120: return (1);
+      0000DA 01 02                  200 	ret	#0x01
+      0000DC                        201 00104$:
+                                    202 ;	../_fslt.c: 121: return (0);
+      0000DC 00 02                  203 	ret	#0x00
+      0000DE                        204 00106$:
+                                    205 ;	../_fslt.c: 124: if (fl1.l < fl2.l)
+      0000DEr88r0F                  206 	mov	a, ___fslt_fl1_65536_21+0
+      0000E0r9Cr0B                  207 	mov	___fslt_sloc7_1_0+0, a
+      0000E2r89r0F                  208 	mov	a, ___fslt_fl1_65536_21+1
+      0000E4r9Dr0B                  209 	mov	___fslt_sloc7_1_0+1, a
+      0000E6r8Ar0F                  210 	mov	a, ___fslt_fl1_65536_21+2
+      0000E8r9Er0B                  211 	mov	___fslt_sloc7_1_0+2, a
+      0000EAr8Br0F                  212 	mov	a, ___fslt_fl1_65536_21+3
+      0000ECr9Fr0B                  213 	mov	___fslt_sloc7_1_0+3, a
+      0000EEr8Cr0F                  214 	mov	a, ___fslt_fl2_65536_21+0
+      0000F0rA0r0B                  215 	mov	___fslt_sloc8_1_0+0, a
+      0000F2r8Dr0F                  216 	mov	a, ___fslt_fl2_65536_21+1
+      0000F4rA1r0B                  217 	mov	___fslt_sloc8_1_0+1, a
+      0000F6r8Er0F                  218 	mov	a, ___fslt_fl2_65536_21+2
+      0000F8rA2r0B                  219 	mov	___fslt_sloc8_1_0+2, a
+      0000FAr8Fr0F                  220 	mov	a, ___fslt_fl2_65536_21+3
+      0000FCrA3r0B                  221 	mov	___fslt_sloc8_1_0+3, a
+      0000FEr9Cr0F                  222 	mov	a, ___fslt_sloc7_1_0+0
+      000100rA0r0C                  223 	sub	a, ___fslt_sloc8_1_0+0
+      000102r9Dr0F                  224 	mov	a, ___fslt_sloc7_1_0+1
+      000104rA1r0D                  225 	subc	a, ___fslt_sloc8_1_0+1
+      000106r9Er0F                  226 	mov	a, ___fslt_sloc7_1_0+2
+      000108rA2r0D                  227 	subc	a, ___fslt_sloc8_1_0+2
+      00010Ar9Fr0F                  228 	mov	a, ___fslt_sloc7_1_0+3
+      00010CrA3r0D                  229 	subc	a, ___fslt_sloc8_1_0+3
+      00010E C0 18                  230 	t0sn	f, ov
+      000110 80 2E                  231 	xor	a, #0x80
+      000112 6B 00                  232 	sl	a
+      000114 40 1A                  233 	t1sn	f, c
+      000116r1Ar31                  234 	goto	00109$
+                                    235 ;	../_fslt.c: 125: return (1);
+      000118 01 02                  236 	ret	#0x01
+      00011A                        237 00109$:
+                                    238 ;	../_fslt.c: 126: return (0);
+      00011A 00 02                  239 	ret	#0x00
+                                    240 ;	../_fslt.c: 127: }
+      00011C 7A 00                  241 	ret
+                                    242 	.area CODE
+                                    243 	.area CONST
+                                    244 	.area CABS (ABS)

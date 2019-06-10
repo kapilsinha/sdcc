@@ -1,0 +1,235 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module ldexpf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _ldexpf_PARM_2
+                                     17 	.globl _ldexpf_PARM_1
+                                     18 	.globl _ldexpf
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _ldexpf_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 _ldexpf_PARM_2:
+      000004                         31 	.ds 2
+      000006                         32 _ldexpf_fl_65536_26:
+      000006                         33 	.ds 4
+                                     34 ;--------------------------------------------------------
+                                     35 ; overlayable items in ram 
+                                     36 ;--------------------------------------------------------
+                                     37 	.area	OSEG (OVR,DATA)
+      000000                         38 _ldexpf_sloc0_1_0:
+      000000                         39 	.ds 4
+      000004                         40 _ldexpf_sloc1_1_0:
+      000004                         41 	.ds 4
+      000008                         42 _ldexpf_sloc2_1_0:
+      000008                         43 	.ds 4
+      00000C                         44 _ldexpf_sloc3_1_0:
+      00000C                         45 	.ds 4
+      000010                         46 _ldexpf_sloc4_1_0:
+      000010                         47 	.ds 4
+      000014                         48 _ldexpf_sloc5_1_0:
+      000014                         49 	.ds 4
+      000018                         50 _ldexpf_sloc6_1_0:
+      000018                         51 	.ds 4
+      00001C                         52 _ldexpf_sloc7_1_0:
+      00001C                         53 	.ds 4
+      000020                         54 _ldexpf_sloc8_1_0:
+      000020                         55 	.ds 4
+      000024                         56 _ldexpf_sloc9_1_0:
+      000024                         57 	.ds 4
+      000028                         58 _ldexpf_sloc10_1_0:
+      000028                         59 	.ds 4
+                                     60 ;--------------------------------------------------------
+                                     61 ; absolute external ram data
+                                     62 ;--------------------------------------------------------
+                                     63 	.area DABS (ABS)
+                                     64 ;--------------------------------------------------------
+                                     65 ; global & static initialisations
+                                     66 ;--------------------------------------------------------
+                                     67 	.area HOME
+                                     68 	.area GSINIT
+                                     69 	.area GSFINAL
+                                     70 	.area GSINIT
+                                     71 ;--------------------------------------------------------
+                                     72 ; Home
+                                     73 ;--------------------------------------------------------
+                                     74 	.area HOME
+                                     75 	.area HOME
+                                     76 ;--------------------------------------------------------
+                                     77 ; code
+                                     78 ;--------------------------------------------------------
+                                     79 	.area CODE
+                                     80 ;	../ldexpf.c: 34: float ldexpf(float x, int pw2)
+                                     81 ;	-----------------------------------------
+                                     82 ;	 function ldexpf
+                                     83 ;	-----------------------------------------
+      000000                         84 _ldexpf:
+                                     85 ;	../ldexpf.c: 39: fl.f = x;
+      000000r80r0F                   86 	mov	a, _ldexpf_PARM_1+0
+      000002r86r0B                   87 	mov	_ldexpf_fl_65536_26+0, a
+      000004r81r0F                   88 	mov	a, _ldexpf_PARM_1+1
+      000006r87r0B                   89 	mov	_ldexpf_fl_65536_26+1, a
+      000008r82r0F                   90 	mov	a, _ldexpf_PARM_1+2
+      00000Ar88r0B                   91 	mov	_ldexpf_fl_65536_26+2, a
+      00000Cr83r0F                   92 	mov	a, _ldexpf_PARM_1+3
+      00000Er89r0B                   93 	mov	_ldexpf_fl_65536_26+3, a
+                                     94 ;	../ldexpf.c: 41: e=(fl.l >> 23) & 0x000000ff;
+      000010r86r0F                   95 	mov	a, _ldexpf_fl_65536_26+0
+      000012r80r0B                   96 	mov	_ldexpf_sloc0_1_0+0, a
+      000014r87r0F                   97 	mov	a, _ldexpf_fl_65536_26+1
+      000016r81r0B                   98 	mov	_ldexpf_sloc0_1_0+1, a
+      000018r88r0F                   99 	mov	a, _ldexpf_fl_65536_26+2
+      00001Ar82r0B                  100 	mov	_ldexpf_sloc0_1_0+2, a
+      00001Cr89r0F                  101 	mov	a, _ldexpf_fl_65536_26+3
+      00001Er83r0B                  102 	mov	_ldexpf_sloc0_1_0+3, a
+      000020r80r0F                  103 	mov	a, _ldexpf_sloc0_1_0+0
+      000022r84r0B                  104 	mov	_ldexpf_sloc1_1_0+0, a
+      000024r81r0F                  105 	mov	a, _ldexpf_sloc0_1_0+1
+      000026r85r0B                  106 	mov	_ldexpf_sloc1_1_0+1, a
+      000028r82r0F                  107 	mov	a, _ldexpf_sloc0_1_0+2
+      00002Ar86r0B                  108 	mov	_ldexpf_sloc1_1_0+2, a
+      00002Cr83r0F                  109 	mov	a, _ldexpf_sloc0_1_0+3
+      00002Er87r0B                  110 	mov	_ldexpf_sloc1_1_0+3, a
+      000030 17 2F                  111 	mov	a, #23
+      000032                        112 00103$:
+      000032 72 00                  113 	push	af
+      000034r87r0F                  114 	mov	a, _ldexpf_sloc1_1_0+3
+      000036 6B 00                  115 	sl	a
+      000038r07r16                  116 	src	_ldexpf_sloc1_1_0+3
+      00003Ar06r16                  117 	src	_ldexpf_sloc1_1_0+2
+      00003Cr05r16                  118 	src	_ldexpf_sloc1_1_0+1
+      00003Er04r16                  119 	src	_ldexpf_sloc1_1_0+0
+      000040 73 00                  120 	pop	af
+      000042 63 00                  121 	dzsn	a
+      000044r32r30                  122 	goto	00103$
+      000046r84r0F                  123 	mov	a, _ldexpf_sloc1_1_0+0
+      000048r88r0B                  124 	mov	_ldexpf_sloc2_1_0+0, a
+      00004Ar09r13                  125 	clear	_ldexpf_sloc2_1_0+1
+      00004Cr0Ar13                  126 	clear	_ldexpf_sloc2_1_0+2
+      00004Er0Br13                  127 	clear	_ldexpf_sloc2_1_0+3
+                                    128 ;	../ldexpf.c: 42: e+=pw2;
+      000050r84r0F                  129 	mov	a, _ldexpf_PARM_2+0
+      000052r8Cr0B                  130 	mov	_ldexpf_sloc3_1_0+0, a
+      000054r85r0F                  131 	mov	a, _ldexpf_PARM_2+1
+      000056r8Dr0B                  132 	mov	_ldexpf_sloc3_1_0+1, a
+      000058 6B 00                  133 	sl	a
+      00005A 00 2F                  134 	mov	a, #0x00
+      00005C 61 00                  135 	subc	a
+      00005Er8Er0B                  136 	mov	_ldexpf_sloc3_1_0+2, a
+      000060r8Fr0B                  137 	mov	_ldexpf_sloc3_1_0+3, a
+      000062r88r0F                  138 	mov	a, _ldexpf_sloc2_1_0+0
+      000064r0Cr0C                  139 	add	a, _ldexpf_sloc3_1_0+0
+      000066r90r0B                  140 	mov	_ldexpf_sloc4_1_0+0, a
+      000068r89r0F                  141 	mov	a, _ldexpf_sloc2_1_0+1
+      00006Ar0Dr0D                  142 	addc	a, _ldexpf_sloc3_1_0+1
+      00006Cr91r0B                  143 	mov	_ldexpf_sloc4_1_0+1, a
+      00006Er8Ar0F                  144 	mov	a, _ldexpf_sloc2_1_0+2
+      000070r0Er0D                  145 	addc	a, _ldexpf_sloc3_1_0+2
+      000072r92r0B                  146 	mov	_ldexpf_sloc4_1_0+2, a
+      000074r8Br0F                  147 	mov	a, _ldexpf_sloc2_1_0+3
+      000076r0Fr0D                  148 	addc	a, _ldexpf_sloc3_1_0+3
+      000078r93r0B                  149 	mov	_ldexpf_sloc4_1_0+3, a
+                                    150 ;	../ldexpf.c: 43: fl.l= ((e & 0xff) << 23) | (fl.l & 0x807fffff);
+      00007Ar90r0F                  151 	mov	a, _ldexpf_sloc4_1_0+0
+      00007Cr94r0B                  152 	mov	_ldexpf_sloc5_1_0+0, a
+      00007Er15r13                  153 	clear	_ldexpf_sloc5_1_0+1
+      000080r16r13                  154 	clear	_ldexpf_sloc5_1_0+2
+      000082r17r13                  155 	clear	_ldexpf_sloc5_1_0+3
+      000084r94r0F                  156 	mov	a, _ldexpf_sloc5_1_0+0
+      000086r9Ar0B                  157 	mov	_ldexpf_sloc6_1_0+2, a
+      000088r95r0F                  158 	mov	a, _ldexpf_sloc5_1_0+1
+      00008Ar9Br0B                  159 	mov	_ldexpf_sloc6_1_0+3, a
+      00008Cr18r13                  160 	clear	_ldexpf_sloc6_1_0+0
+      00008Er19r13                  161 	clear	_ldexpf_sloc6_1_0+1
+      000090 07 2F                  162 	mov	a, #7
+      000092                        163 00104$:
+      000092r9Ar15                  164 	sl	_ldexpf_sloc6_1_0+2
+      000094r9Br16                  165 	slc	_ldexpf_sloc6_1_0+3
+      000096 63 00                  166 	dzsn	a
+      000098r92r30                  167 	goto	00104$
+      00009Ar86r0F                  168 	mov	a, _ldexpf_fl_65536_26+0
+      00009Cr9Cr0B                  169 	mov	_ldexpf_sloc7_1_0+0, a
+      00009Er87r0F                  170 	mov	a, _ldexpf_fl_65536_26+1
+      0000A0r9Dr0B                  171 	mov	_ldexpf_sloc7_1_0+1, a
+      0000A2r88r0F                  172 	mov	a, _ldexpf_fl_65536_26+2
+      0000A4r9Er0B                  173 	mov	_ldexpf_sloc7_1_0+2, a
+      0000A6r89r0F                  174 	mov	a, _ldexpf_fl_65536_26+3
+      0000A8r9Fr0B                  175 	mov	_ldexpf_sloc7_1_0+3, a
+      0000AAr9Cr0F                  176 	mov	a, _ldexpf_sloc7_1_0+0
+      0000ACrA0r0B                  177 	mov	_ldexpf_sloc8_1_0+0, a
+      0000AEr9Dr0F                  178 	mov	a, _ldexpf_sloc7_1_0+1
+      0000B0rA1r0B                  179 	mov	_ldexpf_sloc8_1_0+1, a
+      0000B2r9Er0F                  180 	mov	a, _ldexpf_sloc7_1_0+2
+      0000B4 7F 2C                  181 	and	a, #0x7f
+      0000B6rA2r0B                  182 	mov	_ldexpf_sloc8_1_0+2, a
+      0000B8r9Fr0F                  183 	mov	a, _ldexpf_sloc7_1_0+3
+      0000BA 80 2C                  184 	and	a, #0x80
+      0000BCrA3r0B                  185 	mov	_ldexpf_sloc8_1_0+3, a
+      0000BEr98r0F                  186 	mov	a, _ldexpf_sloc6_1_0+0
+      0000C0rA0r0E                  187 	or	a, _ldexpf_sloc8_1_0+0
+      0000C2rA4r0B                  188 	mov	_ldexpf_sloc9_1_0+0, a
+      0000C4r99r0F                  189 	mov	a, _ldexpf_sloc6_1_0+1
+      0000C6rA1r0E                  190 	or	a, _ldexpf_sloc8_1_0+1
+      0000C8rA5r0B                  191 	mov	_ldexpf_sloc9_1_0+1, a
+      0000CAr9Ar0F                  192 	mov	a, _ldexpf_sloc6_1_0+2
+      0000CCrA2r0E                  193 	or	a, _ldexpf_sloc8_1_0+2
+      0000CErA6r0B                  194 	mov	_ldexpf_sloc9_1_0+2, a
+      0000D0r9Br0F                  195 	mov	a, _ldexpf_sloc6_1_0+3
+      0000D2rA3r0E                  196 	or	a, _ldexpf_sloc8_1_0+3
+      0000D4rA7r0B                  197 	mov	_ldexpf_sloc9_1_0+3, a
+      0000D6rA4r0F                  198 	mov	a, _ldexpf_sloc9_1_0+0
+      0000D8r86r0B                  199 	mov	_ldexpf_fl_65536_26+0, a
+      0000DArA5r0F                  200 	mov	a, _ldexpf_sloc9_1_0+1
+      0000DCr87r0B                  201 	mov	_ldexpf_fl_65536_26+1, a
+      0000DErA6r0F                  202 	mov	a, _ldexpf_sloc9_1_0+2
+      0000E0r88r0B                  203 	mov	_ldexpf_fl_65536_26+2, a
+      0000E2rA7r0F                  204 	mov	a, _ldexpf_sloc9_1_0+3
+      0000E4r89r0B                  205 	mov	_ldexpf_fl_65536_26+3, a
+                                    206 ;	../ldexpf.c: 45: return(fl.f);
+      0000E6r86r0F                  207 	mov	a, _ldexpf_fl_65536_26+0
+      0000E8rA8r0B                  208 	mov	_ldexpf_sloc10_1_0+0, a
+      0000EAr87r0F                  209 	mov	a, _ldexpf_fl_65536_26+1
+      0000ECrA9r0B                  210 	mov	_ldexpf_sloc10_1_0+1, a
+      0000EEr88r0F                  211 	mov	a, _ldexpf_fl_65536_26+2
+      0000F0rAAr0B                  212 	mov	_ldexpf_sloc10_1_0+2, a
+      0000F2r89r0F                  213 	mov	a, _ldexpf_fl_65536_26+3
+      0000F4rABr0B                  214 	mov	_ldexpf_sloc10_1_0+3, a
+      0000F6 C2 01                  215 	mov	a, sp
+      0000F8 FC 28                  216 	add	a, #0xfc
+      0000FAr80r0B                  217 	mov	p, a
+      0000FCr81r03                  218 	idxm	a, p
+      0000FEr80r0B                  219 	mov	p, a
+      000100rA8r0F                  220 	mov	a, _ldexpf_sloc10_1_0+0
+      000102r80r03                  221 	idxm	p, a
+      000104r00r12                  222 	inc	p
+      000106rA9r0F                  223 	mov	a, _ldexpf_sloc10_1_0+1
+      000108r80r03                  224 	idxm	p, a
+      00010Ar00r12                  225 	inc	p
+      00010CrAAr0F                  226 	mov	a, _ldexpf_sloc10_1_0+2
+      00010Er80r03                  227 	idxm	p, a
+      000110r00r12                  228 	inc	p
+      000112rABr0F                  229 	mov	a, _ldexpf_sloc10_1_0+3
+      000114r80r03                  230 	idxm	p, a
+                                    231 ;	../ldexpf.c: 46: }
+      000116 7A 00                  232 	ret
+                                    233 	.area CODE
+                                    234 	.area CONST
+                                    235 	.area CABS (ABS)

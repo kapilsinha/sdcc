@@ -1,0 +1,156 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _memcmp
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _memcmp_PARM_3
+                                     17 	.globl _memcmp_PARM_2
+                                     18 	.globl _memcmp_PARM_1
+                                     19 	.globl _memcmp
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _memcmp_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _memcmp_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _memcmp_PARM_3:
+      000004                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 	.area	OSEG (OVR,DATA)
+      000000                         39 _memcmp_sloc0_1_0:
+      000000                         40 	.ds 2
+      000002                         41 _memcmp_sloc1_1_0:
+      000002                         42 	.ds 2
+      000004                         43 _memcmp_sloc2_1_0:
+      000004                         44 	.ds 1
+      000005                         45 _memcmp_sloc3_1_0:
+      000005                         46 	.ds 2
+      000007                         47 _memcmp_sloc4_1_0:
+      000007                         48 	.ds 2
+                                     49 ;--------------------------------------------------------
+                                     50 ; absolute external ram data
+                                     51 ;--------------------------------------------------------
+                                     52 	.area DABS (ABS)
+                                     53 ;--------------------------------------------------------
+                                     54 ; global & static initialisations
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area GSINIT
+                                     58 	.area GSFINAL
+                                     59 	.area GSINIT
+                                     60 ;--------------------------------------------------------
+                                     61 ; Home
+                                     62 ;--------------------------------------------------------
+                                     63 	.area HOME
+                                     64 	.area HOME
+                                     65 ;--------------------------------------------------------
+                                     66 ; code
+                                     67 ;--------------------------------------------------------
+                                     68 	.area CODE
+                                     69 ;	../_memcmp.c: 31: int memcmp (const void * buf1, const void * buf2, size_t count)
+                                     70 ;	-----------------------------------------
+                                     71 ;	 function memcmp
+                                     72 ;	-----------------------------------------
+      000000                         73 _memcmp:
+                                     74 ;	../_memcmp.c: 33: if (!count)
+      000000r84r0F                   75 	mov	a, _memcmp_PARM_3+0
+      000002r85r0E                   76 	or	a, _memcmp_PARM_3+1
+      000004 00 2A                   77 	ceqsn	a, #0x00
+      000006r0Cr30                   78 	goto	00112$
+                                     79 ;	../_memcmp.c: 34: return(0);
+      000008r00r13                   80 	clear	p
+      00000A 00 02                   81 	ret	#0x00
+                                     82 ;	../_memcmp.c: 36: while ( --count && *((char *)buf1) == *((char *)buf2) ) {
+      00000C                         83 00112$:
+      00000Cr84r0F                   84 	mov	a, _memcmp_PARM_3+0
+      00000Er80r0B                   85 	mov	_memcmp_sloc0_1_0+0, a
+      000010r85r0F                   86 	mov	a, _memcmp_PARM_3+1
+      000012r81r0B                   87 	mov	_memcmp_sloc0_1_0+1, a
+      000014                         88 00104$:
+      000014r80r12                   89 	dec	_memcmp_sloc0_1_0+0
+      000016r81r10                   90 	subc	_memcmp_sloc0_1_0+1
+      000018r80r0F                   91 	mov	a, _memcmp_sloc0_1_0+0
+      00001Ar81r0E                   92 	or	a, _memcmp_sloc0_1_0+1
+      00001C 00 2B                   93 	cneqsn	a, #0x00
+      00001Er68r30                   94 	goto	00106$
+      000020r80r0F                   95 	mov	a, _memcmp_PARM_1+0
+      000022r82r0B                   96 	mov	_memcmp_sloc1_1_0+0, a
+      000024r81r0F                   97 	mov	a, _memcmp_PARM_1+1
+      000026r83r0B                   98 	mov	_memcmp_sloc1_1_0+1, a
+      000028r82r0F                   99 	mov	a, _memcmp_sloc1_1_0+0
+      00002Ar80r0B                  100 	mov	p, a
+      00002Cr83r0F                  101 	mov	a, _memcmp_sloc1_1_0+1
+      00002Er00r38                  102 	call	__gptrget
+      000030r84r0B                  103 	mov	_memcmp_sloc2_1_0+0, a
+      000032r82r0F                  104 	mov	a, _memcmp_PARM_2+0
+      000034r85r0B                  105 	mov	_memcmp_sloc3_1_0+0, a
+      000036r83r0F                  106 	mov	a, _memcmp_PARM_2+1
+      000038r86r0B                  107 	mov	_memcmp_sloc3_1_0+1, a
+      00003Ar85r0F                  108 	mov	a, _memcmp_sloc3_1_0+0
+      00003Cr80r0B                  109 	mov	p, a
+      00003Er86r0F                  110 	mov	a, _memcmp_sloc3_1_0+1
+      000040r00r38                  111 	call	__gptrget
+      000042r04r17                  112 	ceqsn	a, _memcmp_sloc2_1_0+0
+      000044r68r30                  113 	goto	00106$
+                                    114 ;	../_memcmp.c: 37: buf1 = (char *)buf1 + 1;
+      000046r82r0F                  115 	mov	a, _memcmp_sloc1_1_0+0
+      000048 01 28                  116 	add	a, #0x01
+      00004Ar80r0B                  117 	mov	p, a
+      00004Cr83r0F                  118 	mov	a, _memcmp_sloc1_1_0+1
+      00004E 60 00                  119 	addc	a
+      000050r81r0B                  120 	mov	_memcmp_PARM_1+1, a
+      000052r80r0F                  121 	mov	a, p
+      000054r80r0B                  122 	mov	_memcmp_PARM_1+0, a
+                                    123 ;	../_memcmp.c: 38: buf2 = (char *)buf2 + 1;
+      000056r85r0F                  124 	mov	a, _memcmp_sloc3_1_0+0
+      000058 01 28                  125 	add	a, #0x01
+      00005Ar80r0B                  126 	mov	p, a
+      00005Cr86r0F                  127 	mov	a, _memcmp_sloc3_1_0+1
+      00005E 60 00                  128 	addc	a
+      000060r83r0B                  129 	mov	_memcmp_PARM_2+1, a
+      000062r80r0F                  130 	mov	a, p
+      000064r82r0B                  131 	mov	_memcmp_PARM_2+0, a
+      000066r14r30                  132 	goto	00104$
+      000068                        133 00106$:
+                                    134 ;	../_memcmp.c: 41: return( *((unsigned char *)buf1) - *((unsigned char *)buf2) );
+      000068r80r0F                  135 	mov	a, _memcmp_PARM_1+0
+      00006Ar80r0B                  136 	mov	p, a
+      00006Cr81r0F                  137 	mov	a, _memcmp_PARM_1+1
+      00006Er00r38                  138 	call	__gptrget
+      000070r87r0B                  139 	mov	_memcmp_sloc4_1_0+0, a
+      000072r08r13                  140 	clear	_memcmp_sloc4_1_0+1
+      000074r82r0F                  141 	mov	a, _memcmp_PARM_2+0
+      000076r80r0B                  142 	mov	p, a
+      000078r83r0F                  143 	mov	a, _memcmp_PARM_2+1
+      00007Ar00r38                  144 	call	__gptrget
+      00007Cr80r0B                  145 	mov	p, a
+      00007Er87r0F                  146 	mov	a, _memcmp_sloc4_1_0+0
+      000080r80r0C                  147 	sub	a, p
+      000082r80r0B                  148 	mov	p, a
+      000084r88r0F                  149 	mov	a, _memcmp_sloc4_1_0+1
+      000086 61 00                  150 	subc	a
+      000088r80r13                  151 	xch	a, p
+                                    152 ;	../_memcmp.c: 42: }
+      00008A 7A 00                  153 	ret
+                                    154 	.area CODE
+                                    155 	.area CONST
+                                    156 	.area CABS (ABS)

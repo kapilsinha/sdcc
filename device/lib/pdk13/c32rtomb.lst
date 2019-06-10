@@ -1,0 +1,82 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module c32rtomb
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wctomb
+                                     17 	.globl _c32rtomb_PARM_3
+                                     18 	.globl _c32rtomb_PARM_2
+                                     19 	.globl _c32rtomb_PARM_1
+                                     20 	.globl _c32rtomb
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _c32rtomb_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _c32rtomb_PARM_2:
+      000002                         33 	.ds 4
+      000006                         34 _c32rtomb_PARM_3:
+      000006                         35 	.ds 2
+                                     36 ;--------------------------------------------------------
+                                     37 ; overlayable items in ram 
+                                     38 ;--------------------------------------------------------
+                                     39 ;--------------------------------------------------------
+                                     40 ; absolute external ram data
+                                     41 ;--------------------------------------------------------
+                                     42 	.area DABS (ABS)
+                                     43 ;--------------------------------------------------------
+                                     44 ; global & static initialisations
+                                     45 ;--------------------------------------------------------
+                                     46 	.area HOME
+                                     47 	.area GSINIT
+                                     48 	.area GSFINAL
+                                     49 	.area GSINIT
+                                     50 ;--------------------------------------------------------
+                                     51 ; Home
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area HOME
+                                     55 ;--------------------------------------------------------
+                                     56 ; code
+                                     57 ;--------------------------------------------------------
+                                     58 	.area CODE
+                                     59 ;	../c32rtomb.c: 33: size_t c32rtomb(char *restrict s, char32_t c32, mbstate_t *restrict ps)
+                                     60 ;	-----------------------------------------
+                                     61 ;	 function c32rtomb
+                                     62 ;	-----------------------------------------
+      000000                         63 _c32rtomb:
+                                     64 ;	../c32rtomb.c: 36: return(wctomb(s, c32));
+      000000r80r0F                   65 	mov	a, _c32rtomb_PARM_1+0
+      000002r80r0B                   66 	mov	_wctomb_PARM_1+0, a
+      000004r81r0F                   67 	mov	a, _c32rtomb_PARM_1+1
+      000006r81r0B                   68 	mov	_wctomb_PARM_1+1, a
+      000008r82r0F                   69 	mov	a, _c32rtomb_PARM_2+0
+      00000Ar80r0B                   70 	mov	_wctomb_PARM_2+0, a
+      00000Cr83r0F                   71 	mov	a, _c32rtomb_PARM_2+1
+      00000Er81r0B                   72 	mov	_wctomb_PARM_2+1, a
+      000010r84r0F                   73 	mov	a, _c32rtomb_PARM_2+2
+      000012r82r0B                   74 	mov	_wctomb_PARM_2+2, a
+      000014r85r0F                   75 	mov	a, _c32rtomb_PARM_2+3
+      000016r83r0B                   76 	mov	_wctomb_PARM_2+3, a
+      000018r00r38                   77 	call	_wctomb
+                                     78 ;	../c32rtomb.c: 37: }
+      00001A 7A 00                   79 	ret
+                                     80 	.area CODE
+                                     81 	.area CONST
+                                     82 	.area CABS (ABS)

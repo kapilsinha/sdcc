@@ -1,0 +1,1554 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module printf_large
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strlen
+                                     17 	.globl __print_format_PARM_4
+                                     18 	.globl __print_format_PARM_3
+                                     19 	.globl __print_format_PARM_2
+                                     20 	.globl __print_format_PARM_1
+                                     21 	.globl __print_format
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _lower_case:
+      000000                         32 	.ds 1
+      000001                         33 _output_char:
+      000001                         34 	.ds 2
+      000003                         35 _p:
+      000003                         36 	.ds 2
+      000005                         37 _value:
+      000005                         38 	.ds 5
+      00000A                         39 _charsOutputted:
+      00000A                         40 	.ds 2
+      00000C                         41 __output_char_PARM_1:
+      00000C                         42 	.ds 1
+      00000D                         43 _output_digit_PARM_1:
+      00000D                         44 	.ds 1
+      00000E                         45 _output_2digits_PARM_1:
+      00000E                         46 	.ds 1
+      00000F                         47 _calculate_digit_PARM_1:
+      00000F                         48 	.ds 1
+      000010                         49 __print_format_PARM_1:
+      000010                         50 	.ds 2
+      000012                         51 __print_format_PARM_2:
+      000012                         52 	.ds 2
+      000014                         53 __print_format_PARM_3:
+      000014                         54 	.ds 2
+      000016                         55 __print_format_PARM_4:
+      000016                         56 	.ds 2
+      000018                         57 __print_format_store_262144_84:
+      000018                         58 	.ds 6
+      00001E                         59 __print_format_sloc3_1_0:
+      00001E                         60 	.ds 2
+      000020                         61 __print_format_sloc4_1_0:
+      000020                         62 	.ds 1
+      000021                         63 __print_format_sloc5_1_0:
+      000021                         64 	.ds 1
+      000022                         65 __print_format_sloc6_1_0:
+      000022                         66 	.ds 1
+      000023                         67 __print_format_sloc7_1_0:
+      000023                         68 	.ds 1
+      000024                         69 __print_format_sloc8_1_0:
+      000024                         70 	.ds 1
+      000025                         71 __print_format_sloc9_1_0:
+      000025                         72 	.ds 1
+      000026                         73 __print_format_sloc10_1_0:
+      000026                         74 	.ds 1
+      000027                         75 __print_format_sloc11_1_0:
+      000027                         76 	.ds 1
+      000028                         77 __print_format_sloc12_1_0:
+      000028                         78 	.ds 1
+      000029                         79 __print_format_sloc13_1_0:
+      000029                         80 	.ds 1
+      00002A                         81 __print_format_sloc14_1_0:
+      00002A                         82 	.ds 2
+      00002C                         83 __print_format_sloc15_1_0:
+      00002C                         84 	.ds 2
+      00002E                         85 __print_format_sloc16_1_0:
+      00002E                         86 	.ds 2
+      000030                         87 __print_format_sloc17_1_0:
+      000030                         88 	.ds 1
+      000031                         89 __print_format_sloc18_1_0:
+      000031                         90 	.ds 2
+      000033                         91 __print_format_sloc19_1_0:
+      000033                         92 	.ds 2
+      000035                         93 __print_format_sloc20_1_0:
+      000035                         94 	.ds 2
+      000037                         95 __print_format_sloc21_1_0:
+      000037                         96 	.ds 1
+      000038                         97 __print_format_sloc22_1_0:
+      000038                         98 	.ds 2
+      00003A                         99 __print_format_sloc23_1_0:
+      00003A                        100 	.ds 2
+      00003C                        101 __print_format_sloc24_1_0:
+      00003C                        102 	.ds 4
+      000040                        103 __print_format_sloc25_1_0:
+      000040                        104 	.ds 2
+      000042                        105 __print_format_sloc26_1_0:
+      000042                        106 	.ds 4
+      000046                        107 __print_format_sloc27_1_0:
+      000046                        108 	.ds 4
+      00004A                        109 __print_format_sloc28_1_0:
+      00004A                        110 	.ds 2
+      00004C                        111 __print_format_sloc29_1_0:
+      00004C                        112 	.ds 4
+      000050                        113 __print_format_sloc30_1_0:
+      000050                        114 	.ds 4
+      000054                        115 __print_format_sloc31_1_0:
+      000054                        116 	.ds 4
+      000058                        117 __print_format_sloc32_1_0:
+      000058                        118 	.ds 4
+      00005C                        119 __print_format_sloc33_1_0:
+      00005C                        120 	.ds 4
+      000060                        121 __print_format_sloc34_1_0:
+      000060                        122 	.ds 4
+      000064                        123 __print_format_sloc35_1_0:
+      000064                        124 	.ds 4
+      000068                        125 __print_format_sloc36_1_0:
+      000068                        126 	.ds 1
+      000069                        127 __print_format_sloc37_1_0:
+      000069                        128 	.ds 2
+      00006B                        129 __print_format_sloc38_1_0:
+      00006B                        130 	.ds 2
+      00006D                        131 __print_format_sloc39_1_0:
+      00006D                        132 	.ds 1
+      00006E                        133 __print_format_sloc40_1_0:
+      00006E                        134 	.ds 4
+      000072                        135 __print_format_sloc41_1_0:
+      000072                        136 	.ds 2
+      000074                        137 __print_format_sloc42_1_0:
+      000074                        138 	.ds 2
+      000076                        139 __print_format_sloc43_1_0:
+      000076                        140 	.ds 2
+      000078                        141 __print_format_sloc44_1_0:
+      000078                        142 	.ds 2
+      00007A                        143 __print_format_sloc45_1_0:
+      00007A                        144 	.ds 2
+      00007C                        145 __print_format_sloc46_1_0:
+      00007C                        146 	.ds 2
+      00007E                        147 __print_format_sloc47_1_0:
+      00007E                        148 	.ds 2
+      000080                        149 __print_format_sloc48_1_0:
+      000080                        150 	.ds 2
+      000082                        151 __print_format_sloc49_1_0:
+      000082                        152 	.ds 2
+                                    153 ;--------------------------------------------------------
+                                    154 ; overlayable items in ram 
+                                    155 ;--------------------------------------------------------
+                                    156 	.area	OSEG (OVR,DATA)
+      000000                        157 _calculate_digit_sloc0_1_0:
+      000000                        158 	.ds 4
+      000004                        159 _calculate_digit_sloc1_1_0:
+      000004                        160 	.ds 1
+      000005                        161 _calculate_digit_sloc2_1_0:
+      000005                        162 	.ds 4
+                                    163 ;--------------------------------------------------------
+                                    164 ; absolute external ram data
+                                    165 ;--------------------------------------------------------
+                                    166 	.area DABS (ABS)
+                                    167 ;--------------------------------------------------------
+                                    168 ; global & static initialisations
+                                    169 ;--------------------------------------------------------
+                                    170 	.area HOME
+                                    171 	.area GSINIT
+                                    172 	.area GSFINAL
+                                    173 	.area GSINIT
+                                    174 ;--------------------------------------------------------
+                                    175 ; Home
+                                    176 ;--------------------------------------------------------
+                                    177 	.area HOME
+                                    178 	.area HOME
+                                    179 ;--------------------------------------------------------
+                                    180 ; code
+                                    181 ;--------------------------------------------------------
+                                    182 	.area CODE
+                                    183 ;	../printf_large.c: 105: _output_char (unsigned char c)
+                                    184 ;	-----------------------------------------
+                                    185 ;	 function _output_char
+                                    186 ;	-----------------------------------------
+      000000                        187 __output_char:
+                                    188 ;	../printf_large.c: 107: output_char( c, p );
+      000000r83r0F                  189 	mov	a, _p+0
+      000002 72 00                  190 	push	af
+      000004 C2 01                  191 	mov	a, sp
+      000006 FF 28                  192 	add	a, #0xff
+      000008r80r0B                  193 	mov	p, a
+      00000Ar84r0F                  194 	mov	a, _p+1
+      00000Cr80r03                  195 	idxm	p, a
+      00000Er8Cr0F                  196 	mov	a, __output_char_PARM_1+0
+      000010 72 00                  197 	push	af
+      000012r30r2F                  198 	mov	a, #<(00103$)
+      000014 72 00                  199 	push	af
+      000016 C2 01                  200 	mov	a, sp
+      000018r80r0B                  201 	mov	p, a
+      00001Ar80r12                  202 	dec	p
+      00001Cr30r2F                  203 	mov	a, #>(00103$)
+      00001Er80r03                  204 	idxm	p, a
+      000020r81r0F                  205 	mov	a, _output_char+0
+      000022 72 00                  206 	push	af
+      000024 C2 01                  207 	mov	a, sp
+      000026 FF 28                  208 	add	a, #0xff
+      000028r80r0B                  209 	mov	p, a
+      00002Ar82r0F                  210 	mov	a, _output_char+1
+      00002Cr80r03                  211 	idxm	p, a
+      00002E 7A 00                  212 	ret
+      000030                        213 00103$:
+      000030 C2 01                  214 	mov	a, sp
+      000032 FC 28                  215 	add	a, #-4
+      000034 82 01                  216 	mov	sp, a
+                                    217 ;	../printf_large.c: 108: charsOutputted++;
+      000036r0Ar12                  218 	inc	_charsOutputted+0
+      000038r0Br10                  219 	addc	_charsOutputted+1
+                                    220 ;	../printf_large.c: 109: }
+      00003A 7A 00                  221 	ret
+                                    222 ;	../printf_large.c: 130: output_digit (unsigned char n)
+                                    223 ;	-----------------------------------------
+                                    224 ;	 function output_digit
+                                    225 ;	-----------------------------------------
+      00003C                        226 _output_digit:
+                                    227 ;	../printf_large.c: 132: register unsigned char c = n + (unsigned char)'0';
+      00003Cr8Dr0F                  228 	mov	a, _output_digit_PARM_1+0
+      00003E 30 28                  229 	add	a, #0x30
+      000040r80r0B                  230 	mov	p, a
+                                    231 ;	../printf_large.c: 134: if (c > (unsigned char)'9')
+      000042 39 2F                  232 	mov	a, #0x39
+      000044r80r0C                  233 	sub	a, p
+      000046 40 1A                  234 	t1sn	f, c
+      000048r58r30                  235 	goto	00104$
+                                    236 ;	../printf_large.c: 136: c += (unsigned char)('A' - '0' - 10);
+      00004A 07 2F                  237 	mov	a, #0x07
+      00004Cr00r08                  238 	add	p, a
+                                    239 ;	../printf_large.c: 137: if (lower_case)
+      00004Er80r0F                  240 	mov	a, _lower_case+0
+      000050 00 2B                  241 	cneqsn	a, #0x00
+      000052r58r30                  242 	goto	00104$
+                                    243 ;	../printf_large.c: 138: c = tolower(c);
+      000054 20 2F                  244 	mov	a, #0x20
+      000056r80r0A                  245 	or	p, a
+      000058                        246 00104$:
+                                    247 ;	../printf_large.c: 140: _output_char( c );
+      000058r80r0F                  248 	mov	a, p
+      00005Ar8Cr0B                  249 	mov	__output_char_PARM_1+0, a
+      00005Cr00r38                  250 	call	__output_char
+                                    251 ;	../printf_large.c: 141: }
+      00005E 7A 00                  252 	ret
+                                    253 ;	../printf_large.c: 157: output_2digits (unsigned char b)
+                                    254 ;	-----------------------------------------
+                                    255 ;	 function output_2digits
+                                    256 ;	-----------------------------------------
+      000060                        257 _output_2digits:
+                                    258 ;	../printf_large.c: 159: output_digit( b>>4   );
+      000060r8Er0F                  259 	mov	a, _output_2digits_PARM_1+0
+      000062r8Dr0B                  260 	mov	_output_digit_PARM_1+0, a
+      000064r0Dr15                  261 	sr	_output_digit_PARM_1+0
+      000066r0Dr15                  262 	sr	_output_digit_PARM_1+0
+      000068r0Dr15                  263 	sr	_output_digit_PARM_1+0
+      00006Ar0Dr15                  264 	sr	_output_digit_PARM_1+0
+      00006Cr3Cr38                  265 	call	_output_digit
+                                    266 ;	../printf_large.c: 160: output_digit( b&0x0F );
+      00006Er8Er0F                  267 	mov	a, _output_2digits_PARM_1+0
+      000070 0F 2C                  268 	and	a, #0x0f
+      000072r8Dr0B                  269 	mov	_output_digit_PARM_1+0, a
+      000074r3Cr38                  270 	call	_output_digit
+                                    271 ;	../printf_large.c: 161: }
+      000076 7A 00                  272 	ret
+                                    273 ;	../printf_large.c: 189: calculate_digit (unsigned char radix)
+                                    274 ;	-----------------------------------------
+                                    275 ;	 function calculate_digit
+                                    276 ;	-----------------------------------------
+      000078                        277 _calculate_digit:
+                                    278 ;	../printf_large.c: 191: register unsigned long ul = value.ul;
+      000078r85r0F                  279 	mov	a, _value+0
+      00007Ar80r0B                  280 	mov	_calculate_digit_sloc0_1_0+0, a
+      00007Cr86r0F                  281 	mov	a, _value+1
+      00007Er81r0B                  282 	mov	_calculate_digit_sloc0_1_0+1, a
+      000080r87r0F                  283 	mov	a, _value+2
+      000082r82r0B                  284 	mov	_calculate_digit_sloc0_1_0+2, a
+      000084r88r0F                  285 	mov	a, _value+3
+      000086r83r0B                  286 	mov	_calculate_digit_sloc0_1_0+3, a
+                                    287 ;	../printf_large.c: 192: register unsigned char b4 = value.byte[4];
+      000088r89r0F                  288 	mov	a, _value+4
+      00008Ar80r0B                  289 	mov	p, a
+                                    290 ;	../printf_large.c: 193: register unsigned char i = 32;
+      00008C 20 2F                  291 	mov	a, #0x20
+      00008Er84r0B                  292 	mov	_calculate_digit_sloc1_1_0+0, a
+                                    293 ;	../printf_large.c: 195: do
+      000090                        294 00103$:
+                                    295 ;	../printf_large.c: 197: b4 = (b4 << 1);
+      000090r80r15                  296 	sl	p
+                                    297 ;	../printf_large.c: 198: b4 |= (ul >> 31) & 0x01;
+      000092r83r0F                  298 	mov	a, _calculate_digit_sloc0_1_0+3
+      000094r85r0B                  299 	mov	_calculate_digit_sloc2_1_0+0, a
+      000096r06r13                  300 	clear	_calculate_digit_sloc2_1_0+1
+      000098r07r13                  301 	clear	_calculate_digit_sloc2_1_0+2
+      00009Ar08r13                  302 	clear	_calculate_digit_sloc2_1_0+3
+      00009C 07 2F                  303 	mov	a, #7
+      00009E                        304 00123$:
+      00009Er05r15                  305 	sr	_calculate_digit_sloc2_1_0+0
+      0000A0 63 00                  306 	dzsn	a
+      0000A2r9Er30                  307 	goto	00123$
+      0000A4r85r0F                  308 	mov	a, _calculate_digit_sloc2_1_0+0
+      0000A6 01 2C                  309 	and	a, #0x01
+      0000A8r80r0A                  310 	or	p, a
+                                    311 ;	../printf_large.c: 199: ul <<= 1;
+      0000AAr80r15                  312 	sl	_calculate_digit_sloc0_1_0+0
+      0000ACr81r16                  313 	slc	_calculate_digit_sloc0_1_0+1
+      0000AEr82r16                  314 	slc	_calculate_digit_sloc0_1_0+2
+      0000B0r83r16                  315 	slc	_calculate_digit_sloc0_1_0+3
+                                    316 ;	../printf_large.c: 201: if (radix <= b4 )
+      0000B2r80r0F                  317 	mov	a, p
+      0000B4r8Fr0C                  318 	sub	a, _calculate_digit_PARM_1+0
+      0000B6 40 18                  319 	t0sn	f, c
+      0000B8rC2r30                  320 	goto	00104$
+                                    321 ;	../printf_large.c: 203: b4 -= radix;
+      0000BAr8Fr0F                  322 	mov	a, _calculate_digit_PARM_1+0
+      0000BCr80r08                  323 	sub	p, a
+                                    324 ;	../printf_large.c: 204: ul |= 1;
+      0000BE 01 2F                  325 	mov	a, #0x01
+      0000C0r80r0A                  326 	or	_calculate_digit_sloc0_1_0+0, a
+      0000C2                        327 00104$:
+                                    328 ;	../printf_large.c: 206: } while (--i);
+      0000C2r84r0F                  329 	mov	a, _calculate_digit_sloc1_1_0+0
+      0000C4 01 29                  330 	sub	a, #0x01
+      0000C6r84r0B                  331 	mov	_calculate_digit_sloc1_1_0+0, a
+      0000C8 00 2A                  332 	ceqsn	a, #0x00
+      0000CAr90r30                  333 	goto	00103$
+                                    334 ;	../printf_large.c: 207: value.ul = ul;
+      0000CCr80r0F                  335 	mov	a, _calculate_digit_sloc0_1_0+0
+      0000CEr85r0B                  336 	mov	_value+0, a
+      0000D0r81r0F                  337 	mov	a, _calculate_digit_sloc0_1_0+1
+      0000D2r86r0B                  338 	mov	_value+1, a
+      0000D4r82r0F                  339 	mov	a, _calculate_digit_sloc0_1_0+2
+      0000D6r87r0B                  340 	mov	_value+2, a
+      0000D8r83r0F                  341 	mov	a, _calculate_digit_sloc0_1_0+3
+      0000DAr88r0B                  342 	mov	_value+3, a
+                                    343 ;	../printf_large.c: 208: value.byte[4] = b4;
+      0000DCr80r0F                  344 	mov	a, p
+      0000DEr89r0B                  345 	mov	_value+4, a
+                                    346 ;	../printf_large.c: 209: }
+      0000E0 7A 00                  347 	ret
+                                    348 ;	../printf_large.c: 434: _print_format (pfn_outputchar pfn, void* pvoid, const char *format, va_list ap)
+                                    349 ;	-----------------------------------------
+                                    350 ;	 function _print_format
+                                    351 ;	-----------------------------------------
+      0000E2                        352 __print_format:
+                                    353 ;	../printf_large.c: 461: output_char = pfn;
+      0000E2r90r0F                  354 	mov	a, __print_format_PARM_1+0
+      0000E4r81r0B                  355 	mov	_output_char+0, a
+      0000E6r91r0F                  356 	mov	a, __print_format_PARM_1+1
+      0000E8r82r0B                  357 	mov	_output_char+1, a
+                                    358 ;	../printf_large.c: 462: p = pvoid;
+      0000EAr92r0F                  359 	mov	a, __print_format_PARM_2+0
+      0000ECr83r0B                  360 	mov	_p+0, a
+      0000EEr93r0F                  361 	mov	a, __print_format_PARM_2+1
+      0000F0r84r0B                  362 	mov	_p+1, a
+                                    363 ;	../printf_large.c: 466: charsOutputted = 0;
+      0000F2r0Ar13                  364 	clear	_charsOutputted+0
+      0000F4r0Br13                  365 	clear	_charsOutputted+1
+                                    366 ;	../printf_large.c: 475: while( c=*format++ )
+      0000F6                        367 00231$:
+      0000F6r94r0F                  368 	mov	a, __print_format_PARM_3+0
+      0000F8r9Er0B                  369 	mov	__print_format_sloc3_1_0+0, a
+      0000FAr95r0F                  370 	mov	a, __print_format_PARM_3+1
+      0000FCr9Fr0B                  371 	mov	__print_format_sloc3_1_0+1, a
+      0000FEr9Er0F                  372 	mov	a, __print_format_sloc3_1_0+0
+      000100r80r0B                  373 	mov	p, a
+      000102r9Fr0F                  374 	mov	a, __print_format_sloc3_1_0+1
+      000104r00r38                  375 	call	__gptrget
+      000106 72 00                  376 	push	af
+      000108r9Er0F                  377 	mov	a, __print_format_sloc3_1_0+0
+      00010A 01 28                  378 	add	a, #0x01
+      00010Cr94r0B                  379 	mov	__print_format_PARM_3+0, a
+      00010Er9Fr0F                  380 	mov	a, __print_format_sloc3_1_0+1
+      000110 60 00                  381 	addc	a
+      000112r95r0B                  382 	mov	__print_format_PARM_3+1, a
+      000114 73 00                  383 	pop	af
+      000116rA0r0B                  384 	mov	__print_format_sloc4_1_0+0, a
+      000118 00 2B                  385 	cneqsn	a, #0x00
+      00011Ar4Cr30                  386 	goto	00233$
+                                    387 ;	../printf_large.c: 477: if ( c=='%' )
+      00011CrA0r0F                  388 	mov	a, __print_format_sloc4_1_0+0
+      00011E 25 2A                  389 	ceqsn	a, #0x25
+      000120r44r30                  390 	goto	00229$
+                                    391 ;	../printf_large.c: 479: left_justify    = 0;
+      000122r21r13                  392 	clear	__print_format_sloc5_1_0+0
+                                    393 ;	../printf_large.c: 480: zero_padding    = 0;
+      000124r22r13                  394 	clear	__print_format_sloc6_1_0+0
+                                    395 ;	../printf_large.c: 481: prefix_sign     = 0;
+      000126r23r13                  396 	clear	__print_format_sloc7_1_0+0
+                                    397 ;	../printf_large.c: 482: prefix_space    = 0;
+      000128r24r13                  398 	clear	__print_format_sloc8_1_0+0
+                                    399 ;	../printf_large.c: 483: signed_argument = 0;
+      00012Ar25r13                  400 	clear	__print_format_sloc9_1_0+0
+                                    401 ;	../printf_large.c: 484: char_argument   = 0;
+      00012Cr26r13                  402 	clear	__print_format_sloc10_1_0+0
+                                    403 ;	../printf_large.c: 485: long_argument   = 0;
+      00012Er27r13                  404 	clear	__print_format_sloc11_1_0+0
+                                    405 ;	../printf_large.c: 486: float_argument  = 0;
+      000130r28r13                  406 	clear	__print_format_sloc12_1_0+0
+                                    407 ;	../printf_large.c: 487: radix           = 0;
+      000132r29r13                  408 	clear	__print_format_sloc13_1_0+0
+                                    409 ;	../printf_large.c: 488: width           = 0;
+      000134r2Ar13                  410 	clear	__print_format_sloc14_1_0+0
+      000136r2Br13                  411 	clear	__print_format_sloc14_1_0+1
+                                    412 ;	../printf_large.c: 489: decimals        = -1;
+      000138 FF 2F                  413 	mov	a, #0xff
+      00013ArACr0B                  414 	mov	__print_format_sloc15_1_0+0, a
+      00013C FF 2F                  415 	mov	a, #0xff
+      00013ErADr0B                  416 	mov	__print_format_sloc15_1_0+1, a
+                                    417 ;	../printf_large.c: 491: get_conversion_spec:
+      000140r94r0F                  418 	mov	a, __print_format_PARM_3+0
+      000142rAEr0B                  419 	mov	__print_format_sloc16_1_0+0, a
+      000144r95r0F                  420 	mov	a, __print_format_PARM_3+1
+      000146rAFr0B                  421 	mov	__print_format_sloc16_1_0+1, a
+      000148                        422 00101$:
+                                    423 ;	../printf_large.c: 493: c = *format++;
+      000148rAEr0F                  424 	mov	a, __print_format_sloc16_1_0+0
+      00014Ar80r0B                  425 	mov	p, a
+      00014CrAFr0F                  426 	mov	a, __print_format_sloc16_1_0+1
+      00014Er00r38                  427 	call	__gptrget
+      000150rB0r0B                  428 	mov	__print_format_sloc17_1_0+0, a
+      000152r2Er12                  429 	inc	__print_format_sloc16_1_0+0
+      000154r2Fr10                  430 	addc	__print_format_sloc16_1_0+1
+      000156rAEr0F                  431 	mov	a, __print_format_sloc16_1_0+0
+      000158r94r0B                  432 	mov	__print_format_PARM_3+0, a
+      00015ArAFr0F                  433 	mov	a, __print_format_sloc16_1_0+1
+      00015Cr95r0B                  434 	mov	__print_format_PARM_3+1, a
+                                    435 ;	../printf_large.c: 495: if (c=='%')
+      00015ErB0r0F                  436 	mov	a, __print_format_sloc17_1_0+0
+      000160 25 2A                  437 	ceqsn	a, #0x25
+      000162r6Cr31                  438 	goto	00103$
+                                    439 ;	../printf_large.c: 497: OUTPUT_CHAR(c, p);
+      000164rB0r0F                  440 	mov	a, __print_format_sloc17_1_0+0
+      000166r8Cr0B                  441 	mov	__output_char_PARM_1+0, a
+      000168r00r38                  442 	call	__output_char
+                                    443 ;	../printf_large.c: 498: continue;
+      00016ArF6r30                  444 	goto	00231$
+      00016C                        445 00103$:
+                                    446 ;	../printf_large.c: 501: if (isdigit(c))
+      00016CrB0r0F                  447 	mov	a, __print_format_sloc17_1_0+0
+      00016E 30 29                  448 	sub	a, #0x30
+      000170 40 18                  449 	t0sn	f, c
+      000172rDCr31                  450 	goto	00110$
+      000174 39 2F                  451 	mov	a, #0x39
+      000176rB0r0C                  452 	sub	a, __print_format_sloc17_1_0+0
+      000178 40 18                  453 	t0sn	f, c
+      00017ArDCr31                  454 	goto	00110$
+                                    455 ;	../printf_large.c: 503: if (decimals==-1)
+      00017CrACr0F                  456 	mov	a, __print_format_sloc15_1_0+0
+      00017E FF 2A                  457 	ceqsn	a, #0xff
+      000180rB8r31                  458 	goto	00107$
+      000182rADr0F                  459 	mov	a, __print_format_sloc15_1_0+1
+      000184 FF 2A                  460 	ceqsn	a, #0xff
+      000186rB8r31                  461 	goto	00107$
+                                    462 ;	../printf_large.c: 505: width = 10*width + c - '0';
+      000188 0A 2F                  463 	mov	a, #0x0a
+      00018Ar80r0B                  464 	mov	__mulint_PARM_1+0, a
+      00018Cr01r13                  465 	clear	__mulint_PARM_1+1
+      00018ErAAr0F                  466 	mov	a, __print_format_sloc14_1_0+0
+      000190r80r0B                  467 	mov	__mulint_PARM_2+0, a
+      000192rABr0F                  468 	mov	a, __print_format_sloc14_1_0+1
+      000194r81r0B                  469 	mov	__mulint_PARM_2+1, a
+      000196r00r38                  470 	call	__mulint
+      000198r30r0C                  471 	add	a, __print_format_sloc17_1_0+0
+      00019A 72 00                  472 	push	af
+      00019Cr00r10                  473 	addc	p
+      00019E 73 00                  474 	pop	af
+      0001A0 30 29                  475 	sub	a, #0x30
+      0001A2rAAr0B                  476 	mov	__print_format_sloc14_1_0+0, a
+      0001A4r80r0F                  477 	mov	a, p
+      0001A6 61 00                  478 	subc	a
+      0001A8rABr0B                  479 	mov	__print_format_sloc14_1_0+1, a
+                                    480 ;	../printf_large.c: 506: if (width == 0)
+      0001AArAAr0F                  481 	mov	a, __print_format_sloc14_1_0+0
+      0001ACrABr0E                  482 	or	a, __print_format_sloc14_1_0+1
+      0001AE 00 2A                  483 	ceqsn	a, #0x00
+      0001B0r48r31                  484 	goto	00101$
+                                    485 ;	../printf_large.c: 509: zero_padding = 1;
+      0001B2 01 2F                  486 	mov	a, #0x01
+      0001B4rA2r0B                  487 	mov	__print_format_sloc6_1_0+0, a
+      0001B6r48r31                  488 	goto	00101$
+      0001B8                        489 00107$:
+                                    490 ;	../printf_large.c: 514: decimals = 10*decimals + c - '0';
+      0001B8 0A 2F                  491 	mov	a, #0x0a
+      0001BAr80r0B                  492 	mov	__mulint_PARM_1+0, a
+      0001BCr01r13                  493 	clear	__mulint_PARM_1+1
+      0001BErACr0F                  494 	mov	a, __print_format_sloc15_1_0+0
+      0001C0r80r0B                  495 	mov	__mulint_PARM_2+0, a
+      0001C2rADr0F                  496 	mov	a, __print_format_sloc15_1_0+1
+      0001C4r81r0B                  497 	mov	__mulint_PARM_2+1, a
+      0001C6r00r38                  498 	call	__mulint
+      0001C8r30r0C                  499 	add	a, __print_format_sloc17_1_0+0
+      0001CA 72 00                  500 	push	af
+      0001CCr00r10                  501 	addc	p
+      0001CE 73 00                  502 	pop	af
+      0001D0 30 29                  503 	sub	a, #0x30
+      0001D2rACr0B                  504 	mov	__print_format_sloc15_1_0+0, a
+      0001D4r80r0F                  505 	mov	a, p
+      0001D6 61 00                  506 	subc	a
+      0001D8rADr0B                  507 	mov	__print_format_sloc15_1_0+1, a
+                                    508 ;	../printf_large.c: 516: goto get_conversion_spec;
+      0001DAr48r31                  509 	goto	00101$
+      0001DC                        510 00110$:
+                                    511 ;	../printf_large.c: 519: if (c=='.')
+      0001DCrB0r0F                  512 	mov	a, __print_format_sloc17_1_0+0
+      0001DE 2E 2A                  513 	ceqsn	a, #0x2e
+      0001E0rF4r31                  514 	goto	00115$
+                                    515 ;	../printf_large.c: 521: if (decimals==-1)
+      0001E2rACr0F                  516 	mov	a, __print_format_sloc15_1_0+0
+      0001E4 FF 2A                  517 	ceqsn	a, #0xff
+      0001E6r48r31                  518 	goto	00101$
+      0001E8rADr0F                  519 	mov	a, __print_format_sloc15_1_0+1
+      0001EA FF 2A                  520 	ceqsn	a, #0xff
+      0001ECr48r31                  521 	goto	00101$
+                                    522 ;	../printf_large.c: 522: decimals=0;
+      0001EEr2Cr13                  523 	clear	__print_format_sloc15_1_0+0
+      0001F0r2Dr13                  524 	clear	__print_format_sloc15_1_0+1
+                                    525 ;	../printf_large.c: 525: goto get_conversion_spec;
+      0001F2r48r31                  526 	goto	00101$
+      0001F4                        527 00115$:
+                                    528 ;	../printf_large.c: 528: if (islower(c))
+      0001F4rB0r0F                  529 	mov	a, __print_format_sloc17_1_0+0
+      0001F6 61 29                  530 	sub	a, #0x61
+      0001F8 40 18                  531 	t0sn	f, c
+      0001FAr0Er32                  532 	goto	00117$
+      0001FC 7A 2F                  533 	mov	a, #0x7a
+      0001FErB0r0C                  534 	sub	a, __print_format_sloc17_1_0+0
+      000200 40 18                  535 	t0sn	f, c
+      000202r0Er32                  536 	goto	00117$
+                                    537 ;	../printf_large.c: 530: c = toupper(c);
+      000204 DF 2F                  538 	mov	a, #0xdf
+      000206r30r0A                  539 	and	__print_format_sloc17_1_0+0, a
+                                    540 ;	../printf_large.c: 531: lower_case = 1;
+      000208 01 2F                  541 	mov	a, #0x01
+      00020Ar80r0B                  542 	mov	_lower_case+0, a
+      00020Cr10r32                  543 	goto	00118$
+      00020E                        544 00117$:
+                                    545 ;	../printf_large.c: 534: lower_case = 0;
+      00020Er00r13                  546 	clear	_lower_case+0
+      000210                        547 00118$:
+                                    548 ;	../printf_large.c: 536: switch( c )
+      000210rB0r0F                  549 	mov	a, __print_format_sloc17_1_0+0
+      000212 20 2B                  550 	cneqsn	a, #0x20
+      000214r8Ar32                  551 	goto	00122$
+      000216rB0r0F                  552 	mov	a, __print_format_sloc17_1_0+0
+      000218 2B 2B                  553 	cneqsn	a, #0x2b
+      00021Ar84r32                  554 	goto	00121$
+      00021CrB0r0F                  555 	mov	a, __print_format_sloc17_1_0+0
+      00021E 2D 2B                  556 	cneqsn	a, #0x2d
+      000220r7Er32                  557 	goto	00120$
+      000222rB0r0F                  558 	mov	a, __print_format_sloc17_1_0+0
+      000224 42 2B                  559 	cneqsn	a, #0x42
+      000226r90r32                  560 	goto	00123$
+      000228rB0r0F                  561 	mov	a, __print_format_sloc17_1_0+0
+      00022A 43 2B                  562 	cneqsn	a, #0x43
+      00022Cr9Cr32                  563 	goto	00129$
+      00022ErB0r0F                  564 	mov	a, __print_format_sloc17_1_0+0
+      000230 44 2B                  565 	cneqsn	a, #0x44
+      000232r04r34                  566 	goto	00154$
+      000234rB0r0F                  567 	mov	a, __print_format_sloc17_1_0+0
+      000236 46 2B                  568 	cneqsn	a, #0x46
+      000238r20r34                  569 	goto	00158$
+      00023ArB0r0F                  570 	mov	a, __print_format_sloc17_1_0+0
+      00023C 48 2B                  571 	cneqsn	a, #0x48
+      00023Er48r31                  572 	goto	00101$
+      000240rB0r0F                  573 	mov	a, __print_format_sloc17_1_0+0
+      000242 49 2B                  574 	cneqsn	a, #0x49
+      000244r04r34                  575 	goto	00154$
+      000246rB0r0F                  576 	mov	a, __print_format_sloc17_1_0+0
+      000248 4A 2B                  577 	cneqsn	a, #0x4a
+      00024Ar48r31                  578 	goto	00101$
+      00024CrB0r0F                  579 	mov	a, __print_format_sloc17_1_0+0
+      00024E 4C 2B                  580 	cneqsn	a, #0x4c
+      000250r96r32                  581 	goto	00128$
+      000252rB0r0F                  582 	mov	a, __print_format_sloc17_1_0+0
+      000254 4F 2B                  583 	cneqsn	a, #0x4f
+      000256r0Er34                  584 	goto	00155$
+      000258rB0r0F                  585 	mov	a, __print_format_sloc17_1_0+0
+      00025A 50 2B                  586 	cneqsn	a, #0x50
+      00025CrD0r33                  587 	goto	00152$
+      00025ErB0r0F                  588 	mov	a, __print_format_sloc17_1_0+0
+      000260 53 2B                  589 	cneqsn	a, #0x53
+      000262rD2r32                  590 	goto	00133$
+      000264rB0r0F                  591 	mov	a, __print_format_sloc17_1_0+0
+      000266 54 2B                  592 	cneqsn	a, #0x54
+      000268r48r31                  593 	goto	00101$
+      00026ArB0r0F                  594 	mov	a, __print_format_sloc17_1_0+0
+      00026C 55 2B                  595 	cneqsn	a, #0x55
+      00026Er14r34                  596 	goto	00156$
+      000270rB0r0F                  597 	mov	a, __print_format_sloc17_1_0+0
+      000272 58 2B                  598 	cneqsn	a, #0x58
+      000274r1Ar34                  599 	goto	00157$
+      000276rB0r0F                  600 	mov	a, __print_format_sloc17_1_0+0
+      000278 5A 2B                  601 	cneqsn	a, #0x5a
+      00027Ar48r31                  602 	goto	00101$
+      00027Cr26r34                  603 	goto	00159$
+                                    604 ;	../printf_large.c: 538: case '-':
+      00027E                        605 00120$:
+                                    606 ;	../printf_large.c: 539: left_justify = 1;
+      00027E 01 2F                  607 	mov	a, #0x01
+      000280rA1r0B                  608 	mov	__print_format_sloc5_1_0+0, a
+                                    609 ;	../printf_large.c: 540: goto get_conversion_spec;
+      000282r48r31                  610 	goto	00101$
+                                    611 ;	../printf_large.c: 541: case '+':
+      000284                        612 00121$:
+                                    613 ;	../printf_large.c: 542: prefix_sign = 1;
+      000284 01 2F                  614 	mov	a, #0x01
+      000286rA3r0B                  615 	mov	__print_format_sloc7_1_0+0, a
+                                    616 ;	../printf_large.c: 543: goto get_conversion_spec;
+      000288r48r31                  617 	goto	00101$
+                                    618 ;	../printf_large.c: 544: case ' ':
+      00028A                        619 00122$:
+                                    620 ;	../printf_large.c: 545: prefix_space = 1;
+      00028A 01 2F                  621 	mov	a, #0x01
+      00028CrA4r0B                  622 	mov	__print_format_sloc8_1_0+0, a
+                                    623 ;	../printf_large.c: 546: goto get_conversion_spec;
+      00028Er48r31                  624 	goto	00101$
+                                    625 ;	../printf_large.c: 547: case 'B': /* byte */
+      000290                        626 00123$:
+                                    627 ;	../printf_large.c: 548: char_argument = 1;
+      000290 01 2F                  628 	mov	a, #0x01
+      000292rA6r0B                  629 	mov	__print_format_sloc10_1_0+0, a
+                                    630 ;	../printf_large.c: 549: goto get_conversion_spec;
+      000294r48r31                  631 	goto	00101$
+                                    632 ;	../printf_large.c: 556: case 'L': /* long */
+      000296                        633 00128$:
+                                    634 ;	../printf_large.c: 557: long_argument = 1;
+      000296 01 2F                  635 	mov	a, #0x01
+      000298rA7r0B                  636 	mov	__print_format_sloc11_1_0+0, a
+                                    637 ;	../printf_large.c: 558: goto get_conversion_spec;
+      00029Ar48r31                  638 	goto	00101$
+                                    639 ;	../printf_large.c: 560: case 'C':
+      00029C                        640 00129$:
+                                    641 ;	../printf_large.c: 561: if( char_argument )
+      00029CrA6r0F                  642 	mov	a, __print_format_sloc10_1_0+0
+      00029E 00 2B                  643 	cneqsn	a, #0x00
+      0002A0rB8r32                  644 	goto	00131$
+                                    645 ;	../printf_large.c: 562: c = va_arg(ap,char);
+      0002A2r96r0F                  646 	mov	a, __print_format_PARM_4+0
+      0002A4 01 29                  647 	sub	a, #0x01
+      0002A6r80r0B                  648 	mov	p, a
+      0002A8r97r0F                  649 	mov	a, __print_format_PARM_4+1
+      0002AA 61 00                  650 	subc	a
+      0002ACr97r0B                  651 	mov	__print_format_PARM_4+1, a
+      0002AEr80r13                  652 	xch	a, p
+      0002B0r96r0B                  653 	mov	__print_format_PARM_4+0, a
+      0002B2r80r13                  654 	xch	a, p
+      0002B4r00r38                  655 	call	__gptrget
+      0002B6rCCr32                  656 	goto	00132$
+      0002B8                        657 00131$:
+                                    658 ;	../printf_large.c: 564: c = va_arg(ap,int);
+      0002B8r96r0F                  659 	mov	a, __print_format_PARM_4+0
+      0002BA 02 29                  660 	sub	a, #0x02
+      0002BCr80r0B                  661 	mov	p, a
+      0002BEr97r0F                  662 	mov	a, __print_format_PARM_4+1
+      0002C0 61 00                  663 	subc	a
+      0002C2r97r0B                  664 	mov	__print_format_PARM_4+1, a
+      0002C4r80r13                  665 	xch	a, p
+      0002C6r96r0B                  666 	mov	__print_format_PARM_4+0, a
+      0002C8r80r13                  667 	xch	a, p
+      0002CAr00r38                  668 	call	__gptrget
+      0002CC                        669 00132$:
+                                    670 ;	../printf_large.c: 565: OUTPUT_CHAR( c, p );
+      0002CCr8Cr0B                  671 	mov	__output_char_PARM_1+0, a
+      0002CEr00r38                  672 	call	__output_char
+                                    673 ;	../printf_large.c: 566: break;
+      0002D0r36r34                  674 	goto	00160$
+                                    675 ;	../printf_large.c: 568: case 'S':
+      0002D2                        676 00133$:
+                                    677 ;	../printf_large.c: 569: PTR = va_arg(ap,ptr_t);
+      0002D2r96r0F                  678 	mov	a, __print_format_PARM_4+0
+      0002D4 02 29                  679 	sub	a, #0x02
+      0002D6r80r0B                  680 	mov	p, a
+      0002D8r97r0F                  681 	mov	a, __print_format_PARM_4+1
+      0002DA 61 00                  682 	subc	a
+      0002DCr97r0B                  683 	mov	__print_format_PARM_4+1, a
+      0002DEr80r13                  684 	xch	a, p
+      0002E0r96r0B                  685 	mov	__print_format_PARM_4+0, a
+      0002E2r80r13                  686 	xch	a, p
+      0002E4r00r38                  687 	call	__gptrget2
+      0002E6r80r13                  688 	xch	a, p
+      0002E8r86r0B                  689 	mov	_value+1, a
+      0002EAr80r13                  690 	xch	a, p
+      0002ECr85r0B                  691 	mov	_value+0, a
+      0002EEr80r13                  692 	xch	a, p
+                                    693 ;	../printf_large.c: 582: length = strlen(PTR);
+      0002F0r81r0B                  694 	mov	_strlen_PARM_1+1, a
+      0002F2r80r0F                  695 	mov	a, p
+      0002F4r80r0B                  696 	mov	_strlen_PARM_1+0, a
+      0002F6r00r38                  697 	call	_strlen
+      0002F8rB1r0B                  698 	mov	__print_format_sloc18_1_0+0, a
+      0002FAr80r0F                  699 	mov	a, p
+      0002FCrB2r0B                  700 	mov	__print_format_sloc18_1_0+1, a
+                                    701 ;	../printf_large.c: 584: if ( decimals == -1 )
+      0002FErACr0F                  702 	mov	a, __print_format_sloc15_1_0+0
+      000300 FF 2A                  703 	ceqsn	a, #0xff
+      000302r12r33                  704 	goto	00135$
+      000304rADr0F                  705 	mov	a, __print_format_sloc15_1_0+1
+      000306 FF 2A                  706 	ceqsn	a, #0xff
+      000308r12r33                  707 	goto	00135$
+                                    708 ;	../printf_large.c: 586: decimals = length;
+      00030ArB1r0F                  709 	mov	a, __print_format_sloc18_1_0+0
+      00030CrACr0B                  710 	mov	__print_format_sloc15_1_0+0, a
+      00030ErB2r0F                  711 	mov	a, __print_format_sloc18_1_0+1
+      000310rADr0B                  712 	mov	__print_format_sloc15_1_0+1, a
+      000312                        713 00135$:
+                                    714 ;	../printf_large.c: 588: if ( ( !left_justify ) && (length < width) )
+      000312rA1r0F                  715 	mov	a, __print_format_sloc5_1_0+0
+      000314 00 2A                  716 	ceqsn	a, #0x00
+      000316r50r33                  717 	goto	00277$
+      000318rB1r0F                  718 	mov	a, __print_format_sloc18_1_0+0
+      00031ArAAr0C                  719 	sub	a, __print_format_sloc14_1_0+0
+      00031CrB2r0F                  720 	mov	a, __print_format_sloc18_1_0+1
+      00031ErABr0D                  721 	subc	a, __print_format_sloc14_1_0+1
+      000320 40 1A                  722 	t1sn	f, c
+      000322r50r33                  723 	goto	00277$
+                                    724 ;	../printf_large.c: 590: width -= length;
+      000324rAAr0F                  725 	mov	a, __print_format_sloc14_1_0+0
+      000326rB1r0C                  726 	sub	a, __print_format_sloc18_1_0+0
+      000328rB3r0B                  727 	mov	__print_format_sloc19_1_0+0, a
+      00032ArABr0F                  728 	mov	a, __print_format_sloc14_1_0+1
+      00032CrB2r0D                  729 	subc	a, __print_format_sloc18_1_0+1
+      00032ErB4r0B                  730 	mov	__print_format_sloc19_1_0+1, a
+                                    731 ;	../printf_large.c: 591: while( width-- != 0 )
+      000330                        732 00136$:
+      000330rB4r0F                  733 	mov	a, __print_format_sloc19_1_0+1
+      000332r80r0B                  734 	mov	p, a
+      000334rB3r0F                  735 	mov	a, __print_format_sloc19_1_0+0
+      000336rB3r12                  736 	dec	__print_format_sloc19_1_0+0
+      000338rB4r10                  737 	subc	__print_format_sloc19_1_0+1
+      00033Ar80r0E                  738 	or	a, p
+      00033C 00 2B                  739 	cneqsn	a, #0x00
+      00033Er48r33                  740 	goto	00312$
+                                    741 ;	../printf_large.c: 593: OUTPUT_CHAR( ' ', p );
+      000340 20 2F                  742 	mov	a, #0x20
+      000342r8Cr0B                  743 	mov	__output_char_PARM_1+0, a
+      000344r00r38                  744 	call	__output_char
+      000346r30r33                  745 	goto	00136$
+                                    746 ;	../printf_large.c: 597: while ( (c = *PTR)  && (decimals-- > 0))
+      000348                        747 00312$:
+      000348rB3r0F                  748 	mov	a, __print_format_sloc19_1_0+0
+      00034ArAAr0B                  749 	mov	__print_format_sloc14_1_0+0, a
+      00034CrB4r0F                  750 	mov	a, __print_format_sloc19_1_0+1
+      00034ErABr0B                  751 	mov	__print_format_sloc14_1_0+1, a
+      000350                        752 00277$:
+      000350rACr0F                  753 	mov	a, __print_format_sloc15_1_0+0
+      000352rB5r0B                  754 	mov	__print_format_sloc20_1_0+0, a
+      000354rADr0F                  755 	mov	a, __print_format_sloc15_1_0+1
+      000356rB6r0B                  756 	mov	__print_format_sloc20_1_0+1, a
+      000358                        757 00143$:
+      000358r85r0F                  758 	mov	a, _value+0
+      00035Ar80r0B                  759 	mov	p, a
+      00035Cr86r0F                  760 	mov	a, _value+1
+      00035Er00r38                  761 	call	__gptrget
+      000360rB7r0B                  762 	mov	__print_format_sloc21_1_0+0, a
+      000362 00 2B                  763 	cneqsn	a, #0x00
+      000364r9Ar33                  764 	goto	00145$
+      000366 00 2F                  765 	mov	a, #0x00
+      000368rB5r0C                  766 	sub	a, __print_format_sloc20_1_0+0
+      00036A 00 2F                  767 	mov	a, #0x00
+      00036CrB6r0D                  768 	subc	a, __print_format_sloc20_1_0+1
+      00036E C0 18                  769 	t0sn	f, ov
+      000370 80 2E                  770 	xor	a, #0x80
+      000372 6B 00                  771 	sl	a
+      000374 40 1A                  772 	t1sn	f, c
+      000376r9Ar33                  773 	goto	00145$
+      000378rB5r12                  774 	dec	__print_format_sloc20_1_0+0
+      00037ArB6r10                  775 	subc	__print_format_sloc20_1_0+1
+                                    776 ;	../printf_large.c: 599: OUTPUT_CHAR( c, p );
+      00037CrB7r0F                  777 	mov	a, __print_format_sloc21_1_0+0
+      00037Er8Cr0B                  778 	mov	__output_char_PARM_1+0, a
+      000380r00r38                  779 	call	__output_char
+                                    780 ;	../printf_large.c: 600: PTR++;
+      000382r85r0F                  781 	mov	a, _value+0
+      000384 72 00                  782 	push	af
+      000386r86r0F                  783 	mov	a, _value+1
+      000388r80r0B                  784 	mov	p, a
+      00038A 73 00                  785 	pop	af
+      00038C 01 28                  786 	add	a, #0x01
+      00038Er80r13                  787 	xch	a, p
+      000390 60 00                  788 	addc	a
+      000392r86r0B                  789 	mov	_value+1, a
+      000394r80r0F                  790 	mov	a, p
+      000396r85r0B                  791 	mov	_value+0, a
+      000398r58r33                  792 	goto	00143$
+      00039A                        793 00145$:
+                                    794 ;	../printf_large.c: 603: if ( left_justify && (length < width))
+      00039ArA1r0F                  795 	mov	a, __print_format_sloc5_1_0+0
+      00039C 00 2B                  796 	cneqsn	a, #0x00
+      00039Er36r34                  797 	goto	00160$
+      0003A0rB1r0F                  798 	mov	a, __print_format_sloc18_1_0+0
+      0003A2rAAr0C                  799 	sub	a, __print_format_sloc14_1_0+0
+      0003A4rB2r0F                  800 	mov	a, __print_format_sloc18_1_0+1
+      0003A6rABr0D                  801 	subc	a, __print_format_sloc14_1_0+1
+      0003A8 40 1A                  802 	t1sn	f, c
+      0003AAr36r34                  803 	goto	00160$
+                                    804 ;	../printf_large.c: 605: width -= length;
+      0003ACrAAr0F                  805 	mov	a, __print_format_sloc14_1_0+0
+      0003AErB1r0C                  806 	sub	a, __print_format_sloc18_1_0+0
+      0003B0rB8r0B                  807 	mov	__print_format_sloc22_1_0+0, a
+      0003B2rABr0F                  808 	mov	a, __print_format_sloc14_1_0+1
+      0003B4rB2r0D                  809 	subc	a, __print_format_sloc18_1_0+1
+      0003B6rB9r0B                  810 	mov	__print_format_sloc22_1_0+1, a
+                                    811 ;	../printf_large.c: 606: while( width-- != 0 )
+      0003B8                        812 00146$:
+      0003B8rB9r0F                  813 	mov	a, __print_format_sloc22_1_0+1
+      0003BAr80r0B                  814 	mov	p, a
+      0003BCrB8r0F                  815 	mov	a, __print_format_sloc22_1_0+0
+      0003BErB8r12                  816 	dec	__print_format_sloc22_1_0+0
+      0003C0rB9r10                  817 	subc	__print_format_sloc22_1_0+1
+      0003C2r80r0E                  818 	or	a, p
+      0003C4 00 2B                  819 	cneqsn	a, #0x00
+      0003C6r2Er34                  820 	goto	00314$
+                                    821 ;	../printf_large.c: 608: OUTPUT_CHAR( ' ', p );
+      0003C8 20 2F                  822 	mov	a, #0x20
+      0003CAr8Cr0B                  823 	mov	__output_char_PARM_1+0, a
+      0003CCr00r38                  824 	call	__output_char
+      0003CErB8r33                  825 	goto	00146$
+                                    826 ;	../printf_large.c: 613: case 'P':
+      0003D0                        827 00152$:
+                                    828 ;	../printf_large.c: 614: PTR = va_arg(ap,ptr_t);
+      0003D0r96r0F                  829 	mov	a, __print_format_PARM_4+0
+      0003D2 02 29                  830 	sub	a, #0x02
+      0003D4r80r0B                  831 	mov	p, a
+      0003D6r97r0F                  832 	mov	a, __print_format_PARM_4+1
+      0003D8 61 00                  833 	subc	a
+      0003DAr97r0B                  834 	mov	__print_format_PARM_4+1, a
+      0003DCr80r13                  835 	xch	a, p
+      0003DEr96r0B                  836 	mov	__print_format_PARM_4+0, a
+      0003E0r80r13                  837 	xch	a, p
+      0003E2r00r38                  838 	call	__gptrget2
+      0003E4r85r0B                  839 	mov	_value+0, a
+      0003E6r80r0F                  840 	mov	a, p
+      0003E8r86r0B                  841 	mov	_value+1, a
+                                    842 ;	../printf_large.c: 658: OUTPUT_CHAR('0', p);
+      0003EA 30 2F                  843 	mov	a, #0x30
+      0003ECr8Cr0B                  844 	mov	__output_char_PARM_1+0, a
+      0003EEr00r38                  845 	call	__output_char
+                                    846 ;	../printf_large.c: 659: OUTPUT_CHAR('x', p);
+      0003F0 78 2F                  847 	mov	a, #0x78
+      0003F2r8Cr0B                  848 	mov	__output_char_PARM_1+0, a
+      0003F4r00r38                  849 	call	__output_char
+                                    850 ;	../printf_large.c: 660: OUTPUT_2DIGITS( value.byte[1] );
+      0003F6r86r0F                  851 	mov	a, _value+1
+      0003F8r8Er0B                  852 	mov	_output_2digits_PARM_1+0, a
+      0003FAr60r38                  853 	call	_output_2digits
+                                    854 ;	../printf_large.c: 661: OUTPUT_2DIGITS( value.byte[0] );
+      0003FCr85r0F                  855 	mov	a, _value+0
+      0003FEr8Er0B                  856 	mov	_output_2digits_PARM_1+0, a
+      000400r60r38                  857 	call	_output_2digits
+                                    858 ;	../printf_large.c: 663: break;
+      000402r36r34                  859 	goto	00160$
+                                    860 ;	../printf_large.c: 666: case 'I':
+      000404                        861 00154$:
+                                    862 ;	../printf_large.c: 667: signed_argument = 1;
+      000404 01 2F                  863 	mov	a, #0x01
+      000406rA5r0B                  864 	mov	__print_format_sloc9_1_0+0, a
+                                    865 ;	../printf_large.c: 668: radix = 10;
+      000408 0A 2F                  866 	mov	a, #0x0a
+      00040ArA9r0B                  867 	mov	__print_format_sloc13_1_0+0, a
+                                    868 ;	../printf_large.c: 669: break;
+      00040Cr36r34                  869 	goto	00160$
+                                    870 ;	../printf_large.c: 671: case 'O':
+      00040E                        871 00155$:
+                                    872 ;	../printf_large.c: 672: radix = 8;
+      00040E 08 2F                  873 	mov	a, #0x08
+      000410rA9r0B                  874 	mov	__print_format_sloc13_1_0+0, a
+                                    875 ;	../printf_large.c: 673: break;
+      000412r36r34                  876 	goto	00160$
+                                    877 ;	../printf_large.c: 675: case 'U':
+      000414                        878 00156$:
+                                    879 ;	../printf_large.c: 676: radix = 10;
+      000414 0A 2F                  880 	mov	a, #0x0a
+      000416rA9r0B                  881 	mov	__print_format_sloc13_1_0+0, a
+                                    882 ;	../printf_large.c: 677: break;
+      000418r36r34                  883 	goto	00160$
+                                    884 ;	../printf_large.c: 679: case 'X':
+      00041A                        885 00157$:
+                                    886 ;	../printf_large.c: 680: radix = 16;
+      00041A 10 2F                  887 	mov	a, #0x10
+      00041CrA9r0B                  888 	mov	__print_format_sloc13_1_0+0, a
+                                    889 ;	../printf_large.c: 681: break;
+      00041Er36r34                  890 	goto	00160$
+                                    891 ;	../printf_large.c: 683: case 'F':
+      000420                        892 00158$:
+                                    893 ;	../printf_large.c: 684: float_argument=1;
+      000420 01 2F                  894 	mov	a, #0x01
+      000422rA8r0B                  895 	mov	__print_format_sloc12_1_0+0, a
+                                    896 ;	../printf_large.c: 685: break;
+      000424r36r34                  897 	goto	00160$
+                                    898 ;	../printf_large.c: 687: default:
+      000426                        899 00159$:
+                                    900 ;	../printf_large.c: 689: OUTPUT_CHAR( c, p );
+      000426rB0r0F                  901 	mov	a, __print_format_sloc17_1_0+0
+      000428r8Cr0B                  902 	mov	__output_char_PARM_1+0, a
+      00042Ar00r38                  903 	call	__output_char
+                                    904 ;	../printf_large.c: 872: return charsOutputted;
+      00042Cr36r34                  905 	goto	00160$
+                                    906 ;	../printf_large.c: 691: }
+      00042E                        907 00314$:
+      00042ErB8r0F                  908 	mov	a, __print_format_sloc22_1_0+0
+      000430rAAr0B                  909 	mov	__print_format_sloc14_1_0+0, a
+      000432rB9r0F                  910 	mov	a, __print_format_sloc22_1_0+1
+      000434rABr0B                  911 	mov	__print_format_sloc14_1_0+1, a
+      000436                        912 00160$:
+                                    913 ;	../printf_large.c: 693: if (float_argument)
+      000436rA8r0F                  914 	mov	a, __print_format_sloc12_1_0+0
+      000438 00 2B                  915 	cneqsn	a, #0x00
+      00043ArD4r34                  916 	goto	00226$
+                                    917 ;	../printf_large.c: 695: value.f = va_arg(ap, float);
+      00043Cr96r0F                  918 	mov	a, __print_format_PARM_4+0
+      00043E 04 29                  919 	sub	a, #0x04
+      000440r80r0B                  920 	mov	p, a
+      000442r97r0F                  921 	mov	a, __print_format_PARM_4+1
+      000444 61 00                  922 	subc	a
+      000446r97r0B                  923 	mov	__print_format_PARM_4+1, a
+      000448r80r13                  924 	xch	a, p
+      00044Ar96r0B                  925 	mov	__print_format_PARM_4+0, a
+      00044Cr80r13                  926 	xch	a, p
+      00044ErBBr0B                  927 	mov	__print_format_sloc23_1_0+1, a
+      000450r80r0F                  928 	mov	a, p
+      000452rBAr0B                  929 	mov	__print_format_sloc23_1_0+0, a
+      000454r80r0B                  930 	mov	p, a
+      000456rBBr0F                  931 	mov	a, __print_format_sloc23_1_0+1
+      000458r00r38                  932 	call	__gptrget
+      00045ArBCr0B                  933 	mov	__print_format_sloc24_1_0+0, a
+      00045CrBAr0F                  934 	mov	a, __print_format_sloc23_1_0+0
+      00045Er80r0B                  935 	mov	p, a
+      000460rBBr0F                  936 	mov	a, __print_format_sloc23_1_0+1
+      000462r00r12                  937 	inc	p
+      000464 60 00                  938 	addc	a
+      000466r00r38                  939 	call	__gptrget
+      000468rBDr0B                  940 	mov	__print_format_sloc24_1_0+1, a
+      00046ArBAr0F                  941 	mov	a, __print_format_sloc23_1_0+0
+      00046Cr80r0B                  942 	mov	p, a
+      00046ErBBr0F                  943 	mov	a, __print_format_sloc23_1_0+1
+      000470r00r12                  944 	inc	p
+      000472 60 00                  945 	addc	a
+      000474r00r12                  946 	inc	p
+      000476 60 00                  947 	addc	a
+      000478r00r38                  948 	call	__gptrget
+      00047ArBEr0B                  949 	mov	__print_format_sloc24_1_0+2, a
+      00047CrBAr0F                  950 	mov	a, __print_format_sloc23_1_0+0
+      00047Er80r0B                  951 	mov	p, a
+      000480rBBr0F                  952 	mov	a, __print_format_sloc23_1_0+1
+      000482r80r13                  953 	xch	a, p
+      000484 03 28                  954 	add	a, #3
+      000486r80r13                  955 	xch	a, p
+      000488 60 00                  956 	addc	a
+      00048Ar00r38                  957 	call	__gptrget
+      00048CrBFr0B                  958 	mov	__print_format_sloc24_1_0+3, a
+      00048ErBCr0F                  959 	mov	a, __print_format_sloc24_1_0+0
+      000490r85r0B                  960 	mov	_value+0, a
+      000492rBDr0F                  961 	mov	a, __print_format_sloc24_1_0+1
+      000494r86r0B                  962 	mov	_value+1, a
+      000496rBEr0F                  963 	mov	a, __print_format_sloc24_1_0+2
+      000498r87r0B                  964 	mov	_value+2, a
+      00049ArBFr0F                  965 	mov	a, __print_format_sloc24_1_0+3
+      00049Cr88r0B                  966 	mov	_value+3, a
+                                    967 ;	../printf_large.c: 697: PTR="<NO FLOAT>";
+      00049Er00r2F                  968 	mov	a, #<(___str_0 + 0)
+      0004A0r85r0B                  969 	mov	_value+0, a
+      0004A2r00r2F                  970 	mov	a, #>(___str_0 + 0x8000 + 0)
+      0004A4r86r0B                  971 	mov	_value+1, a
+                                    972 ;	../printf_large.c: 698: while (c=*PTR++)
+      0004A6                        973 00161$:
+      0004A6r85r0F                  974 	mov	a, _value+0
+      0004A8rC0r0B                  975 	mov	__print_format_sloc25_1_0+0, a
+      0004AAr86r0F                  976 	mov	a, _value+1
+      0004ACrC1r0B                  977 	mov	__print_format_sloc25_1_0+1, a
+      0004AErC0r0F                  978 	mov	a, __print_format_sloc25_1_0+0
+      0004B0 01 28                  979 	add	a, #0x01
+      0004B2r80r0B                  980 	mov	p, a
+      0004B4rC1r0F                  981 	mov	a, __print_format_sloc25_1_0+1
+      0004B6 60 00                  982 	addc	a
+      0004B8r86r0B                  983 	mov	_value+1, a
+      0004BAr80r0F                  984 	mov	a, p
+      0004BCr85r0B                  985 	mov	_value+0, a
+      0004BErC0r0F                  986 	mov	a, __print_format_sloc25_1_0+0
+      0004C0r80r0B                  987 	mov	p, a
+      0004C2rC1r0F                  988 	mov	a, __print_format_sloc25_1_0+1
+      0004C4r00r38                  989 	call	__gptrget
+      0004C6r80r0B                  990 	mov	p, a
+      0004C8 00 2B                  991 	cneqsn	a, #0x00
+      0004CArF6r30                  992 	goto	00231$
+                                    993 ;	../printf_large.c: 700: OUTPUT_CHAR (c, p);
+      0004CCr80r0F                  994 	mov	a, p
+      0004CEr8Cr0B                  995 	mov	__output_char_PARM_1+0, a
+      0004D0r00r38                  996 	call	__output_char
+      0004D2rA6r34                  997 	goto	00161$
+      0004D4                        998 00226$:
+                                    999 ;	../printf_large.c: 718: else if (radix != 0)
+      0004D4rA9r0F                 1000 	mov	a, __print_format_sloc13_1_0+0
+      0004D6 00 2B                 1001 	cneqsn	a, #0x00
+      0004D8rF6r30                 1002 	goto	00231$
+                                   1003 ;	../printf_large.c: 723: unsigned char MEM_SPACE_BUF_PP *pstore = &store[5];
+                                   1004 ;	../printf_large.c: 726: if (char_argument)
+      0004DArA6r0F                 1005 	mov	a, __print_format_sloc10_1_0+0
+      0004DC 00 2B                 1006 	cneqsn	a, #0x00
+      0004DEr28r35                 1007 	goto	00172$
+                                   1008 ;	../printf_large.c: 728: value.l = va_arg(ap, char);
+      0004E0r96r0F                 1009 	mov	a, __print_format_PARM_4+0
+      0004E2 01 29                 1010 	sub	a, #0x01
+      0004E4r80r0B                 1011 	mov	p, a
+      0004E6r97r0F                 1012 	mov	a, __print_format_PARM_4+1
+      0004E8 61 00                 1013 	subc	a
+      0004EAr97r0B                 1014 	mov	__print_format_PARM_4+1, a
+      0004ECr80r13                 1015 	xch	a, p
+      0004EEr96r0B                 1016 	mov	__print_format_PARM_4+0, a
+      0004F0r80r13                 1017 	xch	a, p
+      0004F2r00r38                 1018 	call	__gptrget
+      0004F4r85r0B                 1019 	mov	_value+0, a
+                                   1020 ;	../printf_large.c: 729: if (!signed_argument)
+      0004F6rA5r0F                 1021 	mov	a, __print_format_sloc9_1_0+0
+      0004F8 00 2A                 1022 	ceqsn	a, #0x00
+      0004FArF8r35                 1023 	goto	00173$
+                                   1024 ;	../printf_large.c: 731: value.l &= 0xFF;
+      0004FCr85r0F                 1025 	mov	a, _value+0
+      0004FErC2r0B                 1026 	mov	__print_format_sloc26_1_0+0, a
+      000500r86r0F                 1027 	mov	a, _value+1
+      000502rC3r0B                 1028 	mov	__print_format_sloc26_1_0+1, a
+      000504r87r0F                 1029 	mov	a, _value+2
+      000506rC4r0B                 1030 	mov	__print_format_sloc26_1_0+2, a
+      000508r88r0F                 1031 	mov	a, _value+3
+      00050ArC5r0B                 1032 	mov	__print_format_sloc26_1_0+3, a
+      00050CrC2r0F                 1033 	mov	a, __print_format_sloc26_1_0+0
+      00050ErC6r0B                 1034 	mov	__print_format_sloc27_1_0+0, a
+      000510r47r13                 1035 	clear	__print_format_sloc27_1_0+1
+      000512r48r13                 1036 	clear	__print_format_sloc27_1_0+2
+      000514r49r13                 1037 	clear	__print_format_sloc27_1_0+3
+      000516rC6r0F                 1038 	mov	a, __print_format_sloc27_1_0+0
+      000518r85r0B                 1039 	mov	_value+0, a
+      00051ArC7r0F                 1040 	mov	a, __print_format_sloc27_1_0+1
+      00051Cr86r0B                 1041 	mov	_value+1, a
+      00051ErC8r0F                 1042 	mov	a, __print_format_sloc27_1_0+2
+      000520r87r0B                 1043 	mov	_value+2, a
+      000522rC9r0F                 1044 	mov	a, __print_format_sloc27_1_0+3
+      000524r88r0B                 1045 	mov	_value+3, a
+      000526rF8r35                 1046 	goto	00173$
+      000528                       1047 00172$:
+                                   1048 ;	../printf_large.c: 734: else if (long_argument)
+      000528rA7r0F                 1049 	mov	a, __print_format_sloc11_1_0+0
+      00052A 00 2B                 1050 	cneqsn	a, #0x00
+      00052Cr92r35                 1051 	goto	00169$
+                                   1052 ;	../printf_large.c: 736: value.l = va_arg(ap, long);
+      00052Er96r0F                 1053 	mov	a, __print_format_PARM_4+0
+      000530 04 29                 1054 	sub	a, #0x04
+      000532r80r0B                 1055 	mov	p, a
+      000534r97r0F                 1056 	mov	a, __print_format_PARM_4+1
+      000536 61 00                 1057 	subc	a
+      000538r97r0B                 1058 	mov	__print_format_PARM_4+1, a
+      00053Ar80r13                 1059 	xch	a, p
+      00053Cr96r0B                 1060 	mov	__print_format_PARM_4+0, a
+      00053Er80r13                 1061 	xch	a, p
+      000540rCBr0B                 1062 	mov	__print_format_sloc28_1_0+1, a
+      000542r80r0F                 1063 	mov	a, p
+      000544rCAr0B                 1064 	mov	__print_format_sloc28_1_0+0, a
+      000546r80r0B                 1065 	mov	p, a
+      000548rCBr0F                 1066 	mov	a, __print_format_sloc28_1_0+1
+      00054Ar00r38                 1067 	call	__gptrget
+      00054CrCCr0B                 1068 	mov	__print_format_sloc29_1_0+0, a
+      00054ErCAr0F                 1069 	mov	a, __print_format_sloc28_1_0+0
+      000550r80r0B                 1070 	mov	p, a
+      000552rCBr0F                 1071 	mov	a, __print_format_sloc28_1_0+1
+      000554r00r12                 1072 	inc	p
+      000556 60 00                 1073 	addc	a
+      000558r00r38                 1074 	call	__gptrget
+      00055ArCDr0B                 1075 	mov	__print_format_sloc29_1_0+1, a
+      00055CrCAr0F                 1076 	mov	a, __print_format_sloc28_1_0+0
+      00055Er80r0B                 1077 	mov	p, a
+      000560rCBr0F                 1078 	mov	a, __print_format_sloc28_1_0+1
+      000562r00r12                 1079 	inc	p
+      000564 60 00                 1080 	addc	a
+      000566r00r12                 1081 	inc	p
+      000568 60 00                 1082 	addc	a
+      00056Ar00r38                 1083 	call	__gptrget
+      00056CrCEr0B                 1084 	mov	__print_format_sloc29_1_0+2, a
+      00056ErCAr0F                 1085 	mov	a, __print_format_sloc28_1_0+0
+      000570r80r0B                 1086 	mov	p, a
+      000572rCBr0F                 1087 	mov	a, __print_format_sloc28_1_0+1
+      000574r80r13                 1088 	xch	a, p
+      000576 03 28                 1089 	add	a, #3
+      000578r80r13                 1090 	xch	a, p
+      00057A 60 00                 1091 	addc	a
+      00057Cr00r38                 1092 	call	__gptrget
+      00057ErCFr0B                 1093 	mov	__print_format_sloc29_1_0+3, a
+      000580rCCr0F                 1094 	mov	a, __print_format_sloc29_1_0+0
+      000582r85r0B                 1095 	mov	_value+0, a
+      000584rCDr0F                 1096 	mov	a, __print_format_sloc29_1_0+1
+      000586r86r0B                 1097 	mov	_value+1, a
+      000588rCEr0F                 1098 	mov	a, __print_format_sloc29_1_0+2
+      00058Ar87r0B                 1099 	mov	_value+2, a
+      00058CrCFr0F                 1100 	mov	a, __print_format_sloc29_1_0+3
+      00058Er88r0B                 1101 	mov	_value+3, a
+      000590rF8r35                 1102 	goto	00173$
+      000592                       1103 00169$:
+                                   1104 ;	../printf_large.c: 740: value.l = va_arg(ap, int);
+      000592r96r0F                 1105 	mov	a, __print_format_PARM_4+0
+      000594 02 29                 1106 	sub	a, #0x02
+      000596r80r0B                 1107 	mov	p, a
+      000598r97r0F                 1108 	mov	a, __print_format_PARM_4+1
+      00059A 61 00                 1109 	subc	a
+      00059Cr97r0B                 1110 	mov	__print_format_PARM_4+1, a
+      00059Er80r13                 1111 	xch	a, p
+      0005A0r96r0B                 1112 	mov	__print_format_PARM_4+0, a
+      0005A2r80r13                 1113 	xch	a, p
+      0005A4r00r38                 1114 	call	__gptrget2
+      0005A6rD0r0B                 1115 	mov	__print_format_sloc30_1_0+0, a
+      0005A8r80r0F                 1116 	mov	a, p
+      0005AArD1r0B                 1117 	mov	__print_format_sloc30_1_0+1, a
+      0005AC 6B 00                 1118 	sl	a
+      0005AE 00 2F                 1119 	mov	a, #0x00
+      0005B0 61 00                 1120 	subc	a
+      0005B2rD2r0B                 1121 	mov	__print_format_sloc30_1_0+2, a
+      0005B4rD3r0B                 1122 	mov	__print_format_sloc30_1_0+3, a
+      0005B6rD0r0F                 1123 	mov	a, __print_format_sloc30_1_0+0
+      0005B8r85r0B                 1124 	mov	_value+0, a
+      0005BArD1r0F                 1125 	mov	a, __print_format_sloc30_1_0+1
+      0005BCr86r0B                 1126 	mov	_value+1, a
+      0005BErD2r0F                 1127 	mov	a, __print_format_sloc30_1_0+2
+      0005C0r87r0B                 1128 	mov	_value+2, a
+      0005C2rD3r0F                 1129 	mov	a, __print_format_sloc30_1_0+3
+      0005C4r88r0B                 1130 	mov	_value+3, a
+                                   1131 ;	../printf_large.c: 741: if (!signed_argument)
+      0005C6rA5r0F                 1132 	mov	a, __print_format_sloc9_1_0+0
+      0005C8 00 2A                 1133 	ceqsn	a, #0x00
+      0005CArF8r35                 1134 	goto	00173$
+                                   1135 ;	../printf_large.c: 743: value.l &= 0xFFFF;
+      0005CCr85r0F                 1136 	mov	a, _value+0
+      0005CErD4r0B                 1137 	mov	__print_format_sloc31_1_0+0, a
+      0005D0r86r0F                 1138 	mov	a, _value+1
+      0005D2rD5r0B                 1139 	mov	__print_format_sloc31_1_0+1, a
+      0005D4r87r0F                 1140 	mov	a, _value+2
+      0005D6rD6r0B                 1141 	mov	__print_format_sloc31_1_0+2, a
+      0005D8r88r0F                 1142 	mov	a, _value+3
+      0005DArD7r0B                 1143 	mov	__print_format_sloc31_1_0+3, a
+      0005DCrD4r0F                 1144 	mov	a, __print_format_sloc31_1_0+0
+      0005DErD8r0B                 1145 	mov	__print_format_sloc32_1_0+0, a
+      0005E0rD5r0F                 1146 	mov	a, __print_format_sloc31_1_0+1
+      0005E2rD9r0B                 1147 	mov	__print_format_sloc32_1_0+1, a
+      0005E4r5Ar13                 1148 	clear	__print_format_sloc32_1_0+2
+      0005E6r5Br13                 1149 	clear	__print_format_sloc32_1_0+3
+      0005E8rD8r0F                 1150 	mov	a, __print_format_sloc32_1_0+0
+      0005EAr85r0B                 1151 	mov	_value+0, a
+      0005ECrD9r0F                 1152 	mov	a, __print_format_sloc32_1_0+1
+      0005EEr86r0B                 1153 	mov	_value+1, a
+      0005F0rDAr0F                 1154 	mov	a, __print_format_sloc32_1_0+2
+      0005F2r87r0B                 1155 	mov	_value+2, a
+      0005F4rDBr0F                 1156 	mov	a, __print_format_sloc32_1_0+3
+      0005F6r88r0B                 1157 	mov	_value+3, a
+      0005F8                       1158 00173$:
+                                   1159 ;	../printf_large.c: 747: if ( signed_argument )
+      0005F8rA5r0F                 1160 	mov	a, __print_format_sloc9_1_0+0
+      0005FA 00 2B                 1161 	cneqsn	a, #0x00
+      0005FCr50r36                 1162 	goto	00178$
+                                   1163 ;	../printf_large.c: 749: if (value.l < 0)
+      0005FEr85r0F                 1164 	mov	a, _value+0
+      000600rDCr0B                 1165 	mov	__print_format_sloc33_1_0+0, a
+      000602r86r0F                 1166 	mov	a, _value+1
+      000604rDDr0B                 1167 	mov	__print_format_sloc33_1_0+1, a
+      000606r87r0F                 1168 	mov	a, _value+2
+      000608rDEr0B                 1169 	mov	__print_format_sloc33_1_0+2, a
+      00060Ar88r0F                 1170 	mov	a, _value+3
+      00060CrDFr0B                 1171 	mov	__print_format_sloc33_1_0+3, a
+      00060E 80 29                 1172 	sub	a, #0x80
+      000610 40 18                 1173 	t0sn	f, c
+      000612r4Er36                 1174 	goto	00175$
+                                   1175 ;	../printf_large.c: 750: value.l = -value.l;
+      000614r85r0F                 1176 	mov	a, _value+0
+      000616rE0r0B                 1177 	mov	__print_format_sloc34_1_0+0, a
+      000618r86r0F                 1178 	mov	a, _value+1
+      00061ArE1r0B                 1179 	mov	__print_format_sloc34_1_0+1, a
+      00061Cr87r0F                 1180 	mov	a, _value+2
+      00061ErE2r0B                 1181 	mov	__print_format_sloc34_1_0+2, a
+      000620r88r0F                 1182 	mov	a, _value+3
+      000622rE3r0B                 1183 	mov	__print_format_sloc34_1_0+3, a
+      000624 00 2F                 1184 	mov	a, #0x00
+      000626rE0r0C                 1185 	sub	a, __print_format_sloc34_1_0+0
+      000628rE4r0B                 1186 	mov	__print_format_sloc35_1_0+0, a
+      00062A 00 2F                 1187 	mov	a, #0x00
+      00062CrE1r0D                 1188 	subc	a, __print_format_sloc34_1_0+1
+      00062ErE5r0B                 1189 	mov	__print_format_sloc35_1_0+1, a
+      000630 00 2F                 1190 	mov	a, #0x00
+      000632rE2r0D                 1191 	subc	a, __print_format_sloc34_1_0+2
+      000634rE6r0B                 1192 	mov	__print_format_sloc35_1_0+2, a
+      000636 00 2F                 1193 	mov	a, #0x00
+      000638rE3r0D                 1194 	subc	a, __print_format_sloc34_1_0+3
+      00063ArE7r0B                 1195 	mov	__print_format_sloc35_1_0+3, a
+      00063CrE4r0F                 1196 	mov	a, __print_format_sloc35_1_0+0
+      00063Er85r0B                 1197 	mov	_value+0, a
+      000640rE5r0F                 1198 	mov	a, __print_format_sloc35_1_0+1
+      000642r86r0B                 1199 	mov	_value+1, a
+      000644rE6r0F                 1200 	mov	a, __print_format_sloc35_1_0+2
+      000646r87r0B                 1201 	mov	_value+2, a
+      000648rE7r0F                 1202 	mov	a, __print_format_sloc35_1_0+3
+      00064Ar88r0B                 1203 	mov	_value+3, a
+      00064Cr50r36                 1204 	goto	00178$
+      00064E                       1205 00175$:
+                                   1206 ;	../printf_large.c: 752: signed_argument = 0;
+      00064Er25r13                 1207 	clear	__print_format_sloc9_1_0+0
+      000650                       1208 00178$:
+                                   1209 ;	../printf_large.c: 756: lsd = 1;
+      000650 01 2F                 1210 	mov	a, #0x01
+      000652rE8r0B                 1211 	mov	__print_format_sloc36_1_0+0, a
+                                   1212 ;	../printf_large.c: 758: do {
+      000654r1Dr2F                 1213 	mov	a, #(__print_format_store_262144_84 + 5)
+      000656rE9r0B                 1214 	mov	__print_format_sloc37_1_0+0, a
+      000658r6Ar13                 1215 	clear	__print_format_sloc37_1_0+1
+      00065Ar6Br13                 1216 	clear	__print_format_sloc38_1_0+0
+      00065Cr6Cr13                 1217 	clear	__print_format_sloc38_1_0+1
+      00065E                       1218 00182$:
+                                   1219 ;	../printf_large.c: 759: value.byte[4] = 0;
+      00065Er09r13                 1220 	clear	_value+4
+                                   1221 ;	../printf_large.c: 763: calculate_digit(radix);
+      000660rA9r0F                 1222 	mov	a, __print_format_sloc13_1_0+0
+      000662r8Fr0B                 1223 	mov	_calculate_digit_PARM_1+0, a
+      000664r78r38                 1224 	call	_calculate_digit
+                                   1225 ;	../printf_large.c: 765: if (!lsd)
+      000666rE8r0F                 1226 	mov	a, __print_format_sloc36_1_0+0
+      000668 00 2A                 1227 	ceqsn	a, #0x00
+      00066Ar9Er36                 1228 	goto	00180$
+                                   1229 ;	../printf_large.c: 767: *pstore = (value.byte[4] << 4) | (value.byte[4] >> 4) | *pstore;
+      00066Cr89r0F                 1230 	mov	a, _value+4
+      00066E 6E 00                 1231 	swap	a
+      000670 F0 2C                 1232 	and	a, #0xf0
+      000672 72 00                 1233 	push	af
+      000674r89r0F                 1234 	mov	a, _value+4
+      000676r80r0B                 1235 	mov	p, a
+      000678 73 00                 1236 	pop	af
+      00067Ar00r15                 1237 	sr	p
+      00067Cr00r15                 1238 	sr	p
+      00067Er00r15                 1239 	sr	p
+      000680r00r15                 1240 	sr	p
+      000682r80r0E                 1241 	or	a, p
+      000684rEDr0B                 1242 	mov	__print_format_sloc39_1_0+0, a
+      000686rE9r0F                 1243 	mov	a, __print_format_sloc37_1_0+0
+      000688r80r0B                 1244 	mov	p, a
+      00068ArEAr0F                 1245 	mov	a, __print_format_sloc37_1_0+1
+      00068Cr00r38                 1246 	call	__gptrget
+      00068ErEDr0E                 1247 	or	a, __print_format_sloc39_1_0+0
+      000690r80r0B                 1248 	mov	p, a
+      000692rE9r0F                 1249 	mov	a, __print_format_sloc37_1_0+0
+      000694r80r13                 1250 	xch	a, p
+      000696r80r03                 1251 	idxm	p, a
+                                   1252 ;	../printf_large.c: 768: pstore--;
+      000698rE9r12                 1253 	dec	__print_format_sloc37_1_0+0
+      00069ArEAr10                 1254 	subc	__print_format_sloc37_1_0+1
+      00069CrA8r36                 1255 	goto	00181$
+      00069E                       1256 00180$:
+                                   1257 ;	../printf_large.c: 772: *pstore = value.byte[4];
+      00069Er89r0F                 1258 	mov	a, _value+4
+      0006A0r80r0B                 1259 	mov	p, a
+      0006A2rE9r0F                 1260 	mov	a, __print_format_sloc37_1_0+0
+      0006A4r80r13                 1261 	xch	a, p
+      0006A6r80r03                 1262 	idxm	p, a
+      0006A8                       1263 00181$:
+                                   1264 ;	../printf_large.c: 774: length++;
+      0006A8r6Br12                 1265 	inc	__print_format_sloc38_1_0+0
+      0006AAr6Cr10                 1266 	addc	__print_format_sloc38_1_0+1
+                                   1267 ;	../printf_large.c: 775: lsd = !lsd;
+      0006ACrE8r0F                 1268 	mov	a, __print_format_sloc36_1_0+0
+      0006AE 01 29                 1269 	sub	a, #0x01
+      0006B0 00 2F                 1270 	mov	a, #0x00
+      0006B2 6D 00                 1271 	slc	a
+      0006B4rE8r0B                 1272 	mov	__print_format_sloc36_1_0+0, a
+                                   1273 ;	../printf_large.c: 776: } while( value.ul );
+      0006B6r85r0F                 1274 	mov	a, _value+0
+      0006B8rEEr0B                 1275 	mov	__print_format_sloc40_1_0+0, a
+      0006BAr86r0F                 1276 	mov	a, _value+1
+      0006BCrEFr0B                 1277 	mov	__print_format_sloc40_1_0+1, a
+      0006BEr87r0F                 1278 	mov	a, _value+2
+      0006C0rF0r0B                 1279 	mov	__print_format_sloc40_1_0+2, a
+      0006C2r88r0F                 1280 	mov	a, _value+3
+      0006C4rF1r0B                 1281 	mov	__print_format_sloc40_1_0+3, a
+      0006C6rEEr0F                 1282 	mov	a, __print_format_sloc40_1_0+0
+      0006C8rEFr0E                 1283 	or	a, __print_format_sloc40_1_0+1
+      0006CArF0r0E                 1284 	or	a, __print_format_sloc40_1_0+2
+      0006CCrF1r0E                 1285 	or	a, __print_format_sloc40_1_0+3
+      0006CE 00 2A                 1286 	ceqsn	a, #0x00
+      0006D0r5Er36                 1287 	goto	00182$
+                                   1288 ;	../printf_large.c: 778: if (width == 0)
+      0006D2rE9r0F                 1289 	mov	a, __print_format_sloc37_1_0+0
+      0006D4rF2r0B                 1290 	mov	__print_format_sloc41_1_0+0, a
+      0006D6rEAr0F                 1291 	mov	a, __print_format_sloc37_1_0+1
+      0006D8rF3r0B                 1292 	mov	__print_format_sloc41_1_0+1, a
+      0006DArEBr0F                 1293 	mov	a, __print_format_sloc38_1_0+0
+      0006DCrF4r0B                 1294 	mov	__print_format_sloc42_1_0+0, a
+      0006DErECr0F                 1295 	mov	a, __print_format_sloc38_1_0+1
+      0006E0rF5r0B                 1296 	mov	__print_format_sloc42_1_0+1, a
+      0006E2rAAr0F                 1297 	mov	a, __print_format_sloc14_1_0+0
+      0006E4rABr0E                 1298 	or	a, __print_format_sloc14_1_0+1
+      0006E6 00 2A                 1299 	ceqsn	a, #0x00
+      0006E8rF0r36                 1300 	goto	00186$
+                                   1301 ;	../printf_large.c: 783: width = 1;
+      0006EA 01 2F                 1302 	mov	a, #0x01
+      0006ECrAAr0B                 1303 	mov	__print_format_sloc14_1_0+0, a
+      0006EEr2Br13                 1304 	clear	__print_format_sloc14_1_0+1
+      0006F0                       1305 00186$:
+                                   1306 ;	../printf_large.c: 787: if (!zero_padding && !left_justify)
+      0006F0rA2r0F                 1307 	mov	a, __print_format_sloc6_1_0+0
+      0006F2 00 2A                 1308 	ceqsn	a, #0x00
+      0006F4r28r37                 1309 	goto	00191$
+      0006F6rA1r0F                 1310 	mov	a, __print_format_sloc5_1_0+0
+      0006F8 00 2A                 1311 	ceqsn	a, #0x00
+      0006FAr28r37                 1312 	goto	00191$
+                                   1313 ;	../printf_large.c: 789: while ( width > (unsigned char) (length+1) )
+      0006FCrAAr0F                 1314 	mov	a, __print_format_sloc14_1_0+0
+      0006FErF6r0B                 1315 	mov	__print_format_sloc43_1_0+0, a
+      000700rABr0F                 1316 	mov	a, __print_format_sloc14_1_0+1
+      000702rF7r0B                 1317 	mov	__print_format_sloc43_1_0+1, a
+      000704                       1318 00187$:
+      000704rF4r0F                 1319 	mov	a, __print_format_sloc42_1_0+0
+      000706 01 28                 1320 	add	a, #0x01
+      000708r00r13                 1321 	clear	p
+      00070ArF6r0C                 1322 	sub	a, __print_format_sloc43_1_0+0
+      00070Cr80r0F                 1323 	mov	a, p
+      00070ErF7r0D                 1324 	subc	a, __print_format_sloc43_1_0+1
+      000710 40 1A                 1325 	t1sn	f, c
+      000712r20r37                 1326 	goto	00316$
+                                   1327 ;	../printf_large.c: 791: OUTPUT_CHAR( ' ', p );
+      000714 20 2F                 1328 	mov	a, #0x20
+      000716r8Cr0B                 1329 	mov	__output_char_PARM_1+0, a
+      000718r00r38                 1330 	call	__output_char
+                                   1331 ;	../printf_large.c: 792: width--;
+      00071ArF6r12                 1332 	dec	__print_format_sloc43_1_0+0
+      00071CrF7r10                 1333 	subc	__print_format_sloc43_1_0+1
+      00071Er04r37                 1334 	goto	00187$
+      000720                       1335 00316$:
+      000720rF6r0F                 1336 	mov	a, __print_format_sloc43_1_0+0
+      000722rAAr0B                 1337 	mov	__print_format_sloc14_1_0+0, a
+      000724rF7r0F                 1338 	mov	a, __print_format_sloc43_1_0+1
+      000726rABr0B                 1339 	mov	__print_format_sloc14_1_0+1, a
+      000728                       1340 00191$:
+                                   1341 ;	../printf_large.c: 796: if (signed_argument) // this now means the original value was negative
+      000728rA5r0F                 1342 	mov	a, __print_format_sloc9_1_0+0
+      00072A 00 2B                 1343 	cneqsn	a, #0x00
+      00072Cr3Ar37                 1344 	goto	00201$
+                                   1345 ;	../printf_large.c: 798: OUTPUT_CHAR( '-', p );
+      00072E 2D 2F                 1346 	mov	a, #0x2d
+      000730r8Cr0B                 1347 	mov	__output_char_PARM_1+0, a
+      000732r00r38                 1348 	call	__output_char
+                                   1349 ;	../printf_large.c: 800: width--;
+      000734rAAr12                 1350 	dec	__print_format_sloc14_1_0+0
+      000736rABr10                 1351 	subc	__print_format_sloc14_1_0+1
+      000738r64r37                 1352 	goto	00202$
+      00073A                       1353 00201$:
+                                   1354 ;	../printf_large.c: 802: else if (length != 0)
+      00073ArF4r0F                 1355 	mov	a, __print_format_sloc42_1_0+0
+      00073CrF5r0E                 1356 	or	a, __print_format_sloc42_1_0+1
+      00073E 00 2B                 1357 	cneqsn	a, #0x00
+      000740r64r37                 1358 	goto	00202$
+                                   1359 ;	../printf_large.c: 805: if (prefix_sign)
+      000742rA3r0F                 1360 	mov	a, __print_format_sloc7_1_0+0
+      000744 00 2B                 1361 	cneqsn	a, #0x00
+      000746r54r37                 1362 	goto	00196$
+                                   1363 ;	../printf_large.c: 807: OUTPUT_CHAR( '+', p );
+      000748 2B 2F                 1364 	mov	a, #0x2b
+      00074Ar8Cr0B                 1365 	mov	__output_char_PARM_1+0, a
+      00074Cr00r38                 1366 	call	__output_char
+                                   1367 ;	../printf_large.c: 809: width--;
+      00074ErAAr12                 1368 	dec	__print_format_sloc14_1_0+0
+      000750rABr10                 1369 	subc	__print_format_sloc14_1_0+1
+      000752r64r37                 1370 	goto	00202$
+      000754                       1371 00196$:
+                                   1372 ;	../printf_large.c: 811: else if (prefix_space)
+      000754rA4r0F                 1373 	mov	a, __print_format_sloc8_1_0+0
+      000756 00 2B                 1374 	cneqsn	a, #0x00
+      000758r64r37                 1375 	goto	00202$
+                                   1376 ;	../printf_large.c: 813: OUTPUT_CHAR( ' ', p );
+      00075A 20 2F                 1377 	mov	a, #0x20
+      00075Cr8Cr0B                 1378 	mov	__output_char_PARM_1+0, a
+      00075Er00r38                 1379 	call	__output_char
+                                   1380 ;	../printf_large.c: 815: width--;
+      000760rAAr12                 1381 	dec	__print_format_sloc14_1_0+0
+      000762rABr10                 1382 	subc	__print_format_sloc14_1_0+1
+      000764                       1383 00202$:
+                                   1384 ;	../printf_large.c: 820: if (!left_justify)
+      000764rA1r0F                 1385 	mov	a, __print_format_sloc5_1_0+0
+      000766 00 2A                 1386 	ceqsn	a, #0x00
+      000768rA0r37                 1387 	goto	00210$
+                                   1388 ;	../printf_large.c: 822: while ( width-- > length )
+      00076ArAAr0F                 1389 	mov	a, __print_format_sloc14_1_0+0
+      00076CrF8r0B                 1390 	mov	__print_format_sloc44_1_0+0, a
+      00076ErABr0F                 1391 	mov	a, __print_format_sloc14_1_0+1
+      000770rF9r0B                 1392 	mov	__print_format_sloc44_1_0+1, a
+      000772                       1393 00203$:
+      000772rF8r0F                 1394 	mov	a, __print_format_sloc44_1_0+0
+      000774rFAr0B                 1395 	mov	__print_format_sloc45_1_0+0, a
+      000776rF9r0F                 1396 	mov	a, __print_format_sloc44_1_0+1
+      000778rFBr0B                 1397 	mov	__print_format_sloc45_1_0+1, a
+      00077ArF8r12                 1398 	dec	__print_format_sloc44_1_0+0
+      00077CrF9r10                 1399 	subc	__print_format_sloc44_1_0+1
+      00077ErF4r0F                 1400 	mov	a, __print_format_sloc42_1_0+0
+      000780rFAr0C                 1401 	sub	a, __print_format_sloc45_1_0+0
+      000782rF5r0F                 1402 	mov	a, __print_format_sloc42_1_0+1
+      000784rFBr0D                 1403 	subc	a, __print_format_sloc45_1_0+1
+      000786 40 1A                 1404 	t1sn	f, c
+      000788rC0r37                 1405 	goto	00317$
+                                   1406 ;	../printf_large.c: 824: OUTPUT_CHAR( zero_padding ? '0' : ' ', p );
+      00078ArA2r0F                 1407 	mov	a, __print_format_sloc6_1_0+0
+      00078C 00 2B                 1408 	cneqsn	a, #0x00
+      00078Er96r37                 1409 	goto	00236$
+      000790 30 2F                 1410 	mov	a, #0x30
+      000792r00r13                 1411 	clear	p
+      000794r9Ar37                 1412 	goto	00237$
+      000796                       1413 00236$:
+      000796 20 2F                 1414 	mov	a, #0x20
+      000798r00r13                 1415 	clear	p
+      00079A                       1416 00237$:
+      00079Ar8Cr0B                 1417 	mov	__output_char_PARM_1+0, a
+      00079Cr00r38                 1418 	call	__output_char
+      00079Er72r37                 1419 	goto	00203$
+      0007A0                       1420 00210$:
+                                   1421 ;	../printf_large.c: 830: if (width > length)
+      0007A0rF4r0F                 1422 	mov	a, __print_format_sloc42_1_0+0
+      0007A2rAAr0C                 1423 	sub	a, __print_format_sloc14_1_0+0
+      0007A4rF5r0F                 1424 	mov	a, __print_format_sloc42_1_0+1
+      0007A6rABr0D                 1425 	subc	a, __print_format_sloc14_1_0+1
+      0007A8 40 1A                 1426 	t1sn	f, c
+      0007AArBAr37                 1427 	goto	00207$
+                                   1428 ;	../printf_large.c: 831: width -= length;
+      0007ACrAAr0F                 1429 	mov	a, __print_format_sloc14_1_0+0
+      0007AErF4r0C                 1430 	sub	a, __print_format_sloc42_1_0+0
+      0007B0rFCr0B                 1431 	mov	__print_format_sloc46_1_0+0, a
+      0007B2rABr0F                 1432 	mov	a, __print_format_sloc14_1_0+1
+      0007B4rF5r0D                 1433 	subc	a, __print_format_sloc42_1_0+1
+      0007B6rFDr0B                 1434 	mov	__print_format_sloc46_1_0+1, a
+      0007B8rC8r37                 1435 	goto	00309$
+      0007BA                       1436 00207$:
+                                   1437 ;	../printf_large.c: 833: width = 0;
+      0007BAr7Cr13                 1438 	clear	__print_format_sloc46_1_0+0
+      0007BCr7Dr13                 1439 	clear	__print_format_sloc46_1_0+1
+                                   1440 ;	../printf_large.c: 872: return charsOutputted;
+      0007BErC8r37                 1441 	goto	00309$
+                                   1442 ;	../printf_large.c: 837: while( length-- )
+      0007C0                       1443 00317$:
+      0007C0rF8r0F                 1444 	mov	a, __print_format_sloc44_1_0+0
+      0007C2rFCr0B                 1445 	mov	__print_format_sloc46_1_0+0, a
+      0007C4rF9r0F                 1446 	mov	a, __print_format_sloc44_1_0+1
+      0007C6rFDr0B                 1447 	mov	__print_format_sloc46_1_0+1, a
+      0007C8                       1448 00309$:
+      0007C8rF2r0F                 1449 	mov	a, __print_format_sloc41_1_0+0
+      0007CArFEr0B                 1450 	mov	__print_format_sloc47_1_0+0, a
+      0007CCrF3r0F                 1451 	mov	a, __print_format_sloc41_1_0+1
+      0007CErFFr0B                 1452 	mov	__print_format_sloc47_1_0+1, a
+      0007D0rF4r0F                 1453 	mov	a, __print_format_sloc42_1_0+0
+      0007D2r80r0B                 1454 	mov	__print_format_sloc48_1_0+0, a
+      0007D4rF5r0F                 1455 	mov	a, __print_format_sloc42_1_0+1
+      0007D6r81r0B                 1456 	mov	__print_format_sloc48_1_0+1, a
+      0007D8                       1457 00215$:
+      0007D8r81r0F                 1458 	mov	a, __print_format_sloc48_1_0+1
+      0007DAr80r0B                 1459 	mov	p, a
+      0007DCr80r0F                 1460 	mov	a, __print_format_sloc48_1_0+0
+      0007DEr80r12                 1461 	dec	__print_format_sloc48_1_0+0
+      0007E0r81r10                 1462 	subc	__print_format_sloc48_1_0+1
+      0007E2r80r0E                 1463 	or	a, p
+      0007E4 00 2B                 1464 	cneqsn	a, #0x00
+      0007E6r1Er30                 1465 	goto	00217$
+                                   1466 ;	../printf_large.c: 839: lsd = !lsd;
+      0007E8rE8r0F                 1467 	mov	a, __print_format_sloc36_1_0+0
+      0007EA 01 29                 1468 	sub	a, #0x01
+      0007EC 00 2F                 1469 	mov	a, #0x00
+      0007EE 6D 00                 1470 	slc	a
+                                   1471 ;	../printf_large.c: 840: if (!lsd)
+      0007F0rE8r0B                 1472 	mov	__print_format_sloc36_1_0+0, a
+      0007F2 00 2A                 1473 	ceqsn	a, #0x00
+      0007F4r0Ar30                 1474 	goto	00213$
+                                   1475 ;	../printf_large.c: 842: pstore++;
+      0007F6r7Er12                 1476 	inc	__print_format_sloc47_1_0+0
+      0007F8r7Fr10                 1477 	addc	__print_format_sloc47_1_0+1
+                                   1478 ;	../printf_large.c: 843: value.byte[4] = *pstore >> 4;
+      0007FArFEr0F                 1479 	mov	a, __print_format_sloc47_1_0+0
+      0007FCr80r0B                 1480 	mov	p, a
+      0007FErFFr0F                 1481 	mov	a, __print_format_sloc47_1_0+1
+      000800r00r38                 1482 	call	__gptrget
+      000802 6E 00                 1483 	swap	a
+      000804 0F 2C                 1484 	and	a, #0x0f
+      000806r89r0B                 1485 	mov	_value+4, a
+      000808r16r30                 1486 	goto	00214$
+      00080A                       1487 00213$:
+                                   1488 ;	../printf_large.c: 847: value.byte[4] = *pstore & 0x0F;
+      00080ArFEr0F                 1489 	mov	a, __print_format_sloc47_1_0+0
+      00080Cr80r0B                 1490 	mov	p, a
+      00080ErFFr0F                 1491 	mov	a, __print_format_sloc47_1_0+1
+      000810r00r38                 1492 	call	__gptrget
+      000812 0F 2C                 1493 	and	a, #0x0f
+      000814r89r0B                 1494 	mov	_value+4, a
+      000816                       1495 00214$:
+                                   1496 ;	../printf_large.c: 853: output_digit( value.byte[4] );
+      000816r89r0F                 1497 	mov	a, _value+4
+      000818r8Dr0B                 1498 	mov	_output_digit_PARM_1+0, a
+      00081Ar3Cr38                 1499 	call	_output_digit
+      00081CrD8r37                 1500 	goto	00215$
+      00081E                       1501 00217$:
+                                   1502 ;	../printf_large.c: 856: if (left_justify)
+      00081ErA1r0F                 1503 	mov	a, __print_format_sloc5_1_0+0
+      000820 00 2B                 1504 	cneqsn	a, #0x00
+      000822rF6r30                 1505 	goto	00231$
+                                   1506 ;	../printf_large.c: 858: while (width-- > 0)
+      000824rFCr0F                 1507 	mov	a, __print_format_sloc46_1_0+0
+      000826r82r0B                 1508 	mov	__print_format_sloc49_1_0+0, a
+      000828rFDr0F                 1509 	mov	a, __print_format_sloc46_1_0+1
+      00082Ar83r0B                 1510 	mov	__print_format_sloc49_1_0+1, a
+      00082C                       1511 00218$:
+      00082Cr83r0F                 1512 	mov	a, __print_format_sloc49_1_0+1
+      00082Er80r0B                 1513 	mov	p, a
+      000830r82r0F                 1514 	mov	a, __print_format_sloc49_1_0+0
+      000832r82r12                 1515 	dec	__print_format_sloc49_1_0+0
+      000834r83r10                 1516 	subc	__print_format_sloc49_1_0+1
+      000836r80r0E                 1517 	or	a, p
+      000838 00 2B                 1518 	cneqsn	a, #0x00
+      00083ArF6r30                 1519 	goto	00231$
+                                   1520 ;	../printf_large.c: 860: OUTPUT_CHAR(' ', p);
+      00083C 20 2F                 1521 	mov	a, #0x20
+      00083Er8Cr0B                 1522 	mov	__output_char_PARM_1+0, a
+      000840r00r38                 1523 	call	__output_char
+      000842r2Cr30                 1524 	goto	00218$
+      000844                       1525 00229$:
+                                   1526 ;	../printf_large.c: 868: OUTPUT_CHAR( c, p );
+      000844rA0r0F                 1527 	mov	a, __print_format_sloc4_1_0+0
+      000846r8Cr0B                 1528 	mov	__output_char_PARM_1+0, a
+      000848r00r38                 1529 	call	__output_char
+      00084ArF6r30                 1530 	goto	00231$
+      00084C                       1531 00233$:
+                                   1532 ;	../printf_large.c: 872: return charsOutputted;
+      00084Cr8Br0F                 1533 	mov	a, _charsOutputted+1
+      00084Er80r0B                 1534 	mov	p, a
+      000850r8Ar0F                 1535 	mov	a, _charsOutputted+0
+                                   1536 ;	../printf_large.c: 873: }
+      000852 7A 00                 1537 	ret
+                                   1538 	.area CODE
+                                   1539 	.area CONST
+                                   1540 	.area CONST
+      000000                       1541 ___str_0:
+      000000 3C 02                 1542 	ret #0x3c	; <
+      000002 4E 02                 1543 	ret #0x4e	; N
+      000004 4F 02                 1544 	ret #0x4f	; O
+      000006 20 02                 1545 	ret #0x20	;  
+      000008 46 02                 1546 	ret #0x46	; F
+      00000A 4C 02                 1547 	ret #0x4c	; L
+      00000C 4F 02                 1548 	ret #0x4f	; O
+      00000E 41 02                 1549 	ret #0x41	; A
+      000010 54 02                 1550 	ret #0x54	; T
+      000012 3E 02                 1551 	ret #0x3e	; >
+      000014 00 02                 1552 	ret #0x00
+                                   1553 	.area CODE
+                                   1554 	.area CABS (ABS)

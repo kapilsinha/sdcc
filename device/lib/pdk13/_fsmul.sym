@@ -1,0 +1,92 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  9 ___fsmul                                                       000000 GR
+  1 ___fsmul_PARM_1                                                000000 GR
+  1 ___fsmul_PARM_2                                                000004 GR
+  1 ___fsmul_fl1_65536_21                                          000008 R
+  1 ___fsmul_fl2_65536_21                                          00000C R
+  1 ___fsmul_result_65536_21                                       000010 R
+  1 ___fsmul_sloc0_1_0                                             000014 R
+  1 ___fsmul_sloc10_1_0                                            00003C R
+  1 ___fsmul_sloc11_1_0                                            000040 R
+  1 ___fsmul_sloc12_1_0                                            000044 R
+  1 ___fsmul_sloc13_1_0                                            000045 R
+  1 ___fsmul_sloc14_1_0                                            000049 R
+  1 ___fsmul_sloc15_1_0                                            00004D R
+  1 ___fsmul_sloc16_1_0                                            00004F R
+  1 ___fsmul_sloc17_1_0                                            000051 R
+  1 ___fsmul_sloc18_1_0                                            000055 R
+  1 ___fsmul_sloc19_1_0                                            000059 R
+  1 ___fsmul_sloc1_1_0                                             000018 R
+  1 ___fsmul_sloc20_1_0                                            00005B R
+  1 ___fsmul_sloc21_1_0                                            00005D R
+  1 ___fsmul_sloc22_1_0                                            000061 R
+  1 ___fsmul_sloc23_1_0                                            000065 R
+  1 ___fsmul_sloc24_1_0                                            000069 R
+  1 ___fsmul_sloc25_1_0                                            00006D R
+  1 ___fsmul_sloc26_1_0                                            000071 R
+  1 ___fsmul_sloc27_1_0                                            000075 R
+  1 ___fsmul_sloc28_1_0                                            000079 R
+  1 ___fsmul_sloc29_1_0                                            00007D R
+  1 ___fsmul_sloc2_1_0                                             00001C R
+  1 ___fsmul_sloc30_1_0                                            000081 R
+  1 ___fsmul_sloc31_1_0                                            000085 R
+  1 ___fsmul_sloc32_1_0                                            000089 R
+  1 ___fsmul_sloc33_1_0                                            00008B R
+  1 ___fsmul_sloc34_1_0                                            00008F R
+  1 ___fsmul_sloc35_1_0                                            000093 R
+  1 ___fsmul_sloc36_1_0                                            000097 R
+  1 ___fsmul_sloc37_1_0                                            00009B R
+  1 ___fsmul_sloc38_1_0                                            00009D R
+  1 ___fsmul_sloc39_1_0                                            0000A1 R
+  1 ___fsmul_sloc3_1_0                                             000020 R
+  1 ___fsmul_sloc40_1_0                                            0000A5 R
+  1 ___fsmul_sloc41_1_0                                            0000A9 R
+  1 ___fsmul_sloc42_1_0                                            0000AD R
+  1 ___fsmul_sloc43_1_0                                            0000B1 R
+  1 ___fsmul_sloc44_1_0                                            0000B5 R
+  1 ___fsmul_sloc45_1_0                                            0000B9 R
+  1 ___fsmul_sloc46_1_0                                            0000BD R
+  1 ___fsmul_sloc47_1_0                                            0000C1 R
+  1 ___fsmul_sloc48_1_0                                            0000C5 R
+  1 ___fsmul_sloc4_1_0                                             000024 R
+  1 ___fsmul_sloc5_1_0                                             000028 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  1 ___fsmul_sloc6_1_0                                             00002C R
+  1 ___fsmul_sloc7_1_0                                             000030 R
+  1 ___fsmul_sloc8_1_0                                             000034 R
+  1 ___fsmul_sloc9_1_0                                             000038 R
+    __mullong                                                      ****** GX
+    __mullong_PARM_1                                               ****** GX
+    __mullong_PARM_2                                               ****** GX
+    p                                                              ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 3.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     C9   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    4B4   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

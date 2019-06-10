@@ -1,0 +1,149 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _slong2fs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___ulong2fs
+                                     17 	.globl ___slong2fs_PARM_1
+                                     18 	.globl ___slong2fs
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___slong2fs_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___slong2fs_sloc0_1_0:
+      000004                         31 	.ds 4
+      000008                         32 ___slong2fs_sloc1_1_0:
+      000008                         33 	.ds 4
+      00000C                         34 ___slong2fs_sloc2_1_0:
+      00000C                         35 	.ds 4
+                                     36 ;--------------------------------------------------------
+                                     37 ; overlayable items in ram 
+                                     38 ;--------------------------------------------------------
+                                     39 ;--------------------------------------------------------
+                                     40 ; absolute external ram data
+                                     41 ;--------------------------------------------------------
+                                     42 	.area DABS (ABS)
+                                     43 ;--------------------------------------------------------
+                                     44 ; global & static initialisations
+                                     45 ;--------------------------------------------------------
+                                     46 	.area HOME
+                                     47 	.area GSINIT
+                                     48 	.area GSFINAL
+                                     49 	.area GSINIT
+                                     50 ;--------------------------------------------------------
+                                     51 ; Home
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area HOME
+                                     55 ;--------------------------------------------------------
+                                     56 ; code
+                                     57 ;--------------------------------------------------------
+                                     58 	.area CODE
+                                     59 ;	../_slong2fs.c: 79: float __slong2fs (signed long sl) {
+                                     60 ;	-----------------------------------------
+                                     61 ;	 function __slong2fs
+                                     62 ;	-----------------------------------------
+      000000                         63 ___slong2fs:
+                                     64 ;	../_slong2fs.c: 80: if (sl<0) 
+      000000r83r0F                   65 	mov	a, ___slong2fs_PARM_1+3
+      000002 80 29                   66 	sub	a, #0x80
+      000004 40 18                   67 	t0sn	f, c
+      000006r60r30                   68 	goto	00102$
+                                     69 ;	../_slong2fs.c: 81: return -__ulong2fs(-sl);
+      000008 00 2F                   70 	mov	a, #0x00
+      00000Ar80r0C                   71 	sub	a, ___slong2fs_PARM_1+0
+      00000Cr80r0B                   72 	mov	___ulong2fs_PARM_1+0, a
+      00000E 00 2F                   73 	mov	a, #0x00
+      000010r81r0D                   74 	subc	a, ___slong2fs_PARM_1+1
+      000012r81r0B                   75 	mov	___ulong2fs_PARM_1+1, a
+      000014 00 2F                   76 	mov	a, #0x00
+      000016r82r0D                   77 	subc	a, ___slong2fs_PARM_1+2
+      000018r82r0B                   78 	mov	___ulong2fs_PARM_1+2, a
+      00001A 00 2F                   79 	mov	a, #0x00
+      00001Cr83r0D                   80 	subc	a, ___slong2fs_PARM_1+3
+      00001Er83r0B                   81 	mov	___ulong2fs_PARM_1+3, a
+      000020r04r2F                   82 	mov	a, #___slong2fs_sloc0_1_0
+      000022 72 00                   83 	push	af
+      000024r00r38                   84 	call	___ulong2fs
+      000026 C2 01                   85 	mov	a, sp
+      000028 FE 28                   86 	add	a, #-2
+      00002A 82 01                   87 	mov	sp, a
+      00002Cr84r0F                   88 	mov	a, ___slong2fs_sloc0_1_0+0
+      00002Er8Cr0B                   89 	mov	___slong2fs_sloc2_1_0+0, a
+      000030r85r0F                   90 	mov	a, ___slong2fs_sloc0_1_0+1
+      000032r8Dr0B                   91 	mov	___slong2fs_sloc2_1_0+1, a
+      000034r86r0F                   92 	mov	a, ___slong2fs_sloc0_1_0+2
+      000036r8Er0B                   93 	mov	___slong2fs_sloc2_1_0+2, a
+      000038r87r0F                   94 	mov	a, ___slong2fs_sloc0_1_0+3
+      00003A 80 2E                   95 	xor	a, #0x80
+      00003Cr8Fr0B                   96 	mov	___slong2fs_sloc2_1_0+3, a
+      00003E C2 01                   97 	mov	a, sp
+      000040 FC 28                   98 	add	a, #0xfc
+      000042r80r0B                   99 	mov	p, a
+      000044r81r03                  100 	idxm	a, p
+      000046r80r0B                  101 	mov	p, a
+      000048r8Cr0F                  102 	mov	a, ___slong2fs_sloc2_1_0+0
+      00004Ar80r03                  103 	idxm	p, a
+      00004Cr00r12                  104 	inc	p
+      00004Er8Dr0F                  105 	mov	a, ___slong2fs_sloc2_1_0+1
+      000050r80r03                  106 	idxm	p, a
+      000052r00r12                  107 	inc	p
+      000054r8Er0F                  108 	mov	a, ___slong2fs_sloc2_1_0+2
+      000056r80r03                  109 	idxm	p, a
+      000058r00r12                  110 	inc	p
+      00005Ar8Fr0F                  111 	mov	a, ___slong2fs_sloc2_1_0+3
+      00005Cr80r03                  112 	idxm	p, a
+      00005E 7A 00                  113 	ret
+      000060                        114 00102$:
+                                    115 ;	../_slong2fs.c: 83: return __ulong2fs(sl);
+      000060r80r0F                  116 	mov	a, ___slong2fs_PARM_1+0
+      000062r80r0B                  117 	mov	___ulong2fs_PARM_1+0, a
+      000064r81r0F                  118 	mov	a, ___slong2fs_PARM_1+1
+      000066r81r0B                  119 	mov	___ulong2fs_PARM_1+1, a
+      000068r82r0F                  120 	mov	a, ___slong2fs_PARM_1+2
+      00006Ar82r0B                  121 	mov	___ulong2fs_PARM_1+2, a
+      00006Cr83r0F                  122 	mov	a, ___slong2fs_PARM_1+3
+      00006Er83r0B                  123 	mov	___ulong2fs_PARM_1+3, a
+      000070r08r2F                  124 	mov	a, #___slong2fs_sloc1_1_0
+      000072 72 00                  125 	push	af
+      000074r00r38                  126 	call	___ulong2fs
+      000076 C2 01                  127 	mov	a, sp
+      000078 FE 28                  128 	add	a, #-2
+      00007A 82 01                  129 	mov	sp, a
+      00007C FC 28                  130 	add	a, #0xfc
+      00007Er80r0B                  131 	mov	p, a
+      000080r81r03                  132 	idxm	a, p
+      000082r80r0B                  133 	mov	p, a
+      000084r88r0F                  134 	mov	a, ___slong2fs_sloc1_1_0+0
+      000086r80r03                  135 	idxm	p, a
+      000088r00r12                  136 	inc	p
+      00008Ar89r0F                  137 	mov	a, ___slong2fs_sloc1_1_0+1
+      00008Cr80r03                  138 	idxm	p, a
+      00008Er00r12                  139 	inc	p
+      000090r8Ar0F                  140 	mov	a, ___slong2fs_sloc1_1_0+2
+      000092r80r03                  141 	idxm	p, a
+      000094r00r12                  142 	inc	p
+      000096r8Br0F                  143 	mov	a, ___slong2fs_sloc1_1_0+3
+      000098r80r03                  144 	idxm	p, a
+                                    145 ;	../_slong2fs.c: 84: }
+      00009A 7A 00                  146 	ret
+                                    147 	.area CODE
+                                    148 	.area CONST
+                                    149 	.area CABS (ABS)

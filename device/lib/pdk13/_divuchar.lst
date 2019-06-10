@@ -1,0 +1,72 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divuchar
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divuchar_PARM_2
+                                     17 	.globl __divuchar_PARM_1
+                                     18 	.globl __divuchar
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divuchar_PARM_1:
+      000000                         29 	.ds 1
+      000001                         30 __divuchar_PARM_2:
+      000001                         31 	.ds 1
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../_divuchar.c: 31: _divuchar (unsigned char x, unsigned char y)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function _divuchar
+                                     58 ;	-----------------------------------------
+      000000                         59 __divuchar:
+                                     60 ;	../_divuchar.c: 33: return ((unsigned int)x / (unsigned int)y);
+      000000r80r0F                   61 	mov	a, __divuchar_PARM_1+0
+      000002r80r0B                   62 	mov	__divuint_PARM_1+0, a
+      000004r01r13                   63 	clear	__divuint_PARM_1+1
+      000006r81r0F                   64 	mov	a, __divuchar_PARM_2+0
+      000008r80r0B                   65 	mov	__divuint_PARM_2+0, a
+      00000Ar01r13                   66 	clear	__divuint_PARM_2+1
+      00000Cr00r38                   67 	call	__divuint
+                                     68 ;	../_divuchar.c: 34: }
+      00000E 7A 00                   69 	ret
+                                     70 	.area CODE
+                                     71 	.area CONST
+                                     72 	.area CABS (ABS)

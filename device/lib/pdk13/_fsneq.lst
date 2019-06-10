@@ -1,0 +1,176 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fsneq
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fsneq_PARM_2
+                                     17 	.globl ___fsneq_PARM_1
+                                     18 	.globl ___fsneq
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fsneq_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fsneq_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 ___fsneq_fl1_65536_21:
+      000008                         33 	.ds 4
+      00000C                         34 ___fsneq_fl2_65536_21:
+      00000C                         35 	.ds 4
+                                     36 ;--------------------------------------------------------
+                                     37 ; overlayable items in ram 
+                                     38 ;--------------------------------------------------------
+                                     39 	.area	OSEG (OVR,DATA)
+      000000                         40 ___fsneq_sloc0_1_0:
+      000000                         41 	.ds 4
+      000004                         42 ___fsneq_sloc1_1_0:
+      000004                         43 	.ds 4
+      000008                         44 ___fsneq_sloc2_1_0:
+      000008                         45 	.ds 4
+      00000C                         46 ___fsneq_sloc3_1_0:
+      00000C                         47 	.ds 4
+      000010                         48 ___fsneq_sloc4_1_0:
+      000010                         49 	.ds 4
+                                     50 ;--------------------------------------------------------
+                                     51 ; absolute external ram data
+                                     52 ;--------------------------------------------------------
+                                     53 	.area DABS (ABS)
+                                     54 ;--------------------------------------------------------
+                                     55 ; global & static initialisations
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area GSINIT
+                                     59 	.area GSFINAL
+                                     60 	.area GSINIT
+                                     61 ;--------------------------------------------------------
+                                     62 ; Home
+                                     63 ;--------------------------------------------------------
+                                     64 	.area HOME
+                                     65 	.area HOME
+                                     66 ;--------------------------------------------------------
+                                     67 ; code
+                                     68 ;--------------------------------------------------------
+                                     69 	.area CODE
+                                     70 ;	../_fsneq.c: 80: char __fsneq (float a1, float a2)
+                                     71 ;	-----------------------------------------
+                                     72 ;	 function __fsneq
+                                     73 ;	-----------------------------------------
+      000000                         74 ___fsneq:
+                                     75 ;	../_fsneq.c: 84: fl1.f = a1;
+      000000r80r0F                   76 	mov	a, ___fsneq_PARM_1+0
+      000002r88r0B                   77 	mov	___fsneq_fl1_65536_21+0, a
+      000004r81r0F                   78 	mov	a, ___fsneq_PARM_1+1
+      000006r89r0B                   79 	mov	___fsneq_fl1_65536_21+1, a
+      000008r82r0F                   80 	mov	a, ___fsneq_PARM_1+2
+      00000Ar8Ar0B                   81 	mov	___fsneq_fl1_65536_21+2, a
+      00000Cr83r0F                   82 	mov	a, ___fsneq_PARM_1+3
+      00000Er8Br0B                   83 	mov	___fsneq_fl1_65536_21+3, a
+                                     84 ;	../_fsneq.c: 85: fl2.f = a2;
+      000010r84r0F                   85 	mov	a, ___fsneq_PARM_2+0
+      000012r8Cr0B                   86 	mov	___fsneq_fl2_65536_21+0, a
+      000014r85r0F                   87 	mov	a, ___fsneq_PARM_2+1
+      000016r8Dr0B                   88 	mov	___fsneq_fl2_65536_21+1, a
+      000018r86r0F                   89 	mov	a, ___fsneq_PARM_2+2
+      00001Ar8Er0B                   90 	mov	___fsneq_fl2_65536_21+2, a
+      00001Cr87r0F                   91 	mov	a, ___fsneq_PARM_2+3
+      00001Er8Fr0B                   92 	mov	___fsneq_fl2_65536_21+3, a
+                                     93 ;	../_fsneq.c: 87: if (fl1.l == fl2.l)
+      000020r88r0F                   94 	mov	a, ___fsneq_fl1_65536_21+0
+      000022r80r0B                   95 	mov	___fsneq_sloc0_1_0+0, a
+      000024r89r0F                   96 	mov	a, ___fsneq_fl1_65536_21+1
+      000026r81r0B                   97 	mov	___fsneq_sloc0_1_0+1, a
+      000028r8Ar0F                   98 	mov	a, ___fsneq_fl1_65536_21+2
+      00002Ar82r0B                   99 	mov	___fsneq_sloc0_1_0+2, a
+      00002Cr8Br0F                  100 	mov	a, ___fsneq_fl1_65536_21+3
+      00002Er83r0B                  101 	mov	___fsneq_sloc0_1_0+3, a
+      000030r8Cr0F                  102 	mov	a, ___fsneq_fl2_65536_21+0
+      000032r84r0B                  103 	mov	___fsneq_sloc1_1_0+0, a
+      000034r8Dr0F                  104 	mov	a, ___fsneq_fl2_65536_21+1
+      000036r85r0B                  105 	mov	___fsneq_sloc1_1_0+1, a
+      000038r8Er0F                  106 	mov	a, ___fsneq_fl2_65536_21+2
+      00003Ar86r0B                  107 	mov	___fsneq_sloc1_1_0+2, a
+      00003Cr8Fr0F                  108 	mov	a, ___fsneq_fl2_65536_21+3
+      00003Er87r0B                  109 	mov	___fsneq_sloc1_1_0+3, a
+      000040r80r0F                  110 	mov	a, ___fsneq_sloc0_1_0+0
+      000042r04r17                  111 	ceqsn	a, ___fsneq_sloc1_1_0+0
+      000044r5Ar30                  112 	goto	00102$
+      000046r81r0F                  113 	mov	a, ___fsneq_sloc0_1_0+1
+      000048r05r17                  114 	ceqsn	a, ___fsneq_sloc1_1_0+1
+      00004Ar5Ar30                  115 	goto	00102$
+      00004Cr82r0F                  116 	mov	a, ___fsneq_sloc0_1_0+2
+      00004Er06r17                  117 	ceqsn	a, ___fsneq_sloc1_1_0+2
+      000050r5Ar30                  118 	goto	00102$
+      000052r83r0F                  119 	mov	a, ___fsneq_sloc0_1_0+3
+      000054r07r17                  120 	ceqsn	a, ___fsneq_sloc1_1_0+3
+      000056r5Ar30                  121 	goto	00102$
+                                    122 ;	../_fsneq.c: 88: return (0);
+      000058 00 02                  123 	ret	#0x00
+      00005A                        124 00102$:
+                                    125 ;	../_fsneq.c: 89: if (((fl1.l | fl2.l) & 0x7FFFFFFF) == 0)
+      00005Ar88r0F                  126 	mov	a, ___fsneq_fl1_65536_21+0
+      00005Cr88r0B                  127 	mov	___fsneq_sloc2_1_0+0, a
+      00005Er89r0F                  128 	mov	a, ___fsneq_fl1_65536_21+1
+      000060r89r0B                  129 	mov	___fsneq_sloc2_1_0+1, a
+      000062r8Ar0F                  130 	mov	a, ___fsneq_fl1_65536_21+2
+      000064r8Ar0B                  131 	mov	___fsneq_sloc2_1_0+2, a
+      000066r8Br0F                  132 	mov	a, ___fsneq_fl1_65536_21+3
+      000068r8Br0B                  133 	mov	___fsneq_sloc2_1_0+3, a
+      00006Ar8Cr0F                  134 	mov	a, ___fsneq_fl2_65536_21+0
+      00006Cr8Cr0B                  135 	mov	___fsneq_sloc3_1_0+0, a
+      00006Er8Dr0F                  136 	mov	a, ___fsneq_fl2_65536_21+1
+      000070r8Dr0B                  137 	mov	___fsneq_sloc3_1_0+1, a
+      000072r8Er0F                  138 	mov	a, ___fsneq_fl2_65536_21+2
+      000074r8Er0B                  139 	mov	___fsneq_sloc3_1_0+2, a
+      000076r8Fr0F                  140 	mov	a, ___fsneq_fl2_65536_21+3
+      000078r8Fr0B                  141 	mov	___fsneq_sloc3_1_0+3, a
+      00007Ar88r0F                  142 	mov	a, ___fsneq_sloc2_1_0+0
+      00007Cr8Cr0E                  143 	or	a, ___fsneq_sloc3_1_0+0
+      00007Er90r0B                  144 	mov	___fsneq_sloc4_1_0+0, a
+      000080r89r0F                  145 	mov	a, ___fsneq_sloc2_1_0+1
+      000082r8Dr0E                  146 	or	a, ___fsneq_sloc3_1_0+1
+      000084r91r0B                  147 	mov	___fsneq_sloc4_1_0+1, a
+      000086r8Ar0F                  148 	mov	a, ___fsneq_sloc2_1_0+2
+      000088r8Er0E                  149 	or	a, ___fsneq_sloc3_1_0+2
+      00008Ar92r0B                  150 	mov	___fsneq_sloc4_1_0+2, a
+      00008Cr8Br0F                  151 	mov	a, ___fsneq_sloc2_1_0+3
+      00008Er8Fr0E                  152 	or	a, ___fsneq_sloc3_1_0+3
+      000090r93r0B                  153 	mov	___fsneq_sloc4_1_0+3, a
+      000092r90r0F                  154 	mov	a, ___fsneq_sloc4_1_0+0
+      000094 00 2A                  155 	ceqsn	a, #0x00
+      000096rAEr30                  156 	goto	00104$
+      000098r91r0F                  157 	mov	a, ___fsneq_sloc4_1_0+1
+      00009A 00 2A                  158 	ceqsn	a, #0x00
+      00009CrAEr30                  159 	goto	00104$
+      00009Er92r0F                  160 	mov	a, ___fsneq_sloc4_1_0+2
+      0000A0 00 2A                  161 	ceqsn	a, #0x00
+      0000A2rAEr30                  162 	goto	00104$
+      0000A4r93r0F                  163 	mov	a, ___fsneq_sloc4_1_0+3
+      0000A6 7F 2C                  164 	and	a, #0x7f
+      0000A8 00 2A                  165 	ceqsn	a, #0x00
+      0000AArAEr30                  166 	goto	00104$
+                                    167 ;	../_fsneq.c: 90: return (0);
+      0000AC 00 02                  168 	ret	#0x00
+      0000AE                        169 00104$:
+                                    170 ;	../_fsneq.c: 91: return (1);
+      0000AE 01 02                  171 	ret	#0x01
+                                    172 ;	../_fsneq.c: 92: }
+      0000B0 7A 00                  173 	ret
+                                    174 	.area CODE
+                                    175 	.area CONST
+                                    176 	.area CABS (ABS)

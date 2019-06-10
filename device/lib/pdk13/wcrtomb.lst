@@ -1,0 +1,103 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module wcrtomb
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wctomb
+                                     17 	.globl _wcrtomb_PARM_3
+                                     18 	.globl _wcrtomb_PARM_2
+                                     19 	.globl _wcrtomb_PARM_1
+                                     20 	.globl _wcrtomb
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _wcrtomb_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _wcrtomb_PARM_2:
+      000002                         33 	.ds 4
+      000006                         34 _wcrtomb_PARM_3:
+      000006                         35 	.ds 2
+      000008                         36 _wcrtomb_sloc0_1_0:
+      000008                         37 	.ds 2
+                                     38 ;--------------------------------------------------------
+                                     39 ; overlayable items in ram 
+                                     40 ;--------------------------------------------------------
+                                     41 ;--------------------------------------------------------
+                                     42 ; absolute external ram data
+                                     43 ;--------------------------------------------------------
+                                     44 	.area DABS (ABS)
+                                     45 ;--------------------------------------------------------
+                                     46 ; global & static initialisations
+                                     47 ;--------------------------------------------------------
+                                     48 	.area HOME
+                                     49 	.area GSINIT
+                                     50 	.area GSFINAL
+                                     51 	.area GSINIT
+                                     52 ;--------------------------------------------------------
+                                     53 ; Home
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area HOME
+                                     57 ;--------------------------------------------------------
+                                     58 ; code
+                                     59 ;--------------------------------------------------------
+                                     60 	.area CODE
+                                     61 ;	../wcrtomb.c: 34: size_t wcrtomb(char *restrict s, wchar_t wc, mbstate_t *restrict ps)
+                                     62 ;	-----------------------------------------
+                                     63 ;	 function wcrtomb
+                                     64 ;	-----------------------------------------
+      000000                         65 _wcrtomb:
+                                     66 ;	../wcrtomb.c: 40: ret = wctomb(s, wc);
+      000000r80r0F                   67 	mov	a, _wcrtomb_PARM_1+0
+      000002r80r0B                   68 	mov	_wctomb_PARM_1+0, a
+      000004r81r0F                   69 	mov	a, _wcrtomb_PARM_1+1
+      000006r81r0B                   70 	mov	_wctomb_PARM_1+1, a
+      000008r82r0F                   71 	mov	a, _wcrtomb_PARM_2+0
+      00000Ar80r0B                   72 	mov	_wctomb_PARM_2+0, a
+      00000Cr83r0F                   73 	mov	a, _wcrtomb_PARM_2+1
+      00000Er81r0B                   74 	mov	_wctomb_PARM_2+1, a
+      000010r84r0F                   75 	mov	a, _wcrtomb_PARM_2+2
+      000012r82r0B                   76 	mov	_wctomb_PARM_2+2, a
+      000014r85r0F                   77 	mov	a, _wcrtomb_PARM_2+3
+      000016r83r0B                   78 	mov	_wctomb_PARM_2+3, a
+      000018r00r38                   79 	call	_wctomb
+      00001Ar88r0B                   80 	mov	_wcrtomb_sloc0_1_0+0, a
+      00001Cr80r0F                   81 	mov	a, p
+      00001Er89r0B                   82 	mov	_wcrtomb_sloc0_1_0+1, a
+                                     83 ;	../wcrtomb.c: 42: if(ret == (size_t)(-1))
+      000020r88r0F                   84 	mov	a, _wcrtomb_sloc0_1_0+0
+      000022 FF 2A                   85 	ceqsn	a, #0xff
+      000024r32r30                   86 	goto	00102$
+      000026r89r0F                   87 	mov	a, _wcrtomb_sloc0_1_0+1
+      000028 FF 2A                   88 	ceqsn	a, #0xff
+      00002Ar32r30                   89 	goto	00102$
+                                     90 ;	../wcrtomb.c: 43: errno = EILSEQ;
+      00002C 54 2F                   91 	mov	a, #0x54
+      00002Er80r0B                   92 	mov	_errno+0, a
+      000030r01r13                   93 	clear	_errno+1
+      000032                         94 00102$:
+                                     95 ;	../wcrtomb.c: 45: return(ret);
+      000032r89r0F                   96 	mov	a, _wcrtomb_sloc0_1_0+1
+      000034r80r0B                   97 	mov	p, a
+      000036r88r0F                   98 	mov	a, _wcrtomb_sloc0_1_0+0
+                                     99 ;	../wcrtomb.c: 46: }
+      000038 7A 00                  100 	ret
+                                    101 	.area CODE
+                                    102 	.area CONST
+                                    103 	.area CABS (ABS)

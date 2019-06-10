@@ -1,0 +1,128 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divschar
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divsuchar_PARM_2
+                                     17 	.globl __divsuchar_PARM_1
+                                     18 	.globl __divuschar_PARM_2
+                                     19 	.globl __divuschar_PARM_1
+                                     20 	.globl __divschar_PARM_2
+                                     21 	.globl __divschar_PARM_1
+                                     22 	.globl __divschar
+                                     23 	.globl __divuschar
+                                     24 	.globl __divsuchar
+                                     25 ;--------------------------------------------------------
+                                     26 ; special function registers
+                                     27 ;--------------------------------------------------------
+                                     28 	.area RSEG (ABS)
+      000000                         29 	.org 0x0000
+                                     30 ;--------------------------------------------------------
+                                     31 ; ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DATA
+      000000                         34 __divschar_PARM_1:
+      000000                         35 	.ds 1
+      000001                         36 __divschar_PARM_2:
+      000001                         37 	.ds 1
+      000002                         38 __divuschar_PARM_1:
+      000002                         39 	.ds 1
+      000003                         40 __divuschar_PARM_2:
+      000003                         41 	.ds 1
+      000004                         42 __divsuchar_PARM_1:
+      000004                         43 	.ds 1
+      000005                         44 __divsuchar_PARM_2:
+      000005                         45 	.ds 1
+                                     46 ;--------------------------------------------------------
+                                     47 ; overlayable items in ram 
+                                     48 ;--------------------------------------------------------
+                                     49 ;--------------------------------------------------------
+                                     50 ; absolute external ram data
+                                     51 ;--------------------------------------------------------
+                                     52 	.area DABS (ABS)
+                                     53 ;--------------------------------------------------------
+                                     54 ; global & static initialisations
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area GSINIT
+                                     58 	.area GSFINAL
+                                     59 	.area GSINIT
+                                     60 ;--------------------------------------------------------
+                                     61 ; Home
+                                     62 ;--------------------------------------------------------
+                                     63 	.area HOME
+                                     64 	.area HOME
+                                     65 ;--------------------------------------------------------
+                                     66 ; code
+                                     67 ;--------------------------------------------------------
+                                     68 	.area CODE
+                                     69 ;	../_divschar.c: 31: _divschar (signed char x, signed char y)
+                                     70 ;	-----------------------------------------
+                                     71 ;	 function _divschar
+                                     72 ;	-----------------------------------------
+      000000                         73 __divschar:
+                                     74 ;	../_divschar.c: 33: return ((int)x / (int)y);
+      000000r80r0F                   75 	mov	a, __divschar_PARM_1+0
+      000002r80r0B                   76 	mov	__divsint_PARM_1+0, a
+      000004 6B 00                   77 	sl	a
+      000006 00 2F                   78 	mov	a, #0x00
+      000008 61 00                   79 	subc	a
+      00000Ar81r0B                   80 	mov	__divsint_PARM_1+1, a
+      00000Cr81r0F                   81 	mov	a, __divschar_PARM_2+0
+      00000Er80r0B                   82 	mov	__divsint_PARM_2+0, a
+      000010 6B 00                   83 	sl	a
+      000012 00 2F                   84 	mov	a, #0x00
+      000014 61 00                   85 	subc	a
+      000016r81r0B                   86 	mov	__divsint_PARM_2+1, a
+      000018r00r38                   87 	call	__divsint
+                                     88 ;	../_divschar.c: 34: }
+      00001A 7A 00                   89 	ret
+                                     90 ;	../_divschar.c: 37: _divuschar (unsigned char x, unsigned char y)
+                                     91 ;	-----------------------------------------
+                                     92 ;	 function _divuschar
+                                     93 ;	-----------------------------------------
+      00001C                         94 __divuschar:
+                                     95 ;	../_divschar.c: 39: return ((int)((signed char)x) / (int)y);
+      00001Cr82r0F                   96 	mov	a, __divuschar_PARM_1+0
+      00001Er80r0B                   97 	mov	__divsint_PARM_1+0, a
+      000020 6B 00                   98 	sl	a
+      000022 00 2F                   99 	mov	a, #0x00
+      000024 61 00                  100 	subc	a
+      000026r81r0B                  101 	mov	__divsint_PARM_1+1, a
+      000028r83r0F                  102 	mov	a, __divuschar_PARM_2+0
+      00002Ar80r0B                  103 	mov	__divsint_PARM_2+0, a
+      00002Cr01r13                  104 	clear	__divsint_PARM_2+1
+      00002Er00r38                  105 	call	__divsint
+                                    106 ;	../_divschar.c: 40: }
+      000030 7A 00                  107 	ret
+                                    108 ;	../_divschar.c: 43: _divsuchar (signed char x, signed char y)
+                                    109 ;	-----------------------------------------
+                                    110 ;	 function _divsuchar
+                                    111 ;	-----------------------------------------
+      000032                        112 __divsuchar:
+                                    113 ;	../_divschar.c: 45: return ((int)((unsigned char)x) / (int)y);
+      000032r84r0F                  114 	mov	a, __divsuchar_PARM_1+0
+      000034r80r0B                  115 	mov	__divsint_PARM_1+0, a
+      000036r01r13                  116 	clear	__divsint_PARM_1+1
+      000038r85r0F                  117 	mov	a, __divsuchar_PARM_2+0
+      00003Ar80r0B                  118 	mov	__divsint_PARM_2+0, a
+      00003C 6B 00                  119 	sl	a
+      00003E 00 2F                  120 	mov	a, #0x00
+      000040 61 00                  121 	subc	a
+      000042r81r0B                  122 	mov	__divsint_PARM_2+1, a
+      000044r00r38                  123 	call	__divsint
+                                    124 ;	../_divschar.c: 46: }
+      000046 7A 00                  125 	ret
+                                    126 	.area CODE
+                                    127 	.area CONST
+                                    128 	.area CABS (ABS)

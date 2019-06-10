@@ -1,0 +1,96 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module isnan
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _isnan_PARM_1
+                                     17 	.globl _isnan
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _isnan_PARM_1:
+      000000                         28 	.ds 4
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _isnan_sloc0_1_0:
+      000000                         34 	.ds 4
+      000004                         35 _isnan_sloc1_1_0:
+      000004                         36 	.ds 4
+                                     37 ;--------------------------------------------------------
+                                     38 ; absolute external ram data
+                                     39 ;--------------------------------------------------------
+                                     40 	.area DABS (ABS)
+                                     41 ;--------------------------------------------------------
+                                     42 ; global & static initialisations
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area GSINIT
+                                     46 	.area GSFINAL
+                                     47 	.area GSINIT
+                                     48 ;--------------------------------------------------------
+                                     49 ; Home
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+                                     52 	.area HOME
+                                     53 ;--------------------------------------------------------
+                                     54 ; code
+                                     55 ;--------------------------------------------------------
+                                     56 	.area CODE
+                                     57 ;	../isnan.c: 33: int isnan (float f)
+                                     58 ;	-----------------------------------------
+                                     59 ;	 function isnan
+                                     60 ;	-----------------------------------------
+      000000                         61 _isnan:
+                                     62 ;	../isnan.c: 35: unsigned long *pl = (unsigned long *) &f;
+                                     63 ;	../isnan.c: 37: return (*pl & 0x7fffffff) > 0x7f800000;
+      000000r80r0F                   64 	mov	a, _isnan_PARM_1+0
+      000002r80r0B                   65 	mov	_isnan_sloc0_1_0+0, a
+      000004r81r0F                   66 	mov	a, _isnan_PARM_1+1
+      000006r81r0B                   67 	mov	_isnan_sloc0_1_0+1, a
+      000008r82r0F                   68 	mov	a, _isnan_PARM_1+2
+      00000Ar82r0B                   69 	mov	_isnan_sloc0_1_0+2, a
+      00000Cr83r0F                   70 	mov	a, _isnan_PARM_1+3
+      00000Er83r0B                   71 	mov	_isnan_sloc0_1_0+3, a
+      000010r80r0F                   72 	mov	a, _isnan_sloc0_1_0+0
+      000012r84r0B                   73 	mov	_isnan_sloc1_1_0+0, a
+      000014r81r0F                   74 	mov	a, _isnan_sloc0_1_0+1
+      000016r85r0B                   75 	mov	_isnan_sloc1_1_0+1, a
+      000018r82r0F                   76 	mov	a, _isnan_sloc0_1_0+2
+      00001Ar86r0B                   77 	mov	_isnan_sloc1_1_0+2, a
+      00001Cr83r0F                   78 	mov	a, _isnan_sloc0_1_0+3
+      00001E 7F 2C                   79 	and	a, #0x7f
+      000020r87r0B                   80 	mov	_isnan_sloc1_1_0+3, a
+      000022 00 2F                   81 	mov	a, #0x00
+      000024r84r0C                   82 	sub	a, _isnan_sloc1_1_0+0
+      000026 00 2F                   83 	mov	a, #0x00
+      000028r85r0D                   84 	subc	a, _isnan_sloc1_1_0+1
+      00002A 80 2F                   85 	mov	a, #0x80
+      00002Cr86r0D                   86 	subc	a, _isnan_sloc1_1_0+2
+      00002E 7F 2F                   87 	mov	a, #0x7f
+      000030r87r0D                   88 	subc	a, _isnan_sloc1_1_0+3
+      000032 00 2F                   89 	mov	a, #0x00
+      000034 6D 00                   90 	slc	a
+      000036r00r13                   91 	clear	p
+                                     92 ;	../isnan.c: 38: }
+      000038 7A 00                   93 	ret
+                                     94 	.area CODE
+                                     95 	.area CONST
+                                     96 	.area CABS (ABS)

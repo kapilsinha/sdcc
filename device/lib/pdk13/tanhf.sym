@@ -1,0 +1,48 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___fsadd                                                       ****** GX
+    ___fsadd_PARM_1                                                ****** GX
+    ___fsadd_PARM_2                                                ****** GX
+    ___fsdiv                                                       ****** GX
+    ___fsdiv_PARM_1                                                ****** GX
+    ___fsdiv_PARM_2                                                ****** GX
+    ___fslt                                                        ****** GX
+    ___fslt_PARM_1                                                 ****** GX
+    ___fslt_PARM_2                                                 ****** GX
+    ___fsmul                                                       ****** GX
+    ___fsmul_PARM_1                                                ****** GX
+    ___fsmul_PARM_2                                                ****** GX
+    ___fssub                                                       ****** GX
+    ___fssub_PARM_1                                                ****** GX
+    ___fssub_PARM_2                                                ****** GX
+    _expf                                                          ****** GX
+    _fabsf                                                         ****** GX
+  9 _tanhf                                                         000000 GR
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    678   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

@@ -1,0 +1,287 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module sprintf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __print_format
+                                     17 	.globl _vsprintf_PARM_3
+                                     18 	.globl _vsprintf_PARM_2
+                                     19 	.globl _vsprintf_PARM_1
+                                     20 	.globl _vsprintf
+                                     21 	.globl _sprintf
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _vsprintf_PARM_1:
+      000000                         32 	.ds 2
+      000002                         33 _vsprintf_PARM_2:
+      000002                         34 	.ds 2
+      000004                         35 _vsprintf_PARM_3:
+      000004                         36 	.ds 2
+      000006                         37 _vsprintf_sloc3_1_0:
+      000006                         38 	.ds 2
+                                     39 ;--------------------------------------------------------
+                                     40 ; overlayable items in ram 
+                                     41 ;--------------------------------------------------------
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area DABS (ABS)
+                                     46 ;--------------------------------------------------------
+                                     47 ; global & static initialisations
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area GSINIT
+                                     51 	.area GSFINAL
+                                     52 	.area GSINIT
+                                     53 ;--------------------------------------------------------
+                                     54 ; Home
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area HOME
+                                     58 ;--------------------------------------------------------
+                                     59 ; code
+                                     60 ;--------------------------------------------------------
+                                     61 	.area CODE
+                                     62 ;	../sprintf.c: 34: put_char_to_string (char c, void* p) _REENTRANT
+                                     63 ;	-----------------------------------------
+                                     64 ;	 function put_char_to_string
+                                     65 ;	-----------------------------------------
+      000000                         66 _put_char_to_string:
+      000000 C2 01                   67 	mov	a, sp
+      000002 06 28                   68 	add	a, #6
+                                     69 ;	../sprintf.c: 36: char **buf = (char **)p;
+      000004 82 01                   70 	mov	sp, a
+      000006 F4 28                   71 	add	a, #0xf4
+      000008r80r0B                   72 	mov	p, a
+      00000Ar81r03                   73 	idxm	a, p
+      00000Cr80r13                   74 	xch	a, p
+      00000E 06 28                   75 	add	a, #6
+      000010r80r13                   76 	xch	a, p
+      000012r80r03                   77 	idxm	p, a
+      000014 FB 2F                   78 	mov	a, #-5
+      000016r00r08                   79 	add	p, a
+      000018r81r03                   80 	idxm	a, p
+      00001Ar80r13                   81 	xch	a, p
+      00001C 06 28                   82 	add	a, #6
+      00001Er80r13                   83 	xch	a, p
+      000020r80r03                   84 	idxm	p, a
+                                     85 ;	../sprintf.c: 37: *(*buf)++ = c;
+      000022r81r03                   86 	idxm	a, p
+      000024 72 00                   87 	push	af
+      000026r80r12                   88 	dec	p
+      000028r81r03                   89 	idxm	a, p
+      00002Ar80r0B                   90 	mov	p, a
+      00002C 73 00                   91 	pop	af
+      00002Er00r38                   92 	call	__gptrget2
+      000030 72 00                   93 	push	af
+      000032 C2 01                   94 	mov	a, sp
+      000034 FB 28                   95 	add	a, #0xfb
+      000036r80r13                   96 	xch	a, p
+      000038r80r03                   97 	idxm	p, a
+      00003A 73 00                   98 	pop	af
+      00003Cr80r12                   99 	dec	p
+      00003Er80r03                  100 	idxm	p, a
+      000040r81r03                  101 	idxm	a, p
+      000042 01 28                  102 	add	a, #0x01
+      000044 72 00                  103 	push	af
+      000046r00r12                  104 	inc	p
+      000048r00r12                  105 	inc	p
+      00004A 73 00                  106 	pop	af
+      00004Cr80r03                  107 	idxm	p, a
+      00004E 72 00                  108 	push	af
+      000050r80r12                  109 	dec	p
+      000052 73 00                  110 	pop	af
+      000054r81r03                  111 	idxm	a, p
+      000056 60 00                  112 	addc	a
+      000058r00r12                  113 	inc	p
+      00005Ar00r12                  114 	inc	p
+      00005Cr80r03                  115 	idxm	p, a
+      00005Er80r12                  116 	dec	p
+      000060r81r03                  117 	idxm	a, p
+      000062 72 00                  118 	push	af
+      000064 FC 2F                  119 	mov	a, #-4
+      000066r00r08                  120 	add	p, a
+      000068r81r03                  121 	idxm	a, p
+      00006Ar80r0B                  122 	mov	p, a
+      00006C 73 00                  123 	pop	af
+      00006Er80r03                  124 	idxm	p, a
+      000070 C2 01                  125 	mov	a, sp
+      000072 FF 28                  126 	add	a, #0xff
+      000074r80r0B                  127 	mov	p, a
+      000076r81r03                  128 	idxm	a, p
+      000078 72 00                  129 	push	af
+      00007A FB 2F                  130 	mov	a, #-5
+      00007Cr00r08                  131 	add	p, a
+      00007Er81r03                  132 	idxm	a, p
+      000080r80r0B                  133 	mov	p, a
+      000082 73 00                  134 	pop	af
+      000084r00r12                  135 	inc	p
+      000086r80r03                  136 	idxm	p, a
+      000088 C2 01                  137 	mov	a, sp
+      00008A F6 28                  138 	add	a, #0xf6
+      00008Cr80r0B                  139 	mov	p, a
+      00008Er81r03                  140 	idxm	a, p
+      000090 72 00                  141 	push	af
+      000092 06 2F                  142 	mov	a, #6
+      000094r00r08                  143 	add	p, a
+      000096r81r03                  144 	idxm	a, p
+      000098r80r0B                  145 	mov	p, a
+      00009A 73 00                  146 	pop	af
+      00009Cr80r03                  147 	idxm	p, a
+                                    148 ;	../sprintf.c: 38: }
+      00009E C2 01                  149 	mov	a, sp
+      0000A0 FA 28                  150 	add	a, #-6
+      0000A2 82 01                  151 	mov	sp, a
+      0000A4 7A 00                  152 	ret
+                                    153 ;	../sprintf.c: 41: vsprintf (char *buf, const char *format, va_list ap)
+                                    154 ;	-----------------------------------------
+                                    155 ;	 function vsprintf
+                                    156 ;	-----------------------------------------
+      0000A6                        157 _vsprintf:
+                                    158 ;	../sprintf.c: 44: i = _print_format (put_char_to_string, &buf, format, ap);
+      0000A6r00r2F                  159 	mov	a, #(_vsprintf_PARM_1 + 0)
+      0000A8r80r0B                  160 	mov	__print_format_PARM_2+0, a
+      0000AAr01r13                  161 	clear	__print_format_PARM_2+1
+      0000ACr00r2F                  162 	mov	a, #<(_put_char_to_string + 0)
+      0000AEr80r0B                  163 	mov	__print_format_PARM_1+0, a
+      0000B0r00r2F                  164 	mov	a, #>(_put_char_to_string + 0)
+      0000B2r81r0B                  165 	mov	__print_format_PARM_1+1, a
+      0000B4r82r0F                  166 	mov	a, _vsprintf_PARM_2+0
+      0000B6r80r0B                  167 	mov	__print_format_PARM_3+0, a
+      0000B8r83r0F                  168 	mov	a, _vsprintf_PARM_2+1
+      0000BAr81r0B                  169 	mov	__print_format_PARM_3+1, a
+      0000BCr84r0F                  170 	mov	a, _vsprintf_PARM_3+0
+      0000BEr80r0B                  171 	mov	__print_format_PARM_4+0, a
+      0000C0r85r0F                  172 	mov	a, _vsprintf_PARM_3+1
+      0000C2r81r0B                  173 	mov	__print_format_PARM_4+1, a
+      0000C4r00r38                  174 	call	__print_format
+      0000C6r86r0B                  175 	mov	_vsprintf_sloc3_1_0+0, a
+      0000C8r80r0F                  176 	mov	a, p
+      0000CAr87r0B                  177 	mov	_vsprintf_sloc3_1_0+1, a
+                                    178 ;	../sprintf.c: 45: *buf = 0;
+      0000CCr80r0F                  179 	mov	a, _vsprintf_PARM_1+0
+      0000CEr80r0B                  180 	mov	p, a
+      0000D0r81r0F                  181 	mov	a, _vsprintf_PARM_1+1
+      0000D2 00 2F                  182 	mov	a, #0x00
+      0000D4r80r03                  183 	idxm	p, a
+                                    184 ;	../sprintf.c: 46: return i;
+      0000D6r87r0F                  185 	mov	a, _vsprintf_sloc3_1_0+1
+      0000D8r80r0B                  186 	mov	p, a
+      0000DAr86r0F                  187 	mov	a, _vsprintf_sloc3_1_0+0
+                                    188 ;	../sprintf.c: 47: }
+      0000DC 7A 00                  189 	ret
+                                    190 ;	../sprintf.c: 50: sprintf (char *buf, const char *format, ...)
+                                    191 ;	-----------------------------------------
+                                    192 ;	 function sprintf
+                                    193 ;	-----------------------------------------
+      0000DE                        194 _sprintf:
+      0000DE 72 00                  195 	push	af
+                                    196 ;	../sprintf.c: 55: va_start (arg, format);
+      0000E0 C2 01                  197 	mov	a, sp
+      0000E2 F8 28                  198 	add	a, #0xf8
+      0000E4r80r0B                  199 	mov	__print_format_PARM_4+0, a
+      0000E6r01r13                  200 	clear	__print_format_PARM_4+1
+                                    201 ;	../sprintf.c: 56: i = _print_format (put_char_to_string, &buf, format, arg);
+      0000E8 C2 01                  202 	mov	a, sp
+      0000EA FA 28                  203 	add	a, #0xfa
+      0000ECr80r0B                  204 	mov	__print_format_PARM_2+0, a
+      0000EEr01r13                  205 	clear	__print_format_PARM_2+1
+      0000F0r00r2F                  206 	mov	a, #<(_put_char_to_string + 0)
+      0000F2r80r0B                  207 	mov	__print_format_PARM_1+0, a
+      0000F4r00r2F                  208 	mov	a, #>(_put_char_to_string + 0)
+      0000F6r81r0B                  209 	mov	__print_format_PARM_1+1, a
+      0000F8 C2 01                  210 	mov	a, sp
+      0000FA F8 28                  211 	add	a, #0xf8
+      0000FCr80r0B                  212 	mov	p, a
+      0000FEr81r03                  213 	idxm	a, p
+      000100r80r0B                  214 	mov	__print_format_PARM_3+0, a
+      000102r00r12                  215 	inc	p
+      000104r81r03                  216 	idxm	a, p
+      000106r81r0B                  217 	mov	__print_format_PARM_3+1, a
+      000108r00r38                  218 	call	__print_format
+      00010Ar80r13                  219 	xch	a, p
+      00010Cr80r0F                  220 	mov	a, p
+      00010Er80r13                  221 	xch	a, p
+      000110 C2 01                  222 	mov	a, sp
+      000112 FE 28                  223 	add	a, #0xfe
+      000114r80r13                  224 	xch	a, p
+      000116r80r03                  225 	idxm	p, a
+      000118r00r12                  226 	inc	p
+      00011Ar80r03                  227 	idxm	p, a
+                                    228 ;	../sprintf.c: 57: *buf = 0;
+      00011C FC 2F                  229 	mov	a, #-4
+      00011Er00r08                  230 	add	p, a
+      000120r81r03                  231 	idxm	a, p
+      000122 72 00                  232 	push	af
+      000124r80r12                  233 	dec	p
+      000126r81r03                  234 	idxm	a, p
+      000128r80r0B                  235 	mov	p, a
+      00012A 73 00                  236 	pop	af
+      00012C 00 2F                  237 	mov	a, #0x00
+      00012Er80r03                  238 	idxm	p, a
+                                    239 ;	../sprintf.c: 60: return i;
+      000130 C2 01                  240 	mov	a, sp
+      000132 FE 28                  241 	add	a, #0xfe
+      000134r80r0B                  242 	mov	p, a
+      000136r81r03                  243 	idxm	a, p
+      000138 72 00                  244 	push	af
+      00013Ar00r12                  245 	inc	p
+      00013Cr81r03                  246 	idxm	a, p
+      00013Er80r0B                  247 	mov	p, a
+      000140 73 00                  248 	pop	af
+                                    249 ;	../sprintf.c: 61: }
+      000142 72 00                  250 	push	af
+      000144r80r0F                  251 	mov	a, p
+      000146 72 00                  252 	push	af
+      000148 C2 01                  253 	mov	a, sp
+      00014A FC 28                  254 	add	a, #0xfc
+      00014Cr80r0B                  255 	mov	p, a
+      00014Er81r03                  256 	idxm	a, p
+      000150r80r12                  257 	dec	p
+      000152r80r12                  258 	dec	p
+      000154r80r03                  259 	idxm	p, a
+      000156 03 2F                  260 	mov	a, #3
+      000158r00r08                  261 	add	p, a
+      00015Ar81r03                  262 	idxm	a, p
+      00015Cr80r12                  263 	dec	p
+      00015Er80r12                  264 	dec	p
+      000160r80r03                  265 	idxm	p, a
+      000162 03 2F                  266 	mov	a, #3
+      000164r00r08                  267 	add	p, a
+      000166r81r03                  268 	idxm	a, p
+      000168r80r12                  269 	dec	p
+      00016Ar80r12                  270 	dec	p
+      00016Cr80r03                  271 	idxm	p, a
+      00016E 03 2F                  272 	mov	a, #3
+      000170r00r08                  273 	add	p, a
+      000172r81r03                  274 	idxm	a, p
+      000174r80r12                  275 	dec	p
+      000176r80r12                  276 	dec	p
+      000178r80r03                  277 	idxm	p, a
+      00017A C2 01                  278 	mov	a, sp
+      00017C FE 28                  279 	add	a, #-2
+      00017E 82 01                  280 	mov	sp, a
+      000180 73 00                  281 	pop	af
+      000182r80r0B                  282 	mov	p, a
+      000184 73 00                  283 	pop	af
+      000186 7A 00                  284 	ret
+                                    285 	.area CODE
+                                    286 	.area CONST
+                                    287 	.area CABS (ABS)

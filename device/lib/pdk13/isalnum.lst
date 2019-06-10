@@ -1,0 +1,93 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module isalnum
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _isalpha
+                                     17 	.globl _isalnum_PARM_1
+                                     18 	.globl _isalnum
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _isalnum_PARM_1:
+      000000                         29 	.ds 2
+                                     30 ;--------------------------------------------------------
+                                     31 ; overlayable items in ram 
+                                     32 ;--------------------------------------------------------
+                                     33 ;--------------------------------------------------------
+                                     34 ; absolute external ram data
+                                     35 ;--------------------------------------------------------
+                                     36 	.area DABS (ABS)
+                                     37 ;--------------------------------------------------------
+                                     38 ; global & static initialisations
+                                     39 ;--------------------------------------------------------
+                                     40 	.area HOME
+                                     41 	.area GSINIT
+                                     42 	.area GSFINAL
+                                     43 	.area GSINIT
+                                     44 ;--------------------------------------------------------
+                                     45 ; Home
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area HOME
+                                     49 ;--------------------------------------------------------
+                                     50 ; code
+                                     51 ;--------------------------------------------------------
+                                     52 	.area CODE
+                                     53 ;	../isalnum.c: 37: int isalnum (int c)
+                                     54 ;	-----------------------------------------
+                                     55 ;	 function isalnum
+                                     56 ;	-----------------------------------------
+      000000                         57 _isalnum:
+                                     58 ;	../isalnum.c: 39: return (isalpha (c) || isdigit (c));
+      000000r80r0F                   59 	mov	a, _isalnum_PARM_1+0
+      000002r80r0B                   60 	mov	_isalpha_PARM_1+0, a
+      000004r81r0F                   61 	mov	a, _isalnum_PARM_1+1
+      000006r81r0B                   62 	mov	_isalpha_PARM_1+1, a
+      000008r00r38                   63 	call	_isalpha
+      00000Ar80r0E                   64 	or	a, p
+      00000C 00 2A                   65 	ceqsn	a, #0x00
+      00000Er2Ar30                   66 	goto	00105$
+      000010r81r0F                   67 	mov	a, _isalnum_PARM_1+1
+      000012r80r0B                   68 	mov	p, a
+      000014r80r0F                   69 	mov	a, _isalnum_PARM_1+0
+                                     70 ;	./../../include/ctype.h: 62: return ((unsigned char)c >= '0' && (unsigned char)c <= '9');
+      000016 30 2A                   71 	ceqsn	a, #0x30
+      000018 00 00                   72 	nop
+      00001A 40 18                   73 	t0sn	f, c
+      00001Cr26r30                   74 	goto	00109$
+      00001E 3A 2A                   75 	ceqsn	a, #0x3a
+      000020 00 00                   76 	nop
+      000022 40 18                   77 	t0sn	f, c
+      000024r2Ar30                   78 	goto	00105$
+      000026                         79 00109$:
+                                     80 ;	../isalnum.c: 39: return (isalpha (c) || isdigit (c));
+      000026r00r13                   81 	clear	p
+      000028r2Er30                   82 	goto	00106$
+      00002A                         83 00105$:
+      00002A 01 2F                   84 	mov	a, #0x01
+      00002Cr80r0B                   85 	mov	p, a
+      00002E                         86 00106$:
+      00002E 00 2F                   87 	mov	a, #0x00
+      000030r80r13                   88 	xch	a, p
+                                     89 ;	../isalnum.c: 40: }
+      000032 7A 00                   90 	ret
+                                     91 	.area CODE
+                                     92 	.area CONST
+                                     93 	.area CABS (ABS)

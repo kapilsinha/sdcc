@@ -1,0 +1,91 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _uchar2fs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___ulong2fs
+                                     17 	.globl ___uchar2fs_PARM_1
+                                     18 	.globl ___uchar2fs
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___uchar2fs_PARM_1:
+      000000                         29 	.ds 1
+      000001                         30 ___uchar2fs_sloc0_1_0:
+      000001                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../_uchar2fs.c: 55: float __uchar2fs (unsigned char uc) {
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function __uchar2fs
+                                     58 ;	-----------------------------------------
+      000000                         59 ___uchar2fs:
+                                     60 ;	../_uchar2fs.c: 56: return __ulong2fs(uc);
+      000000r80r0F                   61 	mov	a, ___uchar2fs_PARM_1+0
+      000002r80r0B                   62 	mov	___ulong2fs_PARM_1+0, a
+      000004r01r13                   63 	clear	___ulong2fs_PARM_1+1
+      000006r02r13                   64 	clear	___ulong2fs_PARM_1+2
+      000008r03r13                   65 	clear	___ulong2fs_PARM_1+3
+      00000Ar01r2F                   66 	mov	a, #___uchar2fs_sloc0_1_0
+      00000C 72 00                   67 	push	af
+      00000Er00r38                   68 	call	___ulong2fs
+      000010 C2 01                   69 	mov	a, sp
+      000012 FE 28                   70 	add	a, #-2
+      000014 82 01                   71 	mov	sp, a
+      000016 FC 28                   72 	add	a, #0xfc
+      000018r80r0B                   73 	mov	p, a
+      00001Ar81r03                   74 	idxm	a, p
+      00001Cr80r0B                   75 	mov	p, a
+      00001Er81r0F                   76 	mov	a, ___uchar2fs_sloc0_1_0+0
+      000020r80r03                   77 	idxm	p, a
+      000022r00r12                   78 	inc	p
+      000024r82r0F                   79 	mov	a, ___uchar2fs_sloc0_1_0+1
+      000026r80r03                   80 	idxm	p, a
+      000028r00r12                   81 	inc	p
+      00002Ar83r0F                   82 	mov	a, ___uchar2fs_sloc0_1_0+2
+      00002Cr80r03                   83 	idxm	p, a
+      00002Er00r12                   84 	inc	p
+      000030r84r0F                   85 	mov	a, ___uchar2fs_sloc0_1_0+3
+      000032r80r03                   86 	idxm	p, a
+                                     87 ;	../_uchar2fs.c: 57: }
+      000034 7A 00                   88 	ret
+                                     89 	.area CODE
+                                     90 	.area CONST
+                                     91 	.area CABS (ABS)

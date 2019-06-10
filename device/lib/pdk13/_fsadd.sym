@@ -1,0 +1,66 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  9 ___fsadd                                                       000000 GR
+  1 ___fsadd_PARM_1                                                000000 GR
+  1 ___fsadd_PARM_2                                                000004 GR
+  2 ___fsadd_sloc0_1_0                                             000000 R
+  2 ___fsadd_sloc10_1_0                                            000026 R
+  2 ___fsadd_sloc11_1_0                                            00002A R
+  2 ___fsadd_sloc12_1_0                                            00002C R
+  2 ___fsadd_sloc13_1_0                                            000030 R
+  2 ___fsadd_sloc14_1_0                                            000034 R
+  2 ___fsadd_sloc15_1_0                                            000038 R
+  2 ___fsadd_sloc16_1_0                                            00003C R
+  2 ___fsadd_sloc17_1_0                                            00003E R
+  2 ___fsadd_sloc18_1_0                                            000040 R
+  2 ___fsadd_sloc19_1_0                                            000044 R
+  2 ___fsadd_sloc1_1_0                                             000004 R
+  2 ___fsadd_sloc20_1_0                                            000045 R
+  2 ___fsadd_sloc21_1_0                                            000047 R
+  2 ___fsadd_sloc22_1_0                                            00004B R
+  2 ___fsadd_sloc23_1_0                                            00004D R
+  2 ___fsadd_sloc24_1_0                                            00004F R
+  2 ___fsadd_sloc25_1_0                                            000053 R
+  2 ___fsadd_sloc26_1_0                                            000057 R
+  2 ___fsadd_sloc27_1_0                                            00005B R
+  2 ___fsadd_sloc28_1_0                                            00005F R
+  2 ___fsadd_sloc29_1_0                                            000063 R
+  2 ___fsadd_sloc2_1_0                                             000008 R
+  2 ___fsadd_sloc30_1_0                                            000067 R
+  2 ___fsadd_sloc31_1_0                                            00006B R
+  2 ___fsadd_sloc32_1_0                                            00006F R
+  2 ___fsadd_sloc3_1_0                                             00000C R
+  2 ___fsadd_sloc4_1_0                                             00000E R
+  2 ___fsadd_sloc5_1_0                                             000012 R
+  2 ___fsadd_sloc6_1_0                                             000016 R
+  2 ___fsadd_sloc7_1_0                                             00001A R
+  2 ___fsadd_sloc8_1_0                                             00001E R
+  2 ___fsadd_sloc9_1_0                                             000022 R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      8   flags    0
+   2 OSEG                                       size     73   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    4B2   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

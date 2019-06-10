@@ -1,0 +1,122 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strcmp
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strcmp_PARM_2
+                                     17 	.globl _strcmp_PARM_1
+                                     18 	.globl _strcmp
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _strcmp_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _strcmp_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _strcmp_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 _strcmp_sloc1_1_0:
+      000002                         39 	.ds 2
+      000004                         40 _strcmp_sloc2_1_0:
+      000004                         41 	.ds 2
+      000006                         42 _strcmp_sloc3_1_0:
+      000006                         43 	.ds 1
+      000007                         44 _strcmp_sloc4_1_0:
+      000007                         45 	.ds 2
+                                     46 ;--------------------------------------------------------
+                                     47 ; absolute external ram data
+                                     48 ;--------------------------------------------------------
+                                     49 	.area DABS (ABS)
+                                     50 ;--------------------------------------------------------
+                                     51 ; global & static initialisations
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area GSINIT
+                                     55 	.area GSFINAL
+                                     56 	.area GSINIT
+                                     57 ;--------------------------------------------------------
+                                     58 ; Home
+                                     59 ;--------------------------------------------------------
+                                     60 	.area HOME
+                                     61 	.area HOME
+                                     62 ;--------------------------------------------------------
+                                     63 ; code
+                                     64 ;--------------------------------------------------------
+                                     65 	.area CODE
+                                     66 ;	../_strcmp.c: 34: int strcmp ( const char * asrc, const char * adst )
+                                     67 ;	-----------------------------------------
+                                     68 ;	 function strcmp
+                                     69 ;	-----------------------------------------
+      000000                         70 _strcmp:
+                                     71 ;	../_strcmp.c: 50: while( ! (ret = *(unsigned char *)asrc - *(unsigned char *)adst) && *adst)
+      000000r80r0F                   72 	mov	a, _strcmp_PARM_1+0
+      000002r80r0B                   73 	mov	_strcmp_sloc0_1_0+0, a
+      000004r81r0F                   74 	mov	a, _strcmp_PARM_1+1
+      000006r81r0B                   75 	mov	_strcmp_sloc0_1_0+1, a
+      000008r82r0F                   76 	mov	a, _strcmp_PARM_2+0
+      00000Ar82r0B                   77 	mov	_strcmp_sloc1_1_0+0, a
+      00000Cr83r0F                   78 	mov	a, _strcmp_PARM_2+1
+      00000Er83r0B                   79 	mov	_strcmp_sloc1_1_0+1, a
+      000010                         80 00102$:
+      000010r80r0F                   81 	mov	a, _strcmp_sloc0_1_0+0
+      000012r80r0B                   82 	mov	p, a
+      000014r81r0F                   83 	mov	a, _strcmp_sloc0_1_0+1
+      000016r00r38                   84 	call	__gptrget
+      000018r84r0B                   85 	mov	_strcmp_sloc2_1_0+0, a
+      00001Ar05r13                   86 	clear	_strcmp_sloc2_1_0+1
+      00001Cr82r0F                   87 	mov	a, _strcmp_sloc1_1_0+0
+      00001Er80r0B                   88 	mov	p, a
+      000020r83r0F                   89 	mov	a, _strcmp_sloc1_1_0+1
+      000022r00r38                   90 	call	__gptrget
+      000024r86r0B                   91 	mov	_strcmp_sloc3_1_0+0, a
+      000026r84r0F                   92 	mov	a, _strcmp_sloc2_1_0+0
+      000028r86r0C                   93 	sub	a, _strcmp_sloc3_1_0+0
+      00002Ar80r0B                   94 	mov	p, a
+      00002Cr85r0F                   95 	mov	a, _strcmp_sloc2_1_0+1
+      00002E 61 00                   96 	subc	a
+      000030r88r0B                   97 	mov	_strcmp_sloc4_1_0+1, a
+      000032r80r13                   98 	xch	a, p
+      000034r87r0B                   99 	mov	_strcmp_sloc4_1_0+0, a
+      000036r80r13                  100 	xch	a, p
+      000038r80r0E                  101 	or	a, p
+      00003A 00 2A                  102 	ceqsn	a, #0x00
+      00003Cr4Er30                  103 	goto	00104$
+      00003Er86r0F                  104 	mov	a, _strcmp_sloc3_1_0+0
+      000040 00 2B                  105 	cneqsn	a, #0x00
+      000042r4Er30                  106 	goto	00104$
+                                    107 ;	../_strcmp.c: 51: ++asrc, ++adst;
+      000044r00r12                  108 	inc	_strcmp_sloc0_1_0+0
+      000046r01r10                  109 	addc	_strcmp_sloc0_1_0+1
+      000048r02r12                  110 	inc	_strcmp_sloc1_1_0+0
+      00004Ar03r10                  111 	addc	_strcmp_sloc1_1_0+1
+      00004Cr10r30                  112 	goto	00102$
+      00004E                        113 00104$:
+                                    114 ;	../_strcmp.c: 53: return( ret );
+      00004Er88r0F                  115 	mov	a, _strcmp_sloc4_1_0+1
+      000050r80r0B                  116 	mov	p, a
+      000052r87r0F                  117 	mov	a, _strcmp_sloc4_1_0+0
+                                    118 ;	../_strcmp.c: 55: }
+      000054 7A 00                  119 	ret
+                                    120 	.area CODE
+                                    121 	.area CONST
+                                    122 	.area CABS (ABS)

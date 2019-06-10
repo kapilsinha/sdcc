@@ -1,0 +1,136 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module tanf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _tancotf
+                                     17 	.globl _tanf
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; overlayable items in ram 
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 ;--------------------------------------------------------
+                                     35 ; global & static initialisations
+                                     36 ;--------------------------------------------------------
+                                     37 	.area HOME
+                                     38 	.area GSINIT
+                                     39 	.area GSFINAL
+                                     40 	.area GSINIT
+                                     41 ;--------------------------------------------------------
+                                     42 ; Home
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area HOME
+                                     46 ;--------------------------------------------------------
+                                     47 ; code
+                                     48 ;--------------------------------------------------------
+                                     49 	.area CODE
+                                     50 ;	../tanf.c: 36: float tanf(float x) _FLOAT_FUNC_REENTRANT
+                                     51 ;	-----------------------------------------
+                                     52 ;	 function tanf
+                                     53 ;	-----------------------------------------
+      000000                         54 _tanf:
+      000000 72 00                   55 	push	af
+      000002 72 00                   56 	push	af
+                                     57 ;	../tanf.c: 38: return tancotf(x, 0);
+      000004 C2 01                   58 	mov	a, sp
+      000006 F4 28                   59 	add	a, #0xf4
+      000008r80r0B                   60 	mov	p, a
+      00000Ar81r03                   61 	idxm	a, p
+      00000Cr80r0B                   62 	mov	_tancotf_PARM_1+0, a
+      00000Er00r12                   63 	inc	p
+      000010r81r03                   64 	idxm	a, p
+      000012r81r0B                   65 	mov	_tancotf_PARM_1+1, a
+      000014r00r12                   66 	inc	p
+      000016r81r03                   67 	idxm	a, p
+      000018r82r0B                   68 	mov	_tancotf_PARM_1+2, a
+      00001Ar00r12                   69 	inc	p
+      00001Cr81r03                   70 	idxm	a, p
+      00001Er83r0B                   71 	mov	_tancotf_PARM_1+3, a
+      000020r00r13                   72 	clear	_tancotf_PARM_2+0
+      000022 C2 01                   73 	mov	a, sp
+      000024 FC 28                   74 	add	a, #0xfc
+      000026 72 00                   75 	push	af
+      000028r00r38                   76 	call	_tancotf
+      00002A C2 01                   77 	mov	a, sp
+      00002C FE 28                   78 	add	a, #-2
+      00002E 82 01                   79 	mov	sp, a
+      000030 FC 28                   80 	add	a, #0xfc
+      000032r80r0B                   81 	mov	p, a
+      000034r81r03                   82 	idxm	a, p
+      000036 72 00                   83 	push	af
+      000038 FC 2F                   84 	mov	a, #-4
+      00003Ar00r08                   85 	add	p, a
+      00003Cr81r03                   86 	idxm	a, p
+      00003Er80r0B                   87 	mov	p, a
+      000040 73 00                   88 	pop	af
+      000042r80r03                   89 	idxm	p, a
+      000044 C2 01                   90 	mov	a, sp
+      000046 FD 28                   91 	add	a, #0xfd
+      000048r80r0B                   92 	mov	p, a
+      00004Ar81r03                   93 	idxm	a, p
+      00004C 72 00                   94 	push	af
+      00004E FB 2F                   95 	mov	a, #-5
+      000050r00r08                   96 	add	p, a
+      000052r81r03                   97 	idxm	a, p
+      000054r80r0B                   98 	mov	p, a
+      000056 73 00                   99 	pop	af
+      000058r00r12                  100 	inc	p
+      00005Ar80r03                  101 	idxm	p, a
+      00005C C2 01                  102 	mov	a, sp
+      00005E FE 28                  103 	add	a, #0xfe
+      000060r80r0B                  104 	mov	p, a
+      000062r81r03                  105 	idxm	a, p
+      000064 72 00                  106 	push	af
+      000066 FA 2F                  107 	mov	a, #-6
+      000068r00r08                  108 	add	p, a
+      00006Ar81r03                  109 	idxm	a, p
+      00006Cr80r0B                  110 	mov	p, a
+      00006E 73 00                  111 	pop	af
+      000070r00r12                  112 	inc	p
+      000072r00r12                  113 	inc	p
+      000074r80r03                  114 	idxm	p, a
+      000076 C2 01                  115 	mov	a, sp
+      000078 FF 28                  116 	add	a, #0xff
+      00007Ar80r0B                  117 	mov	p, a
+      00007Cr81r03                  118 	idxm	a, p
+      00007E 72 00                  119 	push	af
+      000080 F9 2F                  120 	mov	a, #-7
+      000082r00r08                  121 	add	p, a
+      000084r81r03                  122 	idxm	a, p
+      000086r80r0B                  123 	mov	p, a
+      000088 73 00                  124 	pop	af
+      00008Ar00r12                  125 	inc	p
+      00008Cr00r12                  126 	inc	p
+      00008Er00r12                  127 	inc	p
+      000090r80r03                  128 	idxm	p, a
+                                    129 ;	../tanf.c: 39: }
+      000092 C2 01                  130 	mov	a, sp
+      000094 FC 28                  131 	add	a, #-4
+      000096 82 01                  132 	mov	sp, a
+      000098 7A 00                  133 	ret
+                                    134 	.area CODE
+                                    135 	.area CONST
+                                    136 	.area CABS (ABS)

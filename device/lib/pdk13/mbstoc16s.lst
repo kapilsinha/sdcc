@@ -1,0 +1,303 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbstoc16s
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbtowc
+                                     17 	.globl ___mbstoc16s_PARM_3
+                                     18 	.globl ___mbstoc16s_PARM_2
+                                     19 	.globl ___mbstoc16s_PARM_1
+                                     20 	.globl ___mbstoc16s
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 ___mbstoc16s_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 ___mbstoc16s_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 ___mbstoc16s_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 ___mbstoc16s_codepoint_196608_46:
+      000006                         37 	.ds 4
+      00000A                         38 ___mbstoc16s_sloc0_1_0:
+      00000A                         39 	.ds 2
+      00000C                         40 ___mbstoc16s_sloc1_1_0:
+      00000C                         41 	.ds 2
+      00000E                         42 ___mbstoc16s_sloc2_1_0:
+      00000E                         43 	.ds 2
+      000010                         44 ___mbstoc16s_sloc3_1_0:
+      000010                         45 	.ds 2
+      000012                         46 ___mbstoc16s_sloc4_1_0:
+      000012                         47 	.ds 2
+      000014                         48 ___mbstoc16s_sloc5_1_0:
+      000014                         49 	.ds 2
+      000016                         50 ___mbstoc16s_sloc6_1_0:
+      000016                         51 	.ds 2
+      000018                         52 ___mbstoc16s_sloc7_1_0:
+      000018                         53 	.ds 4
+      00001C                         54 ___mbstoc16s_sloc8_1_0:
+      00001C                         55 	.ds 2
+      00001E                         56 ___mbstoc16s_sloc9_1_0:
+      00001E                         57 	.ds 2
+      000020                         58 ___mbstoc16s_sloc10_1_0:
+      000020                         59 	.ds 2
+      000022                         60 ___mbstoc16s_sloc11_1_0:
+      000022                         61 	.ds 2
+      000024                         62 ___mbstoc16s_sloc12_1_0:
+      000024                         63 	.ds 2
+                                     64 ;--------------------------------------------------------
+                                     65 ; overlayable items in ram 
+                                     66 ;--------------------------------------------------------
+                                     67 ;--------------------------------------------------------
+                                     68 ; absolute external ram data
+                                     69 ;--------------------------------------------------------
+                                     70 	.area DABS (ABS)
+                                     71 ;--------------------------------------------------------
+                                     72 ; global & static initialisations
+                                     73 ;--------------------------------------------------------
+                                     74 	.area HOME
+                                     75 	.area GSINIT
+                                     76 	.area GSFINAL
+                                     77 	.area GSINIT
+                                     78 ;--------------------------------------------------------
+                                     79 ; Home
+                                     80 ;--------------------------------------------------------
+                                     81 	.area HOME
+                                     82 	.area HOME
+                                     83 ;--------------------------------------------------------
+                                     84 ; code
+                                     85 ;--------------------------------------------------------
+                                     86 	.area CODE
+                                     87 ;	../mbstoc16s.c: 44: size_t __mbstoc16s(char16_t *restrict c16s, const char *restrict s, size_t n)
+                                     88 ;	-----------------------------------------
+                                     89 ;	 function __mbstoc16s
+                                     90 ;	-----------------------------------------
+      000000                         91 ___mbstoc16s:
+                                     92 ;	../mbstoc16s.c: 46: size_t m = 0;
+      000000r0Ar13                   93 	clear	___mbstoc16s_sloc0_1_0+0
+      000002r0Br13                   94 	clear	___mbstoc16s_sloc0_1_0+1
+                                     95 ;	../mbstoc16s.c: 85: return(m);
+      000004                         96 00116$:
+                                     97 ;	../mbstoc16s.c: 53: l = mbtowc(&codepoint, s, MB_LEN_MAX);
+      000004r06r2F                   98 	mov	a, #(___mbstoc16s_codepoint_196608_46 + 0)
+      000006r80r0B                   99 	mov	_mbtowc_PARM_1+0, a
+      000008r01r13                  100 	clear	_mbtowc_PARM_1+1
+      00000Ar82r0F                  101 	mov	a, ___mbstoc16s_PARM_2+0
+      00000Cr80r0B                  102 	mov	_mbtowc_PARM_2+0, a
+      00000Er83r0F                  103 	mov	a, ___mbstoc16s_PARM_2+1
+      000010r81r0B                  104 	mov	_mbtowc_PARM_2+1, a
+      000012 04 2F                  105 	mov	a, #0x04
+      000014r80r0B                  106 	mov	_mbtowc_PARM_3+0, a
+      000016r01r13                  107 	clear	_mbtowc_PARM_3+1
+      000018r00r38                  108 	call	_mbtowc
+      00001Ar8Cr0B                  109 	mov	___mbstoc16s_sloc1_1_0+0, a
+      00001Cr80r0F                  110 	mov	a, p
+                                    111 ;	../mbstoc16s.c: 55: if(l < 0)
+      00001Er8Dr0B                  112 	mov	___mbstoc16s_sloc1_1_0+1, a
+      000020 80 29                  113 	sub	a, #0x80
+      000022 40 18                  114 	t0sn	f, c
+      000024r2Cr30                  115 	goto	00106$
+                                    116 ;	../mbstoc16s.c: 56: return(-1);
+      000026 FF 2F                  117 	mov	a, #0xff
+      000028r80r0B                  118 	mov	p, a
+      00002A FF 02                  119 	ret	#0xff
+      00002C                        120 00106$:
+                                    121 ;	../mbstoc16s.c: 57: else if(!l)
+      00002Cr8Cr0F                  122 	mov	a, ___mbstoc16s_sloc1_1_0+0
+      00002Er8Dr0E                  123 	or	a, ___mbstoc16s_sloc1_1_0+1
+      000030 00 2A                  124 	ceqsn	a, #0x00
+      000032r58r30                  125 	goto	00107$
+                                    126 ;	../mbstoc16s.c: 59: if(m < n)
+      000034r8Ar0F                  127 	mov	a, ___mbstoc16s_sloc0_1_0+0
+      000036r84r0C                  128 	sub	a, ___mbstoc16s_PARM_3+0
+      000038r8Br0F                  129 	mov	a, ___mbstoc16s_sloc0_1_0+1
+      00003Ar85r0D                  130 	subc	a, ___mbstoc16s_PARM_3+1
+      00003C 40 1A                  131 	t1sn	f, c
+      00003Er64r31                  132 	goto	00115$
+                                    133 ;	../mbstoc16s.c: 60: *c16s = 0;
+      000040r80r0F                  134 	mov	a, ___mbstoc16s_PARM_1+0
+      000042r8Er0B                  135 	mov	___mbstoc16s_sloc2_1_0+0, a
+      000044r81r0F                  136 	mov	a, ___mbstoc16s_PARM_1+1
+      000046r8Fr0B                  137 	mov	___mbstoc16s_sloc2_1_0+1, a
+      000048r8Er0F                  138 	mov	a, ___mbstoc16s_sloc2_1_0+0
+      00004Ar80r0B                  139 	mov	p, a
+      00004C 00 2F                  140 	mov	a, #0x00
+      00004Er80r03                  141 	idxm	p, a
+      000050r00r12                  142 	inc	p
+      000052 00 2F                  143 	mov	a, #0x00
+      000054r80r03                  144 	idxm	p, a
+                                    145 ;	../mbstoc16s.c: 61: break;
+      000056r64r31                  146 	goto	00115$
+      000058                        147 00107$:
+                                    148 ;	../mbstoc16s.c: 64: if (codepoint <= 0xffff) // Basic multilingual plane
+      000058 FF 2F                  149 	mov	a, #0xff
+      00005Ar86r0C                  150 	sub	a, ___mbstoc16s_codepoint_196608_46+0
+      00005C FF 2F                  151 	mov	a, #0xff
+      00005Er87r0D                  152 	subc	a, ___mbstoc16s_codepoint_196608_46+1
+      000060 00 2F                  153 	mov	a, #0x00
+      000062r88r0D                  154 	subc	a, ___mbstoc16s_codepoint_196608_46+2
+      000064 00 2F                  155 	mov	a, #0x00
+      000066r89r0D                  156 	subc	a, ___mbstoc16s_codepoint_196608_46+3
+      000068 40 18                  157 	t0sn	f, c
+      00006ArA8r30                  158 	goto	00113$
+                                    159 ;	../mbstoc16s.c: 66: if (m >= n)
+      00006Cr8Ar0F                  160 	mov	a, ___mbstoc16s_sloc0_1_0+0
+      00006Er84r0C                  161 	sub	a, ___mbstoc16s_PARM_3+0
+      000070r8Br0F                  162 	mov	a, ___mbstoc16s_sloc0_1_0+1
+      000072r85r0D                  163 	subc	a, ___mbstoc16s_PARM_3+1
+      000074 40 1A                  164 	t1sn	f, c
+      000076r64r31                  165 	goto	00115$
+                                    166 ;	../mbstoc16s.c: 69: *c16s++ = codepoint;
+      000078r80r0F                  167 	mov	a, ___mbstoc16s_PARM_1+0
+      00007Ar90r0B                  168 	mov	___mbstoc16s_sloc3_1_0+0, a
+      00007Cr81r0F                  169 	mov	a, ___mbstoc16s_PARM_1+1
+      00007Er91r0B                  170 	mov	___mbstoc16s_sloc3_1_0+1, a
+      000080r86r0F                  171 	mov	a, ___mbstoc16s_codepoint_196608_46+0
+      000082r92r0B                  172 	mov	___mbstoc16s_sloc4_1_0+0, a
+      000084r87r0F                  173 	mov	a, ___mbstoc16s_codepoint_196608_46+1
+      000086r93r0B                  174 	mov	___mbstoc16s_sloc4_1_0+1, a
+      000088r90r0F                  175 	mov	a, ___mbstoc16s_sloc3_1_0+0
+      00008Ar80r0B                  176 	mov	p, a
+      00008Cr92r0F                  177 	mov	a, ___mbstoc16s_sloc4_1_0+0
+      00008Er80r03                  178 	idxm	p, a
+      000090r00r12                  179 	inc	p
+      000092r93r0F                  180 	mov	a, ___mbstoc16s_sloc4_1_0+1
+      000094r80r03                  181 	idxm	p, a
+      000096r90r0F                  182 	mov	a, ___mbstoc16s_sloc3_1_0+0
+      000098 02 28                  183 	add	a, #0x02
+      00009Ar80r0B                  184 	mov	___mbstoc16s_PARM_1+0, a
+      00009Cr91r0F                  185 	mov	a, ___mbstoc16s_sloc3_1_0+1
+      00009E 60 00                  186 	addc	a
+      0000A0r81r0B                  187 	mov	___mbstoc16s_PARM_1+1, a
+                                    188 ;	../mbstoc16s.c: 70: m++;
+      0000A2r0Ar12                  189 	inc	___mbstoc16s_sloc0_1_0+0
+      0000A4r0Br10                  190 	addc	___mbstoc16s_sloc0_1_0+1
+      0000A6r5Ar31                  191 	goto	00114$
+      0000A8                        192 00113$:
+                                    193 ;	../mbstoc16s.c: 74: if (m + 1 >= n)
+      0000A8r8Ar0F                  194 	mov	a, ___mbstoc16s_sloc0_1_0+0
+      0000AA 01 28                  195 	add	a, #0x01
+      0000ACr94r0B                  196 	mov	___mbstoc16s_sloc5_1_0+0, a
+      0000AEr8Br0F                  197 	mov	a, ___mbstoc16s_sloc0_1_0+1
+      0000B0 60 00                  198 	addc	a
+      0000B2r95r0B                  199 	mov	___mbstoc16s_sloc5_1_0+1, a
+      0000B4r94r0F                  200 	mov	a, ___mbstoc16s_sloc5_1_0+0
+      0000B6r84r0C                  201 	sub	a, ___mbstoc16s_PARM_3+0
+      0000B8r95r0F                  202 	mov	a, ___mbstoc16s_sloc5_1_0+1
+      0000BAr85r0D                  203 	subc	a, ___mbstoc16s_PARM_3+1
+      0000BC 40 1A                  204 	t1sn	f, c
+      0000BEr64r31                  205 	goto	00115$
+                                    206 ;	../mbstoc16s.c: 77: codepoint -= 0x100000;
+      0000C0 10 2F                  207 	mov	a, #0x10
+      0000C2r88r08                  208 	sub	___mbstoc16s_codepoint_196608_46+2, a
+      0000C4r89r10                  209 	subc	___mbstoc16s_codepoint_196608_46+3
+                                    210 ;	../mbstoc16s.c: 78: *c16s++ = ((codepoint >> 10) & 0x3ff) + 0xd800;
+      0000C6r80r0F                  211 	mov	a, ___mbstoc16s_PARM_1+0
+      0000C8r96r0B                  212 	mov	___mbstoc16s_sloc6_1_0+0, a
+      0000CAr81r0F                  213 	mov	a, ___mbstoc16s_PARM_1+1
+      0000CCr97r0B                  214 	mov	___mbstoc16s_sloc6_1_0+1, a
+      0000CEr87r0F                  215 	mov	a, ___mbstoc16s_codepoint_196608_46+1
+      0000D0r98r0B                  216 	mov	___mbstoc16s_sloc7_1_0+0, a
+      0000D2r88r0F                  217 	mov	a, ___mbstoc16s_codepoint_196608_46+2
+      0000D4r99r0B                  218 	mov	___mbstoc16s_sloc7_1_0+1, a
+      0000D6r89r0F                  219 	mov	a, ___mbstoc16s_codepoint_196608_46+3
+      0000D8r9Ar0B                  220 	mov	___mbstoc16s_sloc7_1_0+2, a
+      0000DAr1Br13                  221 	clear	___mbstoc16s_sloc7_1_0+3
+      0000DCr1Ar15                  222 	sr	___mbstoc16s_sloc7_1_0+2
+      0000DEr19r16                  223 	src	___mbstoc16s_sloc7_1_0+1
+      0000E0r18r16                  224 	src	___mbstoc16s_sloc7_1_0+0
+      0000E2r1Ar15                  225 	sr	___mbstoc16s_sloc7_1_0+2
+      0000E4r19r16                  226 	src	___mbstoc16s_sloc7_1_0+1
+      0000E6r18r16                  227 	src	___mbstoc16s_sloc7_1_0+0
+      0000E8r99r0F                  228 	mov	a, ___mbstoc16s_sloc7_1_0+1
+      0000EAr80r0B                  229 	mov	p, a
+      0000ECr98r0F                  230 	mov	a, ___mbstoc16s_sloc7_1_0+0
+      0000EEr9Cr0B                  231 	mov	___mbstoc16s_sloc8_1_0+0, a
+      0000F0r80r0F                  232 	mov	a, p
+      0000F2 03 2C                  233 	and	a, #0x03
+      0000F4r9Dr0B                  234 	mov	___mbstoc16s_sloc8_1_0+1, a
+      0000F6r9Cr0F                  235 	mov	a, ___mbstoc16s_sloc8_1_0+0
+      0000F8r9Er0B                  236 	mov	___mbstoc16s_sloc9_1_0+0, a
+      0000FAr9Dr0F                  237 	mov	a, ___mbstoc16s_sloc8_1_0+1
+      0000FC D8 28                  238 	add	a, #0xd8
+      0000FEr9Fr0B                  239 	mov	___mbstoc16s_sloc9_1_0+1, a
+      000100r96r0F                  240 	mov	a, ___mbstoc16s_sloc6_1_0+0
+      000102r80r0B                  241 	mov	p, a
+      000104r9Er0F                  242 	mov	a, ___mbstoc16s_sloc9_1_0+0
+      000106r80r03                  243 	idxm	p, a
+      000108r00r12                  244 	inc	p
+      00010Ar9Fr0F                  245 	mov	a, ___mbstoc16s_sloc9_1_0+1
+      00010Cr80r03                  246 	idxm	p, a
+      00010Er96r0F                  247 	mov	a, ___mbstoc16s_sloc6_1_0+0
+      000110 02 28                  248 	add	a, #0x02
+      000112r80r0B                  249 	mov	___mbstoc16s_PARM_1+0, a
+      000114r97r0F                  250 	mov	a, ___mbstoc16s_sloc6_1_0+1
+      000116 60 00                  251 	addc	a
+      000118r81r0B                  252 	mov	___mbstoc16s_PARM_1+1, a
+                                    253 ;	../mbstoc16s.c: 79: *c16s++ = (codepoint & 0x3ff) + 0xdc00;
+      00011Ar80r0F                  254 	mov	a, ___mbstoc16s_PARM_1+0
+      00011CrA0r0B                  255 	mov	___mbstoc16s_sloc10_1_0+0, a
+      00011Er81r0F                  256 	mov	a, ___mbstoc16s_PARM_1+1
+      000120rA1r0B                  257 	mov	___mbstoc16s_sloc10_1_0+1, a
+      000122r87r0F                  258 	mov	a, ___mbstoc16s_codepoint_196608_46+1
+      000124r80r0B                  259 	mov	p, a
+      000126r86r0F                  260 	mov	a, ___mbstoc16s_codepoint_196608_46+0
+      000128rA2r0B                  261 	mov	___mbstoc16s_sloc11_1_0+0, a
+      00012Ar80r0F                  262 	mov	a, p
+      00012C 03 2C                  263 	and	a, #0x03
+      00012ErA3r0B                  264 	mov	___mbstoc16s_sloc11_1_0+1, a
+      000130rA2r0F                  265 	mov	a, ___mbstoc16s_sloc11_1_0+0
+      000132rA4r0B                  266 	mov	___mbstoc16s_sloc12_1_0+0, a
+      000134rA3r0F                  267 	mov	a, ___mbstoc16s_sloc11_1_0+1
+      000136 DC 28                  268 	add	a, #0xdc
+      000138rA5r0B                  269 	mov	___mbstoc16s_sloc12_1_0+1, a
+      00013ArA0r0F                  270 	mov	a, ___mbstoc16s_sloc10_1_0+0
+      00013Cr80r0B                  271 	mov	p, a
+      00013ErA4r0F                  272 	mov	a, ___mbstoc16s_sloc12_1_0+0
+      000140r80r03                  273 	idxm	p, a
+      000142r00r12                  274 	inc	p
+      000144rA5r0F                  275 	mov	a, ___mbstoc16s_sloc12_1_0+1
+      000146r80r03                  276 	idxm	p, a
+      000148rA0r0F                  277 	mov	a, ___mbstoc16s_sloc10_1_0+0
+      00014A 02 28                  278 	add	a, #0x02
+      00014Cr80r0B                  279 	mov	___mbstoc16s_PARM_1+0, a
+      00014ErA1r0F                  280 	mov	a, ___mbstoc16s_sloc10_1_0+1
+      000150 60 00                  281 	addc	a
+      000152r81r0B                  282 	mov	___mbstoc16s_PARM_1+1, a
+                                    283 ;	../mbstoc16s.c: 80: m += 2;
+      000154 02 2F                  284 	mov	a, #0x02
+      000156r0Ar08                  285 	add	___mbstoc16s_sloc0_1_0+0, a
+      000158r0Br10                  286 	addc	___mbstoc16s_sloc0_1_0+1
+      00015A                        287 00114$:
+                                    288 ;	../mbstoc16s.c: 82: s += l;
+      00015Ar8Cr0F                  289 	mov	a, ___mbstoc16s_sloc1_1_0+0
+      00015Cr02r08                  290 	add	___mbstoc16s_PARM_2+0, a
+      00015Er8Dr0F                  291 	mov	a, ___mbstoc16s_sloc1_1_0+1
+      000160r03r09                  292 	addc	___mbstoc16s_PARM_2+1, a
+      000162r04r30                  293 	goto	00116$
+      000164                        294 00115$:
+                                    295 ;	../mbstoc16s.c: 85: return(m);
+      000164r8Br0F                  296 	mov	a, ___mbstoc16s_sloc0_1_0+1
+      000166r80r0B                  297 	mov	p, a
+      000168r8Ar0F                  298 	mov	a, ___mbstoc16s_sloc0_1_0+0
+                                    299 ;	../mbstoc16s.c: 86: }
+      00016A 7A 00                  300 	ret
+                                    301 	.area CODE
+                                    302 	.area CONST
+                                    303 	.area CABS (ABS)

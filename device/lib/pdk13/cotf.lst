@@ -1,0 +1,268 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module cotf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _tancotf
+                                     17 	.globl _fabsf
+                                     18 	.globl _cotf
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+                                     28 ;--------------------------------------------------------
+                                     29 ; overlayable items in ram 
+                                     30 ;--------------------------------------------------------
+                                     31 ;--------------------------------------------------------
+                                     32 ; absolute external ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area DABS (ABS)
+                                     35 ;--------------------------------------------------------
+                                     36 ; global & static initialisations
+                                     37 ;--------------------------------------------------------
+                                     38 	.area HOME
+                                     39 	.area GSINIT
+                                     40 	.area GSFINAL
+                                     41 	.area GSINIT
+                                     42 ;--------------------------------------------------------
+                                     43 ; Home
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area HOME
+                                     47 ;--------------------------------------------------------
+                                     48 ; code
+                                     49 ;--------------------------------------------------------
+                                     50 	.area CODE
+                                     51 ;	../cotf.c: 37: float cotf(float x) _FLOAT_FUNC_REENTRANT
+                                     52 ;	-----------------------------------------
+                                     53 ;	 function cotf
+                                     54 ;	-----------------------------------------
+      000000                         55 _cotf:
+      000000 C2 01                   56 	mov	a, sp
+      000002 08 28                   57 	add	a, #8
+      000004 82 01                   58 	mov	sp, a
+                                     59 ;	../cotf.c: 41: y=fabsf(x);
+      000006 72 00                   60 	push	af
+      000008 72 00                   61 	push	af
+      00000A C2 01                   62 	mov	a, sp
+      00000C EF 28                   63 	add	a, #0xef
+      00000Er80r0B                   64 	mov	p, a
+      000010r81r03                   65 	idxm	a, p
+      000012r80r13                   66 	xch	a, p
+      000014 10 28                   67 	add	a, #16
+      000016r80r13                   68 	xch	a, p
+      000018r80r03                   69 	idxm	p, a
+      00001A EF 2F                   70 	mov	a, #-17
+      00001Cr00r08                   71 	add	p, a
+      00001Er81r03                   72 	idxm	a, p
+      000020r80r13                   73 	xch	a, p
+      000022 10 28                   74 	add	a, #16
+      000024r80r13                   75 	xch	a, p
+      000026r80r03                   76 	idxm	p, a
+      000028 EF 2F                   77 	mov	a, #-17
+      00002Ar00r08                   78 	add	p, a
+      00002Cr81r03                   79 	idxm	a, p
+      00002Er80r13                   80 	xch	a, p
+      000030 10 28                   81 	add	a, #16
+      000032r80r13                   82 	xch	a, p
+      000034r80r03                   83 	idxm	p, a
+      000036 EF 2F                   84 	mov	a, #-17
+      000038r00r08                   85 	add	p, a
+      00003Ar81r03                   86 	idxm	a, p
+      00003Cr80r13                   87 	xch	a, p
+      00003E 10 28                   88 	add	a, #16
+      000040r80r13                   89 	xch	a, p
+      000042r80r03                   90 	idxm	p, a
+      000044 C2 01                   91 	mov	a, sp
+      000046 F4 28                   92 	add	a, #0xf4
+      000048 72 00                   93 	push	af
+      00004Ar00r38                   94 	call	_fabsf
+      00004C C2 01                   95 	mov	a, sp
+      00004E FA 28                   96 	add	a, #-6
+      000050 82 01                   97 	mov	sp, a
+      000052 F8 28                   98 	add	a, #0xf8
+      000054r80r0B                   99 	mov	p, a
+      000056r81r03                  100 	idxm	a, p
+      000058r80r0B                  101 	mov	___fslt_PARM_1+0, a
+      00005Ar00r12                  102 	inc	p
+      00005Cr81r03                  103 	idxm	a, p
+      00005Er81r0B                  104 	mov	___fslt_PARM_1+1, a
+      000060r00r12                  105 	inc	p
+      000062r81r03                  106 	idxm	a, p
+      000064r82r0B                  107 	mov	___fslt_PARM_1+2, a
+      000066r00r12                  108 	inc	p
+      000068r81r03                  109 	idxm	a, p
+      00006Ar83r0B                  110 	mov	___fslt_PARM_1+3, a
+                                    111 ;	../cotf.c: 42: if (y<1.0E-30) //This one requires more thinking...
+      00006C 60 2F                  112 	mov	a, #0x60
+      00006Er80r0B                  113 	mov	___fslt_PARM_2+0, a
+      000070 42 2F                  114 	mov	a, #0x42
+      000072r81r0B                  115 	mov	___fslt_PARM_2+1, a
+      000074 A2 2F                  116 	mov	a, #0xa2
+      000076r82r0B                  117 	mov	___fslt_PARM_2+2, a
+      000078 0D 2F                  118 	mov	a, #0x0d
+      00007Ar83r0B                  119 	mov	___fslt_PARM_2+3, a
+      00007Cr00r38                  120 	call	___fslt
+      00007E 00 2B                  121 	cneqsn	a, #0x00
+      000080rF6r30                  122 	goto	00105$
+                                    123 ;	../cotf.c: 44: errno = ERANGE;
+      000082 22 2F                  124 	mov	a, #0x22
+      000084r80r0B                  125 	mov	_errno+0, a
+      000086r01r13                  126 	clear	_errno+1
+                                    127 ;	../cotf.c: 45: if (x<0.0)
+      000088 C2 01                  128 	mov	a, sp
+      00008A F0 28                  129 	add	a, #0xf0
+      00008Cr80r0B                  130 	mov	p, a
+      00008Er81r03                  131 	idxm	a, p
+      000090r80r0B                  132 	mov	___fslt_PARM_1+0, a
+      000092r00r12                  133 	inc	p
+      000094r81r03                  134 	idxm	a, p
+      000096r81r0B                  135 	mov	___fslt_PARM_1+1, a
+      000098r00r12                  136 	inc	p
+      00009Ar81r03                  137 	idxm	a, p
+      00009Cr82r0B                  138 	mov	___fslt_PARM_1+2, a
+      00009Er00r12                  139 	inc	p
+      0000A0r81r03                  140 	idxm	a, p
+      0000A2r83r0B                  141 	mov	___fslt_PARM_1+3, a
+      0000A4r00r13                  142 	clear	___fslt_PARM_2+0
+      0000A6r01r13                  143 	clear	___fslt_PARM_2+1
+      0000A8r02r13                  144 	clear	___fslt_PARM_2+2
+      0000AAr03r13                  145 	clear	___fslt_PARM_2+3
+      0000ACr00r38                  146 	call	___fslt
+      0000AE 00 2B                  147 	cneqsn	a, #0x00
+      0000B0rD4r30                  148 	goto	00102$
+                                    149 ;	../cotf.c: 46: return -HUGE_VALF;
+      0000B2 C2 01                  150 	mov	a, sp
+      0000B4 F4 28                  151 	add	a, #0xf4
+      0000B6r80r0B                  152 	mov	p, a
+      0000B8r81r03                  153 	idxm	a, p
+      0000BAr80r0B                  154 	mov	p, a
+      0000BC FF 2F                  155 	mov	a, #0xff
+      0000BEr80r03                  156 	idxm	p, a
+      0000C0r00r12                  157 	inc	p
+      0000C2 FF 2F                  158 	mov	a, #0xff
+      0000C4r80r03                  159 	idxm	p, a
+      0000C6r00r12                  160 	inc	p
+      0000C8 7F 2F                  161 	mov	a, #0x7f
+      0000CAr80r03                  162 	idxm	p, a
+      0000CCr00r12                  163 	inc	p
+      0000CE FF 2F                  164 	mov	a, #0xff
+      0000D0r80r03                  165 	idxm	p, a
+      0000D2r86r31                  166 	goto	00106$
+      0000D4                        167 00102$:
+                                    168 ;	../cotf.c: 48: return +HUGE_VALF;
+      0000D4 C2 01                  169 	mov	a, sp
+      0000D6 F4 28                  170 	add	a, #0xf4
+      0000D8r80r0B                  171 	mov	p, a
+      0000DAr81r03                  172 	idxm	a, p
+      0000DCr80r0B                  173 	mov	p, a
+      0000DE FF 2F                  174 	mov	a, #0xff
+      0000E0r80r03                  175 	idxm	p, a
+      0000E2r00r12                  176 	inc	p
+      0000E4 FF 2F                  177 	mov	a, #0xff
+      0000E6r80r03                  178 	idxm	p, a
+      0000E8r00r12                  179 	inc	p
+      0000EA 7F 2F                  180 	mov	a, #0x7f
+      0000ECr80r03                  181 	idxm	p, a
+      0000EEr00r12                  182 	inc	p
+      0000F0 7F 2F                  183 	mov	a, #0x7f
+      0000F2r80r03                  184 	idxm	p, a
+      0000F4r86r31                  185 	goto	00106$
+      0000F6                        186 00105$:
+                                    187 ;	../cotf.c: 50: return tancotf(x, 1);
+      0000F6 C2 01                  188 	mov	a, sp
+      0000F8 F0 28                  189 	add	a, #0xf0
+      0000FAr80r0B                  190 	mov	p, a
+      0000FCr81r03                  191 	idxm	a, p
+      0000FEr80r0B                  192 	mov	_tancotf_PARM_1+0, a
+      000100r00r12                  193 	inc	p
+      000102r81r03                  194 	idxm	a, p
+      000104r81r0B                  195 	mov	_tancotf_PARM_1+1, a
+      000106r00r12                  196 	inc	p
+      000108r81r03                  197 	idxm	a, p
+      00010Ar82r0B                  198 	mov	_tancotf_PARM_1+2, a
+      00010Cr00r12                  199 	inc	p
+      00010Er81r03                  200 	idxm	a, p
+      000110r83r0B                  201 	mov	_tancotf_PARM_1+3, a
+      000112 01 2F                  202 	mov	a, #0x01
+      000114r80r0B                  203 	mov	_tancotf_PARM_2+0, a
+      000116 C2 01                  204 	mov	a, sp
+      000118 FC 28                  205 	add	a, #0xfc
+      00011A 72 00                  206 	push	af
+      00011Cr00r38                  207 	call	_tancotf
+      00011E C2 01                  208 	mov	a, sp
+      000120 FE 28                  209 	add	a, #-2
+      000122 82 01                  210 	mov	sp, a
+      000124 FC 28                  211 	add	a, #0xfc
+      000126r80r0B                  212 	mov	p, a
+      000128r81r03                  213 	idxm	a, p
+      00012A 72 00                  214 	push	af
+      00012C F8 2F                  215 	mov	a, #-8
+      00012Er00r08                  216 	add	p, a
+      000130r81r03                  217 	idxm	a, p
+      000132r80r0B                  218 	mov	p, a
+      000134 73 00                  219 	pop	af
+      000136r80r03                  220 	idxm	p, a
+      000138 C2 01                  221 	mov	a, sp
+      00013A FD 28                  222 	add	a, #0xfd
+      00013Cr80r0B                  223 	mov	p, a
+      00013Er81r03                  224 	idxm	a, p
+      000140 72 00                  225 	push	af
+      000142 F7 2F                  226 	mov	a, #-9
+      000144r00r08                  227 	add	p, a
+      000146r81r03                  228 	idxm	a, p
+      000148r80r0B                  229 	mov	p, a
+      00014A 73 00                  230 	pop	af
+      00014Cr00r12                  231 	inc	p
+      00014Er80r03                  232 	idxm	p, a
+      000150 C2 01                  233 	mov	a, sp
+      000152 FE 28                  234 	add	a, #0xfe
+      000154r80r0B                  235 	mov	p, a
+      000156r81r03                  236 	idxm	a, p
+      000158 72 00                  237 	push	af
+      00015A F6 2F                  238 	mov	a, #-10
+      00015Cr00r08                  239 	add	p, a
+      00015Er81r03                  240 	idxm	a, p
+      000160r80r0B                  241 	mov	p, a
+      000162 73 00                  242 	pop	af
+      000164r00r12                  243 	inc	p
+      000166r00r12                  244 	inc	p
+      000168r80r03                  245 	idxm	p, a
+      00016A C2 01                  246 	mov	a, sp
+      00016C FF 28                  247 	add	a, #0xff
+      00016Er80r0B                  248 	mov	p, a
+      000170r81r03                  249 	idxm	a, p
+      000172 72 00                  250 	push	af
+      000174 F5 2F                  251 	mov	a, #-11
+      000176r00r08                  252 	add	p, a
+      000178r81r03                  253 	idxm	a, p
+      00017Ar80r0B                  254 	mov	p, a
+      00017C 73 00                  255 	pop	af
+      00017Er00r12                  256 	inc	p
+      000180r00r12                  257 	inc	p
+      000182r00r12                  258 	inc	p
+      000184r80r03                  259 	idxm	p, a
+      000186                        260 00106$:
+                                    261 ;	../cotf.c: 51: }
+      000186 C2 01                  262 	mov	a, sp
+      000188 F8 28                  263 	add	a, #-8
+      00018A 82 01                  264 	mov	sp, a
+      00018C 7A 00                  265 	ret
+                                    266 	.area CODE
+                                    267 	.area CONST
+                                    268 	.area CABS (ABS)

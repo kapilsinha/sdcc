@@ -1,0 +1,137 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module coshf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _sincoshf
+                                     17 	.globl _coshf
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; overlayable items in ram 
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 ;--------------------------------------------------------
+                                     35 ; global & static initialisations
+                                     36 ;--------------------------------------------------------
+                                     37 	.area HOME
+                                     38 	.area GSINIT
+                                     39 	.area GSFINAL
+                                     40 	.area GSINIT
+                                     41 ;--------------------------------------------------------
+                                     42 ; Home
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area HOME
+                                     46 ;--------------------------------------------------------
+                                     47 ; code
+                                     48 ;--------------------------------------------------------
+                                     49 	.area CODE
+                                     50 ;	../coshf.c: 36: float coshf(float x) _FLOAT_FUNC_REENTRANT
+                                     51 ;	-----------------------------------------
+                                     52 ;	 function coshf
+                                     53 ;	-----------------------------------------
+      000000                         54 _coshf:
+      000000 72 00                   55 	push	af
+      000002 72 00                   56 	push	af
+                                     57 ;	../coshf.c: 38: return sincoshf(x, 1);
+      000004 C2 01                   58 	mov	a, sp
+      000006 F4 28                   59 	add	a, #0xf4
+      000008r80r0B                   60 	mov	p, a
+      00000Ar81r03                   61 	idxm	a, p
+      00000Cr80r0B                   62 	mov	_sincoshf_PARM_1+0, a
+      00000Er00r12                   63 	inc	p
+      000010r81r03                   64 	idxm	a, p
+      000012r81r0B                   65 	mov	_sincoshf_PARM_1+1, a
+      000014r00r12                   66 	inc	p
+      000016r81r03                   67 	idxm	a, p
+      000018r82r0B                   68 	mov	_sincoshf_PARM_1+2, a
+      00001Ar00r12                   69 	inc	p
+      00001Cr81r03                   70 	idxm	a, p
+      00001Er83r0B                   71 	mov	_sincoshf_PARM_1+3, a
+      000020 01 2F                   72 	mov	a, #0x01
+      000022r80r0B                   73 	mov	_sincoshf_PARM_2+0, a
+      000024 C2 01                   74 	mov	a, sp
+      000026 FC 28                   75 	add	a, #0xfc
+      000028 72 00                   76 	push	af
+      00002Ar00r38                   77 	call	_sincoshf
+      00002C C2 01                   78 	mov	a, sp
+      00002E FE 28                   79 	add	a, #-2
+      000030 82 01                   80 	mov	sp, a
+      000032 FC 28                   81 	add	a, #0xfc
+      000034r80r0B                   82 	mov	p, a
+      000036r81r03                   83 	idxm	a, p
+      000038 72 00                   84 	push	af
+      00003A FC 2F                   85 	mov	a, #-4
+      00003Cr00r08                   86 	add	p, a
+      00003Er81r03                   87 	idxm	a, p
+      000040r80r0B                   88 	mov	p, a
+      000042 73 00                   89 	pop	af
+      000044r80r03                   90 	idxm	p, a
+      000046 C2 01                   91 	mov	a, sp
+      000048 FD 28                   92 	add	a, #0xfd
+      00004Ar80r0B                   93 	mov	p, a
+      00004Cr81r03                   94 	idxm	a, p
+      00004E 72 00                   95 	push	af
+      000050 FB 2F                   96 	mov	a, #-5
+      000052r00r08                   97 	add	p, a
+      000054r81r03                   98 	idxm	a, p
+      000056r80r0B                   99 	mov	p, a
+      000058 73 00                  100 	pop	af
+      00005Ar00r12                  101 	inc	p
+      00005Cr80r03                  102 	idxm	p, a
+      00005E C2 01                  103 	mov	a, sp
+      000060 FE 28                  104 	add	a, #0xfe
+      000062r80r0B                  105 	mov	p, a
+      000064r81r03                  106 	idxm	a, p
+      000066 72 00                  107 	push	af
+      000068 FA 2F                  108 	mov	a, #-6
+      00006Ar00r08                  109 	add	p, a
+      00006Cr81r03                  110 	idxm	a, p
+      00006Er80r0B                  111 	mov	p, a
+      000070 73 00                  112 	pop	af
+      000072r00r12                  113 	inc	p
+      000074r00r12                  114 	inc	p
+      000076r80r03                  115 	idxm	p, a
+      000078 C2 01                  116 	mov	a, sp
+      00007A FF 28                  117 	add	a, #0xff
+      00007Cr80r0B                  118 	mov	p, a
+      00007Er81r03                  119 	idxm	a, p
+      000080 72 00                  120 	push	af
+      000082 F9 2F                  121 	mov	a, #-7
+      000084r00r08                  122 	add	p, a
+      000086r81r03                  123 	idxm	a, p
+      000088r80r0B                  124 	mov	p, a
+      00008A 73 00                  125 	pop	af
+      00008Cr00r12                  126 	inc	p
+      00008Er00r12                  127 	inc	p
+      000090r00r12                  128 	inc	p
+      000092r80r03                  129 	idxm	p, a
+                                    130 ;	../coshf.c: 39: }
+      000094 C2 01                  131 	mov	a, sp
+      000096 FC 28                  132 	add	a, #-4
+      000098 82 01                  133 	mov	sp, a
+      00009A 7A 00                  134 	ret
+                                    135 	.area CODE
+                                    136 	.area CONST
+                                    137 	.area CABS (ABS)

@@ -1,0 +1,812 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fsadd
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fsadd_PARM_2
+                                     17 	.globl ___fsadd_PARM_1
+                                     18 	.globl ___fsadd
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fsadd_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fsadd_PARM_2:
+      000004                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 ___fsadd_sloc0_1_0:
+      000000                         37 	.ds 4
+      000004                         38 ___fsadd_sloc1_1_0:
+      000004                         39 	.ds 4
+      000008                         40 ___fsadd_sloc2_1_0:
+      000008                         41 	.ds 4
+      00000C                         42 ___fsadd_sloc3_1_0:
+      00000C                         43 	.ds 2
+      00000E                         44 ___fsadd_sloc4_1_0:
+      00000E                         45 	.ds 4
+      000012                         46 ___fsadd_sloc5_1_0:
+      000012                         47 	.ds 4
+      000016                         48 ___fsadd_sloc6_1_0:
+      000016                         49 	.ds 4
+      00001A                         50 ___fsadd_sloc7_1_0:
+      00001A                         51 	.ds 4
+      00001E                         52 ___fsadd_sloc8_1_0:
+      00001E                         53 	.ds 4
+      000022                         54 ___fsadd_sloc9_1_0:
+      000022                         55 	.ds 4
+      000026                         56 ___fsadd_sloc10_1_0:
+      000026                         57 	.ds 4
+      00002A                         58 ___fsadd_sloc11_1_0:
+      00002A                         59 	.ds 2
+      00002C                         60 ___fsadd_sloc12_1_0:
+      00002C                         61 	.ds 4
+      000030                         62 ___fsadd_sloc13_1_0:
+      000030                         63 	.ds 4
+      000034                         64 ___fsadd_sloc14_1_0:
+      000034                         65 	.ds 4
+      000038                         66 ___fsadd_sloc15_1_0:
+      000038                         67 	.ds 4
+      00003C                         68 ___fsadd_sloc16_1_0:
+      00003C                         69 	.ds 2
+      00003E                         70 ___fsadd_sloc17_1_0:
+      00003E                         71 	.ds 2
+      000040                         72 ___fsadd_sloc18_1_0:
+      000040                         73 	.ds 4
+      000044                         74 ___fsadd_sloc19_1_0:
+      000044                         75 	.ds 1
+      000045                         76 ___fsadd_sloc20_1_0:
+      000045                         77 	.ds 2
+      000047                         78 ___fsadd_sloc21_1_0:
+      000047                         79 	.ds 4
+      00004B                         80 ___fsadd_sloc22_1_0:
+      00004B                         81 	.ds 2
+      00004D                         82 ___fsadd_sloc23_1_0:
+      00004D                         83 	.ds 2
+      00004F                         84 ___fsadd_sloc24_1_0:
+      00004F                         85 	.ds 4
+      000053                         86 ___fsadd_sloc25_1_0:
+      000053                         87 	.ds 4
+      000057                         88 ___fsadd_sloc26_1_0:
+      000057                         89 	.ds 4
+      00005B                         90 ___fsadd_sloc27_1_0:
+      00005B                         91 	.ds 4
+      00005F                         92 ___fsadd_sloc28_1_0:
+      00005F                         93 	.ds 4
+      000063                         94 ___fsadd_sloc29_1_0:
+      000063                         95 	.ds 4
+      000067                         96 ___fsadd_sloc30_1_0:
+      000067                         97 	.ds 4
+      00006B                         98 ___fsadd_sloc31_1_0:
+      00006B                         99 	.ds 4
+      00006F                        100 ___fsadd_sloc32_1_0:
+      00006F                        101 	.ds 4
+                                    102 ;--------------------------------------------------------
+                                    103 ; absolute external ram data
+                                    104 ;--------------------------------------------------------
+                                    105 	.area DABS (ABS)
+                                    106 ;--------------------------------------------------------
+                                    107 ; global & static initialisations
+                                    108 ;--------------------------------------------------------
+                                    109 	.area HOME
+                                    110 	.area GSINIT
+                                    111 	.area GSFINAL
+                                    112 	.area GSINIT
+                                    113 ;--------------------------------------------------------
+                                    114 ; Home
+                                    115 ;--------------------------------------------------------
+                                    116 	.area HOME
+                                    117 	.area HOME
+                                    118 ;--------------------------------------------------------
+                                    119 ; code
+                                    120 ;--------------------------------------------------------
+                                    121 	.area CODE
+                                    122 ;	../_fsadd.c: 170: float __fsadd (float a1, float a2)
+                                    123 ;	-----------------------------------------
+                                    124 ;	 function __fsadd
+                                    125 ;	-----------------------------------------
+      000000                        126 ___fsadd:
+                                    127 ;	../_fsadd.c: 178: pfl2 = (long _AUTOMEM *)&a2;
+                                    128 ;	../_fsadd.c: 179: exp2 = EXP (*pfl2);
+      000000r84r0F                  129 	mov	a, ___fsadd_PARM_2+0
+      000002r80r0B                  130 	mov	___fsadd_sloc0_1_0+0, a
+      000004r85r0F                  131 	mov	a, ___fsadd_PARM_2+1
+      000006r81r0B                  132 	mov	___fsadd_sloc0_1_0+1, a
+      000008r86r0F                  133 	mov	a, ___fsadd_PARM_2+2
+      00000Ar82r0B                  134 	mov	___fsadd_sloc0_1_0+2, a
+      00000Cr87r0F                  135 	mov	a, ___fsadd_PARM_2+3
+      00000Er83r0B                  136 	mov	___fsadd_sloc0_1_0+3, a
+      000010r80r0F                  137 	mov	a, ___fsadd_sloc0_1_0+0
+      000012r84r0B                  138 	mov	___fsadd_sloc1_1_0+0, a
+      000014r81r0F                  139 	mov	a, ___fsadd_sloc0_1_0+1
+      000016r85r0B                  140 	mov	___fsadd_sloc1_1_0+1, a
+      000018r82r0F                  141 	mov	a, ___fsadd_sloc0_1_0+2
+      00001Ar86r0B                  142 	mov	___fsadd_sloc1_1_0+2, a
+      00001Cr83r0F                  143 	mov	a, ___fsadd_sloc0_1_0+3
+      00001Er87r0B                  144 	mov	___fsadd_sloc1_1_0+3, a
+      000020r86r0F                  145 	mov	a, ___fsadd_sloc1_1_0+2
+      000022r88r0B                  146 	mov	___fsadd_sloc2_1_0+0, a
+      000024r87r0F                  147 	mov	a, ___fsadd_sloc1_1_0+3
+      000026r89r0B                  148 	mov	___fsadd_sloc2_1_0+1, a
+      000028r0Ar13                  149 	clear	___fsadd_sloc2_1_0+2
+      00002Ar0Br13                  150 	clear	___fsadd_sloc2_1_0+3
+      00002C 07 2F                  151 	mov	a, #7
+      00002E                        152 00240$:
+      00002Er09r15                  153 	sr	___fsadd_sloc2_1_0+1
+      000030r08r16                  154 	src	___fsadd_sloc2_1_0+0
+      000032 63 00                  155 	dzsn	a
+      000034r2Er30                  156 	goto	00240$
+      000036r89r0F                  157 	mov	a, ___fsadd_sloc2_1_0+1
+      000038r80r0B                  158 	mov	p, a
+      00003Ar88r0F                  159 	mov	a, ___fsadd_sloc2_1_0+0
+      00003Cr8Cr0B                  160 	mov	___fsadd_sloc3_1_0+0, a
+      00003Er0Dr13                  161 	clear	___fsadd_sloc3_1_0+1
+                                    162 ;	../_fsadd.c: 180: mant2 = MANT (*pfl2) << 4;
+      000040r80r0F                  163 	mov	a, ___fsadd_sloc0_1_0+0
+      000042r8Er0B                  164 	mov	___fsadd_sloc4_1_0+0, a
+      000044r81r0F                  165 	mov	a, ___fsadd_sloc0_1_0+1
+      000046r8Fr0B                  166 	mov	___fsadd_sloc4_1_0+1, a
+      000048r82r0F                  167 	mov	a, ___fsadd_sloc0_1_0+2
+      00004A 7F 2C                  168 	and	a, #0x7f
+      00004Cr90r0B                  169 	mov	___fsadd_sloc4_1_0+2, a
+      00004Er11r13                  170 	clear	___fsadd_sloc4_1_0+3
+      000050r8Er0F                  171 	mov	a, ___fsadd_sloc4_1_0+0
+      000052r92r0B                  172 	mov	___fsadd_sloc5_1_0+0, a
+      000054r8Fr0F                  173 	mov	a, ___fsadd_sloc4_1_0+1
+      000056r93r0B                  174 	mov	___fsadd_sloc5_1_0+1, a
+      000058r90r0F                  175 	mov	a, ___fsadd_sloc4_1_0+2
+      00005A 80 2D                  176 	or	a, #0x80
+      00005Cr94r0B                  177 	mov	___fsadd_sloc5_1_0+2, a
+      00005Er91r0F                  178 	mov	a, ___fsadd_sloc4_1_0+3
+      000060r95r0B                  179 	mov	___fsadd_sloc5_1_0+3, a
+      000062r92r0F                  180 	mov	a, ___fsadd_sloc5_1_0+0
+      000064r96r0B                  181 	mov	___fsadd_sloc6_1_0+0, a
+      000066r93r0F                  182 	mov	a, ___fsadd_sloc5_1_0+1
+      000068r97r0B                  183 	mov	___fsadd_sloc6_1_0+1, a
+      00006Ar94r0F                  184 	mov	a, ___fsadd_sloc5_1_0+2
+      00006Cr98r0B                  185 	mov	___fsadd_sloc6_1_0+2, a
+      00006Er95r0F                  186 	mov	a, ___fsadd_sloc5_1_0+3
+      000070r99r0B                  187 	mov	___fsadd_sloc6_1_0+3, a
+      000072 04 2F                  188 	mov	a, #4
+      000074                        189 00241$:
+      000074r96r15                  190 	sl	___fsadd_sloc6_1_0+0
+      000076r97r16                  191 	slc	___fsadd_sloc6_1_0+1
+      000078r98r16                  192 	slc	___fsadd_sloc6_1_0+2
+      00007Ar99r16                  193 	slc	___fsadd_sloc6_1_0+3
+      00007C 63 00                  194 	dzsn	a
+      00007Er74r30                  195 	goto	00241$
+                                    196 ;	../_fsadd.c: 181: if (SIGN (*pfl2))
+      000080r87r0F                  197 	mov	a, ___fsadd_sloc1_1_0+3
+      000082r9Ar0B                  198 	mov	___fsadd_sloc7_1_0+0, a
+      000084r1Br13                  199 	clear	___fsadd_sloc7_1_0+1
+      000086r1Cr13                  200 	clear	___fsadd_sloc7_1_0+2
+      000088r1Dr13                  201 	clear	___fsadd_sloc7_1_0+3
+      00008A 07 2F                  202 	mov	a, #7
+      00008C                        203 00242$:
+      00008Cr1Ar15                  204 	sr	___fsadd_sloc7_1_0+0
+      00008E 63 00                  205 	dzsn	a
+      000090r8Cr30                  206 	goto	00242$
+      000092r9Ar0F                  207 	mov	a, ___fsadd_sloc7_1_0+0
+      000094 01 2C                  208 	and	a, #0x01
+      000096 00 2B                  209 	cneqsn	a, #0x00
+      000098rB2r30                  210 	goto	00102$
+                                    211 ;	../_fsadd.c: 182: mant2 = -mant2;
+      00009A 00 2F                  212 	mov	a, #0x00
+      00009Cr96r0C                  213 	sub	a, ___fsadd_sloc6_1_0+0
+      00009Er96r0B                  214 	mov	___fsadd_sloc6_1_0+0, a
+      0000A0 00 2F                  215 	mov	a, #0x00
+      0000A2r97r0D                  216 	subc	a, ___fsadd_sloc6_1_0+1
+      0000A4r97r0B                  217 	mov	___fsadd_sloc6_1_0+1, a
+      0000A6 00 2F                  218 	mov	a, #0x00
+      0000A8r98r0D                  219 	subc	a, ___fsadd_sloc6_1_0+2
+      0000AAr98r0B                  220 	mov	___fsadd_sloc6_1_0+2, a
+      0000AC 00 2F                  221 	mov	a, #0x00
+      0000AEr99r0D                  222 	subc	a, ___fsadd_sloc6_1_0+3
+      0000B0r99r0B                  223 	mov	___fsadd_sloc6_1_0+3, a
+      0000B2                        224 00102$:
+                                    225 ;	../_fsadd.c: 184: if (!*pfl2)
+      0000B2r80r0F                  226 	mov	a, ___fsadd_sloc0_1_0+0
+      0000B4r81r0E                  227 	or	a, ___fsadd_sloc0_1_0+1
+      0000B6r82r0E                  228 	or	a, ___fsadd_sloc0_1_0+2
+      0000B8r83r0E                  229 	or	a, ___fsadd_sloc0_1_0+3
+      0000BA 00 2A                  230 	ceqsn	a, #0x00
+      0000BCrE0r30                  231 	goto	00104$
+                                    232 ;	../_fsadd.c: 185: return (a1);
+      0000BE C2 01                  233 	mov	a, sp
+      0000C0 FC 28                  234 	add	a, #0xfc
+      0000C2r80r0B                  235 	mov	p, a
+      0000C4r81r03                  236 	idxm	a, p
+      0000C6r80r0B                  237 	mov	p, a
+      0000C8r80r0F                  238 	mov	a, ___fsadd_PARM_1+0
+      0000CAr80r03                  239 	idxm	p, a
+      0000CCr00r12                  240 	inc	p
+      0000CEr81r0F                  241 	mov	a, ___fsadd_PARM_1+1
+      0000D0r80r03                  242 	idxm	p, a
+      0000D2r00r12                  243 	inc	p
+      0000D4r82r0F                  244 	mov	a, ___fsadd_PARM_1+2
+      0000D6r80r03                  245 	idxm	p, a
+      0000D8r00r12                  246 	inc	p
+      0000DAr83r0F                  247 	mov	a, ___fsadd_PARM_1+3
+      0000DCr80r03                  248 	idxm	p, a
+      0000DE 7A 00                  249 	ret
+      0000E0                        250 00104$:
+                                    251 ;	../_fsadd.c: 187: pfl1 = (long _AUTOMEM *)&a1;
+                                    252 ;	../_fsadd.c: 188: exp1 = EXP (*pfl1);
+      0000E0r80r0F                  253 	mov	a, ___fsadd_PARM_1+0
+      0000E2r9Er0B                  254 	mov	___fsadd_sloc8_1_0+0, a
+      0000E4r81r0F                  255 	mov	a, ___fsadd_PARM_1+1
+      0000E6r9Fr0B                  256 	mov	___fsadd_sloc8_1_0+1, a
+      0000E8r82r0F                  257 	mov	a, ___fsadd_PARM_1+2
+      0000EArA0r0B                  258 	mov	___fsadd_sloc8_1_0+2, a
+      0000ECr83r0F                  259 	mov	a, ___fsadd_PARM_1+3
+      0000EErA1r0B                  260 	mov	___fsadd_sloc8_1_0+3, a
+      0000F0r9Er0F                  261 	mov	a, ___fsadd_sloc8_1_0+0
+      0000F2rA2r0B                  262 	mov	___fsadd_sloc9_1_0+0, a
+      0000F4r9Fr0F                  263 	mov	a, ___fsadd_sloc8_1_0+1
+      0000F6rA3r0B                  264 	mov	___fsadd_sloc9_1_0+1, a
+      0000F8rA0r0F                  265 	mov	a, ___fsadd_sloc8_1_0+2
+      0000FArA4r0B                  266 	mov	___fsadd_sloc9_1_0+2, a
+      0000FCrA1r0F                  267 	mov	a, ___fsadd_sloc8_1_0+3
+      0000FErA5r0B                  268 	mov	___fsadd_sloc9_1_0+3, a
+      000100rA4r0F                  269 	mov	a, ___fsadd_sloc9_1_0+2
+      000102rA6r0B                  270 	mov	___fsadd_sloc10_1_0+0, a
+      000104rA5r0F                  271 	mov	a, ___fsadd_sloc9_1_0+3
+      000106rA7r0B                  272 	mov	___fsadd_sloc10_1_0+1, a
+      000108r28r13                  273 	clear	___fsadd_sloc10_1_0+2
+      00010Ar29r13                  274 	clear	___fsadd_sloc10_1_0+3
+      00010C 07 2F                  275 	mov	a, #7
+      00010E                        276 00243$:
+      00010Er27r15                  277 	sr	___fsadd_sloc10_1_0+1
+      000110r26r16                  278 	src	___fsadd_sloc10_1_0+0
+      000112 63 00                  279 	dzsn	a
+      000114r0Er31                  280 	goto	00243$
+      000116rA7r0F                  281 	mov	a, ___fsadd_sloc10_1_0+1
+      000118r80r0B                  282 	mov	p, a
+      00011ArA6r0F                  283 	mov	a, ___fsadd_sloc10_1_0+0
+      00011CrAAr0B                  284 	mov	___fsadd_sloc11_1_0+0, a
+      00011Er2Br13                  285 	clear	___fsadd_sloc11_1_0+1
+                                    286 ;	../_fsadd.c: 189: mant1 = MANT (*pfl1) << 4;
+      000120r9Er0F                  287 	mov	a, ___fsadd_sloc8_1_0+0
+      000122rACr0B                  288 	mov	___fsadd_sloc12_1_0+0, a
+      000124r9Fr0F                  289 	mov	a, ___fsadd_sloc8_1_0+1
+      000126rADr0B                  290 	mov	___fsadd_sloc12_1_0+1, a
+      000128rA0r0F                  291 	mov	a, ___fsadd_sloc8_1_0+2
+      00012A 7F 2C                  292 	and	a, #0x7f
+      00012CrAEr0B                  293 	mov	___fsadd_sloc12_1_0+2, a
+      00012Er2Fr13                  294 	clear	___fsadd_sloc12_1_0+3
+      000130rACr0F                  295 	mov	a, ___fsadd_sloc12_1_0+0
+      000132rB0r0B                  296 	mov	___fsadd_sloc13_1_0+0, a
+      000134rADr0F                  297 	mov	a, ___fsadd_sloc12_1_0+1
+      000136rB1r0B                  298 	mov	___fsadd_sloc13_1_0+1, a
+      000138rAEr0F                  299 	mov	a, ___fsadd_sloc12_1_0+2
+      00013A 80 2D                  300 	or	a, #0x80
+      00013CrB2r0B                  301 	mov	___fsadd_sloc13_1_0+2, a
+      00013ErAFr0F                  302 	mov	a, ___fsadd_sloc12_1_0+3
+      000140rB3r0B                  303 	mov	___fsadd_sloc13_1_0+3, a
+      000142rB0r0F                  304 	mov	a, ___fsadd_sloc13_1_0+0
+      000144rB4r0B                  305 	mov	___fsadd_sloc14_1_0+0, a
+      000146rB1r0F                  306 	mov	a, ___fsadd_sloc13_1_0+1
+      000148rB5r0B                  307 	mov	___fsadd_sloc14_1_0+1, a
+      00014ArB2r0F                  308 	mov	a, ___fsadd_sloc13_1_0+2
+      00014CrB6r0B                  309 	mov	___fsadd_sloc14_1_0+2, a
+      00014ErB3r0F                  310 	mov	a, ___fsadd_sloc13_1_0+3
+      000150rB7r0B                  311 	mov	___fsadd_sloc14_1_0+3, a
+      000152 04 2F                  312 	mov	a, #4
+      000154                        313 00244$:
+      000154rB4r15                  314 	sl	___fsadd_sloc14_1_0+0
+      000156rB5r16                  315 	slc	___fsadd_sloc14_1_0+1
+      000158rB6r16                  316 	slc	___fsadd_sloc14_1_0+2
+      00015ArB7r16                  317 	slc	___fsadd_sloc14_1_0+3
+      00015C 63 00                  318 	dzsn	a
+      00015Er54r31                  319 	goto	00244$
+                                    320 ;	../_fsadd.c: 190: if (SIGN(*pfl1))
+      000160rA5r0F                  321 	mov	a, ___fsadd_sloc9_1_0+3
+      000162rB8r0B                  322 	mov	___fsadd_sloc15_1_0+0, a
+      000164r39r13                  323 	clear	___fsadd_sloc15_1_0+1
+      000166r3Ar13                  324 	clear	___fsadd_sloc15_1_0+2
+      000168r3Br13                  325 	clear	___fsadd_sloc15_1_0+3
+      00016A 07 2F                  326 	mov	a, #7
+      00016C                        327 00245$:
+      00016Cr38r15                  328 	sr	___fsadd_sloc15_1_0+0
+      00016E 63 00                  329 	dzsn	a
+      000170r6Cr31                  330 	goto	00245$
+      000172rB8r0F                  331 	mov	a, ___fsadd_sloc15_1_0+0
+      000174 01 2C                  332 	and	a, #0x01
+      000176 00 2B                  333 	cneqsn	a, #0x00
+      000178r9Ar31                  334 	goto	00108$
+                                    335 ;	../_fsadd.c: 191: if (*pfl1 & 0x80000000)
+      00017ArA1r0F                  336 	mov	a, ___fsadd_sloc8_1_0+3
+      00017C 80 2C                  337 	and	a, #0x80
+      00017E 00 2B                  338 	cneqsn	a, #0x00
+      000180r9Ar31                  339 	goto	00108$
+                                    340 ;	../_fsadd.c: 192: mant1 = -mant1;
+      000182 00 2F                  341 	mov	a, #0x00
+      000184rB4r0C                  342 	sub	a, ___fsadd_sloc14_1_0+0
+      000186rB4r0B                  343 	mov	___fsadd_sloc14_1_0+0, a
+      000188 00 2F                  344 	mov	a, #0x00
+      00018ArB5r0D                  345 	subc	a, ___fsadd_sloc14_1_0+1
+      00018CrB5r0B                  346 	mov	___fsadd_sloc14_1_0+1, a
+      00018E 00 2F                  347 	mov	a, #0x00
+      000190rB6r0D                  348 	subc	a, ___fsadd_sloc14_1_0+2
+      000192rB6r0B                  349 	mov	___fsadd_sloc14_1_0+2, a
+      000194 00 2F                  350 	mov	a, #0x00
+      000196rB7r0D                  351 	subc	a, ___fsadd_sloc14_1_0+3
+      000198rB7r0B                  352 	mov	___fsadd_sloc14_1_0+3, a
+      00019A                        353 00108$:
+                                    354 ;	../_fsadd.c: 194: if (!*pfl1)
+      00019Ar9Er0F                  355 	mov	a, ___fsadd_sloc8_1_0+0
+      00019Cr9Fr0E                  356 	or	a, ___fsadd_sloc8_1_0+1
+      00019ErA0r0E                  357 	or	a, ___fsadd_sloc8_1_0+2
+      0001A0rA1r0E                  358 	or	a, ___fsadd_sloc8_1_0+3
+      0001A2 00 2A                  359 	ceqsn	a, #0x00
+      0001A4rC8r31                  360 	goto	00110$
+                                    361 ;	../_fsadd.c: 195: return (a2);
+      0001A6 C2 01                  362 	mov	a, sp
+      0001A8 FC 28                  363 	add	a, #0xfc
+      0001AAr80r0B                  364 	mov	p, a
+      0001ACr81r03                  365 	idxm	a, p
+      0001AEr80r0B                  366 	mov	p, a
+      0001B0r84r0F                  367 	mov	a, ___fsadd_PARM_2+0
+      0001B2r80r03                  368 	idxm	p, a
+      0001B4r00r12                  369 	inc	p
+      0001B6r85r0F                  370 	mov	a, ___fsadd_PARM_2+1
+      0001B8r80r03                  371 	idxm	p, a
+      0001BAr00r12                  372 	inc	p
+      0001BCr86r0F                  373 	mov	a, ___fsadd_PARM_2+2
+      0001BEr80r03                  374 	idxm	p, a
+      0001C0r00r12                  375 	inc	p
+      0001C2r87r0F                  376 	mov	a, ___fsadd_PARM_2+3
+      0001C4r80r03                  377 	idxm	p, a
+      0001C6 7A 00                  378 	ret
+      0001C8                        379 00110$:
+                                    380 ;	../_fsadd.c: 197: expd = exp1 - exp2;
+      0001C8rAAr0F                  381 	mov	a, ___fsadd_sloc11_1_0+0
+      0001CAr8Cr0C                  382 	sub	a, ___fsadd_sloc3_1_0+0
+      0001CCrBCr0B                  383 	mov	___fsadd_sloc16_1_0+0, a
+      0001CErABr0F                  384 	mov	a, ___fsadd_sloc11_1_0+1
+      0001D0r8Dr0D                  385 	subc	a, ___fsadd_sloc3_1_0+1
+      0001D2rBDr0B                  386 	mov	___fsadd_sloc16_1_0+1, a
+                                    387 ;	../_fsadd.c: 198: if (expd > 25)
+      0001D4 19 2F                  388 	mov	a, #0x19
+      0001D6rBCr0C                  389 	sub	a, ___fsadd_sloc16_1_0+0
+      0001D8 00 2F                  390 	mov	a, #0x00
+      0001DArBDr0D                  391 	subc	a, ___fsadd_sloc16_1_0+1
+      0001DC C0 18                  392 	t0sn	f, ov
+      0001DE 80 2E                  393 	xor	a, #0x80
+      0001E0 6B 00                  394 	sl	a
+      0001E2 40 1A                  395 	t1sn	f, c
+      0001E4r08r32                  396 	goto	00112$
+                                    397 ;	../_fsadd.c: 199: return (a1);
+      0001E6 C2 01                  398 	mov	a, sp
+      0001E8 FC 28                  399 	add	a, #0xfc
+      0001EAr80r0B                  400 	mov	p, a
+      0001ECr81r03                  401 	idxm	a, p
+      0001EEr80r0B                  402 	mov	p, a
+      0001F0r80r0F                  403 	mov	a, ___fsadd_PARM_1+0
+      0001F2r80r03                  404 	idxm	p, a
+      0001F4r00r12                  405 	inc	p
+      0001F6r81r0F                  406 	mov	a, ___fsadd_PARM_1+1
+      0001F8r80r03                  407 	idxm	p, a
+      0001FAr00r12                  408 	inc	p
+      0001FCr82r0F                  409 	mov	a, ___fsadd_PARM_1+2
+      0001FEr80r03                  410 	idxm	p, a
+      000200r00r12                  411 	inc	p
+      000202r83r0F                  412 	mov	a, ___fsadd_PARM_1+3
+      000204r80r03                  413 	idxm	p, a
+      000206 7A 00                  414 	ret
+      000208                        415 00112$:
+                                    416 ;	../_fsadd.c: 200: if (expd < -25)
+      000208rBCr0F                  417 	mov	a, ___fsadd_sloc16_1_0+0
+      00020A E7 29                  418 	sub	a, #0xe7
+      00020C FF 2F                  419 	mov	a, #0xff
+      00020Er80r0B                  420 	mov	p, a
+      000210rBDr0F                  421 	mov	a, ___fsadd_sloc16_1_0+1
+      000212r80r0D                  422 	subc	a, p
+      000214 C0 18                  423 	t0sn	f, ov
+      000216 80 2E                  424 	xor	a, #0x80
+      000218 6B 00                  425 	sl	a
+      00021A 40 1A                  426 	t1sn	f, c
+      00021Cr40r32                  427 	goto	00114$
+                                    428 ;	../_fsadd.c: 201: return (a2);
+      00021E C2 01                  429 	mov	a, sp
+      000220 FC 28                  430 	add	a, #0xfc
+      000222r80r0B                  431 	mov	p, a
+      000224r81r03                  432 	idxm	a, p
+      000226r80r0B                  433 	mov	p, a
+      000228r84r0F                  434 	mov	a, ___fsadd_PARM_2+0
+      00022Ar80r03                  435 	idxm	p, a
+      00022Cr00r12                  436 	inc	p
+      00022Er85r0F                  437 	mov	a, ___fsadd_PARM_2+1
+      000230r80r03                  438 	idxm	p, a
+      000232r00r12                  439 	inc	p
+      000234r86r0F                  440 	mov	a, ___fsadd_PARM_2+2
+      000236r80r03                  441 	idxm	p, a
+      000238r00r12                  442 	inc	p
+      00023Ar87r0F                  443 	mov	a, ___fsadd_PARM_2+3
+      00023Cr80r03                  444 	idxm	p, a
+      00023E 7A 00                  445 	ret
+      000240                        446 00114$:
+                                    447 ;	../_fsadd.c: 203: if (expd < 0)
+      000240rBDr0F                  448 	mov	a, ___fsadd_sloc16_1_0+1
+      000242 80 29                  449 	sub	a, #0x80
+      000244 40 18                  450 	t0sn	f, c
+      000246r7Er32                  451 	goto	00116$
+                                    452 ;	../_fsadd.c: 205: expd = -expd;
+      000248 00 2F                  453 	mov	a, #0x00
+      00024ArBCr0C                  454 	sub	a, ___fsadd_sloc16_1_0+0
+      00024CrBEr0B                  455 	mov	___fsadd_sloc17_1_0+0, a
+      00024E 00 2F                  456 	mov	a, #0x00
+      000250rBDr0D                  457 	subc	a, ___fsadd_sloc16_1_0+1
+      000252rBFr0B                  458 	mov	___fsadd_sloc17_1_0+1, a
+                                    459 ;	../_fsadd.c: 206: exp1 += expd;
+      000254rBEr0F                  460 	mov	a, ___fsadd_sloc17_1_0+0
+      000256r2Ar08                  461 	add	___fsadd_sloc11_1_0+0, a
+      000258rBFr0F                  462 	mov	a, ___fsadd_sloc17_1_0+1
+      00025Ar2Br09                  463 	addc	___fsadd_sloc11_1_0+1, a
+                                    464 ;	../_fsadd.c: 207: mant1 >>= expd;
+      00025CrBEr0F                  465 	mov	a, ___fsadd_sloc17_1_0+0
+      00025E                        466 00246$:
+      00025E 01 29                  467 	sub	a, #1
+      000260 40 18                  468 	t0sn	f, c
+      000262r7Cr32                  469 	goto	00247$
+      000264 72 00                  470 	push	af
+      000266 01 2F                  471 	mov	a, #0x01
+      000268rB7r15                  472 	sl	___fsadd_sloc14_1_0+3
+      00026A 40 18                  473 	t0sn	f, c
+      00026CrB7r0A                  474 	or	___fsadd_sloc14_1_0+3, a
+      00026Er37r16                  475 	src	___fsadd_sloc14_1_0+3
+      000270r37r16                  476 	src	___fsadd_sloc14_1_0+3
+      000272r36r16                  477 	src	___fsadd_sloc14_1_0+2
+      000274r35r16                  478 	src	___fsadd_sloc14_1_0+1
+      000276r34r16                  479 	src	___fsadd_sloc14_1_0+0
+      000278 73 00                  480 	pop	af
+      00027Ar5Er32                  481 	goto	00246$
+      00027C                        482 00247$:
+      00027Cr9Er32                  483 	goto	00117$
+      00027E                        484 00116$:
+                                    485 ;	../_fsadd.c: 211: mant2 >>= expd;
+      00027ErBCr0F                  486 	mov	a, ___fsadd_sloc16_1_0+0
+      000280                        487 00248$:
+      000280 01 29                  488 	sub	a, #1
+      000282 40 18                  489 	t0sn	f, c
+      000284r9Er32                  490 	goto	00249$
+      000286 72 00                  491 	push	af
+      000288 01 2F                  492 	mov	a, #0x01
+      00028Ar99r15                  493 	sl	___fsadd_sloc6_1_0+3
+      00028C 40 18                  494 	t0sn	f, c
+      00028Er99r0A                  495 	or	___fsadd_sloc6_1_0+3, a
+      000290r19r16                  496 	src	___fsadd_sloc6_1_0+3
+      000292r19r16                  497 	src	___fsadd_sloc6_1_0+3
+      000294r18r16                  498 	src	___fsadd_sloc6_1_0+2
+      000296r17r16                  499 	src	___fsadd_sloc6_1_0+1
+      000298r16r16                  500 	src	___fsadd_sloc6_1_0+0
+      00029A 73 00                  501 	pop	af
+      00029Cr80r32                  502 	goto	00248$
+      00029E                        503 00249$:
+      00029E                        504 00117$:
+                                    505 ;	../_fsadd.c: 213: mant1 += mant2;
+      00029ErB4r0F                  506 	mov	a, ___fsadd_sloc14_1_0+0
+      0002A0r16r0C                  507 	add	a, ___fsadd_sloc6_1_0+0
+      0002A2rC0r0B                  508 	mov	___fsadd_sloc18_1_0+0, a
+      0002A4rB5r0F                  509 	mov	a, ___fsadd_sloc14_1_0+1
+      0002A6r17r0D                  510 	addc	a, ___fsadd_sloc6_1_0+1
+      0002A8rC1r0B                  511 	mov	___fsadd_sloc18_1_0+1, a
+      0002AArB6r0F                  512 	mov	a, ___fsadd_sloc14_1_0+2
+      0002ACr18r0D                  513 	addc	a, ___fsadd_sloc6_1_0+2
+      0002AErC2r0B                  514 	mov	___fsadd_sloc18_1_0+2, a
+      0002B0rB7r0F                  515 	mov	a, ___fsadd_sloc14_1_0+3
+      0002B2r19r0D                  516 	addc	a, ___fsadd_sloc6_1_0+3
+      0002B4rC3r0B                  517 	mov	___fsadd_sloc18_1_0+3, a
+                                    518 ;	../_fsadd.c: 215: sign = false;
+      0002B6r44r13                  519 	clear	___fsadd_sloc19_1_0+0
+                                    520 ;	../_fsadd.c: 217: if (mant1 < 0)
+      0002B8rC3r0F                  521 	mov	a, ___fsadd_sloc18_1_0+3
+      0002BA 80 29                  522 	sub	a, #0x80
+      0002BC 40 18                  523 	t0sn	f, c
+      0002BErDEr32                  524 	goto	00121$
+                                    525 ;	../_fsadd.c: 219: mant1 = -mant1;
+      0002C0 00 2F                  526 	mov	a, #0x00
+      0002C2rC0r0C                  527 	sub	a, ___fsadd_sloc18_1_0+0
+      0002C4rC0r0B                  528 	mov	___fsadd_sloc18_1_0+0, a
+      0002C6 00 2F                  529 	mov	a, #0x00
+      0002C8rC1r0D                  530 	subc	a, ___fsadd_sloc18_1_0+1
+      0002CArC1r0B                  531 	mov	___fsadd_sloc18_1_0+1, a
+      0002CC 00 2F                  532 	mov	a, #0x00
+      0002CErC2r0D                  533 	subc	a, ___fsadd_sloc18_1_0+2
+      0002D0rC2r0B                  534 	mov	___fsadd_sloc18_1_0+2, a
+      0002D2 00 2F                  535 	mov	a, #0x00
+      0002D4rC3r0D                  536 	subc	a, ___fsadd_sloc18_1_0+3
+      0002D6rC3r0B                  537 	mov	___fsadd_sloc18_1_0+3, a
+                                    538 ;	../_fsadd.c: 220: sign = true;
+      0002D8 01 2F                  539 	mov	a, #0x01
+      0002DArC4r0B                  540 	mov	___fsadd_sloc19_1_0+0, a
+      0002DCr0Cr33                  541 	goto	00154$
+      0002DE                        542 00121$:
+                                    543 ;	../_fsadd.c: 222: else if (!mant1)
+      0002DErC0r0F                  544 	mov	a, ___fsadd_sloc18_1_0+0
+      0002E0rC1r0E                  545 	or	a, ___fsadd_sloc18_1_0+1
+      0002E2rC2r0E                  546 	or	a, ___fsadd_sloc18_1_0+2
+      0002E4rC3r0E                  547 	or	a, ___fsadd_sloc18_1_0+3
+      0002E6 00 2A                  548 	ceqsn	a, #0x00
+      0002E8r0Cr33                  549 	goto	00154$
+                                    550 ;	../_fsadd.c: 223: return (0);
+      0002EA C2 01                  551 	mov	a, sp
+      0002EC FC 28                  552 	add	a, #0xfc
+      0002EEr80r0B                  553 	mov	p, a
+      0002F0r81r03                  554 	idxm	a, p
+      0002F2r80r0B                  555 	mov	p, a
+      0002F4 00 2F                  556 	mov	a, #0x00
+      0002F6r80r03                  557 	idxm	p, a
+      0002F8r00r12                  558 	inc	p
+      0002FA 00 2F                  559 	mov	a, #0x00
+      0002FCr80r03                  560 	idxm	p, a
+      0002FEr00r12                  561 	inc	p
+      000300 00 2F                  562 	mov	a, #0x00
+      000302r80r03                  563 	idxm	p, a
+      000304r00r12                  564 	inc	p
+      000306 00 2F                  565 	mov	a, #0x00
+      000308r80r03                  566 	idxm	p, a
+      00030A 7A 00                  567 	ret
+                                    568 ;	../_fsadd.c: 226: while (mant1 < (HIDDEN<<4)) {
+      00030C                        569 00154$:
+      00030CrAAr0F                  570 	mov	a, ___fsadd_sloc11_1_0+0
+      00030ErC5r0B                  571 	mov	___fsadd_sloc20_1_0+0, a
+      000310rABr0F                  572 	mov	a, ___fsadd_sloc11_1_0+1
+      000312rC6r0B                  573 	mov	___fsadd_sloc20_1_0+1, a
+      000314                        574 00123$:
+      000314rC0r0F                  575 	mov	a, ___fsadd_sloc18_1_0+0
+      000316rC7r0B                  576 	mov	___fsadd_sloc21_1_0+0, a
+      000318rC1r0F                  577 	mov	a, ___fsadd_sloc18_1_0+1
+      00031ArC8r0B                  578 	mov	___fsadd_sloc21_1_0+1, a
+      00031CrC2r0F                  579 	mov	a, ___fsadd_sloc18_1_0+2
+      00031ErC9r0B                  580 	mov	___fsadd_sloc21_1_0+2, a
+      000320rC3r0F                  581 	mov	a, ___fsadd_sloc18_1_0+3
+      000322rCAr0B                  582 	mov	___fsadd_sloc21_1_0+3, a
+      000324 08 29                  583 	sub	a, #0x08
+      000326 40 1A                  584 	t1sn	f, c
+      000328r38r33                  585 	goto	00157$
+                                    586 ;	../_fsadd.c: 227: mant1 <<= 1;
+      00032ArC0r15                  587 	sl	___fsadd_sloc18_1_0+0
+      00032CrC1r16                  588 	slc	___fsadd_sloc18_1_0+1
+      00032ErC2r16                  589 	slc	___fsadd_sloc18_1_0+2
+      000330rC3r16                  590 	slc	___fsadd_sloc18_1_0+3
+                                    591 ;	../_fsadd.c: 228: exp1--;
+      000332rC5r12                  592 	dec	___fsadd_sloc20_1_0+0
+      000334rC6r10                  593 	subc	___fsadd_sloc20_1_0+1
+      000336r14r33                  594 	goto	00123$
+                                    595 ;	../_fsadd.c: 232: while (mant1 & 0xf0000000) {
+      000338                        596 00157$:
+      000338rC5r0F                  597 	mov	a, ___fsadd_sloc20_1_0+0
+      00033ArCBr0B                  598 	mov	___fsadd_sloc22_1_0+0, a
+      00033CrC6r0F                  599 	mov	a, ___fsadd_sloc20_1_0+1
+      00033ErCCr0B                  600 	mov	___fsadd_sloc22_1_0+1, a
+      000340                        601 00128$:
+      000340rC3r0F                  602 	mov	a, ___fsadd_sloc18_1_0+3
+      000342 F0 2C                  603 	and	a, #0xf0
+      000344 00 2B                  604 	cneqsn	a, #0x00
+      000346r6Cr33                  605 	goto	00163$
+                                    606 ;	../_fsadd.c: 233: if (mant1&1)
+      000348rC0r0F                  607 	mov	a, ___fsadd_sloc18_1_0+0
+      00034A 01 2C                  608 	and	a, #0x01
+      00034C 00 2B                  609 	cneqsn	a, #0x00
+      00034Er5Ar33                  610 	goto	00127$
+                                    611 ;	../_fsadd.c: 234: mant1 += 2;
+      000350 02 2F                  612 	mov	a, #0x02
+      000352r40r08                  613 	add	___fsadd_sloc18_1_0+0, a
+      000354r41r10                  614 	addc	___fsadd_sloc18_1_0+1
+      000356r42r10                  615 	addc	___fsadd_sloc18_1_0+2
+      000358r43r10                  616 	addc	___fsadd_sloc18_1_0+3
+      00035A                        617 00127$:
+                                    618 ;	../_fsadd.c: 235: mant1 >>= 1;
+      00035ArC3r0F                  619 	mov	a, ___fsadd_sloc18_1_0+3
+      00035C 6B 00                  620 	sl	a
+      00035Er43r16                  621 	src	___fsadd_sloc18_1_0+3
+      000360r42r16                  622 	src	___fsadd_sloc18_1_0+2
+      000362r41r16                  623 	src	___fsadd_sloc18_1_0+1
+      000364r40r16                  624 	src	___fsadd_sloc18_1_0+0
+                                    625 ;	../_fsadd.c: 236: exp1++;
+      000366r4Br12                  626 	inc	___fsadd_sloc22_1_0+0
+      000368r4Cr10                  627 	addc	___fsadd_sloc22_1_0+1
+      00036Ar40r33                  628 	goto	00128$
+      00036C                        629 00163$:
+      00036CrCBr0F                  630 	mov	a, ___fsadd_sloc22_1_0+0
+      00036ErCDr0B                  631 	mov	___fsadd_sloc23_1_0+0, a
+      000370rCCr0F                  632 	mov	a, ___fsadd_sloc22_1_0+1
+      000372rCEr0B                  633 	mov	___fsadd_sloc23_1_0+1, a
+                                    634 ;	../_fsadd.c: 240: mant1 &= ~(HIDDEN<<4);
+      000374rC0r0F                  635 	mov	a, ___fsadd_sloc18_1_0+0
+      000376rCFr0B                  636 	mov	___fsadd_sloc24_1_0+0, a
+      000378rC1r0F                  637 	mov	a, ___fsadd_sloc18_1_0+1
+      00037ArD0r0B                  638 	mov	___fsadd_sloc24_1_0+1, a
+      00037CrC2r0F                  639 	mov	a, ___fsadd_sloc18_1_0+2
+      00037ErD1r0B                  640 	mov	___fsadd_sloc24_1_0+2, a
+      000380rC3r0F                  641 	mov	a, ___fsadd_sloc18_1_0+3
+      000382 F7 2C                  642 	and	a, #0xf7
+      000384rD2r0B                  643 	mov	___fsadd_sloc24_1_0+3, a
+                                    644 ;	../_fsadd.c: 243: if (exp1 >= 0x100)
+      000386rCCr0F                  645 	mov	a, ___fsadd_sloc22_1_0+1
+      000388 01 29                  646 	sub	a, #0x01
+      00038A C0 18                  647 	t0sn	f, ov
+      00038C 80 2E                  648 	xor	a, #0x80
+      00038E 6B 00                  649 	sl	a
+      000390 40 18                  650 	t0sn	f, c
+      000392rC6r33                  651 	goto	00135$
+                                    652 ;	../_fsadd.c: 244: *pfl1 = (sign ? (SIGNBIT | __INFINITY) : __INFINITY);
+      000394rC4r0F                  653 	mov	a, ___fsadd_sloc19_1_0+0
+      000396 00 2B                  654 	cneqsn	a, #0x00
+      000398rA8r33                  655 	goto	00139$
+      00039Ar53r13                  656 	clear	___fsadd_sloc25_1_0+0
+      00039Cr54r13                  657 	clear	___fsadd_sloc25_1_0+1
+      00039E 80 2F                  658 	mov	a, #0x80
+      0003A0rD5r0B                  659 	mov	___fsadd_sloc25_1_0+2, a
+      0003A2 FF 2F                  660 	mov	a, #0xff
+      0003A4rD6r0B                  661 	mov	___fsadd_sloc25_1_0+3, a
+      0003A6rB4r33                  662 	goto	00140$
+      0003A8                        663 00139$:
+      0003A8r53r13                  664 	clear	___fsadd_sloc25_1_0+0
+      0003AAr54r13                  665 	clear	___fsadd_sloc25_1_0+1
+      0003AC 80 2F                  666 	mov	a, #0x80
+      0003AErD5r0B                  667 	mov	___fsadd_sloc25_1_0+2, a
+      0003B0 7F 2F                  668 	mov	a, #0x7f
+      0003B2rD6r0B                  669 	mov	___fsadd_sloc25_1_0+3, a
+      0003B4                        670 00140$:
+      0003B4rD3r0F                  671 	mov	a, ___fsadd_sloc25_1_0+0
+      0003B6r80r0B                  672 	mov	___fsadd_PARM_1+0, a
+      0003B8rD4r0F                  673 	mov	a, ___fsadd_sloc25_1_0+1
+      0003BAr81r0B                  674 	mov	___fsadd_PARM_1+1, a
+      0003BCrD5r0F                  675 	mov	a, ___fsadd_sloc25_1_0+2
+      0003BEr82r0B                  676 	mov	___fsadd_PARM_1+2, a
+      0003C0rD6r0F                  677 	mov	a, ___fsadd_sloc25_1_0+3
+      0003C2r83r0B                  678 	mov	___fsadd_PARM_1+3, a
+      0003C4r90r34                  679 	goto	00136$
+      0003C6                        680 00135$:
+                                    681 ;	../_fsadd.c: 245: else if (exp1 < 0)
+      0003C6rCCr0F                  682 	mov	a, ___fsadd_sloc22_1_0+1
+      0003C8 80 29                  683 	sub	a, #0x80
+      0003CA 40 18                  684 	t0sn	f, c
+      0003CCrD8r33                  685 	goto	00132$
+                                    686 ;	../_fsadd.c: 246: *pfl1 = 0;
+      0003CEr00r13                  687 	clear	___fsadd_PARM_1+0
+      0003D0r01r13                  688 	clear	___fsadd_PARM_1+1
+      0003D2r02r13                  689 	clear	___fsadd_PARM_1+2
+      0003D4r03r13                  690 	clear	___fsadd_PARM_1+3
+      0003D6r90r34                  691 	goto	00136$
+      0003D8                        692 00132$:
+                                    693 ;	../_fsadd.c: 248: *pfl1 = PACK (sign ? SIGNBIT : 0 , exp1, mant1>>4);
+      0003D8rC4r0F                  694 	mov	a, ___fsadd_sloc19_1_0+0
+      0003DA 00 2B                  695 	cneqsn	a, #0x00
+      0003DCrEAr33                  696 	goto	00141$
+      0003DEr57r13                  697 	clear	___fsadd_sloc26_1_0+0
+      0003E0r58r13                  698 	clear	___fsadd_sloc26_1_0+1
+      0003E2r59r13                  699 	clear	___fsadd_sloc26_1_0+2
+      0003E4 80 2F                  700 	mov	a, #0x80
+      0003E6rDAr0B                  701 	mov	___fsadd_sloc26_1_0+3, a
+      0003E8rF2r33                  702 	goto	00142$
+      0003EA                        703 00141$:
+      0003EAr57r13                  704 	clear	___fsadd_sloc26_1_0+0
+      0003ECr58r13                  705 	clear	___fsadd_sloc26_1_0+1
+      0003EEr59r13                  706 	clear	___fsadd_sloc26_1_0+2
+      0003F0r5Ar13                  707 	clear	___fsadd_sloc26_1_0+3
+      0003F2                        708 00142$:
+      0003F2rCDr0F                  709 	mov	a, ___fsadd_sloc23_1_0+0
+      0003F4rDBr0B                  710 	mov	___fsadd_sloc27_1_0+0, a
+      0003F6rCEr0F                  711 	mov	a, ___fsadd_sloc23_1_0+1
+      0003F8rDCr0B                  712 	mov	___fsadd_sloc27_1_0+1, a
+      0003FA 6B 00                  713 	sl	a
+      0003FC 00 2F                  714 	mov	a, #0x00
+      0003FE 61 00                  715 	subc	a
+      000400rDDr0B                  716 	mov	___fsadd_sloc27_1_0+2, a
+      000402rDEr0B                  717 	mov	___fsadd_sloc27_1_0+3, a
+      000404rDBr0F                  718 	mov	a, ___fsadd_sloc27_1_0+0
+      000406rE1r0B                  719 	mov	___fsadd_sloc28_1_0+2, a
+      000408rDCr0F                  720 	mov	a, ___fsadd_sloc27_1_0+1
+      00040ArE2r0B                  721 	mov	___fsadd_sloc28_1_0+3, a
+      00040Cr5Fr13                  722 	clear	___fsadd_sloc28_1_0+0
+      00040Er60r13                  723 	clear	___fsadd_sloc28_1_0+1
+      000410 07 2F                  724 	mov	a, #7
+      000412                        725 00250$:
+      000412rE1r15                  726 	sl	___fsadd_sloc28_1_0+2
+      000414rE2r16                  727 	slc	___fsadd_sloc28_1_0+3
+      000416 63 00                  728 	dzsn	a
+      000418r12r34                  729 	goto	00250$
+      00041ArD7r0F                  730 	mov	a, ___fsadd_sloc26_1_0+0
+      00041CrDFr0E                  731 	or	a, ___fsadd_sloc28_1_0+0
+      00041ErE3r0B                  732 	mov	___fsadd_sloc29_1_0+0, a
+      000420rD8r0F                  733 	mov	a, ___fsadd_sloc26_1_0+1
+      000422rE0r0E                  734 	or	a, ___fsadd_sloc28_1_0+1
+      000424rE4r0B                  735 	mov	___fsadd_sloc29_1_0+1, a
+      000426rD9r0F                  736 	mov	a, ___fsadd_sloc26_1_0+2
+      000428rE1r0E                  737 	or	a, ___fsadd_sloc28_1_0+2
+      00042ArE5r0B                  738 	mov	___fsadd_sloc29_1_0+2, a
+      00042CrDAr0F                  739 	mov	a, ___fsadd_sloc26_1_0+3
+      00042ErE2r0E                  740 	or	a, ___fsadd_sloc28_1_0+3
+      000430rE6r0B                  741 	mov	___fsadd_sloc29_1_0+3, a
+      000432rCFr0F                  742 	mov	a, ___fsadd_sloc24_1_0+0
+      000434rE7r0B                  743 	mov	___fsadd_sloc30_1_0+0, a
+      000436rD0r0F                  744 	mov	a, ___fsadd_sloc24_1_0+1
+      000438rE8r0B                  745 	mov	___fsadd_sloc30_1_0+1, a
+      00043ArD1r0F                  746 	mov	a, ___fsadd_sloc24_1_0+2
+      00043CrE9r0B                  747 	mov	___fsadd_sloc30_1_0+2, a
+      00043ErD2r0F                  748 	mov	a, ___fsadd_sloc24_1_0+3
+      000440rEAr0B                  749 	mov	___fsadd_sloc30_1_0+3, a
+      000442 04 2F                  750 	mov	a, #4
+      000444                        751 00251$:
+      000444 72 00                  752 	push	af
+      000446rEAr0F                  753 	mov	a, ___fsadd_sloc30_1_0+3
+      000448 6B 00                  754 	sl	a
+      00044Ar6Ar16                  755 	src	___fsadd_sloc30_1_0+3
+      00044Cr69r16                  756 	src	___fsadd_sloc30_1_0+2
+      00044Er68r16                  757 	src	___fsadd_sloc30_1_0+1
+      000450r67r16                  758 	src	___fsadd_sloc30_1_0+0
+      000452 73 00                  759 	pop	af
+      000454 63 00                  760 	dzsn	a
+      000456r44r34                  761 	goto	00251$
+      000458rE7r0F                  762 	mov	a, ___fsadd_sloc30_1_0+0
+      00045ArEBr0B                  763 	mov	___fsadd_sloc31_1_0+0, a
+      00045CrE8r0F                  764 	mov	a, ___fsadd_sloc30_1_0+1
+      00045ErECr0B                  765 	mov	___fsadd_sloc31_1_0+1, a
+      000460rE9r0F                  766 	mov	a, ___fsadd_sloc30_1_0+2
+      000462rEDr0B                  767 	mov	___fsadd_sloc31_1_0+2, a
+      000464rEAr0F                  768 	mov	a, ___fsadd_sloc30_1_0+3
+      000466rEEr0B                  769 	mov	___fsadd_sloc31_1_0+3, a
+      000468rE3r0F                  770 	mov	a, ___fsadd_sloc29_1_0+0
+      00046ArEBr0E                  771 	or	a, ___fsadd_sloc31_1_0+0
+      00046CrEFr0B                  772 	mov	___fsadd_sloc32_1_0+0, a
+      00046ErE4r0F                  773 	mov	a, ___fsadd_sloc29_1_0+1
+      000470rECr0E                  774 	or	a, ___fsadd_sloc31_1_0+1
+      000472rF0r0B                  775 	mov	___fsadd_sloc32_1_0+1, a
+      000474rE5r0F                  776 	mov	a, ___fsadd_sloc29_1_0+2
+      000476rEDr0E                  777 	or	a, ___fsadd_sloc31_1_0+2
+      000478rF1r0B                  778 	mov	___fsadd_sloc32_1_0+2, a
+      00047ArE6r0F                  779 	mov	a, ___fsadd_sloc29_1_0+3
+      00047CrEEr0E                  780 	or	a, ___fsadd_sloc31_1_0+3
+      00047ErF2r0B                  781 	mov	___fsadd_sloc32_1_0+3, a
+      000480rEFr0F                  782 	mov	a, ___fsadd_sloc32_1_0+0
+      000482r80r0B                  783 	mov	___fsadd_PARM_1+0, a
+      000484rF0r0F                  784 	mov	a, ___fsadd_sloc32_1_0+1
+      000486r81r0B                  785 	mov	___fsadd_PARM_1+1, a
+      000488rF1r0F                  786 	mov	a, ___fsadd_sloc32_1_0+2
+      00048Ar82r0B                  787 	mov	___fsadd_PARM_1+2, a
+      00048CrF2r0F                  788 	mov	a, ___fsadd_sloc32_1_0+3
+      00048Er83r0B                  789 	mov	___fsadd_PARM_1+3, a
+      000490                        790 00136$:
+                                    791 ;	../_fsadd.c: 249: return (a1);
+      000490 C2 01                  792 	mov	a, sp
+      000492 FC 28                  793 	add	a, #0xfc
+      000494r80r0B                  794 	mov	p, a
+      000496r81r03                  795 	idxm	a, p
+      000498r80r0B                  796 	mov	p, a
+      00049Ar80r0F                  797 	mov	a, ___fsadd_PARM_1+0
+      00049Cr80r03                  798 	idxm	p, a
+      00049Er00r12                  799 	inc	p
+      0004A0r81r0F                  800 	mov	a, ___fsadd_PARM_1+1
+      0004A2r80r03                  801 	idxm	p, a
+      0004A4r00r12                  802 	inc	p
+      0004A6r82r0F                  803 	mov	a, ___fsadd_PARM_1+2
+      0004A8r80r03                  804 	idxm	p, a
+      0004AAr00r12                  805 	inc	p
+      0004ACr83r0F                  806 	mov	a, ___fsadd_PARM_1+3
+      0004AEr80r03                  807 	idxm	p, a
+                                    808 ;	../_fsadd.c: 250: }
+      0004B0 7A 00                  809 	ret
+                                    810 	.area CODE
+                                    811 	.area CONST
+                                    812 	.area CABS (ABS)

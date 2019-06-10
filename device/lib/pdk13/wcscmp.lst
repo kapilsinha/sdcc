@@ -1,0 +1,268 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module wcscmp
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wcscmp_PARM_2
+                                     17 	.globl _wcscmp_PARM_1
+                                     18 	.globl _wcscmp
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _wcscmp_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _wcscmp_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _wcscmp_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 _wcscmp_sloc1_1_0:
+      000002                         39 	.ds 2
+      000004                         40 _wcscmp_sloc2_1_0:
+      000004                         41 	.ds 4
+      000008                         42 _wcscmp_sloc3_1_0:
+      000008                         43 	.ds 4
+      00000C                         44 _wcscmp_sloc4_1_0:
+      00000C                         45 	.ds 4
+      000010                         46 _wcscmp_sloc5_1_0:
+      000010                         47 	.ds 4
+                                     48 ;--------------------------------------------------------
+                                     49 ; absolute external ram data
+                                     50 ;--------------------------------------------------------
+                                     51 	.area DABS (ABS)
+                                     52 ;--------------------------------------------------------
+                                     53 ; global & static initialisations
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area GSINIT
+                                     57 	.area GSFINAL
+                                     58 	.area GSINIT
+                                     59 ;--------------------------------------------------------
+                                     60 ; Home
+                                     61 ;--------------------------------------------------------
+                                     62 	.area HOME
+                                     63 	.area HOME
+                                     64 ;--------------------------------------------------------
+                                     65 ; code
+                                     66 ;--------------------------------------------------------
+                                     67 	.area CODE
+                                     68 ;	../wcscmp.c: 31: int wcscmp(const wchar_t *s1, const wchar_t *s2)
+                                     69 ;	-----------------------------------------
+                                     70 ;	 function wcscmp
+                                     71 ;	-----------------------------------------
+      000000                         72 _wcscmp:
+                                     73 ;	../wcscmp.c: 33: while(*s1 == *s2 && *s1)
+      000000r80r0F                   74 	mov	a, _wcscmp_PARM_1+0
+      000002r80r0B                   75 	mov	_wcscmp_sloc0_1_0+0, a
+      000004r81r0F                   76 	mov	a, _wcscmp_PARM_1+1
+      000006r81r0B                   77 	mov	_wcscmp_sloc0_1_0+1, a
+      000008r82r0F                   78 	mov	a, _wcscmp_PARM_2+0
+      00000Ar82r0B                   79 	mov	_wcscmp_sloc1_1_0+0, a
+      00000Cr83r0F                   80 	mov	a, _wcscmp_PARM_2+1
+      00000Er83r0B                   81 	mov	_wcscmp_sloc1_1_0+1, a
+      000010                         82 00102$:
+      000010r80r0F                   83 	mov	a, _wcscmp_sloc0_1_0+0
+      000012r80r0B                   84 	mov	p, a
+      000014r81r0F                   85 	mov	a, _wcscmp_sloc0_1_0+1
+      000016r00r38                   86 	call	__gptrget
+      000018r84r0B                   87 	mov	_wcscmp_sloc2_1_0+0, a
+      00001Ar80r0F                   88 	mov	a, _wcscmp_sloc0_1_0+0
+      00001Cr80r0B                   89 	mov	p, a
+      00001Er81r0F                   90 	mov	a, _wcscmp_sloc0_1_0+1
+      000020r00r12                   91 	inc	p
+      000022 60 00                   92 	addc	a
+      000024r00r38                   93 	call	__gptrget
+      000026r85r0B                   94 	mov	_wcscmp_sloc2_1_0+1, a
+      000028r80r0F                   95 	mov	a, _wcscmp_sloc0_1_0+0
+      00002Ar80r0B                   96 	mov	p, a
+      00002Cr81r0F                   97 	mov	a, _wcscmp_sloc0_1_0+1
+      00002Er00r12                   98 	inc	p
+      000030 60 00                   99 	addc	a
+      000032r00r12                  100 	inc	p
+      000034 60 00                  101 	addc	a
+      000036r00r38                  102 	call	__gptrget
+      000038r86r0B                  103 	mov	_wcscmp_sloc2_1_0+2, a
+      00003Ar80r0F                  104 	mov	a, _wcscmp_sloc0_1_0+0
+      00003Cr80r0B                  105 	mov	p, a
+      00003Er81r0F                  106 	mov	a, _wcscmp_sloc0_1_0+1
+      000040r80r13                  107 	xch	a, p
+      000042 03 28                  108 	add	a, #3
+      000044r80r13                  109 	xch	a, p
+      000046 60 00                  110 	addc	a
+      000048r00r38                  111 	call	__gptrget
+      00004Ar87r0B                  112 	mov	_wcscmp_sloc2_1_0+3, a
+      00004Cr82r0F                  113 	mov	a, _wcscmp_sloc1_1_0+0
+      00004Er80r0B                  114 	mov	p, a
+      000050r83r0F                  115 	mov	a, _wcscmp_sloc1_1_0+1
+      000052r00r38                  116 	call	__gptrget
+      000054r88r0B                  117 	mov	_wcscmp_sloc3_1_0+0, a
+      000056r82r0F                  118 	mov	a, _wcscmp_sloc1_1_0+0
+      000058r80r0B                  119 	mov	p, a
+      00005Ar83r0F                  120 	mov	a, _wcscmp_sloc1_1_0+1
+      00005Cr00r12                  121 	inc	p
+      00005E 60 00                  122 	addc	a
+      000060r00r38                  123 	call	__gptrget
+      000062r89r0B                  124 	mov	_wcscmp_sloc3_1_0+1, a
+      000064r82r0F                  125 	mov	a, _wcscmp_sloc1_1_0+0
+      000066r80r0B                  126 	mov	p, a
+      000068r83r0F                  127 	mov	a, _wcscmp_sloc1_1_0+1
+      00006Ar00r12                  128 	inc	p
+      00006C 60 00                  129 	addc	a
+      00006Er00r12                  130 	inc	p
+      000070 60 00                  131 	addc	a
+      000072r00r38                  132 	call	__gptrget
+      000074r8Ar0B                  133 	mov	_wcscmp_sloc3_1_0+2, a
+      000076r82r0F                  134 	mov	a, _wcscmp_sloc1_1_0+0
+      000078r80r0B                  135 	mov	p, a
+      00007Ar83r0F                  136 	mov	a, _wcscmp_sloc1_1_0+1
+      00007Cr80r13                  137 	xch	a, p
+      00007E 03 28                  138 	add	a, #3
+      000080r80r13                  139 	xch	a, p
+      000082 60 00                  140 	addc	a
+      000084r00r38                  141 	call	__gptrget
+      000086r8Br0B                  142 	mov	_wcscmp_sloc3_1_0+3, a
+      000088r84r0F                  143 	mov	a, _wcscmp_sloc2_1_0+0
+      00008Ar08r17                  144 	ceqsn	a, _wcscmp_sloc3_1_0+0
+      00008CrBAr30                  145 	goto	00104$
+      00008Er85r0F                  146 	mov	a, _wcscmp_sloc2_1_0+1
+      000090r09r17                  147 	ceqsn	a, _wcscmp_sloc3_1_0+1
+      000092rBAr30                  148 	goto	00104$
+      000094r86r0F                  149 	mov	a, _wcscmp_sloc2_1_0+2
+      000096r0Ar17                  150 	ceqsn	a, _wcscmp_sloc3_1_0+2
+      000098rBAr30                  151 	goto	00104$
+      00009Ar87r0F                  152 	mov	a, _wcscmp_sloc2_1_0+3
+      00009Cr0Br17                  153 	ceqsn	a, _wcscmp_sloc3_1_0+3
+      00009ErBAr30                  154 	goto	00104$
+      0000A0r84r0F                  155 	mov	a, _wcscmp_sloc2_1_0+0
+      0000A2r85r0E                  156 	or	a, _wcscmp_sloc2_1_0+1
+      0000A4r86r0E                  157 	or	a, _wcscmp_sloc2_1_0+2
+      0000A6r87r0E                  158 	or	a, _wcscmp_sloc2_1_0+3
+      0000A8 00 2B                  159 	cneqsn	a, #0x00
+      0000AArBAr30                  160 	goto	00104$
+                                    161 ;	../wcscmp.c: 34: s1++, s2++;
+      0000AC 04 2F                  162 	mov	a, #0x04
+      0000AEr00r08                  163 	add	_wcscmp_sloc0_1_0+0, a
+      0000B0r01r10                  164 	addc	_wcscmp_sloc0_1_0+1
+      0000B2 04 2F                  165 	mov	a, #0x04
+      0000B4r02r08                  166 	add	_wcscmp_sloc1_1_0+0, a
+      0000B6r03r10                  167 	addc	_wcscmp_sloc1_1_0+1
+      0000B8r10r30                  168 	goto	00102$
+      0000BA                        169 00104$:
+                                    170 ;	../wcscmp.c: 36: if(*s1 < *s2)
+      0000BAr80r0F                  171 	mov	a, _wcscmp_sloc0_1_0+0
+      0000BCr80r0B                  172 	mov	p, a
+      0000BEr81r0F                  173 	mov	a, _wcscmp_sloc0_1_0+1
+      0000C0r00r38                  174 	call	__gptrget
+      0000C2r8Cr0B                  175 	mov	_wcscmp_sloc4_1_0+0, a
+      0000C4r80r0F                  176 	mov	a, _wcscmp_sloc0_1_0+0
+      0000C6r80r0B                  177 	mov	p, a
+      0000C8r81r0F                  178 	mov	a, _wcscmp_sloc0_1_0+1
+      0000CAr00r12                  179 	inc	p
+      0000CC 60 00                  180 	addc	a
+      0000CEr00r38                  181 	call	__gptrget
+      0000D0r8Dr0B                  182 	mov	_wcscmp_sloc4_1_0+1, a
+      0000D2r80r0F                  183 	mov	a, _wcscmp_sloc0_1_0+0
+      0000D4r80r0B                  184 	mov	p, a
+      0000D6r81r0F                  185 	mov	a, _wcscmp_sloc0_1_0+1
+      0000D8r00r12                  186 	inc	p
+      0000DA 60 00                  187 	addc	a
+      0000DCr00r12                  188 	inc	p
+      0000DE 60 00                  189 	addc	a
+      0000E0r00r38                  190 	call	__gptrget
+      0000E2r8Er0B                  191 	mov	_wcscmp_sloc4_1_0+2, a
+      0000E4r80r0F                  192 	mov	a, _wcscmp_sloc0_1_0+0
+      0000E6r80r0B                  193 	mov	p, a
+      0000E8r81r0F                  194 	mov	a, _wcscmp_sloc0_1_0+1
+      0000EAr80r13                  195 	xch	a, p
+      0000EC 03 28                  196 	add	a, #3
+      0000EEr80r13                  197 	xch	a, p
+      0000F0 60 00                  198 	addc	a
+      0000F2r00r38                  199 	call	__gptrget
+      0000F4r8Fr0B                  200 	mov	_wcscmp_sloc4_1_0+3, a
+      0000F6r82r0F                  201 	mov	a, _wcscmp_sloc1_1_0+0
+      0000F8r80r0B                  202 	mov	p, a
+      0000FAr83r0F                  203 	mov	a, _wcscmp_sloc1_1_0+1
+      0000FCr00r38                  204 	call	__gptrget
+      0000FEr90r0B                  205 	mov	_wcscmp_sloc5_1_0+0, a
+      000100r82r0F                  206 	mov	a, _wcscmp_sloc1_1_0+0
+      000102r80r0B                  207 	mov	p, a
+      000104r83r0F                  208 	mov	a, _wcscmp_sloc1_1_0+1
+      000106r00r12                  209 	inc	p
+      000108 60 00                  210 	addc	a
+      00010Ar00r38                  211 	call	__gptrget
+      00010Cr91r0B                  212 	mov	_wcscmp_sloc5_1_0+1, a
+      00010Er82r0F                  213 	mov	a, _wcscmp_sloc1_1_0+0
+      000110r80r0B                  214 	mov	p, a
+      000112r83r0F                  215 	mov	a, _wcscmp_sloc1_1_0+1
+      000114r00r12                  216 	inc	p
+      000116 60 00                  217 	addc	a
+      000118r00r12                  218 	inc	p
+      00011A 60 00                  219 	addc	a
+      00011Cr00r38                  220 	call	__gptrget
+      00011Er92r0B                  221 	mov	_wcscmp_sloc5_1_0+2, a
+      000120r82r0F                  222 	mov	a, _wcscmp_sloc1_1_0+0
+      000122r80r0B                  223 	mov	p, a
+      000124r83r0F                  224 	mov	a, _wcscmp_sloc1_1_0+1
+      000126r80r13                  225 	xch	a, p
+      000128 03 28                  226 	add	a, #3
+      00012Ar80r13                  227 	xch	a, p
+      00012C 60 00                  228 	addc	a
+      00012Er00r38                  229 	call	__gptrget
+      000130r93r0B                  230 	mov	_wcscmp_sloc5_1_0+3, a
+      000132r8Cr0F                  231 	mov	a, _wcscmp_sloc4_1_0+0
+      000134r90r0C                  232 	sub	a, _wcscmp_sloc5_1_0+0
+      000136r8Dr0F                  233 	mov	a, _wcscmp_sloc4_1_0+1
+      000138r91r0D                  234 	subc	a, _wcscmp_sloc5_1_0+1
+      00013Ar8Er0F                  235 	mov	a, _wcscmp_sloc4_1_0+2
+      00013Cr92r0D                  236 	subc	a, _wcscmp_sloc5_1_0+2
+      00013Er8Fr0F                  237 	mov	a, _wcscmp_sloc4_1_0+3
+      000140r93r0D                  238 	subc	a, _wcscmp_sloc5_1_0+3
+      000142 40 1A                  239 	t1sn	f, c
+      000144r4Cr31                  240 	goto	00106$
+                                    241 ;	../wcscmp.c: 37: return(-1);
+      000146 FF 2F                  242 	mov	a, #0xff
+      000148r80r0B                  243 	mov	p, a
+      00014A FF 02                  244 	ret	#0xff
+      00014C                        245 00106$:
+                                    246 ;	../wcscmp.c: 38: if(*s1 > *s2)
+      00014Cr90r0F                  247 	mov	a, _wcscmp_sloc5_1_0+0
+      00014Er8Cr0C                  248 	sub	a, _wcscmp_sloc4_1_0+0
+      000150r91r0F                  249 	mov	a, _wcscmp_sloc5_1_0+1
+      000152r8Dr0D                  250 	subc	a, _wcscmp_sloc4_1_0+1
+      000154r92r0F                  251 	mov	a, _wcscmp_sloc5_1_0+2
+      000156r8Er0D                  252 	subc	a, _wcscmp_sloc4_1_0+2
+      000158r93r0F                  253 	mov	a, _wcscmp_sloc5_1_0+3
+      00015Ar8Fr0D                  254 	subc	a, _wcscmp_sloc4_1_0+3
+      00015C 40 1A                  255 	t1sn	f, c
+      00015Er64r31                  256 	goto	00108$
+                                    257 ;	../wcscmp.c: 39: return(1);
+      000160r00r13                  258 	clear	p
+      000162 01 02                  259 	ret	#0x01
+      000164                        260 00108$:
+                                    261 ;	../wcscmp.c: 40: return(0);
+      000164r00r13                  262 	clear	p
+      000166 00 02                  263 	ret	#0x00
+                                    264 ;	../wcscmp.c: 41: }
+      000168 7A 00                  265 	ret
+                                    266 	.area CODE
+                                    267 	.area CONST
+                                    268 	.area CABS (ABS)

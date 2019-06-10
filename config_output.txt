@@ -1,0 +1,72 @@
+sdcc 3.9.1 is now configured for
+
+  Build:                x86_64-unknown-linux-gnu
+  Host:                 x86_64-unknown-linux-gnu
+  Source directory:     .
+  Yacc:                 bison -y
+  C compiler:           gcc
+  CFLAGS:                -pipe -ggdb -g -O2
+  C++ compiler:         g++ -std=gnu++11
+  CXXFLAGS:             -pipe -ggdb -g -O2
+  CPPFLAGS:             
+  LDFLAGS:              
+  MAKEDEP:              g++ -std=gnu++11 -MM
+
+  ENABLED Ports:
+    ds390               yes
+    ds400               yes
+    hc08                yes
+    s08                 yes
+    mcs51               yes
+    pic14               no
+    pic16               no
+    z80                 yes
+    z180                yes
+    r2k                 yes
+    r3ka                yes
+    gbz80               yes
+    tlcs90              yes
+    ez80_z80            yes
+    stm8                yes
+    pdk13               yes
+    pdk14               yes
+    pdk15               yes
+
+  Disable non-free lib: 0
+  Disable packihx:      0
+  Disable ucsim:        0
+  Disable device lib:   0
+  Disable sdcpp:        0
+  Disable sdcdb:        0
+  Disable sdbinutil:    0
+  Enable documentation: 0
+  Enable libgc:         0
+
+  Install paths:
+    binary files:           ${prefix}
+    include/library files:  ${datarootdir}/sdcc
+    include files:          ${datarootdir}/sdcc/include
+    library files:          ${datarootdir}/sdcc/lib
+    non-free files:         ${datarootdir}/sdcc/non-free
+    non-free include files: ${datarootdir}/sdcc/non-free/include
+    non-free library files: ${datarootdir}/sdcc/non-free/lib
+    documentation:          ${datarootdir}/doc/${PACKAGE}
+
+    prefix:             /usr/local
+    datadir:            ${datarootdir}
+    datarootdir:        ${prefix}/share
+
+  Search paths (incomplete, see manual for all search paths):
+    binary files:       $SDCC_HOME/bin
+    include files:      /share/sdcc/include
+                        path(argv[0])/../share/sdcc/include
+                        /usr/local/share/sdcc/include
+                        /share/sdcc/non-free/include
+                        path(argv[0])/../share/sdcc/non-free/include
+                        /usr/local/share/sdcc/non-free/include
+    library files:      $SDCC_HOME/share/sdcc/lib/<model>
+                        path(argv[0])/../share/sdcc/lib/<model>
+                        /usr/local/share/sdcc/lib/<model>
+                        $SDCC_HOME/share/sdcc/non-free/lib/<model>
+                        path(argv[0])/../share/sdcc/non-free/lib/<model>
+                        /usr/local/share/sdcc/non-free/lib/<model>

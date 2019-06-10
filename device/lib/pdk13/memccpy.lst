@@ -1,0 +1,135 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module memccpy
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _memccpy_PARM_4
+                                     17 	.globl _memccpy_PARM_3
+                                     18 	.globl _memccpy_PARM_2
+                                     19 	.globl _memccpy_PARM_1
+                                     20 	.globl _memccpy
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _memccpy_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _memccpy_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _memccpy_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _memccpy_PARM_4:
+      000006                         37 	.ds 2
+                                     38 ;--------------------------------------------------------
+                                     39 ; overlayable items in ram 
+                                     40 ;--------------------------------------------------------
+                                     41 	.area	OSEG (OVR,DATA)
+      000000                         42 _memccpy_sloc0_1_0:
+      000000                         43 	.ds 2
+      000002                         44 _memccpy_sloc1_1_0:
+      000002                         45 	.ds 2
+      000004                         46 _memccpy_sloc2_1_0:
+      000004                         47 	.ds 2
+      000006                         48 _memccpy_sloc3_1_0:
+      000006                         49 	.ds 1
+      000007                         50 _memccpy_sloc4_1_0:
+      000007                         51 	.ds 2
+                                     52 ;--------------------------------------------------------
+                                     53 ; absolute external ram data
+                                     54 ;--------------------------------------------------------
+                                     55 	.area DABS (ABS)
+                                     56 ;--------------------------------------------------------
+                                     57 ; global & static initialisations
+                                     58 ;--------------------------------------------------------
+                                     59 	.area HOME
+                                     60 	.area GSINIT
+                                     61 	.area GSFINAL
+                                     62 	.area GSINIT
+                                     63 ;--------------------------------------------------------
+                                     64 ; Home
+                                     65 ;--------------------------------------------------------
+                                     66 	.area HOME
+                                     67 	.area HOME
+                                     68 ;--------------------------------------------------------
+                                     69 ; code
+                                     70 ;--------------------------------------------------------
+                                     71 	.area CODE
+                                     72 ;	../memccpy.c: 31: void *memccpy (void *restrict dst, const void *restrict src, int c, size_t n)
+                                     73 ;	-----------------------------------------
+                                     74 ;	 function memccpy
+                                     75 ;	-----------------------------------------
+      000000                         76 _memccpy:
+                                     77 ;	../memccpy.c: 33: char *d = dst;
+      000000r80r0F                   78 	mov	a, _memccpy_PARM_1+0
+      000002r80r0B                   79 	mov	_memccpy_sloc0_1_0+0, a
+      000004r81r0F                   80 	mov	a, _memccpy_PARM_1+1
+      000006r81r0B                   81 	mov	_memccpy_sloc0_1_0+1, a
+                                     82 ;	../memccpy.c: 34: const char *s = src;
+      000008r82r0F                   83 	mov	a, _memccpy_PARM_2+0
+      00000Ar82r0B                   84 	mov	_memccpy_sloc1_1_0+0, a
+      00000Cr83r0F                   85 	mov	a, _memccpy_PARM_2+1
+      00000Er83r0B                   86 	mov	_memccpy_sloc1_1_0+1, a
+                                     87 ;	../memccpy.c: 36: while (n--)
+      000010r86r0F                   88 	mov	a, _memccpy_PARM_4+0
+      000012r84r0B                   89 	mov	_memccpy_sloc2_1_0+0, a
+      000014r87r0F                   90 	mov	a, _memccpy_PARM_4+1
+      000016r85r0B                   91 	mov	_memccpy_sloc2_1_0+1, a
+      000018                         92 00103$:
+      000018r85r0F                   93 	mov	a, _memccpy_sloc2_1_0+1
+      00001Ar80r0B                   94 	mov	p, a
+      00001Cr84r0F                   95 	mov	a, _memccpy_sloc2_1_0+0
+      00001Er84r12                   96 	dec	_memccpy_sloc2_1_0+0
+      000020r85r10                   97 	subc	_memccpy_sloc2_1_0+1
+      000022r80r0E                   98 	or	a, p
+      000024 00 2B                   99 	cneqsn	a, #0x00
+      000026r58r30                  100 	goto	00105$
+                                    101 ;	../memccpy.c: 37: if ((*d++ = *s++) == (unsigned char)c)
+      000028r82r0F                  102 	mov	a, _memccpy_sloc1_1_0+0
+      00002Ar80r0B                  103 	mov	p, a
+      00002Cr83r0F                  104 	mov	a, _memccpy_sloc1_1_0+1
+      00002Er00r38                  105 	call	__gptrget
+      000030r86r0B                  106 	mov	_memccpy_sloc3_1_0+0, a
+      000032r02r12                  107 	inc	_memccpy_sloc1_1_0+0
+      000034r03r10                  108 	addc	_memccpy_sloc1_1_0+1
+      000036r80r0F                  109 	mov	a, _memccpy_sloc0_1_0+0
+      000038r80r0B                  110 	mov	p, a
+      00003Ar86r0F                  111 	mov	a, _memccpy_sloc3_1_0+0
+      00003Cr80r03                  112 	idxm	p, a
+      00003Er00r12                  113 	inc	_memccpy_sloc0_1_0+0
+      000040r01r10                  114 	addc	_memccpy_sloc0_1_0+1
+      000042r80r0F                  115 	mov	a, _memccpy_sloc0_1_0+0
+      000044r87r0B                  116 	mov	_memccpy_sloc4_1_0+0, a
+      000046r81r0F                  117 	mov	a, _memccpy_sloc0_1_0+1
+      000048r88r0B                  118 	mov	_memccpy_sloc4_1_0+1, a
+      00004Ar84r0F                  119 	mov	a, _memccpy_PARM_3+0
+      00004Cr06r17                  120 	ceqsn	a, _memccpy_sloc3_1_0+0
+      00004Er18r30                  121 	goto	00103$
+                                    122 ;	../memccpy.c: 38: return (d);
+      000050r88r0F                  123 	mov	a, _memccpy_sloc4_1_0+1
+      000052r80r0B                  124 	mov	p, a
+      000054r87r0F                  125 	mov	a, _memccpy_sloc4_1_0+0
+      000056 7A 00                  126 	ret
+      000058                        127 00105$:
+                                    128 ;	../memccpy.c: 40: return (0);
+      000058r00r13                  129 	clear	p
+      00005A 00 02                  130 	ret	#0x00
+                                    131 ;	../memccpy.c: 41: }
+      00005C 7A 00                  132 	ret
+                                    133 	.area CODE
+                                    134 	.area CONST
+                                    135 	.area CABS (ABS)

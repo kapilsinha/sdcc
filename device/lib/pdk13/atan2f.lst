@@ -1,0 +1,457 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module atan2f
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _fabsf
+                                     17 	.globl _atanf
+                                     18 	.globl _atan2f_PARM_2
+                                     19 	.globl _atan2f_PARM_1
+                                     20 	.globl _atan2f
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _atan2f_PARM_1:
+      000000                         31 	.ds 4
+      000004                         32 _atan2f_PARM_2:
+      000004                         33 	.ds 4
+      000008                         34 _atan2f_sloc0_1_0:
+      000008                         35 	.ds 4
+      00000C                         36 _atan2f_sloc1_1_0:
+      00000C                         37 	.ds 4
+      000010                         38 _atan2f_sloc2_1_0:
+      000010                         39 	.ds 4
+      000014                         40 _atan2f_sloc3_1_0:
+      000014                         41 	.ds 4
+      000018                         42 _atan2f_sloc4_1_0:
+      000018                         43 	.ds 4
+      00001C                         44 _atan2f_sloc5_1_0:
+      00001C                         45 	.ds 4
+      000020                         46 _atan2f_sloc6_1_0:
+      000020                         47 	.ds 4
+      000024                         48 _atan2f_sloc7_1_0:
+      000024                         49 	.ds 4
+      000028                         50 _atan2f_sloc8_1_0:
+      000028                         51 	.ds 4
+      00002C                         52 _atan2f_sloc9_1_0:
+      00002C                         53 	.ds 4
+      000030                         54 _atan2f_sloc10_1_0:
+      000030                         55 	.ds 4
+      000034                         56 _atan2f_sloc11_1_0:
+      000034                         57 	.ds 4
+                                     58 ;--------------------------------------------------------
+                                     59 ; overlayable items in ram 
+                                     60 ;--------------------------------------------------------
+                                     61 ;--------------------------------------------------------
+                                     62 ; absolute external ram data
+                                     63 ;--------------------------------------------------------
+                                     64 	.area DABS (ABS)
+                                     65 ;--------------------------------------------------------
+                                     66 ; global & static initialisations
+                                     67 ;--------------------------------------------------------
+                                     68 	.area HOME
+                                     69 	.area GSINIT
+                                     70 	.area GSFINAL
+                                     71 	.area GSINIT
+                                     72 ;--------------------------------------------------------
+                                     73 ; Home
+                                     74 ;--------------------------------------------------------
+                                     75 	.area HOME
+                                     76 	.area HOME
+                                     77 ;--------------------------------------------------------
+                                     78 ; code
+                                     79 ;--------------------------------------------------------
+                                     80 	.area CODE
+                                     81 ;	../atan2f.c: 34: float atan2f(float x, float y)
+                                     82 ;	-----------------------------------------
+                                     83 ;	 function atan2f
+                                     84 ;	-----------------------------------------
+      000000                         85 _atan2f:
+                                     86 ;	../atan2f.c: 38: if ((x==0.0) && (y==0.0))
+      000000r83r0F                   87 	mov	a, _atan2f_PARM_1+3
+      000002 7F 2C                   88 	and	a, #0x7f
+      000004r80r0E                   89 	or	a, _atan2f_PARM_1+0
+      000006r81r0E                   90 	or	a, _atan2f_PARM_1+1
+      000008r82r0E                   91 	or	a, _atan2f_PARM_1+2
+      00000A 00 2A                   92 	ceqsn	a, #0x00
+      00000Cr44r30                   93 	goto	00102$
+      00000Er87r0F                   94 	mov	a, _atan2f_PARM_2+3
+      000010 7F 2C                   95 	and	a, #0x7f
+      000012r84r0E                   96 	or	a, _atan2f_PARM_2+0
+      000014r85r0E                   97 	or	a, _atan2f_PARM_2+1
+      000016r86r0E                   98 	or	a, _atan2f_PARM_2+2
+      000018 00 2A                   99 	ceqsn	a, #0x00
+      00001Ar44r30                  100 	goto	00102$
+                                    101 ;	../atan2f.c: 40: errno=EDOM;
+      00001C 21 2F                  102 	mov	a, #0x21
+      00001Er80r0B                  103 	mov	_errno+0, a
+      000020r01r13                  104 	clear	_errno+1
+                                    105 ;	../atan2f.c: 41: return 0.0;
+      000022 C2 01                  106 	mov	a, sp
+      000024 FC 28                  107 	add	a, #0xfc
+      000026r80r0B                  108 	mov	p, a
+      000028r81r03                  109 	idxm	a, p
+      00002Ar80r0B                  110 	mov	p, a
+      00002C 00 2F                  111 	mov	a, #0x00
+      00002Er80r03                  112 	idxm	p, a
+      000030r00r12                  113 	inc	p
+      000032 00 2F                  114 	mov	a, #0x00
+      000034r80r03                  115 	idxm	p, a
+      000036r00r12                  116 	inc	p
+      000038 00 2F                  117 	mov	a, #0x00
+      00003Ar80r03                  118 	idxm	p, a
+      00003Cr00r12                  119 	inc	p
+      00003E 00 2F                  120 	mov	a, #0x00
+      000040r80r03                  121 	idxm	p, a
+      000042 7A 00                  122 	ret
+      000044                        123 00102$:
+                                    124 ;	../atan2f.c: 44: if(fabsf(y)>=fabsf(x))
+      000044 C2 01                  125 	mov	a, sp
+      000046r80r0B                  126 	mov	p, a
+      000048 72 00                  127 	push	af
+      00004A 72 00                  128 	push	af
+      00004Cr84r0F                  129 	mov	a, _atan2f_PARM_2+0
+      00004Er80r03                  130 	idxm	p, a
+      000050r00r12                  131 	inc	p
+      000052r85r0F                  132 	mov	a, _atan2f_PARM_2+1
+      000054r80r03                  133 	idxm	p, a
+      000056r00r12                  134 	inc	p
+      000058r86r0F                  135 	mov	a, _atan2f_PARM_2+2
+      00005Ar80r03                  136 	idxm	p, a
+      00005Cr00r12                  137 	inc	p
+      00005Er87r0F                  138 	mov	a, _atan2f_PARM_2+3
+      000060r80r03                  139 	idxm	p, a
+      000062r08r2F                  140 	mov	a, #_atan2f_sloc0_1_0
+      000064 72 00                  141 	push	af
+      000066r00r38                  142 	call	_fabsf
+      000068 C2 01                  143 	mov	a, sp
+      00006A FA 28                  144 	add	a, #-6
+      00006C 82 01                  145 	mov	sp, a
+      00006Er80r0B                  146 	mov	p, a
+      000070 72 00                  147 	push	af
+      000072 72 00                  148 	push	af
+      000074r80r0F                  149 	mov	a, _atan2f_PARM_1+0
+      000076r80r03                  150 	idxm	p, a
+      000078r00r12                  151 	inc	p
+      00007Ar81r0F                  152 	mov	a, _atan2f_PARM_1+1
+      00007Cr80r03                  153 	idxm	p, a
+      00007Er00r12                  154 	inc	p
+      000080r82r0F                  155 	mov	a, _atan2f_PARM_1+2
+      000082r80r03                  156 	idxm	p, a
+      000084r00r12                  157 	inc	p
+      000086r83r0F                  158 	mov	a, _atan2f_PARM_1+3
+      000088r80r03                  159 	idxm	p, a
+      00008Ar0Cr2F                  160 	mov	a, #_atan2f_sloc1_1_0
+      00008C 72 00                  161 	push	af
+      00008Er00r38                  162 	call	_fabsf
+      000090 C2 01                  163 	mov	a, sp
+      000092 FA 28                  164 	add	a, #-6
+      000094 82 01                  165 	mov	sp, a
+      000096r88r0F                  166 	mov	a, _atan2f_sloc0_1_0+0
+      000098r80r0B                  167 	mov	___fslt_PARM_1+0, a
+      00009Ar89r0F                  168 	mov	a, _atan2f_sloc0_1_0+1
+      00009Cr81r0B                  169 	mov	___fslt_PARM_1+1, a
+      00009Er8Ar0F                  170 	mov	a, _atan2f_sloc0_1_0+2
+      0000A0r82r0B                  171 	mov	___fslt_PARM_1+2, a
+      0000A2r8Br0F                  172 	mov	a, _atan2f_sloc0_1_0+3
+      0000A4r83r0B                  173 	mov	___fslt_PARM_1+3, a
+      0000A6r8Cr0F                  174 	mov	a, _atan2f_sloc1_1_0+0
+      0000A8r80r0B                  175 	mov	___fslt_PARM_2+0, a
+      0000AAr8Dr0F                  176 	mov	a, _atan2f_sloc1_1_0+1
+      0000ACr81r0B                  177 	mov	___fslt_PARM_2+1, a
+      0000AEr8Er0F                  178 	mov	a, _atan2f_sloc1_1_0+2
+      0000B0r82r0B                  179 	mov	___fslt_PARM_2+2, a
+      0000B2r8Fr0F                  180 	mov	a, _atan2f_sloc1_1_0+3
+      0000B4r83r0B                  181 	mov	___fslt_PARM_2+3, a
+      0000B6r00r38                  182 	call	___fslt
+      0000B8 00 2A                  183 	ceqsn	a, #0x00
+      0000BArBCr31                  184 	goto	00107$
+                                    185 ;	../atan2f.c: 46: r=atanf(x/y);
+      0000BCr80r0F                  186 	mov	a, _atan2f_PARM_1+0
+      0000BEr80r0B                  187 	mov	___fsdiv_PARM_1+0, a
+      0000C0r81r0F                  188 	mov	a, _atan2f_PARM_1+1
+      0000C2r81r0B                  189 	mov	___fsdiv_PARM_1+1, a
+      0000C4r82r0F                  190 	mov	a, _atan2f_PARM_1+2
+      0000C6r82r0B                  191 	mov	___fsdiv_PARM_1+2, a
+      0000C8r83r0F                  192 	mov	a, _atan2f_PARM_1+3
+      0000CAr83r0B                  193 	mov	___fsdiv_PARM_1+3, a
+      0000CCr84r0F                  194 	mov	a, _atan2f_PARM_2+0
+      0000CEr80r0B                  195 	mov	___fsdiv_PARM_2+0, a
+      0000D0r85r0F                  196 	mov	a, _atan2f_PARM_2+1
+      0000D2r81r0B                  197 	mov	___fsdiv_PARM_2+1, a
+      0000D4r86r0F                  198 	mov	a, _atan2f_PARM_2+2
+      0000D6r82r0B                  199 	mov	___fsdiv_PARM_2+2, a
+      0000D8r87r0F                  200 	mov	a, _atan2f_PARM_2+3
+      0000DAr83r0B                  201 	mov	___fsdiv_PARM_2+3, a
+      0000DCr10r2F                  202 	mov	a, #_atan2f_sloc2_1_0
+      0000DE 72 00                  203 	push	af
+      0000E0r00r38                  204 	call	___fsdiv
+      0000E2 C2 01                  205 	mov	a, sp
+      0000E4 FE 28                  206 	add	a, #-2
+      0000E6 82 01                  207 	mov	sp, a
+      0000E8r80r0B                  208 	mov	p, a
+      0000EA 72 00                  209 	push	af
+      0000EC 72 00                  210 	push	af
+      0000EEr90r0F                  211 	mov	a, _atan2f_sloc2_1_0+0
+      0000F0r80r03                  212 	idxm	p, a
+      0000F2r00r12                  213 	inc	p
+      0000F4r91r0F                  214 	mov	a, _atan2f_sloc2_1_0+1
+      0000F6r80r03                  215 	idxm	p, a
+      0000F8r00r12                  216 	inc	p
+      0000FAr92r0F                  217 	mov	a, _atan2f_sloc2_1_0+2
+      0000FCr80r03                  218 	idxm	p, a
+      0000FEr00r12                  219 	inc	p
+      000100r93r0F                  220 	mov	a, _atan2f_sloc2_1_0+3
+      000102r80r03                  221 	idxm	p, a
+      000104r14r2F                  222 	mov	a, #_atan2f_sloc3_1_0
+      000106 72 00                  223 	push	af
+      000108r00r38                  224 	call	_atanf
+      00010A C2 01                  225 	mov	a, sp
+      00010C FA 28                  226 	add	a, #-6
+      00010E 82 01                  227 	mov	sp, a
+      000110r94r0F                  228 	mov	a, _atan2f_sloc3_1_0+0
+      000112rA8r0B                  229 	mov	_atan2f_sloc8_1_0+0, a
+      000114r95r0F                  230 	mov	a, _atan2f_sloc3_1_0+1
+      000116rA9r0B                  231 	mov	_atan2f_sloc8_1_0+1, a
+      000118r96r0F                  232 	mov	a, _atan2f_sloc3_1_0+2
+      00011ArAAr0B                  233 	mov	_atan2f_sloc8_1_0+2, a
+      00011Cr97r0F                  234 	mov	a, _atan2f_sloc3_1_0+3
+      00011ErABr0B                  235 	mov	_atan2f_sloc8_1_0+3, a
+                                    236 ;	../atan2f.c: 47: if(y<0.0) r+=(x>=0?PI:-PI);
+      000120r84r0F                  237 	mov	a, _atan2f_PARM_2+0
+      000122r80r0B                  238 	mov	___fslt_PARM_1+0, a
+      000124r85r0F                  239 	mov	a, _atan2f_PARM_2+1
+      000126r81r0B                  240 	mov	___fslt_PARM_1+1, a
+      000128r86r0F                  241 	mov	a, _atan2f_PARM_2+2
+      00012Ar82r0B                  242 	mov	___fslt_PARM_1+2, a
+      00012Cr87r0F                  243 	mov	a, _atan2f_PARM_2+3
+      00012Er83r0B                  244 	mov	___fslt_PARM_1+3, a
+      000130r00r13                  245 	clear	___fslt_PARM_2+0
+      000132r01r13                  246 	clear	___fslt_PARM_2+1
+      000134r02r13                  247 	clear	___fslt_PARM_2+2
+      000136r03r13                  248 	clear	___fslt_PARM_2+3
+      000138r00r38                  249 	call	___fslt
+      00013A 00 2B                  250 	cneqsn	a, #0x00
+      00013Cr9Er32                  251 	goto	00108$
+      00013Er80r0F                  252 	mov	a, _atan2f_PARM_1+0
+      000140r80r0B                  253 	mov	___fslt_PARM_1+0, a
+      000142r81r0F                  254 	mov	a, _atan2f_PARM_1+1
+      000144r81r0B                  255 	mov	___fslt_PARM_1+1, a
+      000146r82r0F                  256 	mov	a, _atan2f_PARM_1+2
+      000148r82r0B                  257 	mov	___fslt_PARM_1+2, a
+      00014Ar83r0F                  258 	mov	a, _atan2f_PARM_1+3
+      00014Cr83r0B                  259 	mov	___fslt_PARM_1+3, a
+      00014Er00r13                  260 	clear	___fslt_PARM_2+0
+      000150r01r13                  261 	clear	___fslt_PARM_2+1
+      000152r02r13                  262 	clear	___fslt_PARM_2+2
+      000154r03r13                  263 	clear	___fslt_PARM_2+3
+      000156r00r38                  264 	call	___fslt
+      000158 00 2A                  265 	ceqsn	a, #0x00
+      00015Ar6Er31                  266 	goto	00111$
+      00015C DB 2F                  267 	mov	a, #0xdb
+      00015ErACr0B                  268 	mov	_atan2f_sloc9_1_0+0, a
+      000160 0F 2F                  269 	mov	a, #0x0f
+      000162rADr0B                  270 	mov	_atan2f_sloc9_1_0+1, a
+      000164 49 2F                  271 	mov	a, #0x49
+      000166rAEr0B                  272 	mov	_atan2f_sloc9_1_0+2, a
+      000168 40 2F                  273 	mov	a, #0x40
+      00016ArAFr0B                  274 	mov	_atan2f_sloc9_1_0+3, a
+      00016Cr7Er31                  275 	goto	00112$
+      00016E                        276 00111$:
+      00016E DB 2F                  277 	mov	a, #0xdb
+      000170rACr0B                  278 	mov	_atan2f_sloc9_1_0+0, a
+      000172 0F 2F                  279 	mov	a, #0x0f
+      000174rADr0B                  280 	mov	_atan2f_sloc9_1_0+1, a
+      000176 49 2F                  281 	mov	a, #0x49
+      000178rAEr0B                  282 	mov	_atan2f_sloc9_1_0+2, a
+      00017A C0 2F                  283 	mov	a, #0xc0
+      00017CrAFr0B                  284 	mov	_atan2f_sloc9_1_0+3, a
+      00017E                        285 00112$:
+      00017ErA8r0F                  286 	mov	a, _atan2f_sloc8_1_0+0
+      000180r80r0B                  287 	mov	___fsadd_PARM_1+0, a
+      000182rA9r0F                  288 	mov	a, _atan2f_sloc8_1_0+1
+      000184r81r0B                  289 	mov	___fsadd_PARM_1+1, a
+      000186rAAr0F                  290 	mov	a, _atan2f_sloc8_1_0+2
+      000188r82r0B                  291 	mov	___fsadd_PARM_1+2, a
+      00018ArABr0F                  292 	mov	a, _atan2f_sloc8_1_0+3
+      00018Cr83r0B                  293 	mov	___fsadd_PARM_1+3, a
+      00018ErACr0F                  294 	mov	a, _atan2f_sloc9_1_0+0
+      000190r80r0B                  295 	mov	___fsadd_PARM_2+0, a
+      000192rADr0F                  296 	mov	a, _atan2f_sloc9_1_0+1
+      000194r81r0B                  297 	mov	___fsadd_PARM_2+1, a
+      000196rAEr0F                  298 	mov	a, _atan2f_sloc9_1_0+2
+      000198r82r0B                  299 	mov	___fsadd_PARM_2+2, a
+      00019ArAFr0F                  300 	mov	a, _atan2f_sloc9_1_0+3
+      00019Cr83r0B                  301 	mov	___fsadd_PARM_2+3, a
+      00019Er18r2F                  302 	mov	a, #_atan2f_sloc4_1_0
+      0001A0 72 00                  303 	push	af
+      0001A2r00r38                  304 	call	___fsadd
+      0001A4 C2 01                  305 	mov	a, sp
+      0001A6 FE 28                  306 	add	a, #-2
+      0001A8 82 01                  307 	mov	sp, a
+      0001AAr98r0F                  308 	mov	a, _atan2f_sloc4_1_0+0
+      0001ACrA8r0B                  309 	mov	_atan2f_sloc8_1_0+0, a
+      0001AEr99r0F                  310 	mov	a, _atan2f_sloc4_1_0+1
+      0001B0rA9r0B                  311 	mov	_atan2f_sloc8_1_0+1, a
+      0001B2r9Ar0F                  312 	mov	a, _atan2f_sloc4_1_0+2
+      0001B4rAAr0B                  313 	mov	_atan2f_sloc8_1_0+2, a
+      0001B6r9Br0F                  314 	mov	a, _atan2f_sloc4_1_0+3
+      0001B8rABr0B                  315 	mov	_atan2f_sloc8_1_0+3, a
+      0001BAr9Er32                  316 	goto	00108$
+      0001BC                        317 00107$:
+                                    318 ;	../atan2f.c: 51: r=-atanf(y/x);
+      0001BCr84r0F                  319 	mov	a, _atan2f_PARM_2+0
+      0001BEr80r0B                  320 	mov	___fsdiv_PARM_1+0, a
+      0001C0r85r0F                  321 	mov	a, _atan2f_PARM_2+1
+      0001C2r81r0B                  322 	mov	___fsdiv_PARM_1+1, a
+      0001C4r86r0F                  323 	mov	a, _atan2f_PARM_2+2
+      0001C6r82r0B                  324 	mov	___fsdiv_PARM_1+2, a
+      0001C8r87r0F                  325 	mov	a, _atan2f_PARM_2+3
+      0001CAr83r0B                  326 	mov	___fsdiv_PARM_1+3, a
+      0001CCr80r0F                  327 	mov	a, _atan2f_PARM_1+0
+      0001CEr80r0B                  328 	mov	___fsdiv_PARM_2+0, a
+      0001D0r81r0F                  329 	mov	a, _atan2f_PARM_1+1
+      0001D2r81r0B                  330 	mov	___fsdiv_PARM_2+1, a
+      0001D4r82r0F                  331 	mov	a, _atan2f_PARM_1+2
+      0001D6r82r0B                  332 	mov	___fsdiv_PARM_2+2, a
+      0001D8r83r0F                  333 	mov	a, _atan2f_PARM_1+3
+      0001DAr83r0B                  334 	mov	___fsdiv_PARM_2+3, a
+      0001DCr1Cr2F                  335 	mov	a, #_atan2f_sloc5_1_0
+      0001DE 72 00                  336 	push	af
+      0001E0r00r38                  337 	call	___fsdiv
+      0001E2 C2 01                  338 	mov	a, sp
+      0001E4 FE 28                  339 	add	a, #-2
+      0001E6 82 01                  340 	mov	sp, a
+      0001E8r80r0B                  341 	mov	p, a
+      0001EA 72 00                  342 	push	af
+      0001EC 72 00                  343 	push	af
+      0001EEr9Cr0F                  344 	mov	a, _atan2f_sloc5_1_0+0
+      0001F0r80r03                  345 	idxm	p, a
+      0001F2r00r12                  346 	inc	p
+      0001F4r9Dr0F                  347 	mov	a, _atan2f_sloc5_1_0+1
+      0001F6r80r03                  348 	idxm	p, a
+      0001F8r00r12                  349 	inc	p
+      0001FAr9Er0F                  350 	mov	a, _atan2f_sloc5_1_0+2
+      0001FCr80r03                  351 	idxm	p, a
+      0001FEr00r12                  352 	inc	p
+      000200r9Fr0F                  353 	mov	a, _atan2f_sloc5_1_0+3
+      000202r80r03                  354 	idxm	p, a
+      000204r20r2F                  355 	mov	a, #_atan2f_sloc6_1_0
+      000206 72 00                  356 	push	af
+      000208r00r38                  357 	call	_atanf
+      00020A C2 01                  358 	mov	a, sp
+      00020C FA 28                  359 	add	a, #-6
+      00020E 82 01                  360 	mov	sp, a
+      000210rA0r0F                  361 	mov	a, _atan2f_sloc6_1_0+0
+      000212rB0r0B                  362 	mov	_atan2f_sloc10_1_0+0, a
+      000214rA1r0F                  363 	mov	a, _atan2f_sloc6_1_0+1
+      000216rB1r0B                  364 	mov	_atan2f_sloc10_1_0+1, a
+      000218rA2r0F                  365 	mov	a, _atan2f_sloc6_1_0+2
+      00021ArB2r0B                  366 	mov	_atan2f_sloc10_1_0+2, a
+      00021CrA3r0F                  367 	mov	a, _atan2f_sloc6_1_0+3
+      00021E 80 2E                  368 	xor	a, #0x80
+      000220rB3r0B                  369 	mov	_atan2f_sloc10_1_0+3, a
+                                    370 ;	../atan2f.c: 52: r+=(x<0.0?-HALF_PI:HALF_PI);
+      000222r80r0F                  371 	mov	a, _atan2f_PARM_1+0
+      000224r80r0B                  372 	mov	___fslt_PARM_1+0, a
+      000226r81r0F                  373 	mov	a, _atan2f_PARM_1+1
+      000228r81r0B                  374 	mov	___fslt_PARM_1+1, a
+      00022Ar82r0F                  375 	mov	a, _atan2f_PARM_1+2
+      00022Cr82r0B                  376 	mov	___fslt_PARM_1+2, a
+      00022Er83r0F                  377 	mov	a, _atan2f_PARM_1+3
+      000230r83r0B                  378 	mov	___fslt_PARM_1+3, a
+      000232r00r13                  379 	clear	___fslt_PARM_2+0
+      000234r01r13                  380 	clear	___fslt_PARM_2+1
+      000236r02r13                  381 	clear	___fslt_PARM_2+2
+      000238r03r13                  382 	clear	___fslt_PARM_2+3
+      00023Ar00r38                  383 	call	___fslt
+      00023C 00 2B                  384 	cneqsn	a, #0x00
+      00023Er52r32                  385 	goto	00113$
+      000240 DB 2F                  386 	mov	a, #0xdb
+      000242rB4r0B                  387 	mov	_atan2f_sloc11_1_0+0, a
+      000244 0F 2F                  388 	mov	a, #0x0f
+      000246rB5r0B                  389 	mov	_atan2f_sloc11_1_0+1, a
+      000248 C9 2F                  390 	mov	a, #0xc9
+      00024ArB6r0B                  391 	mov	_atan2f_sloc11_1_0+2, a
+      00024C BF 2F                  392 	mov	a, #0xbf
+      00024ErB7r0B                  393 	mov	_atan2f_sloc11_1_0+3, a
+      000250r62r32                  394 	goto	00114$
+      000252                        395 00113$:
+      000252 DB 2F                  396 	mov	a, #0xdb
+      000254rB4r0B                  397 	mov	_atan2f_sloc11_1_0+0, a
+      000256 0F 2F                  398 	mov	a, #0x0f
+      000258rB5r0B                  399 	mov	_atan2f_sloc11_1_0+1, a
+      00025A C9 2F                  400 	mov	a, #0xc9
+      00025CrB6r0B                  401 	mov	_atan2f_sloc11_1_0+2, a
+      00025E 3F 2F                  402 	mov	a, #0x3f
+      000260rB7r0B                  403 	mov	_atan2f_sloc11_1_0+3, a
+      000262                        404 00114$:
+      000262rB0r0F                  405 	mov	a, _atan2f_sloc10_1_0+0
+      000264r80r0B                  406 	mov	___fsadd_PARM_1+0, a
+      000266rB1r0F                  407 	mov	a, _atan2f_sloc10_1_0+1
+      000268r81r0B                  408 	mov	___fsadd_PARM_1+1, a
+      00026ArB2r0F                  409 	mov	a, _atan2f_sloc10_1_0+2
+      00026Cr82r0B                  410 	mov	___fsadd_PARM_1+2, a
+      00026ErB3r0F                  411 	mov	a, _atan2f_sloc10_1_0+3
+      000270r83r0B                  412 	mov	___fsadd_PARM_1+3, a
+      000272rB4r0F                  413 	mov	a, _atan2f_sloc11_1_0+0
+      000274r80r0B                  414 	mov	___fsadd_PARM_2+0, a
+      000276rB5r0F                  415 	mov	a, _atan2f_sloc11_1_0+1
+      000278r81r0B                  416 	mov	___fsadd_PARM_2+1, a
+      00027ArB6r0F                  417 	mov	a, _atan2f_sloc11_1_0+2
+      00027Cr82r0B                  418 	mov	___fsadd_PARM_2+2, a
+      00027ErB7r0F                  419 	mov	a, _atan2f_sloc11_1_0+3
+      000280r83r0B                  420 	mov	___fsadd_PARM_2+3, a
+      000282r24r2F                  421 	mov	a, #_atan2f_sloc7_1_0
+      000284 72 00                  422 	push	af
+      000286r00r38                  423 	call	___fsadd
+      000288 C2 01                  424 	mov	a, sp
+      00028A FE 28                  425 	add	a, #-2
+      00028C 82 01                  426 	mov	sp, a
+      00028ErA4r0F                  427 	mov	a, _atan2f_sloc7_1_0+0
+      000290rA8r0B                  428 	mov	_atan2f_sloc8_1_0+0, a
+      000292rA5r0F                  429 	mov	a, _atan2f_sloc7_1_0+1
+      000294rA9r0B                  430 	mov	_atan2f_sloc8_1_0+1, a
+      000296rA6r0F                  431 	mov	a, _atan2f_sloc7_1_0+2
+      000298rAAr0B                  432 	mov	_atan2f_sloc8_1_0+2, a
+      00029ArA7r0F                  433 	mov	a, _atan2f_sloc7_1_0+3
+      00029CrABr0B                  434 	mov	_atan2f_sloc8_1_0+3, a
+      00029E                        435 00108$:
+                                    436 ;	../atan2f.c: 54: return r;
+      00029E C2 01                  437 	mov	a, sp
+      0002A0 FC 28                  438 	add	a, #0xfc
+      0002A2r80r0B                  439 	mov	p, a
+      0002A4r81r03                  440 	idxm	a, p
+      0002A6r80r0B                  441 	mov	p, a
+      0002A8rA8r0F                  442 	mov	a, _atan2f_sloc8_1_0+0
+      0002AAr80r03                  443 	idxm	p, a
+      0002ACr00r12                  444 	inc	p
+      0002AErA9r0F                  445 	mov	a, _atan2f_sloc8_1_0+1
+      0002B0r80r03                  446 	idxm	p, a
+      0002B2r00r12                  447 	inc	p
+      0002B4rAAr0F                  448 	mov	a, _atan2f_sloc8_1_0+2
+      0002B6r80r03                  449 	idxm	p, a
+      0002B8r00r12                  450 	inc	p
+      0002BArABr0F                  451 	mov	a, _atan2f_sloc8_1_0+3
+      0002BCr80r03                  452 	idxm	p, a
+                                    453 ;	../atan2f.c: 55: }
+      0002BE 7A 00                  454 	ret
+                                    455 	.area CODE
+                                    456 	.area CONST
+                                    457 	.area CABS (ABS)

@@ -1,0 +1,383 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbtowc
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbtowc_PARM_3
+                                     17 	.globl _mbtowc_PARM_2
+                                     18 	.globl _mbtowc_PARM_1
+                                     19 	.globl _mbtowc
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _mbtowc_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _mbtowc_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _mbtowc_PARM_3:
+      000004                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 	.area	OSEG (OVR,DATA)
+      000000                         39 _mbtowc_sloc0_1_0:
+      000000                         40 	.ds 1
+      000001                         41 _mbtowc_sloc1_1_0:
+      000001                         42 	.ds 2
+      000003                         43 _mbtowc_sloc2_1_0:
+      000003                         44 	.ds 1
+      000004                         45 _mbtowc_sloc3_1_0:
+      000004                         46 	.ds 1
+      000005                         47 _mbtowc_sloc4_1_0:
+      000005                         48 	.ds 2
+      000007                         49 _mbtowc_sloc5_1_0:
+      000007                         50 	.ds 2
+      000009                         51 _mbtowc_sloc6_1_0:
+      000009                         52 	.ds 2
+      00000B                         53 _mbtowc_sloc7_1_0:
+      00000B                         54 	.ds 2
+      00000D                         55 _mbtowc_sloc8_1_0:
+      00000D                         56 	.ds 1
+      00000E                         57 _mbtowc_sloc9_1_0:
+      00000E                         58 	.ds 2
+      000010                         59 _mbtowc_sloc10_1_0:
+      000010                         60 	.ds 4
+      000014                         61 _mbtowc_sloc11_1_0:
+      000014                         62 	.ds 1
+      000015                         63 _mbtowc_sloc12_1_0:
+      000015                         64 	.ds 2
+      000017                         65 _mbtowc_sloc13_1_0:
+      000017                         66 	.ds 4
+      00001B                         67 _mbtowc_sloc14_1_0:
+      00001B                         68 	.ds 2
+      00001D                         69 _mbtowc_sloc15_1_0:
+      00001D                         70 	.ds 4
+      000021                         71 _mbtowc_sloc16_1_0:
+      000021                         72 	.ds 2
+                                     73 ;--------------------------------------------------------
+                                     74 ; absolute external ram data
+                                     75 ;--------------------------------------------------------
+                                     76 	.area DABS (ABS)
+                                     77 ;--------------------------------------------------------
+                                     78 ; global & static initialisations
+                                     79 ;--------------------------------------------------------
+                                     80 	.area HOME
+                                     81 	.area GSINIT
+                                     82 	.area GSFINAL
+                                     83 	.area GSINIT
+                                     84 ;--------------------------------------------------------
+                                     85 ; Home
+                                     86 ;--------------------------------------------------------
+                                     87 	.area HOME
+                                     88 	.area HOME
+                                     89 ;--------------------------------------------------------
+                                     90 ; code
+                                     91 ;--------------------------------------------------------
+                                     92 	.area CODE
+                                     93 ;	../mbtowc.c: 31: int mbtowc(wchar_t *pwc, const char *restrict s, size_t n)
+                                     94 ;	-----------------------------------------
+                                     95 ;	 function mbtowc
+                                     96 ;	-----------------------------------------
+      000000                         97 _mbtowc:
+                                     98 ;	../mbtowc.c: 37: if(!s)
+      000000r82r0F                   99 	mov	a, _mbtowc_PARM_2+0
+      000002r83r0E                  100 	or	a, _mbtowc_PARM_2+1
+      000004 00 2A                  101 	ceqsn	a, #0x00
+      000006r0Cr30                  102 	goto	00102$
+                                    103 ;	../mbtowc.c: 38: return(0);
+      000008r00r13                  104 	clear	p
+      00000A 00 02                  105 	ret	#0x00
+      00000C                        106 00102$:
+                                    107 ;	../mbtowc.c: 40: seqlen = 1;
+      00000C 01 2F                  108 	mov	a, #0x01
+      00000Er80r0B                  109 	mov	_mbtowc_sloc0_1_0+0, a
+                                    110 ;	../mbtowc.c: 41: first_byte = *s;
+      000010r82r0F                  111 	mov	a, _mbtowc_PARM_2+0
+      000012r81r0B                  112 	mov	_mbtowc_sloc1_1_0+0, a
+      000014r83r0F                  113 	mov	a, _mbtowc_PARM_2+1
+      000016r82r0B                  114 	mov	_mbtowc_sloc1_1_0+1, a
+      000018r81r0F                  115 	mov	a, _mbtowc_sloc1_1_0+0
+      00001Ar80r0B                  116 	mov	p, a
+      00001Cr82r0F                  117 	mov	a, _mbtowc_sloc1_1_0+1
+      00001Er00r38                  118 	call	__gptrget
+                                    119 ;	../mbtowc.c: 43: if(first_byte & 0x80)
+      000020r83r0B                  120 	mov	_mbtowc_sloc2_1_0+0, a
+      000022 80 2C                  121 	and	a, #0x80
+      000024 00 2B                  122 	cneqsn	a, #0x00
+      000026r98r30                  123 	goto	00107$
+                                    124 ;	../mbtowc.c: 45: while (first_byte & (0x80 >> seqlen))
+      000028 01 2F                  125 	mov	a, #0x01
+      00002Ar84r0B                  126 	mov	_mbtowc_sloc3_1_0+0, a
+      00002C                        127 00103$:
+      00002C 80 2F                  128 	mov	a, #0x80
+      00002Er85r0B                  129 	mov	_mbtowc_sloc4_1_0+0, a
+      000030r06r13                  130 	clear	_mbtowc_sloc4_1_0+1
+      000032r84r0F                  131 	mov	a, _mbtowc_sloc3_1_0+0
+      000034                        132 00194$:
+      000034 01 29                  133 	sub	a, #1
+      000036 40 18                  134 	t0sn	f, c
+      000038r4Er30                  135 	goto	00195$
+      00003A 72 00                  136 	push	af
+      00003C 01 2F                  137 	mov	a, #0x01
+      00003Er86r15                  138 	sl	_mbtowc_sloc4_1_0+1
+      000040 40 18                  139 	t0sn	f, c
+      000042r86r0A                  140 	or	_mbtowc_sloc4_1_0+1, a
+      000044r06r16                  141 	src	_mbtowc_sloc4_1_0+1
+      000046r06r16                  142 	src	_mbtowc_sloc4_1_0+1
+      000048r05r16                  143 	src	_mbtowc_sloc4_1_0+0
+      00004A 73 00                  144 	pop	af
+      00004Cr34r30                  145 	goto	00194$
+      00004E                        146 00195$:
+      00004Er00r13                  147 	clear	p
+      000050r83r0F                  148 	mov	a, _mbtowc_sloc2_1_0+0
+      000052r05r0E                  149 	and	a, _mbtowc_sloc4_1_0+0
+      000054r87r0B                  150 	mov	_mbtowc_sloc5_1_0+0, a
+      000056r80r0F                  151 	mov	a, p
+      000058r06r0E                  152 	and	a, _mbtowc_sloc4_1_0+1
+      00005Ar88r0B                  153 	mov	_mbtowc_sloc5_1_0+1, a
+      00005Cr87r0F                  154 	mov	a, _mbtowc_sloc5_1_0+0
+      00005Er88r0E                  155 	or	a, _mbtowc_sloc5_1_0+1
+      000060 00 2B                  156 	cneqsn	a, #0x00
+      000062r68r30                  157 	goto	00140$
+                                    158 ;	../mbtowc.c: 46: seqlen++;
+      000064r04r12                  159 	inc	_mbtowc_sloc3_1_0+0
+      000066r2Cr30                  160 	goto	00103$
+      000068                        161 00140$:
+      000068r84r0F                  162 	mov	a, _mbtowc_sloc3_1_0+0
+      00006Ar80r0B                  163 	mov	_mbtowc_sloc0_1_0+0, a
+                                    164 ;	../mbtowc.c: 47: first_byte &= (0xff >> (seqlen + 1));
+      00006Cr84r0F                  165 	mov	a, _mbtowc_sloc3_1_0+0
+      00006E 01 28                  166 	add	a, #0x01
+      000070r80r0B                  167 	mov	p, a
+      000072 FF 2F                  168 	mov	a, #0xff
+      000074r89r0B                  169 	mov	_mbtowc_sloc6_1_0+0, a
+      000076r0Ar13                  170 	clear	_mbtowc_sloc6_1_0+1
+      000078r80r0F                  171 	mov	a, p
+      00007A                        172 00196$:
+      00007A 01 29                  173 	sub	a, #1
+      00007C 40 18                  174 	t0sn	f, c
+      00007Er94r30                  175 	goto	00197$
+      000080 72 00                  176 	push	af
+      000082 01 2F                  177 	mov	a, #0x01
+      000084r8Ar15                  178 	sl	_mbtowc_sloc6_1_0+1
+      000086 40 18                  179 	t0sn	f, c
+      000088r8Ar0A                  180 	or	_mbtowc_sloc6_1_0+1, a
+      00008Ar0Ar16                  181 	src	_mbtowc_sloc6_1_0+1
+      00008Cr0Ar16                  182 	src	_mbtowc_sloc6_1_0+1
+      00008Er09r16                  183 	src	_mbtowc_sloc6_1_0+0
+      000090 73 00                  184 	pop	af
+      000092r7Ar30                  185 	goto	00196$
+      000094                        186 00197$:
+      000094r89r0F                  187 	mov	a, _mbtowc_sloc6_1_0+0
+      000096r03r0A                  188 	and	_mbtowc_sloc2_1_0+0, a
+      000098                        189 00107$:
+                                    190 ;	../mbtowc.c: 50: if(seqlen > 4 || n < seqlen)
+      000098 04 2F                  191 	mov	a, #0x04
+      00009Ar80r0C                  192 	sub	a, _mbtowc_sloc0_1_0+0
+      00009C 40 18                  193 	t0sn	f, c
+      00009ErB2r30                  194 	goto	00108$
+      0000A0r80r0F                  195 	mov	a, _mbtowc_sloc0_1_0+0
+      0000A2r8Br0B                  196 	mov	_mbtowc_sloc7_1_0+0, a
+      0000A4r0Cr13                  197 	clear	_mbtowc_sloc7_1_0+1
+      0000A6r84r0F                  198 	mov	a, _mbtowc_PARM_3+0
+      0000A8r8Br0C                  199 	sub	a, _mbtowc_sloc7_1_0+0
+      0000AAr85r0F                  200 	mov	a, _mbtowc_PARM_3+1
+      0000ACr8Cr0D                  201 	subc	a, _mbtowc_sloc7_1_0+1
+      0000AE 40 1A                  202 	t1sn	f, c
+      0000B0rB8r30                  203 	goto	00134$
+      0000B2                        204 00108$:
+                                    205 ;	../mbtowc.c: 51: return(-1);
+      0000B2 FF 2F                  206 	mov	a, #0xff
+      0000B4r80r0B                  207 	mov	p, a
+      0000B6 FF 02                  208 	ret	#0xff
+                                    209 ;	../mbtowc.c: 53: for(i = 1; i < seqlen; i++)
+      0000B8                        210 00134$:
+      0000B8 01 2F                  211 	mov	a, #0x01
+      0000BAr8Dr0B                  212 	mov	_mbtowc_sloc8_1_0+0, a
+      0000BC                        213 00119$:
+      0000BCr8Dr0F                  214 	mov	a, _mbtowc_sloc8_1_0+0
+      0000BEr80r0C                  215 	sub	a, _mbtowc_sloc0_1_0+0
+      0000C0 40 1A                  216 	t1sn	f, c
+      0000C2rEEr30                  217 	goto	00113$
+                                    218 ;	../mbtowc.c: 54: if((s[i] & 0xc0) != 0x80)
+      0000C4r81r0F                  219 	mov	a, _mbtowc_sloc1_1_0+0
+      0000C6r0Dr0C                  220 	add	a, _mbtowc_sloc8_1_0+0
+      0000C8r80r0B                  221 	mov	p, a
+      0000CAr82r0F                  222 	mov	a, _mbtowc_sloc1_1_0+1
+      0000CC 60 00                  223 	addc	a
+      0000CEr00r38                  224 	call	__gptrget
+      0000D0r00r13                  225 	clear	p
+      0000D2 C0 2C                  226 	and	a, #0xc0
+      0000D4r8Er0B                  227 	mov	_mbtowc_sloc9_1_0+0, a
+      0000D6r0Fr13                  228 	clear	_mbtowc_sloc9_1_0+1
+      0000D8r8Er0F                  229 	mov	a, _mbtowc_sloc9_1_0+0
+      0000DA 80 2A                  230 	ceqsn	a, #0x80
+      0000DCrE4r30                  231 	goto	00198$
+      0000DEr8Fr0F                  232 	mov	a, _mbtowc_sloc9_1_0+1
+      0000E0 00 2B                  233 	cneqsn	a, #0x00
+      0000E2rEAr30                  234 	goto	00120$
+      0000E4                        235 00198$:
+                                    236 ;	../mbtowc.c: 55: return(-1);
+      0000E4 FF 2F                  237 	mov	a, #0xff
+      0000E6r80r0B                  238 	mov	p, a
+      0000E8 FF 02                  239 	ret	#0xff
+      0000EA                        240 00120$:
+                                    241 ;	../mbtowc.c: 53: for(i = 1; i < seqlen; i++)
+      0000EAr0Dr12                  242 	inc	_mbtowc_sloc8_1_0+0
+      0000ECrBCr30                  243 	goto	00119$
+      0000EE                        244 00113$:
+                                    245 ;	../mbtowc.c: 57: codepoint = first_byte;
+      0000EEr83r0F                  246 	mov	a, _mbtowc_sloc2_1_0+0
+      0000F0r90r0B                  247 	mov	_mbtowc_sloc10_1_0+0, a
+      0000F2r11r13                  248 	clear	_mbtowc_sloc10_1_0+1
+      0000F4r12r13                  249 	clear	_mbtowc_sloc10_1_0+2
+      0000F6r13r13                  250 	clear	_mbtowc_sloc10_1_0+3
+                                    251 ;	../mbtowc.c: 59: for(s++, i = seqlen - 1; i; i--)
+      0000F8r81r0F                  252 	mov	a, _mbtowc_sloc1_1_0+0
+      0000FA 01 28                  253 	add	a, #0x01
+      0000FCr82r0B                  254 	mov	_mbtowc_PARM_2+0, a
+      0000FEr82r0F                  255 	mov	a, _mbtowc_sloc1_1_0+1
+      000100 60 00                  256 	addc	a
+      000102r83r0B                  257 	mov	_mbtowc_PARM_2+1, a
+      000104r80r0F                  258 	mov	a, _mbtowc_sloc0_1_0+0
+      000106 01 29                  259 	sub	a, #0x01
+      000108r94r0B                  260 	mov	_mbtowc_sloc11_1_0+0, a
+      00010Ar82r0F                  261 	mov	a, _mbtowc_PARM_2+0
+      00010Cr95r0B                  262 	mov	_mbtowc_sloc12_1_0+0, a
+      00010Er83r0F                  263 	mov	a, _mbtowc_PARM_2+1
+      000110r96r0B                  264 	mov	_mbtowc_sloc12_1_0+1, a
+      000112                        265 00122$:
+      000112r94r0F                  266 	mov	a, _mbtowc_sloc11_1_0+0
+      000114 00 2B                  267 	cneqsn	a, #0x00
+      000116r78r31                  268 	goto	00114$
+                                    269 ;	../mbtowc.c: 61: codepoint <<= 6;
+      000118r90r0F                  270 	mov	a, _mbtowc_sloc10_1_0+0
+      00011Ar97r0B                  271 	mov	_mbtowc_sloc13_1_0+0, a
+      00011Cr91r0F                  272 	mov	a, _mbtowc_sloc10_1_0+1
+      00011Er98r0B                  273 	mov	_mbtowc_sloc13_1_0+1, a
+      000120r92r0F                  274 	mov	a, _mbtowc_sloc10_1_0+2
+      000122r99r0B                  275 	mov	_mbtowc_sloc13_1_0+2, a
+      000124r93r0F                  276 	mov	a, _mbtowc_sloc10_1_0+3
+      000126r9Ar0B                  277 	mov	_mbtowc_sloc13_1_0+3, a
+      000128 06 2F                  278 	mov	a, #6
+      00012A                        279 00199$:
+      00012Ar97r15                  280 	sl	_mbtowc_sloc13_1_0+0
+      00012Cr98r16                  281 	slc	_mbtowc_sloc13_1_0+1
+      00012Er99r16                  282 	slc	_mbtowc_sloc13_1_0+2
+      000130r9Ar16                  283 	slc	_mbtowc_sloc13_1_0+3
+      000132 63 00                  284 	dzsn	a
+      000134r2Ar31                  285 	goto	00199$
+                                    286 ;	../mbtowc.c: 62: codepoint |= (*s & 0x3f);
+      000136r95r0F                  287 	mov	a, _mbtowc_sloc12_1_0+0
+      000138r80r0B                  288 	mov	p, a
+      00013Ar96r0F                  289 	mov	a, _mbtowc_sloc12_1_0+1
+      00013Cr00r38                  290 	call	__gptrget
+      00013Er00r13                  291 	clear	p
+      000140 3F 2C                  292 	and	a, #0x3f
+      000142r9Br0B                  293 	mov	_mbtowc_sloc14_1_0+0, a
+      000144r1Cr13                  294 	clear	_mbtowc_sloc14_1_0+1
+      000146r9Br0F                  295 	mov	a, _mbtowc_sloc14_1_0+0
+      000148r9Dr0B                  296 	mov	_mbtowc_sloc15_1_0+0, a
+      00014Ar9Cr0F                  297 	mov	a, _mbtowc_sloc14_1_0+1
+      00014Cr9Er0B                  298 	mov	_mbtowc_sloc15_1_0+1, a
+      00014E 6B 00                  299 	sl	a
+      000150 00 2F                  300 	mov	a, #0x00
+      000152 61 00                  301 	subc	a
+      000154r9Fr0B                  302 	mov	_mbtowc_sloc15_1_0+2, a
+      000156rA0r0B                  303 	mov	_mbtowc_sloc15_1_0+3, a
+      000158r97r0F                  304 	mov	a, _mbtowc_sloc13_1_0+0
+      00015Ar9Dr0E                  305 	or	a, _mbtowc_sloc15_1_0+0
+      00015Cr90r0B                  306 	mov	_mbtowc_sloc10_1_0+0, a
+      00015Er98r0F                  307 	mov	a, _mbtowc_sloc13_1_0+1
+      000160r9Er0E                  308 	or	a, _mbtowc_sloc15_1_0+1
+      000162r91r0B                  309 	mov	_mbtowc_sloc10_1_0+1, a
+      000164r99r0F                  310 	mov	a, _mbtowc_sloc13_1_0+2
+      000166r9Fr0E                  311 	or	a, _mbtowc_sloc15_1_0+2
+      000168r92r0B                  312 	mov	_mbtowc_sloc10_1_0+2, a
+      00016Ar9Ar0F                  313 	mov	a, _mbtowc_sloc13_1_0+3
+      00016CrA0r0E                  314 	or	a, _mbtowc_sloc15_1_0+3
+      00016Er93r0B                  315 	mov	_mbtowc_sloc10_1_0+3, a
+                                    316 ;	../mbtowc.c: 63: s++;
+      000170r15r12                  317 	inc	_mbtowc_sloc12_1_0+0
+      000172r16r10                  318 	addc	_mbtowc_sloc12_1_0+1
+                                    319 ;	../mbtowc.c: 59: for(s++, i = seqlen - 1; i; i--)
+      000174r94r12                  320 	dec	_mbtowc_sloc11_1_0+0
+      000176r12r31                  321 	goto	00122$
+      000178                        322 00114$:
+                                    323 ;	../mbtowc.c: 66: if(codepoint >= 0xd800 && codepoint <= 0xdfff) // UTF-16 surrogate.
+      000178r91r0F                  324 	mov	a, _mbtowc_sloc10_1_0+1
+      00017A D8 29                  325 	sub	a, #0xd8
+      00017Cr92r0F                  326 	mov	a, _mbtowc_sloc10_1_0+2
+      00017E 61 00                  327 	subc	a
+      000180r93r0F                  328 	mov	a, _mbtowc_sloc10_1_0+3
+      000182 61 00                  329 	subc	a
+      000184 40 18                  330 	t0sn	f, c
+      000186rA2r31                  331 	goto	00116$
+      000188 FF 2F                  332 	mov	a, #0xff
+      00018Ar90r0C                  333 	sub	a, _mbtowc_sloc10_1_0+0
+      00018C DF 2F                  334 	mov	a, #0xdf
+      00018Er91r0D                  335 	subc	a, _mbtowc_sloc10_1_0+1
+      000190 00 2F                  336 	mov	a, #0x00
+      000192r92r0D                  337 	subc	a, _mbtowc_sloc10_1_0+2
+      000194 00 2F                  338 	mov	a, #0x00
+      000196r93r0D                  339 	subc	a, _mbtowc_sloc10_1_0+3
+      000198 40 18                  340 	t0sn	f, c
+      00019ArA2r31                  341 	goto	00116$
+                                    342 ;	../mbtowc.c: 67: return(-1);
+      00019C FF 2F                  343 	mov	a, #0xff
+      00019Er80r0B                  344 	mov	p, a
+      0001A0 FF 02                  345 	ret	#0xff
+      0001A2                        346 00116$:
+                                    347 ;	../mbtowc.c: 69: *pwc = codepoint;
+      0001A2r80r0F                  348 	mov	a, _mbtowc_PARM_1+0
+      0001A4rA1r0B                  349 	mov	_mbtowc_sloc16_1_0+0, a
+      0001A6r81r0F                  350 	mov	a, _mbtowc_PARM_1+1
+      0001A8rA2r0B                  351 	mov	_mbtowc_sloc16_1_0+1, a
+      0001AArA1r0F                  352 	mov	a, _mbtowc_sloc16_1_0+0
+      0001ACr80r0B                  353 	mov	p, a
+      0001AEr90r0F                  354 	mov	a, _mbtowc_sloc10_1_0+0
+      0001B0r80r03                  355 	idxm	p, a
+      0001B2r00r12                  356 	inc	p
+      0001B4r91r0F                  357 	mov	a, _mbtowc_sloc10_1_0+1
+      0001B6r80r03                  358 	idxm	p, a
+      0001B8r00r12                  359 	inc	p
+      0001BAr92r0F                  360 	mov	a, _mbtowc_sloc10_1_0+2
+      0001BCr80r03                  361 	idxm	p, a
+      0001BEr00r12                  362 	inc	p
+      0001C0r93r0F                  363 	mov	a, _mbtowc_sloc10_1_0+3
+      0001C2r80r03                  364 	idxm	p, a
+                                    365 ;	../mbtowc.c: 70: return(codepoint ? seqlen : 0);
+      0001C4r90r0F                  366 	mov	a, _mbtowc_sloc10_1_0+0
+      0001C6r91r0E                  367 	or	a, _mbtowc_sloc10_1_0+1
+      0001C8r92r0E                  368 	or	a, _mbtowc_sloc10_1_0+2
+      0001CAr93r0E                  369 	or	a, _mbtowc_sloc10_1_0+3
+      0001CC 00 2B                  370 	cneqsn	a, #0x00
+      0001CErD6r31                  371 	goto	00126$
+      0001D0r00r13                  372 	clear	p
+      0001D2r80r0F                  373 	mov	a, _mbtowc_sloc0_1_0+0
+      0001D4rDAr31                  374 	goto	00127$
+      0001D6                        375 00126$:
+      0001D6 00 2F                  376 	mov	a, #0x00
+      0001D8r00r13                  377 	clear	p
+      0001DA                        378 00127$:
+                                    379 ;	../mbtowc.c: 71: }
+      0001DA 7A 00                  380 	ret
+                                    381 	.area CODE
+                                    382 	.area CONST
+                                    383 	.area CABS (ABS)

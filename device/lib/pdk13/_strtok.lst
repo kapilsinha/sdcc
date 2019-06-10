@@ -1,0 +1,182 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strtok
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strchr
+                                     17 	.globl _strtok_PARM_2
+                                     18 	.globl _strtok_PARM_1
+                                     19 	.globl _strtok
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _strtok_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _strtok_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _strtok_s_65536_24:
+      000004                         34 	.ds 2
+      000006                         35 _strtok_sloc0_1_0:
+      000006                         36 	.ds 2
+                                     37 ;--------------------------------------------------------
+                                     38 ; overlayable items in ram 
+                                     39 ;--------------------------------------------------------
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_strtok.c: 36: char * strtok ( char * str, const char * control )
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function strtok
+                                     63 ;	-----------------------------------------
+      000000                         64 _strtok:
+                                     65 ;	../_strtok.c: 41: if ( str )
+      000000r80r0F                   66 	mov	a, _strtok_PARM_1+0
+      000002r81r0E                   67 	or	a, _strtok_PARM_1+1
+      000004 00 2B                   68 	cneqsn	a, #0x00
+      000006r10r30                   69 	goto	00102$
+                                     70 ;	../_strtok.c: 42: s = str;
+      000008r80r0F                   71 	mov	a, _strtok_PARM_1+0
+      00000Ar84r0B                   72 	mov	_strtok_s_65536_24+0, a
+      00000Cr81r0F                   73 	mov	a, _strtok_PARM_1+1
+      00000Er85r0B                   74 	mov	_strtok_s_65536_24+1, a
+      000010                         75 00102$:
+                                     76 ;	../_strtok.c: 43: if ( !s )
+      000010r84r0F                   77 	mov	a, _strtok_s_65536_24+0
+      000012r85r0E                   78 	or	a, _strtok_s_65536_24+1
+      000014 00 2A                   79 	ceqsn	a, #0x00
+      000016r1Cr30                   80 	goto	00108$
+                                     81 ;	../_strtok.c: 44: return NULL;
+      000018r00r13                   82 	clear	p
+      00001A 00 02                   83 	ret	#0x00
+                                     84 ;	../_strtok.c: 46: while (*s) {
+      00001C                         85 00108$:
+      00001Cr84r0F                   86 	mov	a, _strtok_s_65536_24+0
+      00001Er80r0B                   87 	mov	p, a
+      000020r85r0F                   88 	mov	a, _strtok_s_65536_24+1
+      000022r00r38                   89 	call	__gptrget
+      000024 00 2B                   90 	cneqsn	a, #0x00
+      000026r4Ar30                   91 	goto	00110$
+                                     92 ;	../_strtok.c: 47: if (strchr(control,*s))
+      000028r84r0F                   93 	mov	a, _strtok_s_65536_24+0
+      00002Ar80r0B                   94 	mov	p, a
+      00002Cr85r0F                   95 	mov	a, _strtok_s_65536_24+1
+      00002Er00r38                   96 	call	__gptrget
+      000030r80r0B                   97 	mov	_strchr_PARM_2+0, a
+      000032r01r13                   98 	clear	_strchr_PARM_2+1
+      000034r82r0F                   99 	mov	a, _strtok_PARM_2+0
+      000036r80r0B                  100 	mov	_strchr_PARM_1+0, a
+      000038r83r0F                  101 	mov	a, _strtok_PARM_2+1
+      00003Ar81r0B                  102 	mov	_strchr_PARM_1+1, a
+      00003Cr00r38                  103 	call	_strchr
+      00003Er80r0E                  104 	or	a, p
+      000040 00 2B                  105 	cneqsn	a, #0x00
+      000042r4Ar30                  106 	goto	00110$
+                                    107 ;	../_strtok.c: 48: s++;
+      000044r04r12                  108 	inc	_strtok_s_65536_24+0
+      000046r05r10                  109 	addc	_strtok_s_65536_24+1
+      000048r1Cr30                  110 	goto	00108$
+                                    111 ;	../_strtok.c: 50: break;
+      00004A                        112 00110$:
+                                    113 ;	../_strtok.c: 53: s1 = s;
+      00004Ar84r0F                  114 	mov	a, _strtok_s_65536_24+0
+      00004Cr86r0B                  115 	mov	_strtok_sloc0_1_0+0, a
+      00004Er85r0F                  116 	mov	a, _strtok_s_65536_24+1
+      000050r87r0B                  117 	mov	_strtok_sloc0_1_0+1, a
+                                    118 ;	../_strtok.c: 55: while (*s) {
+      000052                        119 00113$:
+      000052r84r0F                  120 	mov	a, _strtok_s_65536_24+0
+      000054r80r0B                  121 	mov	p, a
+      000056r85r0F                  122 	mov	a, _strtok_s_65536_24+1
+      000058r00r38                  123 	call	__gptrget
+      00005A 00 2B                  124 	cneqsn	a, #0x00
+      00005Cr94r30                  125 	goto	00115$
+                                    126 ;	../_strtok.c: 56: if (strchr(control,*s)) {
+      00005Er84r0F                  127 	mov	a, _strtok_s_65536_24+0
+      000060r80r0B                  128 	mov	p, a
+      000062r85r0F                  129 	mov	a, _strtok_s_65536_24+1
+      000064r00r38                  130 	call	__gptrget
+      000066r80r0B                  131 	mov	_strchr_PARM_2+0, a
+      000068r01r13                  132 	clear	_strchr_PARM_2+1
+      00006Ar82r0F                  133 	mov	a, _strtok_PARM_2+0
+      00006Cr80r0B                  134 	mov	_strchr_PARM_1+0, a
+      00006Er83r0F                  135 	mov	a, _strtok_PARM_2+1
+      000070r81r0B                  136 	mov	_strchr_PARM_1+1, a
+      000072r00r38                  137 	call	_strchr
+      000074r80r0E                  138 	or	a, p
+      000076 00 2B                  139 	cneqsn	a, #0x00
+      000078r8Er30                  140 	goto	00112$
+                                    141 ;	../_strtok.c: 57: *s++ = '\0';
+      00007Ar84r0F                  142 	mov	a, _strtok_s_65536_24+0
+      00007Cr80r0B                  143 	mov	p, a
+      00007E 00 2F                  144 	mov	a, #0x00
+      000080r80r03                  145 	idxm	p, a
+      000082r04r12                  146 	inc	_strtok_s_65536_24+0
+      000084r05r10                  147 	addc	_strtok_s_65536_24+1
+                                    148 ;	../_strtok.c: 58: return s1;
+      000086r87r0F                  149 	mov	a, _strtok_sloc0_1_0+1
+      000088r80r0B                  150 	mov	p, a
+      00008Ar86r0F                  151 	mov	a, _strtok_sloc0_1_0+0
+      00008C 7A 00                  152 	ret
+      00008E                        153 00112$:
+                                    154 ;	../_strtok.c: 60: s++ ;
+      00008Er04r12                  155 	inc	_strtok_s_65536_24+0
+      000090r05r10                  156 	addc	_strtok_s_65536_24+1
+      000092r52r30                  157 	goto	00113$
+      000094                        158 00115$:
+                                    159 ;	../_strtok.c: 63: s = NULL;
+      000094r04r13                  160 	clear	_strtok_s_65536_24+0
+      000096r05r13                  161 	clear	_strtok_s_65536_24+1
+                                    162 ;	../_strtok.c: 65: if (*s1)
+      000098r86r0F                  163 	mov	a, _strtok_sloc0_1_0+0
+      00009Ar80r0B                  164 	mov	p, a
+      00009Cr87r0F                  165 	mov	a, _strtok_sloc0_1_0+1
+      00009Er00r38                  166 	call	__gptrget
+      0000A0 00 2B                  167 	cneqsn	a, #0x00
+      0000A2rACr30                  168 	goto	00117$
+                                    169 ;	../_strtok.c: 66: return s1;
+      0000A4r87r0F                  170 	mov	a, _strtok_sloc0_1_0+1
+      0000A6r80r0B                  171 	mov	p, a
+      0000A8r86r0F                  172 	mov	a, _strtok_sloc0_1_0+0
+      0000AA 7A 00                  173 	ret
+      0000AC                        174 00117$:
+                                    175 ;	../_strtok.c: 68: return NULL;
+      0000ACr00r13                  176 	clear	p
+      0000AE 00 02                  177 	ret	#0x00
+                                    178 ;	../_strtok.c: 69: }
+      0000B0 7A 00                  179 	ret
+                                    180 	.area CODE
+                                    181 	.area CONST
+                                    182 	.area CABS (ABS)

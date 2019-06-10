@@ -1,0 +1,308 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _mullonglong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __mullonglong_PARM_2
+                                     17 	.globl __mullonglong_PARM_1
+                                     18 	.globl __mullonglong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __mullonglong_PARM_1:
+      000000                         29 	.ds 8
+      000008                         30 __mullonglong_PARM_2:
+      000008                         31 	.ds 8
+      000010                         32 __mullonglong_sloc0_1_0:
+      000010                         33 	.ds 8
+      000018                         34 __mullonglong_sloc1_1_0:
+      000018                         35 	.ds 1
+      000019                         36 __mullonglong_sloc2_1_0:
+      000019                         37 	.ds 8
+      000021                         38 __mullonglong_sloc3_1_0:
+      000021                         39 	.ds 1
+      000022                         40 __mullonglong_sloc4_1_0:
+      000022                         41 	.ds 1
+      000023                         42 __mullonglong_sloc5_1_0:
+      000023                         43 	.ds 8
+      00002B                         44 __mullonglong_sloc6_1_0:
+      00002B                         45 	.ds 8
+      000033                         46 __mullonglong_sloc7_1_0:
+      000033                         47 	.ds 1
+      000034                         48 __mullonglong_sloc8_1_0:
+      000034                         49 	.ds 8
+                                     50 ;--------------------------------------------------------
+                                     51 ; overlayable items in ram 
+                                     52 ;--------------------------------------------------------
+                                     53 ;--------------------------------------------------------
+                                     54 ; absolute external ram data
+                                     55 ;--------------------------------------------------------
+                                     56 	.area DABS (ABS)
+                                     57 ;--------------------------------------------------------
+                                     58 ; global & static initialisations
+                                     59 ;--------------------------------------------------------
+                                     60 	.area HOME
+                                     61 	.area GSINIT
+                                     62 	.area GSFINAL
+                                     63 	.area GSINIT
+                                     64 ;--------------------------------------------------------
+                                     65 ; Home
+                                     66 ;--------------------------------------------------------
+                                     67 	.area HOME
+                                     68 	.area HOME
+                                     69 ;--------------------------------------------------------
+                                     70 ; code
+                                     71 ;--------------------------------------------------------
+                                     72 	.area CODE
+                                     73 ;	../_mullonglong.c: 35: long long _mullonglong(long long ll, long long lr)
+                                     74 ;	-----------------------------------------
+                                     75 ;	 function _mullonglong
+                                     76 ;	-----------------------------------------
+      000000                         77 __mullonglong:
+                                     78 ;	../_mullonglong.c: 37: unsigned long long ret = 0ull;
+      000000r10r13                   79 	clear	__mullonglong_sloc0_1_0+0
+      000002r11r13                   80 	clear	__mullonglong_sloc0_1_0+1
+      000004r12r13                   81 	clear	__mullonglong_sloc0_1_0+2
+      000006r13r13                   82 	clear	__mullonglong_sloc0_1_0+3
+      000008r14r13                   83 	clear	__mullonglong_sloc0_1_0+4
+      00000Ar15r13                   84 	clear	__mullonglong_sloc0_1_0+5
+      00000Cr16r13                   85 	clear	__mullonglong_sloc0_1_0+6
+      00000Er17r13                   86 	clear	__mullonglong_sloc0_1_0+7
+                                     87 ;	../_mullonglong.c: 40: for (i = 0; i < sizeof (long long); i++)
+      000010r18r13                   88 	clear	__mullonglong_sloc1_1_0+0
+      000012                         89 00106$:
+                                     90 ;	../_mullonglong.c: 42: unsigned char l = ll >> (i * 8);
+      000012r98r0F                   91 	mov	a, __mullonglong_sloc1_1_0+0
+      000014r80r0B                   92 	mov	p, a
+      000016r80r15                   93 	sl	p
+      000018r80r15                   94 	sl	p
+      00001Ar80r15                   95 	sl	p
+      00001Cr80r0F                   96 	mov	a, __mullonglong_PARM_1+0
+      00001Er99r0B                   97 	mov	__mullonglong_sloc2_1_0+0, a
+      000020r81r0F                   98 	mov	a, __mullonglong_PARM_1+1
+      000022r9Ar0B                   99 	mov	__mullonglong_sloc2_1_0+1, a
+      000024r82r0F                  100 	mov	a, __mullonglong_PARM_1+2
+      000026r9Br0B                  101 	mov	__mullonglong_sloc2_1_0+2, a
+      000028r83r0F                  102 	mov	a, __mullonglong_PARM_1+3
+      00002Ar9Cr0B                  103 	mov	__mullonglong_sloc2_1_0+3, a
+      00002Cr84r0F                  104 	mov	a, __mullonglong_PARM_1+4
+      00002Er9Dr0B                  105 	mov	__mullonglong_sloc2_1_0+4, a
+      000030r85r0F                  106 	mov	a, __mullonglong_PARM_1+5
+      000032r9Er0B                  107 	mov	__mullonglong_sloc2_1_0+5, a
+      000034r86r0F                  108 	mov	a, __mullonglong_PARM_1+6
+      000036r9Fr0B                  109 	mov	__mullonglong_sloc2_1_0+6, a
+      000038r87r0F                  110 	mov	a, __mullonglong_PARM_1+7
+      00003ArA0r0B                  111 	mov	__mullonglong_sloc2_1_0+7, a
+      00003Cr80r0F                  112 	mov	a, p
+      00003E                        113 00128$:
+      00003E 01 29                  114 	sub	a, #1
+      000040 40 18                  115 	t0sn	f, c
+      000042r64r30                  116 	goto	00129$
+      000044 72 00                  117 	push	af
+      000046 01 2F                  118 	mov	a, #0x01
+      000048rA0r15                  119 	sl	__mullonglong_sloc2_1_0+7
+      00004A 40 18                  120 	t0sn	f, c
+      00004CrA0r0A                  121 	or	__mullonglong_sloc2_1_0+7, a
+      00004Er20r16                  122 	src	__mullonglong_sloc2_1_0+7
+      000050r20r16                  123 	src	__mullonglong_sloc2_1_0+7
+      000052r1Fr16                  124 	src	__mullonglong_sloc2_1_0+6
+      000054r1Er16                  125 	src	__mullonglong_sloc2_1_0+5
+      000056r1Dr16                  126 	src	__mullonglong_sloc2_1_0+4
+      000058r1Cr16                  127 	src	__mullonglong_sloc2_1_0+3
+      00005Ar1Br16                  128 	src	__mullonglong_sloc2_1_0+2
+      00005Cr1Ar16                  129 	src	__mullonglong_sloc2_1_0+1
+      00005Er19r16                  130 	src	__mullonglong_sloc2_1_0+0
+      000060 73 00                  131 	pop	af
+      000062r3Er30                  132 	goto	00128$
+      000064                        133 00129$:
+      000064r99r0F                  134 	mov	a, __mullonglong_sloc2_1_0+0
+      000066rA1r0B                  135 	mov	__mullonglong_sloc3_1_0+0, a
+                                    136 ;	../_mullonglong.c: 43: for(j = 0; (i + j) < sizeof (long long); j++)
+      000068r22r13                  137 	clear	__mullonglong_sloc4_1_0+0
+      00006A                        138 00104$:
+      00006Ar00r13                  139 	clear	p
+      00006Cr98r0F                  140 	mov	a, __mullonglong_sloc1_1_0+0
+      00006Er22r0C                  141 	add	a, __mullonglong_sloc4_1_0+0
+      000070 72 00                  142 	push	af
+      000072r00r10                  143 	addc	p
+      000074 73 00                  144 	pop	af
+      000076 08 29                  145 	sub	a, #0x08
+      000078r80r0F                  146 	mov	a, p
+      00007A 61 00                  147 	subc	a
+      00007C C0 18                  148 	t0sn	f, ov
+      00007E 80 2E                  149 	xor	a, #0x80
+      000080 6B 00                  150 	sl	a
+      000082 40 1A                  151 	t1sn	f, c
+      000084r5Er31                  152 	goto	00107$
+                                    153 ;	../_mullonglong.c: 45: unsigned char r = lr >> (j * 8);
+      000086rA2r0F                  154 	mov	a, __mullonglong_sloc4_1_0+0
+      000088r80r0B                  155 	mov	p, a
+      00008Ar80r15                  156 	sl	p
+      00008Cr80r15                  157 	sl	p
+      00008Er80r15                  158 	sl	p
+      000090r88r0F                  159 	mov	a, __mullonglong_PARM_2+0
+      000092rA3r0B                  160 	mov	__mullonglong_sloc5_1_0+0, a
+      000094r89r0F                  161 	mov	a, __mullonglong_PARM_2+1
+      000096rA4r0B                  162 	mov	__mullonglong_sloc5_1_0+1, a
+      000098r8Ar0F                  163 	mov	a, __mullonglong_PARM_2+2
+      00009ArA5r0B                  164 	mov	__mullonglong_sloc5_1_0+2, a
+      00009Cr8Br0F                  165 	mov	a, __mullonglong_PARM_2+3
+      00009ErA6r0B                  166 	mov	__mullonglong_sloc5_1_0+3, a
+      0000A0r8Cr0F                  167 	mov	a, __mullonglong_PARM_2+4
+      0000A2rA7r0B                  168 	mov	__mullonglong_sloc5_1_0+4, a
+      0000A4r8Dr0F                  169 	mov	a, __mullonglong_PARM_2+5
+      0000A6rA8r0B                  170 	mov	__mullonglong_sloc5_1_0+5, a
+      0000A8r8Er0F                  171 	mov	a, __mullonglong_PARM_2+6
+      0000AArA9r0B                  172 	mov	__mullonglong_sloc5_1_0+6, a
+      0000ACr8Fr0F                  173 	mov	a, __mullonglong_PARM_2+7
+      0000AErAAr0B                  174 	mov	__mullonglong_sloc5_1_0+7, a
+      0000B0r80r0F                  175 	mov	a, p
+      0000B2                        176 00130$:
+      0000B2 01 29                  177 	sub	a, #1
+      0000B4 40 18                  178 	t0sn	f, c
+      0000B6rD8r30                  179 	goto	00131$
+      0000B8 72 00                  180 	push	af
+      0000BA 01 2F                  181 	mov	a, #0x01
+      0000BCrAAr15                  182 	sl	__mullonglong_sloc5_1_0+7
+      0000BE 40 18                  183 	t0sn	f, c
+      0000C0rAAr0A                  184 	or	__mullonglong_sloc5_1_0+7, a
+      0000C2r2Ar16                  185 	src	__mullonglong_sloc5_1_0+7
+      0000C4r2Ar16                  186 	src	__mullonglong_sloc5_1_0+7
+      0000C6r29r16                  187 	src	__mullonglong_sloc5_1_0+6
+      0000C8r28r16                  188 	src	__mullonglong_sloc5_1_0+5
+      0000CAr27r16                  189 	src	__mullonglong_sloc5_1_0+4
+      0000CCr26r16                  190 	src	__mullonglong_sloc5_1_0+3
+      0000CEr25r16                  191 	src	__mullonglong_sloc5_1_0+2
+      0000D0r24r16                  192 	src	__mullonglong_sloc5_1_0+1
+      0000D2r23r16                  193 	src	__mullonglong_sloc5_1_0+0
+      0000D4 73 00                  194 	pop	af
+      0000D6rB2r30                  195 	goto	00130$
+      0000D8                        196 00131$:
+      0000D8rA3r0F                  197 	mov	a, __mullonglong_sloc5_1_0+0
+      0000DAr80r0B                  198 	mov	__muluchar_PARM_2+0, a
+                                    199 ;	../_mullonglong.c: 46: ret += (unsigned long long)((unsigned short)(l * r)) << ((i + j) * 8);
+      0000DCrA1r0F                  200 	mov	a, __mullonglong_sloc3_1_0+0
+      0000DEr80r0B                  201 	mov	__muluchar_PARM_1+0, a
+      0000E0r00r38                  202 	call	__muluchar
+      0000E2rABr0B                  203 	mov	__mullonglong_sloc6_1_0+0, a
+      0000E4r80r0F                  204 	mov	a, p
+      0000E6rACr0B                  205 	mov	__mullonglong_sloc6_1_0+1, a
+      0000E8r2Dr13                  206 	clear	__mullonglong_sloc6_1_0+2
+      0000EAr2Er13                  207 	clear	__mullonglong_sloc6_1_0+3
+      0000ECr2Fr13                  208 	clear	__mullonglong_sloc6_1_0+4
+      0000EEr30r13                  209 	clear	__mullonglong_sloc6_1_0+5
+      0000F0r31r13                  210 	clear	__mullonglong_sloc6_1_0+6
+      0000F2r32r13                  211 	clear	__mullonglong_sloc6_1_0+7
+      0000F4r98r0F                  212 	mov	a, __mullonglong_sloc1_1_0+0
+      0000F6r22r0C                  213 	add	a, __mullonglong_sloc4_1_0+0
+      0000F8rB3r0B                  214 	mov	__mullonglong_sloc7_1_0+0, a
+      0000FArB3r15                  215 	sl	__mullonglong_sloc7_1_0+0
+      0000FCrB3r15                  216 	sl	__mullonglong_sloc7_1_0+0
+      0000FErB3r15                  217 	sl	__mullonglong_sloc7_1_0+0
+      000100rABr0F                  218 	mov	a, __mullonglong_sloc6_1_0+0
+      000102rB4r0B                  219 	mov	__mullonglong_sloc8_1_0+0, a
+      000104rACr0F                  220 	mov	a, __mullonglong_sloc6_1_0+1
+      000106rB5r0B                  221 	mov	__mullonglong_sloc8_1_0+1, a
+      000108rADr0F                  222 	mov	a, __mullonglong_sloc6_1_0+2
+      00010ArB6r0B                  223 	mov	__mullonglong_sloc8_1_0+2, a
+      00010CrAEr0F                  224 	mov	a, __mullonglong_sloc6_1_0+3
+      00010ErB7r0B                  225 	mov	__mullonglong_sloc8_1_0+3, a
+      000110rAFr0F                  226 	mov	a, __mullonglong_sloc6_1_0+4
+      000112rB8r0B                  227 	mov	__mullonglong_sloc8_1_0+4, a
+      000114rB0r0F                  228 	mov	a, __mullonglong_sloc6_1_0+5
+      000116rB9r0B                  229 	mov	__mullonglong_sloc8_1_0+5, a
+      000118rB1r0F                  230 	mov	a, __mullonglong_sloc6_1_0+6
+      00011ArBAr0B                  231 	mov	__mullonglong_sloc8_1_0+6, a
+      00011CrB2r0F                  232 	mov	a, __mullonglong_sloc6_1_0+7
+      00011ErBBr0B                  233 	mov	__mullonglong_sloc8_1_0+7, a
+      000120rB3r0F                  234 	mov	a, __mullonglong_sloc7_1_0+0
+      000122                        235 00132$:
+      000122 01 29                  236 	sub	a, #1
+      000124 40 18                  237 	t0sn	f, c
+      000126r3Ar31                  238 	goto	00133$
+      000128rB4r15                  239 	sl	__mullonglong_sloc8_1_0+0
+      00012ArB5r16                  240 	slc	__mullonglong_sloc8_1_0+1
+      00012CrB6r16                  241 	slc	__mullonglong_sloc8_1_0+2
+      00012ErB7r16                  242 	slc	__mullonglong_sloc8_1_0+3
+      000130rB8r16                  243 	slc	__mullonglong_sloc8_1_0+4
+      000132rB9r16                  244 	slc	__mullonglong_sloc8_1_0+5
+      000134rBAr16                  245 	slc	__mullonglong_sloc8_1_0+6
+      000136rBBr16                  246 	slc	__mullonglong_sloc8_1_0+7
+      000138r22r31                  247 	goto	00132$
+      00013A                        248 00133$:
+      00013ArB4r0F                  249 	mov	a, __mullonglong_sloc8_1_0+0
+      00013Cr10r08                  250 	add	__mullonglong_sloc0_1_0+0, a
+      00013ErB5r0F                  251 	mov	a, __mullonglong_sloc8_1_0+1
+      000140r11r09                  252 	addc	__mullonglong_sloc0_1_0+1, a
+      000142rB6r0F                  253 	mov	a, __mullonglong_sloc8_1_0+2
+      000144r12r09                  254 	addc	__mullonglong_sloc0_1_0+2, a
+      000146rB7r0F                  255 	mov	a, __mullonglong_sloc8_1_0+3
+      000148r13r09                  256 	addc	__mullonglong_sloc0_1_0+3, a
+      00014ArB8r0F                  257 	mov	a, __mullonglong_sloc8_1_0+4
+      00014Cr14r09                  258 	addc	__mullonglong_sloc0_1_0+4, a
+      00014ErB9r0F                  259 	mov	a, __mullonglong_sloc8_1_0+5
+      000150r15r09                  260 	addc	__mullonglong_sloc0_1_0+5, a
+      000152rBAr0F                  261 	mov	a, __mullonglong_sloc8_1_0+6
+      000154r16r09                  262 	addc	__mullonglong_sloc0_1_0+6, a
+      000156rBBr0F                  263 	mov	a, __mullonglong_sloc8_1_0+7
+      000158r17r09                  264 	addc	__mullonglong_sloc0_1_0+7, a
+                                    265 ;	../_mullonglong.c: 43: for(j = 0; (i + j) < sizeof (long long); j++)
+      00015Ar22r12                  266 	inc	__mullonglong_sloc4_1_0+0
+      00015Cr6Ar30                  267 	goto	00104$
+      00015E                        268 00107$:
+                                    269 ;	../_mullonglong.c: 40: for (i = 0; i < sizeof (long long); i++)
+      00015Er18r12                  270 	inc	__mullonglong_sloc1_1_0+0
+      000160r98r0F                  271 	mov	a, __mullonglong_sloc1_1_0+0
+      000162 08 29                  272 	sub	a, #0x08
+      000164 40 18                  273 	t0sn	f, c
+      000166r12r30                  274 	goto	00106$
+                                    275 ;	../_mullonglong.c: 50: return(ret);
+      000168 C2 01                  276 	mov	a, sp
+      00016A FC 28                  277 	add	a, #0xfc
+      00016Cr80r0B                  278 	mov	p, a
+      00016Er81r03                  279 	idxm	a, p
+      000170r80r0B                  280 	mov	p, a
+      000172r90r0F                  281 	mov	a, __mullonglong_sloc0_1_0+0
+      000174r80r03                  282 	idxm	p, a
+      000176r00r12                  283 	inc	p
+      000178r91r0F                  284 	mov	a, __mullonglong_sloc0_1_0+1
+      00017Ar80r03                  285 	idxm	p, a
+      00017Cr00r12                  286 	inc	p
+      00017Er92r0F                  287 	mov	a, __mullonglong_sloc0_1_0+2
+      000180r80r03                  288 	idxm	p, a
+      000182r00r12                  289 	inc	p
+      000184r93r0F                  290 	mov	a, __mullonglong_sloc0_1_0+3
+      000186r80r03                  291 	idxm	p, a
+      000188r00r12                  292 	inc	p
+      00018Ar94r0F                  293 	mov	a, __mullonglong_sloc0_1_0+4
+      00018Cr80r03                  294 	idxm	p, a
+      00018Er00r12                  295 	inc	p
+      000190r95r0F                  296 	mov	a, __mullonglong_sloc0_1_0+5
+      000192r80r03                  297 	idxm	p, a
+      000194r00r12                  298 	inc	p
+      000196r96r0F                  299 	mov	a, __mullonglong_sloc0_1_0+6
+      000198r80r03                  300 	idxm	p, a
+      00019Ar00r12                  301 	inc	p
+      00019Cr97r0F                  302 	mov	a, __mullonglong_sloc0_1_0+7
+      00019Er80r03                  303 	idxm	p, a
+                                    304 ;	../_mullonglong.c: 51: }
+      0001A0 7A 00                  305 	ret
+                                    306 	.area CODE
+                                    307 	.area CONST
+                                    308 	.area CABS (ABS)

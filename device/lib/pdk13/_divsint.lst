@@ -1,0 +1,141 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divsint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divsint_PARM_2
+                                     17 	.globl __divsint_PARM_1
+                                     18 	.globl __divsint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divsint_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 __divsint_PARM_2:
+      000002                         31 	.ds 2
+      000004                         32 __divsint_sloc0_1_0:
+      000004                         33 	.ds 1
+      000005                         34 __divsint_sloc1_1_0:
+      000005                         35 	.ds 2
+      000007                         36 __divsint_sloc2_1_0:
+      000007                         37 	.ds 1
+      000008                         38 __divsint_sloc3_1_0:
+      000008                         39 	.ds 2
+                                     40 ;--------------------------------------------------------
+                                     41 ; overlayable items in ram 
+                                     42 ;--------------------------------------------------------
+                                     43 ;--------------------------------------------------------
+                                     44 ; absolute external ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DABS (ABS)
+                                     47 ;--------------------------------------------------------
+                                     48 ; global & static initialisations
+                                     49 ;--------------------------------------------------------
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area GSINIT
+                                     54 ;--------------------------------------------------------
+                                     55 ; Home
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area HOME
+                                     59 ;--------------------------------------------------------
+                                     60 ; code
+                                     61 ;--------------------------------------------------------
+                                     62 	.area CODE
+                                     63 ;	../_divsint.c: 207: _divsint (int x, int y)
+                                     64 ;	-----------------------------------------
+                                     65 ;	 function _divsint
+                                     66 ;	-----------------------------------------
+      000000                         67 __divsint:
+                                     68 ;	../_divsint.c: 211: r = (unsigned int)(x < 0 ? -x : x) / (unsigned int)(y < 0 ? -y : y);
+      000000r81r0F                   69 	mov	a, __divsint_PARM_1+1
+      000002 6B 00                   70 	sl	a
+      000004 00 2F                   71 	mov	a, #0x00
+      000006 6D 00                   72 	slc	a
+      000008r84r0B                   73 	mov	__divsint_sloc0_1_0+0, a
+      00000A 00 2B                   74 	cneqsn	a, #0x00
+      00000Cr1Ar30                   75 	goto	00106$
+      00000E 00 2F                   76 	mov	a, #0x00
+      000010r80r0C                   77 	sub	a, __divsint_PARM_1+0
+      000012r80r0B                   78 	mov	p, a
+      000014 00 2F                   79 	mov	a, #0x00
+      000016r81r0D                   80 	subc	a, __divsint_PARM_1+1
+      000018r20r30                   81 	goto	00107$
+      00001A                         82 00106$:
+      00001Ar80r0F                   83 	mov	a, __divsint_PARM_1+0
+      00001Cr80r0B                   84 	mov	p, a
+      00001Er81r0F                   85 	mov	a, __divsint_PARM_1+1
+      000020                         86 00107$:
+      000020r86r0B                   87 	mov	__divsint_sloc1_1_0+1, a
+      000022r80r0F                   88 	mov	a, p
+      000024r85r0B                   89 	mov	__divsint_sloc1_1_0+0, a
+      000026r83r0F                   90 	mov	a, __divsint_PARM_2+1
+      000028 6B 00                   91 	sl	a
+      00002A 00 2F                   92 	mov	a, #0x00
+      00002C 6D 00                   93 	slc	a
+      00002Er87r0B                   94 	mov	__divsint_sloc2_1_0+0, a
+      000030 00 2B                   95 	cneqsn	a, #0x00
+      000032r40r30                   96 	goto	00108$
+      000034 00 2F                   97 	mov	a, #0x00
+      000036r82r0C                   98 	sub	a, __divsint_PARM_2+0
+      000038r80r0B                   99 	mov	p, a
+      00003A 00 2F                  100 	mov	a, #0x00
+      00003Cr83r0D                  101 	subc	a, __divsint_PARM_2+1
+      00003Er46r30                  102 	goto	00109$
+      000040                        103 00108$:
+      000040r82r0F                  104 	mov	a, __divsint_PARM_2+0
+      000042r80r0B                  105 	mov	p, a
+      000044r83r0F                  106 	mov	a, __divsint_PARM_2+1
+      000046                        107 00109$:
+      000046r81r0B                  108 	mov	__divuint_PARM_2+1, a
+      000048r80r0F                  109 	mov	a, p
+      00004Ar80r0B                  110 	mov	__divuint_PARM_2+0, a
+      00004Cr85r0F                  111 	mov	a, __divsint_sloc1_1_0+0
+      00004Er80r0B                  112 	mov	__divuint_PARM_1+0, a
+      000050r86r0F                  113 	mov	a, __divsint_sloc1_1_0+1
+      000052r81r0B                  114 	mov	__divuint_PARM_1+1, a
+      000054r00r38                  115 	call	__divuint
+      000056r88r0B                  116 	mov	__divsint_sloc3_1_0+0, a
+      000058r80r0F                  117 	mov	a, p
+      00005Ar89r0B                  118 	mov	__divsint_sloc3_1_0+1, a
+                                    119 ;	../_divsint.c: 212: if ((x < 0) ^ (y < 0))
+      00005Cr84r0F                  120 	mov	a, __divsint_sloc0_1_0+0
+      00005Er07r0F                  121 	xor	a, __divsint_sloc2_1_0+0
+      000060 00 2B                  122 	cneqsn	a, #0x00
+      000062r72r30                  123 	goto	00102$
+                                    124 ;	../_divsint.c: 213: return -r;
+      000064 00 2F                  125 	mov	a, #0x00
+      000066r88r0C                  126 	sub	a, __divsint_sloc3_1_0+0
+      000068r80r0B                  127 	mov	p, a
+      00006A 00 2F                  128 	mov	a, #0x00
+      00006Cr89r0D                  129 	subc	a, __divsint_sloc3_1_0+1
+      00006Er80r13                  130 	xch	a, p
+      000070 7A 00                  131 	ret
+      000072                        132 00102$:
+                                    133 ;	../_divsint.c: 215: return r;
+      000072r89r0F                  134 	mov	a, __divsint_sloc3_1_0+1
+      000074r80r0B                  135 	mov	p, a
+      000076r88r0F                  136 	mov	a, __divsint_sloc3_1_0+0
+                                    137 ;	../_divsint.c: 216: }
+      000078 7A 00                  138 	ret
+                                    139 	.area CODE
+                                    140 	.area CONST
+                                    141 	.area CABS (ABS)

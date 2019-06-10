@@ -1,0 +1,100 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _muluchar
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __muluchar_PARM_2
+                                     17 	.globl __muluchar_PARM_1
+                                     18 	.globl __muluchar
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __muluchar_PARM_1:
+      000000                         29 	.ds 1
+      000001                         30 __muluchar_PARM_2:
+      000001                         31 	.ds 1
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __muluchar_sloc0_1_0:
+      000000                         37 	.ds 2
+                                     38 ;--------------------------------------------------------
+                                     39 ; absolute external ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area DABS (ABS)
+                                     42 ;--------------------------------------------------------
+                                     43 ; global & static initialisations
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area GSINIT
+                                     47 	.area GSFINAL
+                                     48 	.area GSINIT
+                                     49 ;--------------------------------------------------------
+                                     50 ; Home
+                                     51 ;--------------------------------------------------------
+                                     52 	.area HOME
+                                     53 	.area HOME
+                                     54 ;--------------------------------------------------------
+                                     55 ; code
+                                     56 ;--------------------------------------------------------
+                                     57 	.area CODE
+                                     58 ;	../_muluchar.c: 30: _muluchar (unsigned char x, unsigned char y)
+                                     59 ;	-----------------------------------------
+                                     60 ;	 function _muluchar
+                                     61 ;	-----------------------------------------
+      000000                         62 __muluchar:
+                                     63 ;	../_muluchar.c: 32: unsigned int result = 0;
+      000000r00r13                   64 	clear	__muluchar_sloc0_1_0+0
+      000002r01r13                   65 	clear	__muluchar_sloc0_1_0+1
+                                     66 ;	../_muluchar.c: 34: for (unsigned char i = 0; i < 8; i++)
+      000004r00r13                   67 	clear	p
+      000006                         68 00105$:
+      000006r80r0F                   69 	mov	a, p
+      000008 08 29                   70 	sub	a, #0x08
+      00000A 40 1A                   71 	t1sn	f, c
+      00000Cr26r30                   72 	goto	00103$
+                                     73 ;	../_muluchar.c: 36: result <<= 1;
+      00000Er80r15                   74 	sl	__muluchar_sloc0_1_0+0
+      000010r81r16                   75 	slc	__muluchar_sloc0_1_0+1
+                                     76 ;	../_muluchar.c: 37: if (x & 0x80)
+      000012r80r0F                   77 	mov	a, __muluchar_PARM_1+0
+      000014 80 2C                   78 	and	a, #0x80
+      000016 00 2B                   79 	cneqsn	a, #0x00
+      000018r20r30                   80 	goto	00102$
+                                     81 ;	../_muluchar.c: 38: result += y;
+      00001Ar81r0F                   82 	mov	a, __muluchar_PARM_2+0
+      00001Cr00r08                   83 	add	__muluchar_sloc0_1_0+0, a
+      00001Er01r10                   84 	addc	__muluchar_sloc0_1_0+1
+      000020                         85 00102$:
+                                     86 ;	../_muluchar.c: 39: x <<= 1;
+      000020r80r15                   87 	sl	__muluchar_PARM_1+0
+                                     88 ;	../_muluchar.c: 34: for (unsigned char i = 0; i < 8; i++)
+      000022r00r12                   89 	inc	p
+      000024r06r30                   90 	goto	00105$
+      000026                         91 00103$:
+                                     92 ;	../_muluchar.c: 42: return result;
+      000026r81r0F                   93 	mov	a, __muluchar_sloc0_1_0+1
+      000028r80r0B                   94 	mov	p, a
+      00002Ar80r0F                   95 	mov	a, __muluchar_sloc0_1_0+0
+                                     96 ;	../_muluchar.c: 43: }
+      00002C 7A 00                   97 	ret
+                                     98 	.area CODE
+                                     99 	.area CONST
+                                    100 	.area CABS (ABS)

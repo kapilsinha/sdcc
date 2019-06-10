@@ -1,0 +1,91 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strlen
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strlen_PARM_1
+                                     17 	.globl _strlen
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _strlen_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _strlen_sloc0_1_0:
+      000000                         34 	.ds 2
+      000002                         35 _strlen_sloc1_1_0:
+      000002                         36 	.ds 2
+                                     37 ;--------------------------------------------------------
+                                     38 ; absolute external ram data
+                                     39 ;--------------------------------------------------------
+                                     40 	.area DABS (ABS)
+                                     41 ;--------------------------------------------------------
+                                     42 ; global & static initialisations
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area GSINIT
+                                     46 	.area GSFINAL
+                                     47 	.area GSINIT
+                                     48 ;--------------------------------------------------------
+                                     49 ; Home
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+                                     52 	.area HOME
+                                     53 ;--------------------------------------------------------
+                                     54 ; code
+                                     55 ;--------------------------------------------------------
+                                     56 	.area CODE
+                                     57 ;	../_strlen.c: 35: size_t strlen ( const char * str )
+                                     58 ;	-----------------------------------------
+                                     59 ;	 function strlen
+                                     60 ;	-----------------------------------------
+      000000                         61 _strlen:
+                                     62 ;	../_strlen.c: 39: while (*str++)
+      000000r00r13                   63 	clear	_strlen_sloc0_1_0+0
+      000002r01r13                   64 	clear	_strlen_sloc0_1_0+1
+      000004r80r0F                   65 	mov	a, _strlen_PARM_1+0
+      000006r82r0B                   66 	mov	_strlen_sloc1_1_0+0, a
+      000008r81r0F                   67 	mov	a, _strlen_PARM_1+1
+      00000Ar83r0B                   68 	mov	_strlen_sloc1_1_0+1, a
+      00000C                         69 00101$:
+      00000Cr82r0F                   70 	mov	a, _strlen_sloc1_1_0+0
+      00000Er80r0B                   71 	mov	p, a
+      000010r83r0F                   72 	mov	a, _strlen_sloc1_1_0+1
+      000012r00r38                   73 	call	__gptrget
+      000014r02r12                   74 	inc	_strlen_sloc1_1_0+0
+      000016r03r10                   75 	addc	_strlen_sloc1_1_0+1
+      000018 00 2B                   76 	cneqsn	a, #0x00
+      00001Ar22r30                   77 	goto	00103$
+                                     78 ;	../_strlen.c: 40: i++ ;
+      00001Cr00r12                   79 	inc	_strlen_sloc0_1_0+0
+      00001Er01r10                   80 	addc	_strlen_sloc0_1_0+1
+      000020r0Cr30                   81 	goto	00101$
+      000022                         82 00103$:
+                                     83 ;	../_strlen.c: 42: return i;
+      000022r81r0F                   84 	mov	a, _strlen_sloc0_1_0+1
+      000024r80r0B                   85 	mov	p, a
+      000026r80r0F                   86 	mov	a, _strlen_sloc0_1_0+0
+                                     87 ;	../_strlen.c: 43: }
+      000028 7A 00                   88 	ret
+                                     89 	.area CODE
+                                     90 	.area CONST
+                                     91 	.area CABS (ABS)

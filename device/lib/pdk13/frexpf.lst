@@ -1,0 +1,239 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module frexpf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _frexpf_PARM_2
+                                     17 	.globl _frexpf_PARM_1
+                                     18 	.globl _frexpf
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _frexpf_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 _frexpf_PARM_2:
+      000004                         31 	.ds 2
+      000006                         32 _frexpf_fl_65536_26:
+      000006                         33 	.ds 4
+                                     34 ;--------------------------------------------------------
+                                     35 ; overlayable items in ram 
+                                     36 ;--------------------------------------------------------
+                                     37 	.area	OSEG (OVR,DATA)
+      000000                         38 _frexpf_sloc0_1_0:
+      000000                         39 	.ds 4
+      000004                         40 _frexpf_sloc1_1_0:
+      000004                         41 	.ds 4
+      000008                         42 _frexpf_sloc2_1_0:
+      000008                         43 	.ds 4
+      00000C                         44 _frexpf_sloc3_1_0:
+      00000C                         45 	.ds 4
+      000010                         46 _frexpf_sloc4_1_0:
+      000010                         47 	.ds 2
+      000012                         48 _frexpf_sloc5_1_0:
+      000012                         49 	.ds 2
+      000014                         50 _frexpf_sloc6_1_0:
+      000014                         51 	.ds 4
+      000018                         52 _frexpf_sloc7_1_0:
+      000018                         53 	.ds 4
+      00001C                         54 _frexpf_sloc8_1_0:
+      00001C                         55 	.ds 4
+      000020                         56 _frexpf_sloc9_1_0:
+      000020                         57 	.ds 4
+      000024                         58 _frexpf_sloc10_1_0:
+      000024                         59 	.ds 4
+                                     60 ;--------------------------------------------------------
+                                     61 ; absolute external ram data
+                                     62 ;--------------------------------------------------------
+                                     63 	.area DABS (ABS)
+                                     64 ;--------------------------------------------------------
+                                     65 ; global & static initialisations
+                                     66 ;--------------------------------------------------------
+                                     67 	.area HOME
+                                     68 	.area GSINIT
+                                     69 	.area GSFINAL
+                                     70 	.area GSINIT
+                                     71 ;--------------------------------------------------------
+                                     72 ; Home
+                                     73 ;--------------------------------------------------------
+                                     74 	.area HOME
+                                     75 	.area HOME
+                                     76 ;--------------------------------------------------------
+                                     77 ; code
+                                     78 ;--------------------------------------------------------
+                                     79 	.area CODE
+                                     80 ;	../frexpf.c: 34: float frexpf(float x, int *pw2)
+                                     81 ;	-----------------------------------------
+                                     82 ;	 function frexpf
+                                     83 ;	-----------------------------------------
+      000000                         84 _frexpf:
+                                     85 ;	../frexpf.c: 39: fl.f=x;
+      000000r80r0F                   86 	mov	a, _frexpf_PARM_1+0
+      000002r86r0B                   87 	mov	_frexpf_fl_65536_26+0, a
+      000004r81r0F                   88 	mov	a, _frexpf_PARM_1+1
+      000006r87r0B                   89 	mov	_frexpf_fl_65536_26+1, a
+      000008r82r0F                   90 	mov	a, _frexpf_PARM_1+2
+      00000Ar88r0B                   91 	mov	_frexpf_fl_65536_26+2, a
+      00000Cr83r0F                   92 	mov	a, _frexpf_PARM_1+3
+      00000Er89r0B                   93 	mov	_frexpf_fl_65536_26+3, a
+                                     94 ;	../frexpf.c: 41: i  = ( fl.l >> 23) & 0x000000ff;
+      000010r86r0F                   95 	mov	a, _frexpf_fl_65536_26+0
+      000012r80r0B                   96 	mov	_frexpf_sloc0_1_0+0, a
+      000014r87r0F                   97 	mov	a, _frexpf_fl_65536_26+1
+      000016r81r0B                   98 	mov	_frexpf_sloc0_1_0+1, a
+      000018r88r0F                   99 	mov	a, _frexpf_fl_65536_26+2
+      00001Ar82r0B                  100 	mov	_frexpf_sloc0_1_0+2, a
+      00001Cr89r0F                  101 	mov	a, _frexpf_fl_65536_26+3
+      00001Er83r0B                  102 	mov	_frexpf_sloc0_1_0+3, a
+      000020r80r0F                  103 	mov	a, _frexpf_sloc0_1_0+0
+      000022r84r0B                  104 	mov	_frexpf_sloc1_1_0+0, a
+      000024r81r0F                  105 	mov	a, _frexpf_sloc0_1_0+1
+      000026r85r0B                  106 	mov	_frexpf_sloc1_1_0+1, a
+      000028r82r0F                  107 	mov	a, _frexpf_sloc0_1_0+2
+      00002Ar86r0B                  108 	mov	_frexpf_sloc1_1_0+2, a
+      00002Cr83r0F                  109 	mov	a, _frexpf_sloc0_1_0+3
+      00002Er87r0B                  110 	mov	_frexpf_sloc1_1_0+3, a
+      000030 17 2F                  111 	mov	a, #23
+      000032                        112 00103$:
+      000032 72 00                  113 	push	af
+      000034r87r0F                  114 	mov	a, _frexpf_sloc1_1_0+3
+      000036 6B 00                  115 	sl	a
+      000038r07r16                  116 	src	_frexpf_sloc1_1_0+3
+      00003Ar06r16                  117 	src	_frexpf_sloc1_1_0+2
+      00003Cr05r16                  118 	src	_frexpf_sloc1_1_0+1
+      00003Er04r16                  119 	src	_frexpf_sloc1_1_0+0
+      000040 73 00                  120 	pop	af
+      000042 63 00                  121 	dzsn	a
+      000044r32r30                  122 	goto	00103$
+      000046r84r0F                  123 	mov	a, _frexpf_sloc1_1_0+0
+      000048r88r0B                  124 	mov	_frexpf_sloc2_1_0+0, a
+      00004Ar09r13                  125 	clear	_frexpf_sloc2_1_0+1
+      00004Cr0Ar13                  126 	clear	_frexpf_sloc2_1_0+2
+      00004Er0Br13                  127 	clear	_frexpf_sloc2_1_0+3
+                                    128 ;	../frexpf.c: 42: i -= 0x7e;
+      000050r88r0F                  129 	mov	a, _frexpf_sloc2_1_0+0
+      000052 7E 29                  130 	sub	a, #0x7e
+      000054r8Cr0B                  131 	mov	_frexpf_sloc3_1_0+0, a
+      000056r89r0F                  132 	mov	a, _frexpf_sloc2_1_0+1
+      000058 61 00                  133 	subc	a
+      00005Ar8Dr0B                  134 	mov	_frexpf_sloc3_1_0+1, a
+      00005Cr8Ar0F                  135 	mov	a, _frexpf_sloc2_1_0+2
+      00005E 61 00                  136 	subc	a
+      000060r8Er0B                  137 	mov	_frexpf_sloc3_1_0+2, a
+      000062r8Br0F                  138 	mov	a, _frexpf_sloc2_1_0+3
+      000064 61 00                  139 	subc	a
+      000066r8Fr0B                  140 	mov	_frexpf_sloc3_1_0+3, a
+                                    141 ;	../frexpf.c: 43: *pw2 = i;
+      000068r84r0F                  142 	mov	a, _frexpf_PARM_2+0
+      00006Ar90r0B                  143 	mov	_frexpf_sloc4_1_0+0, a
+      00006Cr85r0F                  144 	mov	a, _frexpf_PARM_2+1
+      00006Er91r0B                  145 	mov	_frexpf_sloc4_1_0+1, a
+      000070r8Cr0F                  146 	mov	a, _frexpf_sloc3_1_0+0
+      000072r92r0B                  147 	mov	_frexpf_sloc5_1_0+0, a
+      000074r8Dr0F                  148 	mov	a, _frexpf_sloc3_1_0+1
+      000076r93r0B                  149 	mov	_frexpf_sloc5_1_0+1, a
+      000078r90r0F                  150 	mov	a, _frexpf_sloc4_1_0+0
+      00007Ar80r0B                  151 	mov	p, a
+      00007Cr92r0F                  152 	mov	a, _frexpf_sloc5_1_0+0
+      00007Er80r03                  153 	idxm	p, a
+      000080r00r12                  154 	inc	p
+      000082r93r0F                  155 	mov	a, _frexpf_sloc5_1_0+1
+      000084r80r03                  156 	idxm	p, a
+                                    157 ;	../frexpf.c: 44: fl.l &= 0x807fffff; /* strip all exponent bits */
+      000086r86r0F                  158 	mov	a, _frexpf_fl_65536_26+0
+      000088r94r0B                  159 	mov	_frexpf_sloc6_1_0+0, a
+      00008Ar87r0F                  160 	mov	a, _frexpf_fl_65536_26+1
+      00008Cr95r0B                  161 	mov	_frexpf_sloc6_1_0+1, a
+      00008Er88r0F                  162 	mov	a, _frexpf_fl_65536_26+2
+      000090r96r0B                  163 	mov	_frexpf_sloc6_1_0+2, a
+      000092r89r0F                  164 	mov	a, _frexpf_fl_65536_26+3
+      000094r97r0B                  165 	mov	_frexpf_sloc6_1_0+3, a
+      000096r94r0F                  166 	mov	a, _frexpf_sloc6_1_0+0
+      000098r98r0B                  167 	mov	_frexpf_sloc7_1_0+0, a
+      00009Ar95r0F                  168 	mov	a, _frexpf_sloc6_1_0+1
+      00009Cr99r0B                  169 	mov	_frexpf_sloc7_1_0+1, a
+      00009Er96r0F                  170 	mov	a, _frexpf_sloc6_1_0+2
+      0000A0 7F 2C                  171 	and	a, #0x7f
+      0000A2r9Ar0B                  172 	mov	_frexpf_sloc7_1_0+2, a
+      0000A4r97r0F                  173 	mov	a, _frexpf_sloc6_1_0+3
+      0000A6 80 2C                  174 	and	a, #0x80
+      0000A8r9Br0B                  175 	mov	_frexpf_sloc7_1_0+3, a
+      0000AAr98r0F                  176 	mov	a, _frexpf_sloc7_1_0+0
+      0000ACr86r0B                  177 	mov	_frexpf_fl_65536_26+0, a
+      0000AEr99r0F                  178 	mov	a, _frexpf_sloc7_1_0+1
+      0000B0r87r0B                  179 	mov	_frexpf_fl_65536_26+1, a
+      0000B2r9Ar0F                  180 	mov	a, _frexpf_sloc7_1_0+2
+      0000B4r88r0B                  181 	mov	_frexpf_fl_65536_26+2, a
+      0000B6r9Br0F                  182 	mov	a, _frexpf_sloc7_1_0+3
+      0000B8r89r0B                  183 	mov	_frexpf_fl_65536_26+3, a
+                                    184 ;	../frexpf.c: 45: fl.l |= 0x3f000000; /* mantissa between 0.5 and 1 */
+      0000BAr86r0F                  185 	mov	a, _frexpf_fl_65536_26+0
+      0000BCrA4r0B                  186 	mov	_frexpf_sloc10_1_0+0, a
+      0000BEr87r0F                  187 	mov	a, _frexpf_fl_65536_26+1
+      0000C0rA5r0B                  188 	mov	_frexpf_sloc10_1_0+1, a
+      0000C2r88r0F                  189 	mov	a, _frexpf_fl_65536_26+2
+      0000C4rA6r0B                  190 	mov	_frexpf_sloc10_1_0+2, a
+      0000C6r89r0F                  191 	mov	a, _frexpf_fl_65536_26+3
+      0000C8rA7r0B                  192 	mov	_frexpf_sloc10_1_0+3, a
+      0000CAr98r0F                  193 	mov	a, _frexpf_sloc7_1_0+0
+      0000CCr9Cr0B                  194 	mov	_frexpf_sloc8_1_0+0, a
+      0000CEr99r0F                  195 	mov	a, _frexpf_sloc7_1_0+1
+      0000D0r9Dr0B                  196 	mov	_frexpf_sloc8_1_0+1, a
+      0000D2r9Ar0F                  197 	mov	a, _frexpf_sloc7_1_0+2
+      0000D4r9Er0B                  198 	mov	_frexpf_sloc8_1_0+2, a
+      0000D6r9Br0F                  199 	mov	a, _frexpf_sloc7_1_0+3
+      0000D8 3F 2D                  200 	or	a, #0x3f
+      0000DAr9Fr0B                  201 	mov	_frexpf_sloc8_1_0+3, a
+      0000DCr9Cr0F                  202 	mov	a, _frexpf_sloc8_1_0+0
+      0000DEr86r0B                  203 	mov	_frexpf_fl_65536_26+0, a
+      0000E0r9Dr0F                  204 	mov	a, _frexpf_sloc8_1_0+1
+      0000E2r87r0B                  205 	mov	_frexpf_fl_65536_26+1, a
+      0000E4r9Er0F                  206 	mov	a, _frexpf_sloc8_1_0+2
+      0000E6r88r0B                  207 	mov	_frexpf_fl_65536_26+2, a
+      0000E8r9Fr0F                  208 	mov	a, _frexpf_sloc8_1_0+3
+      0000EAr89r0B                  209 	mov	_frexpf_fl_65536_26+3, a
+                                    210 ;	../frexpf.c: 46: return(fl.f);
+      0000ECr86r0F                  211 	mov	a, _frexpf_fl_65536_26+0
+      0000EErA0r0B                  212 	mov	_frexpf_sloc9_1_0+0, a
+      0000F0r87r0F                  213 	mov	a, _frexpf_fl_65536_26+1
+      0000F2rA1r0B                  214 	mov	_frexpf_sloc9_1_0+1, a
+      0000F4r88r0F                  215 	mov	a, _frexpf_fl_65536_26+2
+      0000F6rA2r0B                  216 	mov	_frexpf_sloc9_1_0+2, a
+      0000F8r89r0F                  217 	mov	a, _frexpf_fl_65536_26+3
+      0000FArA3r0B                  218 	mov	_frexpf_sloc9_1_0+3, a
+      0000FC C2 01                  219 	mov	a, sp
+      0000FE FC 28                  220 	add	a, #0xfc
+      000100r80r0B                  221 	mov	p, a
+      000102r81r03                  222 	idxm	a, p
+      000104r80r0B                  223 	mov	p, a
+      000106rA0r0F                  224 	mov	a, _frexpf_sloc9_1_0+0
+      000108r80r03                  225 	idxm	p, a
+      00010Ar00r12                  226 	inc	p
+      00010CrA1r0F                  227 	mov	a, _frexpf_sloc9_1_0+1
+      00010Er80r03                  228 	idxm	p, a
+      000110r00r12                  229 	inc	p
+      000112rA2r0F                  230 	mov	a, _frexpf_sloc9_1_0+2
+      000114r80r03                  231 	idxm	p, a
+      000116r00r12                  232 	inc	p
+      000118rA3r0F                  233 	mov	a, _frexpf_sloc9_1_0+3
+      00011Ar80r03                  234 	idxm	p, a
+                                    235 ;	../frexpf.c: 47: }
+      00011C 7A 00                  236 	ret
+                                    237 	.area CODE
+                                    238 	.area CONST
+                                    239 	.area CABS (ABS)

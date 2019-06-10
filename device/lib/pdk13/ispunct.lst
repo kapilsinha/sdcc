@@ -1,0 +1,98 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module ispunct
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _isalnum
+                                     17 	.globl _isspace
+                                     18 	.globl _isprint
+                                     19 	.globl _ispunct_PARM_1
+                                     20 	.globl _ispunct
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _ispunct_PARM_1:
+      000000                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../ispunct.c: 33: int ispunct (int c)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function ispunct
+                                     58 ;	-----------------------------------------
+      000000                         59 _ispunct:
+                                     60 ;	../ispunct.c: 35: return (isprint (c) && !isspace (c) && !isalnum (c));
+      000000r80r0F                   61 	mov	a, _ispunct_PARM_1+0
+      000002r80r0B                   62 	mov	_isprint_PARM_1+0, a
+      000004r81r0F                   63 	mov	a, _ispunct_PARM_1+1
+      000006r81r0B                   64 	mov	_isprint_PARM_1+1, a
+      000008r00r38                   65 	call	_isprint
+      00000Ar80r0E                   66 	or	a, p
+      00000C 00 2B                   67 	cneqsn	a, #0x00
+      00000Er30r30                   68 	goto	00103$
+      000010r80r0F                   69 	mov	a, _ispunct_PARM_1+0
+      000012r80r0B                   70 	mov	_isspace_PARM_1+0, a
+      000014r81r0F                   71 	mov	a, _ispunct_PARM_1+1
+      000016r81r0B                   72 	mov	_isspace_PARM_1+1, a
+      000018r00r38                   73 	call	_isspace
+      00001Ar80r0E                   74 	or	a, p
+      00001C 00 2A                   75 	ceqsn	a, #0x00
+      00001Er30r30                   76 	goto	00103$
+      000020r80r0F                   77 	mov	a, _ispunct_PARM_1+0
+      000022r80r0B                   78 	mov	_isalnum_PARM_1+0, a
+      000024r81r0F                   79 	mov	a, _ispunct_PARM_1+1
+      000026r81r0B                   80 	mov	_isalnum_PARM_1+1, a
+      000028r00r38                   81 	call	_isalnum
+      00002Ar80r0E                   82 	or	a, p
+      00002C 00 2B                   83 	cneqsn	a, #0x00
+      00002Er34r30                   84 	goto	00104$
+      000030                         85 00103$:
+      000030r00r13                   86 	clear	p
+      000032r38r30                   87 	goto	00105$
+      000034                         88 00104$:
+      000034 01 2F                   89 	mov	a, #0x01
+      000036r80r0B                   90 	mov	p, a
+      000038                         91 00105$:
+      000038 00 2F                   92 	mov	a, #0x00
+      00003Ar80r13                   93 	xch	a, p
+                                     94 ;	../ispunct.c: 36: }
+      00003C 7A 00                   95 	ret
+                                     96 	.area CODE
+                                     97 	.area CONST
+                                     98 	.area CABS (ABS)

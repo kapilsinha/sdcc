@@ -1,0 +1,570 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module strtoul
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strncmp
+                                     17 	.globl _strtoul_PARM_3
+                                     18 	.globl _strtoul_PARM_2
+                                     19 	.globl _strtoul_PARM_1
+                                     20 	.globl _strtoul
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 __isdigit_PARM_1:
+      000000                         31 	.ds 1
+      000001                         32 __isdigit_PARM_2:
+      000001                         33 	.ds 1
+      000002                         34 _strtoul_PARM_1:
+      000002                         35 	.ds 2
+      000004                         36 _strtoul_PARM_2:
+      000004                         37 	.ds 2
+      000006                         38 _strtoul_PARM_3:
+      000006                         39 	.ds 2
+      000008                         40 _strtoul_sloc0_1_0:
+      000008                         41 	.ds 4
+      00000C                         42 _strtoul_sloc1_1_0:
+      00000C                         43 	.ds 2
+      00000E                         44 _strtoul_sloc2_1_0:
+      00000E                         45 	.ds 1
+      00000F                         46 _strtoul_sloc3_1_0:
+      00000F                         47 	.ds 1
+      000010                         48 _strtoul_sloc4_1_0:
+      000010                         49 	.ds 2
+      000012                         50 _strtoul_sloc5_1_0:
+      000012                         51 	.ds 1
+      000013                         52 _strtoul_sloc6_1_0:
+      000013                         53 	.ds 2
+      000015                         54 _strtoul_sloc7_1_0:
+      000015                         55 	.ds 4
+      000019                         56 _strtoul_sloc8_1_0:
+      000019                         57 	.ds 2
+      00001B                         58 _strtoul_sloc9_1_0:
+      00001B                         59 	.ds 1
+      00001C                         60 _strtoul_sloc10_1_0:
+      00001C                         61 	.ds 4
+      000020                         62 _strtoul_sloc11_1_0:
+      000020                         63 	.ds 4
+      000024                         64 _strtoul_sloc12_1_0:
+      000024                         65 	.ds 2
+      000026                         66 _strtoul_sloc13_1_0:
+      000026                         67 	.ds 4
+                                     68 ;--------------------------------------------------------
+                                     69 ; overlayable items in ram 
+                                     70 ;--------------------------------------------------------
+                                     71 ;--------------------------------------------------------
+                                     72 ; absolute external ram data
+                                     73 ;--------------------------------------------------------
+                                     74 	.area DABS (ABS)
+                                     75 ;--------------------------------------------------------
+                                     76 ; global & static initialisations
+                                     77 ;--------------------------------------------------------
+                                     78 	.area HOME
+                                     79 	.area GSINIT
+                                     80 	.area GSFINAL
+                                     81 	.area GSINIT
+                                     82 ;--------------------------------------------------------
+                                     83 ; Home
+                                     84 ;--------------------------------------------------------
+                                     85 	.area HOME
+                                     86 	.area HOME
+                                     87 ;--------------------------------------------------------
+                                     88 ; code
+                                     89 ;--------------------------------------------------------
+                                     90 	.area CODE
+                                     91 ;	../strtoul.c: 37: static signed char _isdigit(const char c, unsigned char base)
+                                     92 ;	-----------------------------------------
+                                     93 ;	 function _isdigit
+                                     94 ;	-----------------------------------------
+      000000                         95 __isdigit:
+                                     96 ;	../strtoul.c: 41: if (c >= '0' && c <= '9')
+      000000r80r0F                   97 	mov	a, __isdigit_PARM_1+0
+      000002 30 29                   98 	sub	a, #0x30
+      000004 40 18                   99 	t0sn	f, c
+      000006r16r30                  100 	goto	00110$
+      000008 39 2F                  101 	mov	a, #0x39
+      00000Ar80r0C                  102 	sub	a, __isdigit_PARM_1+0
+      00000C 40 18                  103 	t0sn	f, c
+      00000Er16r30                  104 	goto	00110$
+                                    105 ;	../strtoul.c: 42: v = c - '0';
+      000010r80r0F                  106 	mov	a, __isdigit_PARM_1+0
+      000012 30 29                  107 	sub	a, #0x30
+      000014r44r30                  108 	goto	00111$
+      000016                        109 00110$:
+                                    110 ;	../strtoul.c: 43: else if (c >= 'a' && c <='z')
+      000016r80r0F                  111 	mov	a, __isdigit_PARM_1+0
+      000018 61 29                  112 	sub	a, #0x61
+      00001A 40 18                  113 	t0sn	f, c
+      00001Cr2Cr30                  114 	goto	00106$
+      00001E 7A 2F                  115 	mov	a, #0x7a
+      000020r80r0C                  116 	sub	a, __isdigit_PARM_1+0
+      000022 40 18                  117 	t0sn	f, c
+      000024r2Cr30                  118 	goto	00106$
+                                    119 ;	../strtoul.c: 44: v = c - 'a' + 10;
+      000026r80r0F                  120 	mov	a, __isdigit_PARM_1+0
+      000028 A9 28                  121 	add	a, #0xa9
+      00002Ar44r30                  122 	goto	00111$
+      00002C                        123 00106$:
+                                    124 ;	../strtoul.c: 45: else if (c >= 'A' && c <='Z')
+      00002Cr80r0F                  125 	mov	a, __isdigit_PARM_1+0
+      00002E 41 29                  126 	sub	a, #0x41
+      000030 40 18                  127 	t0sn	f, c
+      000032r42r30                  128 	goto	00102$
+      000034 5A 2F                  129 	mov	a, #0x5a
+      000036r80r0C                  130 	sub	a, __isdigit_PARM_1+0
+      000038 40 18                  131 	t0sn	f, c
+      00003Ar42r30                  132 	goto	00102$
+                                    133 ;	../strtoul.c: 46: v = c - 'A' + 10;
+      00003Cr80r0F                  134 	mov	a, __isdigit_PARM_1+0
+      00003E C9 28                  135 	add	a, #0xc9
+      000040r44r30                  136 	goto	00111$
+      000042                        137 00102$:
+                                    138 ;	../strtoul.c: 48: return (-1);
+      000042 FF 02                  139 	ret	#0xff
+      000044                        140 00111$:
+                                    141 ;	../strtoul.c: 50: if (v >= base)
+      000044r01r17                  142 	ceqsn	a, __isdigit_PARM_2+0
+      000046 00 00                  143 	nop
+      000048 40 18                  144 	t0sn	f, c
+      00004Ar4Er30                  145 	goto	00114$
+                                    146 ;	../strtoul.c: 51: return (-1);
+      00004C FF 02                  147 	ret	#0xff
+      00004E                        148 00114$:
+                                    149 ;	../strtoul.c: 53: return (v);
+                                    150 ;	../strtoul.c: 54: }
+      00004E 7A 00                  151 	ret
+                                    152 ;	../strtoul.c: 56: unsigned long int strtoul(const char *nptr, char **endptr, int base)
+                                    153 ;	-----------------------------------------
+                                    154 ;	 function strtoul
+                                    155 ;	-----------------------------------------
+      000050                        156 _strtoul:
+                                    157 ;	../strtoul.c: 58: const char *ptr = nptr;
+      000050r82r0F                  158 	mov	a, _strtoul_PARM_1+0
+      000052r8Cr0B                  159 	mov	_strtoul_sloc1_1_0+0, a
+      000054r83r0F                  160 	mov	a, _strtoul_PARM_1+1
+      000056r8Dr0B                  161 	mov	_strtoul_sloc1_1_0+1, a
+                                    162 ;	../strtoul.c: 60: bool range_error = false;
+      000058r0Er13                  163 	clear	_strtoul_sloc2_1_0+0
+                                    164 ;	../strtoul.c: 61: bool neg = false;
+      00005Ar0Fr13                  165 	clear	_strtoul_sloc3_1_0+0
+                                    166 ;	../strtoul.c: 63: while (isblank (*ptr))
+      00005C                        167 00101$:
+      00005Cr8Cr0F                  168 	mov	a, _strtoul_sloc1_1_0+0
+      00005Er80r0B                  169 	mov	p, a
+      000060r8Dr0F                  170 	mov	a, _strtoul_sloc1_1_0+1
+      000062r00r38                  171 	call	__gptrget
+                                    172 ;	./../../include/ctype.h: 53: return ((unsigned char)c == ' ' || (unsigned char)c == '\t');
+      000064 20 2B                  173 	cneqsn	a, #0x20
+      000066r6Cr30                  174 	goto	00140$
+      000068 09 2A                  175 	ceqsn	a, #0x09
+      00006Ar72r30                  176 	goto	00163$
+      00006C                        177 00140$:
+                                    178 ;	../strtoul.c: 64: ptr++;
+      00006Cr0Cr12                  179 	inc	_strtoul_sloc1_1_0+0
+      00006Er0Dr10                  180 	addc	_strtoul_sloc1_1_0+1
+      000070r5Cr30                  181 	goto	00101$
+      000072                        182 00163$:
+      000072r8Cr0F                  183 	mov	a, _strtoul_sloc1_1_0+0
+      000074r90r0B                  184 	mov	_strtoul_sloc4_1_0+0, a
+      000076r8Dr0F                  185 	mov	a, _strtoul_sloc1_1_0+1
+      000078r91r0B                  186 	mov	_strtoul_sloc4_1_0+1, a
+                                    187 ;	../strtoul.c: 67: switch(*ptr)
+      00007Ar8Cr0F                  188 	mov	a, _strtoul_sloc1_1_0+0
+      00007Cr80r0B                  189 	mov	p, a
+      00007Er8Dr0F                  190 	mov	a, _strtoul_sloc1_1_0+1
+      000080r00r38                  191 	call	__gptrget
+      000082 2B 2B                  192 	cneqsn	a, #0x2b
+      000084r8Er30                  193 	goto	00105$
+      000086 2D 2A                  194 	ceqsn	a, #0x2d
+      000088r92r30                  195 	goto	00106$
+                                    196 ;	../strtoul.c: 70: neg = true;
+      00008A 01 2F                  197 	mov	a, #0x01
+      00008Cr8Fr0B                  198 	mov	_strtoul_sloc3_1_0+0, a
+                                    199 ;	../strtoul.c: 71: case '+':
+      00008E                        200 00105$:
+                                    201 ;	../strtoul.c: 72: ptr++;
+      00008Er10r12                  202 	inc	_strtoul_sloc4_1_0+0
+      000090r11r10                  203 	addc	_strtoul_sloc4_1_0+1
+                                    204 ;	../strtoul.c: 73: }
+      000092                        205 00106$:
+                                    206 ;	../strtoul.c: 76: if (!base)
+      000092r86r0F                  207 	mov	a, _strtoul_PARM_3+0
+      000094r87r0E                  208 	or	a, _strtoul_PARM_3+1
+      000096 00 2A                  209 	ceqsn	a, #0x00
+      000098r04r31                  210 	goto	00119$
+                                    211 ;	../strtoul.c: 78: if (!strncmp (ptr, "0x", 2) || !strncmp (ptr, "0X", 2))
+      00009Ar00r2F                  212 	mov	a, #<(___str_0 + 0)
+      00009Cr80r0B                  213 	mov	_strncmp_PARM_2+0, a
+      00009Er00r2F                  214 	mov	a, #>(___str_0 + 0x8000 + 0)
+      0000A0r81r0B                  215 	mov	_strncmp_PARM_2+1, a
+      0000A2r90r0F                  216 	mov	a, _strtoul_sloc4_1_0+0
+      0000A4r80r0B                  217 	mov	_strncmp_PARM_1+0, a
+      0000A6r91r0F                  218 	mov	a, _strtoul_sloc4_1_0+1
+      0000A8r81r0B                  219 	mov	_strncmp_PARM_1+1, a
+      0000AA 02 2F                  220 	mov	a, #0x02
+      0000ACr80r0B                  221 	mov	_strncmp_PARM_3+0, a
+      0000AEr01r13                  222 	clear	_strncmp_PARM_3+1
+      0000B0r00r38                  223 	call	_strncmp
+      0000B2r80r0E                  224 	or	a, p
+      0000B4 00 2B                  225 	cneqsn	a, #0x00
+      0000B6rD6r30                  226 	goto	00110$
+      0000B8r06r2F                  227 	mov	a, #<(___str_1 + 0)
+      0000BAr80r0B                  228 	mov	_strncmp_PARM_2+0, a
+      0000BCr06r2F                  229 	mov	a, #>(___str_1 + 0x8000 + 0)
+      0000BEr81r0B                  230 	mov	_strncmp_PARM_2+1, a
+      0000C0r90r0F                  231 	mov	a, _strtoul_sloc4_1_0+0
+      0000C2r80r0B                  232 	mov	_strncmp_PARM_1+0, a
+      0000C4r91r0F                  233 	mov	a, _strtoul_sloc4_1_0+1
+      0000C6r81r0B                  234 	mov	_strncmp_PARM_1+1, a
+      0000C8 02 2F                  235 	mov	a, #0x02
+      0000CAr80r0B                  236 	mov	_strncmp_PARM_3+0, a
+      0000CCr01r13                  237 	clear	_strncmp_PARM_3+1
+      0000CEr00r38                  238 	call	_strncmp
+      0000D0r80r0E                  239 	or	a, p
+      0000D2 00 2A                  240 	ceqsn	a, #0x00
+      0000D4rE4r30                  241 	goto	00111$
+      0000D6                        242 00110$:
+                                    243 ;	../strtoul.c: 80: base = 16;
+      0000D6 10 2F                  244 	mov	a, #0x10
+      0000D8r86r0B                  245 	mov	_strtoul_PARM_3+0, a
+      0000DAr07r13                  246 	clear	_strtoul_PARM_3+1
+                                    247 ;	../strtoul.c: 81: ptr += 2;
+      0000DC 02 2F                  248 	mov	a, #0x02
+      0000DEr10r08                  249 	add	_strtoul_sloc4_1_0+0, a
+      0000E0r11r10                  250 	addc	_strtoul_sloc4_1_0+1
+      0000E2r52r31                  251 	goto	00120$
+      0000E4                        252 00111$:
+                                    253 ;	../strtoul.c: 83: else if (*ptr == '0')
+      0000E4r90r0F                  254 	mov	a, _strtoul_sloc4_1_0+0
+      0000E6r80r0B                  255 	mov	p, a
+      0000E8r91r0F                  256 	mov	a, _strtoul_sloc4_1_0+1
+      0000EAr00r38                  257 	call	__gptrget
+      0000EC 30 2A                  258 	ceqsn	a, #0x30
+      0000EErFCr30                  259 	goto	00108$
+                                    260 ;	../strtoul.c: 85: base = 8;
+      0000F0 08 2F                  261 	mov	a, #0x08
+      0000F2r86r0B                  262 	mov	_strtoul_PARM_3+0, a
+      0000F4r07r13                  263 	clear	_strtoul_PARM_3+1
+                                    264 ;	../strtoul.c: 86: ptr++;
+      0000F6r10r12                  265 	inc	_strtoul_sloc4_1_0+0
+      0000F8r11r10                  266 	addc	_strtoul_sloc4_1_0+1
+      0000FAr52r31                  267 	goto	00120$
+      0000FC                        268 00108$:
+                                    269 ;	../strtoul.c: 89: base = 10;
+      0000FC 0A 2F                  270 	mov	a, #0x0a
+      0000FEr86r0B                  271 	mov	_strtoul_PARM_3+0, a
+      000100r07r13                  272 	clear	_strtoul_PARM_3+1
+      000102r52r31                  273 	goto	00120$
+      000104                        274 00119$:
+                                    275 ;	../strtoul.c: 92: else if (base == 16 && (!strncmp (ptr, "0x", 2) || !strncmp (ptr, "0X", 2)))
+      000104r86r0F                  276 	mov	a, _strtoul_PARM_3+0
+      000106 10 2A                  277 	ceqsn	a, #0x10
+      000108r52r31                  278 	goto	00120$
+      00010Ar87r0F                  279 	mov	a, _strtoul_PARM_3+1
+      00010C 00 2A                  280 	ceqsn	a, #0x00
+      00010Er52r31                  281 	goto	00120$
+      000110r00r2F                  282 	mov	a, #<(___str_0 + 0)
+      000112r80r0B                  283 	mov	_strncmp_PARM_2+0, a
+      000114r00r2F                  284 	mov	a, #>(___str_0 + 0x8000 + 0)
+      000116r81r0B                  285 	mov	_strncmp_PARM_2+1, a
+      000118r90r0F                  286 	mov	a, _strtoul_sloc4_1_0+0
+      00011Ar80r0B                  287 	mov	_strncmp_PARM_1+0, a
+      00011Cr91r0F                  288 	mov	a, _strtoul_sloc4_1_0+1
+      00011Er81r0B                  289 	mov	_strncmp_PARM_1+1, a
+      000120 02 2F                  290 	mov	a, #0x02
+      000122r80r0B                  291 	mov	_strncmp_PARM_3+0, a
+      000124r01r13                  292 	clear	_strncmp_PARM_3+1
+      000126r00r38                  293 	call	_strncmp
+      000128r80r0E                  294 	or	a, p
+      00012A 00 2B                  295 	cneqsn	a, #0x00
+      00012Cr4Cr31                  296 	goto	00114$
+      00012Er06r2F                  297 	mov	a, #<(___str_1 + 0)
+      000130r80r0B                  298 	mov	_strncmp_PARM_2+0, a
+      000132r06r2F                  299 	mov	a, #>(___str_1 + 0x8000 + 0)
+      000134r81r0B                  300 	mov	_strncmp_PARM_2+1, a
+      000136r90r0F                  301 	mov	a, _strtoul_sloc4_1_0+0
+      000138r80r0B                  302 	mov	_strncmp_PARM_1+0, a
+      00013Ar91r0F                  303 	mov	a, _strtoul_sloc4_1_0+1
+      00013Cr81r0B                  304 	mov	_strncmp_PARM_1+1, a
+      00013E 02 2F                  305 	mov	a, #0x02
+      000140r80r0B                  306 	mov	_strncmp_PARM_3+0, a
+      000142r01r13                  307 	clear	_strncmp_PARM_3+1
+      000144r00r38                  308 	call	_strncmp
+      000146r80r0E                  309 	or	a, p
+      000148 00 2A                  310 	ceqsn	a, #0x00
+      00014Ar52r31                  311 	goto	00120$
+      00014C                        312 00114$:
+                                    313 ;	../strtoul.c: 93: ptr += 2;
+      00014C 02 2F                  314 	mov	a, #0x02
+      00014Er10r08                  315 	add	_strtoul_sloc4_1_0+0, a
+      000150r11r10                  316 	addc	_strtoul_sloc4_1_0+1
+      000152                        317 00120$:
+                                    318 ;	../strtoul.c: 97: if (_isdigit (*ptr, base) < 0)
+      000152r90r0F                  319 	mov	a, _strtoul_sloc4_1_0+0
+      000154r80r0B                  320 	mov	p, a
+      000156r91r0F                  321 	mov	a, _strtoul_sloc4_1_0+1
+      000158r00r38                  322 	call	__gptrget
+      00015Ar80r0B                  323 	mov	__isdigit_PARM_1+0, a
+      00015Cr86r0F                  324 	mov	a, _strtoul_PARM_3+0
+      00015Er92r0B                  325 	mov	_strtoul_sloc5_1_0+0, a
+      000160r81r0B                  326 	mov	__isdigit_PARM_2+0, a
+      000162r00r38                  327 	call	__isdigit
+      000164 80 29                  328 	sub	a, #0x80
+      000166 40 18                  329 	t0sn	f, c
+      000168rAAr31                  330 	goto	00124$
+                                    331 ;	../strtoul.c: 99: if (endptr)
+      00016Ar84r0F                  332 	mov	a, _strtoul_PARM_2+0
+      00016Cr85r0E                  333 	or	a, _strtoul_PARM_2+1
+      00016E 00 2B                  334 	cneqsn	a, #0x00
+      000170r88r31                  335 	goto	00122$
+                                    336 ;	../strtoul.c: 100: *endptr = (char*)nptr;
+      000172r84r0F                  337 	mov	a, _strtoul_PARM_2+0
+      000174r93r0B                  338 	mov	_strtoul_sloc6_1_0+0, a
+      000176r85r0F                  339 	mov	a, _strtoul_PARM_2+1
+      000178r94r0B                  340 	mov	_strtoul_sloc6_1_0+1, a
+      00017Ar93r0F                  341 	mov	a, _strtoul_sloc6_1_0+0
+      00017Cr80r0B                  342 	mov	p, a
+      00017Er82r0F                  343 	mov	a, _strtoul_PARM_1+0
+      000180r80r03                  344 	idxm	p, a
+      000182r00r12                  345 	inc	p
+      000184r83r0F                  346 	mov	a, _strtoul_PARM_1+1
+      000186r80r03                  347 	idxm	p, a
+      000188                        348 00122$:
+                                    349 ;	../strtoul.c: 101: return (0);
+      000188 C2 01                  350 	mov	a, sp
+      00018A FC 28                  351 	add	a, #0xfc
+      00018Cr80r0B                  352 	mov	p, a
+      00018Er81r03                  353 	idxm	a, p
+      000190r80r0B                  354 	mov	p, a
+      000192 00 2F                  355 	mov	a, #0x00
+      000194r80r03                  356 	idxm	p, a
+      000196r00r12                  357 	inc	p
+      000198 00 2F                  358 	mov	a, #0x00
+      00019Ar80r03                  359 	idxm	p, a
+      00019Cr00r12                  360 	inc	p
+      00019E 00 2F                  361 	mov	a, #0x00
+      0001A0r80r03                  362 	idxm	p, a
+      0001A2r00r12                  363 	inc	p
+      0001A4 00 2F                  364 	mov	a, #0x00
+      0001A6r80r03                  365 	idxm	p, a
+      0001A8 7A 00                  366 	ret
+      0001AA                        367 00124$:
+                                    368 ;	../strtoul.c: 104: for (ret = 0;; ptr++)
+      0001AAr15r13                  369 	clear	_strtoul_sloc7_1_0+0
+      0001ACr16r13                  370 	clear	_strtoul_sloc7_1_0+1
+      0001AEr17r13                  371 	clear	_strtoul_sloc7_1_0+2
+      0001B0r18r13                  372 	clear	_strtoul_sloc7_1_0+3
+      0001B2r90r0F                  373 	mov	a, _strtoul_sloc4_1_0+0
+      0001B4r99r0B                  374 	mov	_strtoul_sloc8_1_0+0, a
+      0001B6r91r0F                  375 	mov	a, _strtoul_sloc4_1_0+1
+      0001B8r9Ar0B                  376 	mov	_strtoul_sloc8_1_0+1, a
+      0001BA                        377 00135$:
+                                    378 ;	../strtoul.c: 107: signed char digit = _isdigit (*ptr, base);
+      0001BAr99r0F                  379 	mov	a, _strtoul_sloc8_1_0+0
+      0001BCr80r0B                  380 	mov	p, a
+      0001BEr9Ar0F                  381 	mov	a, _strtoul_sloc8_1_0+1
+      0001C0r00r38                  382 	call	__gptrget
+      0001C2r80r0B                  383 	mov	__isdigit_PARM_1+0, a
+      0001C4r92r0F                  384 	mov	a, _strtoul_sloc5_1_0+0
+      0001C6r81r0B                  385 	mov	__isdigit_PARM_2+0, a
+      0001C8r00r38                  386 	call	__isdigit
+                                    387 ;	../strtoul.c: 109: if (digit < 0)
+      0001CAr9Br0B                  388 	mov	_strtoul_sloc9_1_0+0, a
+      0001CC 80 2A                  389 	ceqsn	a, #0x80
+      0001CE 40 1A                  390 	t1sn	f, c
+      0001D0r56r32                  391 	goto	00129$
+                                    392 ;	../strtoul.c: 112: oldret = ret;
+      0001D2r95r0F                  393 	mov	a, _strtoul_sloc7_1_0+0
+      0001D4r9Cr0B                  394 	mov	_strtoul_sloc10_1_0+0, a
+      0001D6r96r0F                  395 	mov	a, _strtoul_sloc7_1_0+1
+      0001D8r9Dr0B                  396 	mov	_strtoul_sloc10_1_0+1, a
+      0001DAr97r0F                  397 	mov	a, _strtoul_sloc7_1_0+2
+      0001DCr9Er0B                  398 	mov	_strtoul_sloc10_1_0+2, a
+      0001DEr98r0F                  399 	mov	a, _strtoul_sloc7_1_0+3
+      0001E0r9Fr0B                  400 	mov	_strtoul_sloc10_1_0+3, a
+                                    401 ;	../strtoul.c: 113: ret *= base;
+      0001E2r86r0F                  402 	mov	a, _strtoul_PARM_3+0
+      0001E4r80r0B                  403 	mov	__mullong_PARM_2+0, a
+      0001E6r87r0F                  404 	mov	a, _strtoul_PARM_3+1
+      0001E8r81r0B                  405 	mov	__mullong_PARM_2+1, a
+      0001EA 6B 00                  406 	sl	a
+      0001EC 00 2F                  407 	mov	a, #0x00
+      0001EE 61 00                  408 	subc	a
+      0001F0r82r0B                  409 	mov	__mullong_PARM_2+2, a
+      0001F2r83r0B                  410 	mov	__mullong_PARM_2+3, a
+      0001F4r95r0F                  411 	mov	a, _strtoul_sloc7_1_0+0
+      0001F6r80r0B                  412 	mov	__mullong_PARM_1+0, a
+      0001F8r96r0F                  413 	mov	a, _strtoul_sloc7_1_0+1
+      0001FAr81r0B                  414 	mov	__mullong_PARM_1+1, a
+      0001FCr97r0F                  415 	mov	a, _strtoul_sloc7_1_0+2
+      0001FEr82r0B                  416 	mov	__mullong_PARM_1+2, a
+      000200r98r0F                  417 	mov	a, _strtoul_sloc7_1_0+3
+      000202r83r0B                  418 	mov	__mullong_PARM_1+3, a
+      000204r08r2F                  419 	mov	a, #_strtoul_sloc0_1_0
+      000206 72 00                  420 	push	af
+      000208r00r38                  421 	call	__mullong
+      00020A C2 01                  422 	mov	a, sp
+      00020C FE 28                  423 	add	a, #-2
+      00020E 82 01                  424 	mov	sp, a
+      000210r88r0F                  425 	mov	a, _strtoul_sloc0_1_0+0
+      000212rA0r0B                  426 	mov	_strtoul_sloc11_1_0+0, a
+      000214r89r0F                  427 	mov	a, _strtoul_sloc0_1_0+1
+      000216rA1r0B                  428 	mov	_strtoul_sloc11_1_0+1, a
+      000218r8Ar0F                  429 	mov	a, _strtoul_sloc0_1_0+2
+      00021ArA2r0B                  430 	mov	_strtoul_sloc11_1_0+2, a
+      00021Cr8Br0F                  431 	mov	a, _strtoul_sloc0_1_0+3
+      00021ErA3r0B                  432 	mov	_strtoul_sloc11_1_0+3, a
+                                    433 ;	../strtoul.c: 114: if (ret < oldret)
+      000220rA0r0F                  434 	mov	a, _strtoul_sloc11_1_0+0
+      000222r9Cr0C                  435 	sub	a, _strtoul_sloc10_1_0+0
+      000224rA1r0F                  436 	mov	a, _strtoul_sloc11_1_0+1
+      000226r9Dr0D                  437 	subc	a, _strtoul_sloc10_1_0+1
+      000228rA2r0F                  438 	mov	a, _strtoul_sloc11_1_0+2
+      00022Ar9Er0D                  439 	subc	a, _strtoul_sloc10_1_0+2
+      00022CrA3r0F                  440 	mov	a, _strtoul_sloc11_1_0+3
+      00022Er9Fr0D                  441 	subc	a, _strtoul_sloc10_1_0+3
+      000230 40 1A                  442 	t1sn	f, c
+      000232r38r32                  443 	goto	00128$
+                                    444 ;	../strtoul.c: 115: range_error = true;
+      000234 01 2F                  445 	mov	a, #0x01
+      000236r8Er0B                  446 	mov	_strtoul_sloc2_1_0+0, a
+      000238                        447 00128$:
+                                    448 ;	../strtoul.c: 117: ret += (unsigned char)digit;
+      000238r9Br0F                  449 	mov	a, _strtoul_sloc9_1_0+0
+      00023Ar20r0C                  450 	add	a, _strtoul_sloc11_1_0+0
+      00023Cr95r0B                  451 	mov	_strtoul_sloc7_1_0+0, a
+      00023E 00 2F                  452 	mov	a, #0x00
+      000240r21r0D                  453 	addc	a, _strtoul_sloc11_1_0+1
+      000242r96r0B                  454 	mov	_strtoul_sloc7_1_0+1, a
+      000244 00 2F                  455 	mov	a, #0x00
+      000246r22r0D                  456 	addc	a, _strtoul_sloc11_1_0+2
+      000248r97r0B                  457 	mov	_strtoul_sloc7_1_0+2, a
+      00024A 00 2F                  458 	mov	a, #0x00
+      00024Cr23r0D                  459 	addc	a, _strtoul_sloc11_1_0+3
+      00024Er98r0B                  460 	mov	_strtoul_sloc7_1_0+3, a
+                                    461 ;	../strtoul.c: 104: for (ret = 0;; ptr++)
+      000250r19r12                  462 	inc	_strtoul_sloc8_1_0+0
+      000252r1Ar10                  463 	addc	_strtoul_sloc8_1_0+1
+      000254rBAr31                  464 	goto	00135$
+      000256                        465 00129$:
+                                    466 ;	../strtoul.c: 120: if (endptr)
+      000256r84r0F                  467 	mov	a, _strtoul_PARM_2+0
+      000258r85r0E                  468 	or	a, _strtoul_PARM_2+1
+      00025A 00 2B                  469 	cneqsn	a, #0x00
+      00025Cr74r32                  470 	goto	00131$
+                                    471 ;	../strtoul.c: 121: *endptr = (char*)ptr;
+      00025Er84r0F                  472 	mov	a, _strtoul_PARM_2+0
+      000260rA4r0B                  473 	mov	_strtoul_sloc12_1_0+0, a
+      000262r85r0F                  474 	mov	a, _strtoul_PARM_2+1
+      000264rA5r0B                  475 	mov	_strtoul_sloc12_1_0+1, a
+      000266rA4r0F                  476 	mov	a, _strtoul_sloc12_1_0+0
+      000268r80r0B                  477 	mov	p, a
+      00026Ar99r0F                  478 	mov	a, _strtoul_sloc8_1_0+0
+      00026Cr80r03                  479 	idxm	p, a
+      00026Er00r12                  480 	inc	p
+      000270r9Ar0F                  481 	mov	a, _strtoul_sloc8_1_0+1
+      000272r80r03                  482 	idxm	p, a
+      000274                        483 00131$:
+                                    484 ;	../strtoul.c: 123: if (range_error)
+      000274r8Er0F                  485 	mov	a, _strtoul_sloc2_1_0+0
+      000276 00 2B                  486 	cneqsn	a, #0x00
+      000278rA2r32                  487 	goto	00133$
+                                    488 ;	../strtoul.c: 125: errno = ERANGE;
+      00027A 22 2F                  489 	mov	a, #0x22
+      00027Cr80r0B                  490 	mov	_errno+0, a
+      00027Er01r13                  491 	clear	_errno+1
+                                    492 ;	../strtoul.c: 126: return (ULONG_MAX);
+      000280 C2 01                  493 	mov	a, sp
+      000282 FC 28                  494 	add	a, #0xfc
+      000284r80r0B                  495 	mov	p, a
+      000286r81r03                  496 	idxm	a, p
+      000288r80r0B                  497 	mov	p, a
+      00028A FF 2F                  498 	mov	a, #0xff
+      00028Cr80r03                  499 	idxm	p, a
+      00028Er00r12                  500 	inc	p
+      000290 FF 2F                  501 	mov	a, #0xff
+      000292r80r03                  502 	idxm	p, a
+      000294r00r12                  503 	inc	p
+      000296 FF 2F                  504 	mov	a, #0xff
+      000298r80r03                  505 	idxm	p, a
+      00029Ar00r12                  506 	inc	p
+      00029C FF 2F                  507 	mov	a, #0xff
+      00029Er80r03                  508 	idxm	p, a
+      0002A0 7A 00                  509 	ret
+      0002A2                        510 00133$:
+                                    511 ;	../strtoul.c: 129: return (neg ? -ret : ret);
+      0002A2r8Fr0F                  512 	mov	a, _strtoul_sloc3_1_0+0
+      0002A4 00 2B                  513 	cneqsn	a, #0x00
+      0002A6rC2r32                  514 	goto	00142$
+      0002A8 00 2F                  515 	mov	a, #0x00
+      0002AAr95r0C                  516 	sub	a, _strtoul_sloc7_1_0+0
+      0002ACrA6r0B                  517 	mov	_strtoul_sloc13_1_0+0, a
+      0002AE 00 2F                  518 	mov	a, #0x00
+      0002B0r96r0D                  519 	subc	a, _strtoul_sloc7_1_0+1
+      0002B2rA7r0B                  520 	mov	_strtoul_sloc13_1_0+1, a
+      0002B4 00 2F                  521 	mov	a, #0x00
+      0002B6r97r0D                  522 	subc	a, _strtoul_sloc7_1_0+2
+      0002B8rA8r0B                  523 	mov	_strtoul_sloc13_1_0+2, a
+      0002BA 00 2F                  524 	mov	a, #0x00
+      0002BCr98r0D                  525 	subc	a, _strtoul_sloc7_1_0+3
+      0002BErA9r0B                  526 	mov	_strtoul_sloc13_1_0+3, a
+      0002C0rD2r32                  527 	goto	00143$
+      0002C2                        528 00142$:
+      0002C2r95r0F                  529 	mov	a, _strtoul_sloc7_1_0+0
+      0002C4rA6r0B                  530 	mov	_strtoul_sloc13_1_0+0, a
+      0002C6r96r0F                  531 	mov	a, _strtoul_sloc7_1_0+1
+      0002C8rA7r0B                  532 	mov	_strtoul_sloc13_1_0+1, a
+      0002CAr97r0F                  533 	mov	a, _strtoul_sloc7_1_0+2
+      0002CCrA8r0B                  534 	mov	_strtoul_sloc13_1_0+2, a
+      0002CEr98r0F                  535 	mov	a, _strtoul_sloc7_1_0+3
+      0002D0rA9r0B                  536 	mov	_strtoul_sloc13_1_0+3, a
+      0002D2                        537 00143$:
+      0002D2 C2 01                  538 	mov	a, sp
+      0002D4 FC 28                  539 	add	a, #0xfc
+      0002D6r80r0B                  540 	mov	p, a
+      0002D8r81r03                  541 	idxm	a, p
+      0002DAr80r0B                  542 	mov	p, a
+      0002DCrA6r0F                  543 	mov	a, _strtoul_sloc13_1_0+0
+      0002DEr80r03                  544 	idxm	p, a
+      0002E0r00r12                  545 	inc	p
+      0002E2rA7r0F                  546 	mov	a, _strtoul_sloc13_1_0+1
+      0002E4r80r03                  547 	idxm	p, a
+      0002E6r00r12                  548 	inc	p
+      0002E8rA8r0F                  549 	mov	a, _strtoul_sloc13_1_0+2
+      0002EAr80r03                  550 	idxm	p, a
+      0002ECr00r12                  551 	inc	p
+      0002EErA9r0F                  552 	mov	a, _strtoul_sloc13_1_0+3
+      0002F0r80r03                  553 	idxm	p, a
+                                    554 ;	../strtoul.c: 130: }
+      0002F2 7A 00                  555 	ret
+                                    556 	.area CODE
+                                    557 	.area CONST
+                                    558 	.area CONST
+      000000                        559 ___str_0:
+      000000 30 02                  560 	ret #0x30	; 0
+      000002 78 02                  561 	ret #0x78	; x
+      000004 00 02                  562 	ret #0x00
+                                    563 	.area CODE
+                                    564 	.area CONST
+      000006                        565 ___str_1:
+      000006 30 02                  566 	ret #0x30	; 0
+      000008 58 02                  567 	ret #0x58	; X
+      00000A 00 02                  568 	ret #0x00
+                                    569 	.area CODE
+                                    570 	.area CABS (ABS)

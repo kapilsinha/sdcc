@@ -1,0 +1,98 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module toupper
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _toupper_PARM_1
+                                     17 	.globl _toupper
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _toupper_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _toupper_sloc0_1_0:
+      000000                         34 	.ds 2
+      000002                         35 _toupper_sloc1_1_0:
+      000002                         36 	.ds 2
+                                     37 ;--------------------------------------------------------
+                                     38 ; absolute external ram data
+                                     39 ;--------------------------------------------------------
+                                     40 	.area DABS (ABS)
+                                     41 ;--------------------------------------------------------
+                                     42 ; global & static initialisations
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area GSINIT
+                                     46 	.area GSFINAL
+                                     47 	.area GSINIT
+                                     48 ;--------------------------------------------------------
+                                     49 ; Home
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+                                     52 	.area HOME
+                                     53 ;--------------------------------------------------------
+                                     54 ; code
+                                     55 ;--------------------------------------------------------
+                                     56 	.area CODE
+                                     57 ;	../toupper.c: 33: int toupper (int c)
+                                     58 ;	-----------------------------------------
+                                     59 ;	 function toupper
+                                     60 ;	-----------------------------------------
+      000000                         61 _toupper:
+                                     62 ;	../toupper.c: 35: return (islower (c) ? c + ('A' - 'a') : c);
+      000000r80r0F                   63 	mov	a, _toupper_PARM_1+0
+      000002r80r0B                   64 	mov	_toupper_sloc0_1_0+0, a
+      000004r81r0F                   65 	mov	a, _toupper_PARM_1+1
+      000006r81r0B                   66 	mov	_toupper_sloc0_1_0+1, a
+                                     67 ;	./../../include/ctype.h: 71: return ((unsigned char)c >= 'a' && (unsigned char)c <= 'z');
+      000008r80r0F                   68 	mov	a, _toupper_sloc0_1_0+0
+      00000A 61 2A                   69 	ceqsn	a, #0x61
+      00000C 00 00                   70 	nop
+      00000E 40 18                   71 	t0sn	f, c
+      000010r28r30                   72 	goto	00104$
+      000012 7B 2A                   73 	ceqsn	a, #0x7b
+      000014 40 1A                   74 	t1sn	f, c
+      000016r28r30                   75 	goto	00104$
+                                     76 ;	../toupper.c: 35: return (islower (c) ? c + ('A' - 'a') : c);
+      000018r80r0F                   77 	mov	a, _toupper_sloc0_1_0+0
+      00001A E0 28                   78 	add	a, #0xe0
+      00001Cr82r0B                   79 	mov	_toupper_sloc1_1_0+0, a
+      00001Er81r0F                   80 	mov	a, _toupper_sloc0_1_0+1
+      000020 60 00                   81 	addc	a
+      000022 FF 28                   82 	add	a, #0xff
+      000024r83r0B                   83 	mov	_toupper_sloc1_1_0+1, a
+      000026r30r30                   84 	goto	00105$
+      000028                         85 00104$:
+      000028r80r0F                   86 	mov	a, _toupper_sloc0_1_0+0
+      00002Ar82r0B                   87 	mov	_toupper_sloc1_1_0+0, a
+      00002Cr81r0F                   88 	mov	a, _toupper_sloc0_1_0+1
+      00002Er83r0B                   89 	mov	_toupper_sloc1_1_0+1, a
+      000030                         90 00105$:
+      000030r83r0F                   91 	mov	a, _toupper_sloc1_1_0+1
+      000032r80r0B                   92 	mov	p, a
+      000034r82r0F                   93 	mov	a, _toupper_sloc1_1_0+0
+                                     94 ;	../toupper.c: 36: }
+      000036 7A 00                   95 	ret
+                                     96 	.area CODE
+                                     97 	.area CONST
+                                     98 	.area CABS (ABS)

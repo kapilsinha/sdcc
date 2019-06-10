@@ -1,0 +1,149 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _rlslonglong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __rlslonglong_PARM_2
+                                     17 	.globl __rlslonglong_PARM_1
+                                     18 	.globl __rlslonglong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __rlslonglong_PARM_1:
+      000000                         29 	.ds 8
+      000008                         30 __rlslonglong_PARM_2:
+      000008                         31 	.ds 1
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __rlslonglong_sloc0_1_0:
+      000000                         37 	.ds 8
+      000008                         38 __rlslonglong_sloc1_1_0:
+      000008                         39 	.ds 1
+      000009                         40 __rlslonglong_sloc2_1_0:
+      000009                         41 	.ds 8
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area DABS (ABS)
+                                     46 ;--------------------------------------------------------
+                                     47 ; global & static initialisations
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area GSINIT
+                                     51 	.area GSFINAL
+                                     52 	.area GSINIT
+                                     53 ;--------------------------------------------------------
+                                     54 ; Home
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area HOME
+                                     58 ;--------------------------------------------------------
+                                     59 ; code
+                                     60 ;--------------------------------------------------------
+                                     61 	.area CODE
+                                     62 ;	../_rlslonglong.c: 35: long long _rlslonglong(long long l, char s)
+                                     63 ;	-----------------------------------------
+                                     64 ;	 function _rlslonglong
+                                     65 ;	-----------------------------------------
+      000000                         66 __rlslonglong:
+                                     67 ;	../_rlslonglong.c: 37: return((unsigned long long)(l) << s);
+      000000r80r0F                   68 	mov	a, __rlslonglong_PARM_1+0
+      000002r80r0B                   69 	mov	__rlslonglong_sloc0_1_0+0, a
+      000004r81r0F                   70 	mov	a, __rlslonglong_PARM_1+1
+      000006r81r0B                   71 	mov	__rlslonglong_sloc0_1_0+1, a
+      000008r82r0F                   72 	mov	a, __rlslonglong_PARM_1+2
+      00000Ar82r0B                   73 	mov	__rlslonglong_sloc0_1_0+2, a
+      00000Cr83r0F                   74 	mov	a, __rlslonglong_PARM_1+3
+      00000Er83r0B                   75 	mov	__rlslonglong_sloc0_1_0+3, a
+      000010r84r0F                   76 	mov	a, __rlslonglong_PARM_1+4
+      000012r84r0B                   77 	mov	__rlslonglong_sloc0_1_0+4, a
+      000014r85r0F                   78 	mov	a, __rlslonglong_PARM_1+5
+      000016r85r0B                   79 	mov	__rlslonglong_sloc0_1_0+5, a
+      000018r86r0F                   80 	mov	a, __rlslonglong_PARM_1+6
+      00001Ar86r0B                   81 	mov	__rlslonglong_sloc0_1_0+6, a
+      00001Cr87r0F                   82 	mov	a, __rlslonglong_PARM_1+7
+      00001Er87r0B                   83 	mov	__rlslonglong_sloc0_1_0+7, a
+      000020r88r0F                   84 	mov	a, __rlslonglong_PARM_2+0
+      000022r88r0B                   85 	mov	__rlslonglong_sloc1_1_0+0, a
+      000024r80r0F                   86 	mov	a, __rlslonglong_sloc0_1_0+0
+      000026r89r0B                   87 	mov	__rlslonglong_sloc2_1_0+0, a
+      000028r81r0F                   88 	mov	a, __rlslonglong_sloc0_1_0+1
+      00002Ar8Ar0B                   89 	mov	__rlslonglong_sloc2_1_0+1, a
+      00002Cr82r0F                   90 	mov	a, __rlslonglong_sloc0_1_0+2
+      00002Er8Br0B                   91 	mov	__rlslonglong_sloc2_1_0+2, a
+      000030r83r0F                   92 	mov	a, __rlslonglong_sloc0_1_0+3
+      000032r8Cr0B                   93 	mov	__rlslonglong_sloc2_1_0+3, a
+      000034r84r0F                   94 	mov	a, __rlslonglong_sloc0_1_0+4
+      000036r8Dr0B                   95 	mov	__rlslonglong_sloc2_1_0+4, a
+      000038r85r0F                   96 	mov	a, __rlslonglong_sloc0_1_0+5
+      00003Ar8Er0B                   97 	mov	__rlslonglong_sloc2_1_0+5, a
+      00003Cr86r0F                   98 	mov	a, __rlslonglong_sloc0_1_0+6
+      00003Er8Fr0B                   99 	mov	__rlslonglong_sloc2_1_0+6, a
+      000040r87r0F                  100 	mov	a, __rlslonglong_sloc0_1_0+7
+      000042r90r0B                  101 	mov	__rlslonglong_sloc2_1_0+7, a
+      000044r88r0F                  102 	mov	a, __rlslonglong_sloc1_1_0+0
+      000046                        103 00103$:
+      000046 01 29                  104 	sub	a, #1
+      000048 40 18                  105 	t0sn	f, c
+      00004Ar5Er30                  106 	goto	00104$
+      00004Cr89r15                  107 	sl	__rlslonglong_sloc2_1_0+0
+      00004Er8Ar16                  108 	slc	__rlslonglong_sloc2_1_0+1
+      000050r8Br16                  109 	slc	__rlslonglong_sloc2_1_0+2
+      000052r8Cr16                  110 	slc	__rlslonglong_sloc2_1_0+3
+      000054r8Dr16                  111 	slc	__rlslonglong_sloc2_1_0+4
+      000056r8Er16                  112 	slc	__rlslonglong_sloc2_1_0+5
+      000058r8Fr16                  113 	slc	__rlslonglong_sloc2_1_0+6
+      00005Ar90r16                  114 	slc	__rlslonglong_sloc2_1_0+7
+      00005Cr46r30                  115 	goto	00103$
+      00005E                        116 00104$:
+      00005E C2 01                  117 	mov	a, sp
+      000060 FC 28                  118 	add	a, #0xfc
+      000062r80r0B                  119 	mov	p, a
+      000064r81r03                  120 	idxm	a, p
+      000066r80r0B                  121 	mov	p, a
+      000068r89r0F                  122 	mov	a, __rlslonglong_sloc2_1_0+0
+      00006Ar80r03                  123 	idxm	p, a
+      00006Cr00r12                  124 	inc	p
+      00006Er8Ar0F                  125 	mov	a, __rlslonglong_sloc2_1_0+1
+      000070r80r03                  126 	idxm	p, a
+      000072r00r12                  127 	inc	p
+      000074r8Br0F                  128 	mov	a, __rlslonglong_sloc2_1_0+2
+      000076r80r03                  129 	idxm	p, a
+      000078r00r12                  130 	inc	p
+      00007Ar8Cr0F                  131 	mov	a, __rlslonglong_sloc2_1_0+3
+      00007Cr80r03                  132 	idxm	p, a
+      00007Er00r12                  133 	inc	p
+      000080r8Dr0F                  134 	mov	a, __rlslonglong_sloc2_1_0+4
+      000082r80r03                  135 	idxm	p, a
+      000084r00r12                  136 	inc	p
+      000086r8Er0F                  137 	mov	a, __rlslonglong_sloc2_1_0+5
+      000088r80r03                  138 	idxm	p, a
+      00008Ar00r12                  139 	inc	p
+      00008Cr8Fr0F                  140 	mov	a, __rlslonglong_sloc2_1_0+6
+      00008Er80r03                  141 	idxm	p, a
+      000090r00r12                  142 	inc	p
+      000092r90r0F                  143 	mov	a, __rlslonglong_sloc2_1_0+7
+      000094r80r03                  144 	idxm	p, a
+                                    145 ;	../_rlslonglong.c: 38: }
+      000096 7A 00                  146 	ret
+                                    147 	.area CODE
+                                    148 	.area CONST
+                                    149 	.area CABS (ABS)

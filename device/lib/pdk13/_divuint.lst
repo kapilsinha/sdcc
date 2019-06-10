@@ -1,0 +1,122 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divuint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divuint_PARM_2
+                                     17 	.globl __divuint_PARM_1
+                                     18 	.globl __divuint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divuint_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 __divuint_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __divuint_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 __divuint_sloc1_1_0:
+      000002                         39 	.ds 1
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_divuint.c: 155: _divuint (unsigned int x, unsigned int y)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function _divuint
+                                     63 ;	-----------------------------------------
+      000000                         64 __divuint:
+                                     65 ;	../_divuint.c: 157: unsigned int reste = 0;
+      000000r00r13                   66 	clear	__divuint_sloc0_1_0+0
+      000002r01r13                   67 	clear	__divuint_sloc0_1_0+1
+                                     68 ;	../_divuint.c: 158: unsigned char count = 16;
+      000004 10 2F                   69 	mov	a, #0x10
+      000006r82r0B                   70 	mov	__divuint_sloc1_1_0+0, a
+                                     71 ;	../_divuint.c: 161: do
+      000008                         72 00105$:
+                                     73 ;	../_divuint.c: 164: c = MSB_SET(x);
+      000008r00r13                   74 	clear	p
+      00000Ar81r0F                   75 	mov	a, __divuint_PARM_1+1
+      00000C 6B 00                   76 	sl	a
+      00000E 00 2F                   77 	mov	a, #0x00
+      000010 6D 00                   78 	slc	a
+                                     79 ;	../_divuint.c: 165: x <<= 1;
+      000012r80r15                   80 	sl	__divuint_PARM_1+0
+      000014r81r16                   81 	slc	__divuint_PARM_1+1
+                                     82 ;	../_divuint.c: 166: reste <<= 1;
+      000016r80r15                   83 	sl	__divuint_sloc0_1_0+0
+      000018r81r16                   84 	slc	__divuint_sloc0_1_0+1
+                                     85 ;	../_divuint.c: 167: if (c)
+      00001A 00 2B                   86 	cneqsn	a, #0x00
+      00001Cr22r30                   87 	goto	00102$
+                                     88 ;	../_divuint.c: 168: reste |= 1;
+      00001E 01 2F                   89 	mov	a, #0x01
+      000020r80r0A                   90 	or	__divuint_sloc0_1_0+0, a
+      000022                         91 00102$:
+                                     92 ;	../_divuint.c: 170: if (reste >= y)
+      000022r80r0F                   93 	mov	a, __divuint_sloc0_1_0+0
+      000024r82r0C                   94 	sub	a, __divuint_PARM_2+0
+      000026r81r0F                   95 	mov	a, __divuint_sloc0_1_0+1
+      000028r83r0D                   96 	subc	a, __divuint_PARM_2+1
+      00002A 40 18                   97 	t0sn	f, c
+      00002Cr3Ar30                   98 	goto	00106$
+                                     99 ;	../_divuint.c: 172: reste -= y;
+      00002Er82r0F                  100 	mov	a, __divuint_PARM_2+0
+      000030r80r08                  101 	sub	__divuint_sloc0_1_0+0, a
+      000032r83r0F                  102 	mov	a, __divuint_PARM_2+1
+      000034r81r09                  103 	subc	__divuint_sloc0_1_0+1, a
+                                    104 ;	../_divuint.c: 174: x |= 1;
+      000036 01 2F                  105 	mov	a, #0x01
+      000038r80r0A                  106 	or	__divuint_PARM_1+0, a
+      00003A                        107 00106$:
+                                    108 ;	../_divuint.c: 177: while (--count);
+      00003Ar82r0F                  109 	mov	a, __divuint_sloc1_1_0+0
+      00003C 01 29                  110 	sub	a, #0x01
+      00003Er82r0B                  111 	mov	__divuint_sloc1_1_0+0, a
+      000040 00 2A                  112 	ceqsn	a, #0x00
+      000042r08r30                  113 	goto	00105$
+                                    114 ;	../_divuint.c: 178: return x;
+      000044r81r0F                  115 	mov	a, __divuint_PARM_1+1
+      000046r80r0B                  116 	mov	p, a
+      000048r80r0F                  117 	mov	a, __divuint_PARM_1+0
+                                    118 ;	../_divuint.c: 179: }
+      00004A 7A 00                  119 	ret
+                                    120 	.area CODE
+                                    121 	.area CONST
+                                    122 	.area CABS (ABS)

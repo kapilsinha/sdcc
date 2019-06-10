@@ -1,0 +1,975 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module asincosf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _asincosf
+                                     17 	.globl _ldexpf
+                                     18 	.globl _fabsf
+                                     19 	.globl _sqrtf
+                                     20 	.globl _asincosf_PARM_2
+                                     21 	.globl _asincosf_PARM_1
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _asincosf_PARM_1:
+      000000                         32 	.ds 4
+      000004                         33 _asincosf_PARM_2:
+      000004                         34 	.ds 1
+      000005                         35 _asincosf_sloc0_1_0:
+      000005                         36 	.ds 4
+      000009                         37 _asincosf_sloc1_1_0:
+      000009                         38 	.ds 4
+      00000D                         39 _asincosf_sloc2_1_0:
+      00000D                         40 	.ds 4
+      000011                         41 _asincosf_sloc3_1_0:
+      000011                         42 	.ds 4
+      000015                         43 _asincosf_sloc4_1_0:
+      000015                         44 	.ds 4
+      000019                         45 _asincosf_sloc5_1_0:
+      000019                         46 	.ds 4
+      00001D                         47 _asincosf_sloc6_1_0:
+      00001D                         48 	.ds 4
+      000021                         49 _asincosf_sloc7_1_0:
+      000021                         50 	.ds 4
+      000025                         51 _asincosf_sloc8_1_0:
+      000025                         52 	.ds 4
+      000029                         53 _asincosf_sloc9_1_0:
+      000029                         54 	.ds 4
+      00002D                         55 _asincosf_sloc10_1_0:
+      00002D                         56 	.ds 4
+      000031                         57 _asincosf_sloc11_1_0:
+      000031                         58 	.ds 4
+      000035                         59 _asincosf_sloc12_1_0:
+      000035                         60 	.ds 4
+      000039                         61 _asincosf_sloc13_1_0:
+      000039                         62 	.ds 4
+      00003D                         63 _asincosf_sloc14_1_0:
+      00003D                         64 	.ds 4
+      000041                         65 _asincosf_sloc15_1_0:
+      000041                         66 	.ds 4
+      000045                         67 _asincosf_sloc16_1_0:
+      000045                         68 	.ds 4
+      000049                         69 _asincosf_sloc17_1_0:
+      000049                         70 	.ds 4
+      00004D                         71 _asincosf_sloc18_1_0:
+      00004D                         72 	.ds 4
+      000051                         73 _asincosf_sloc19_1_0:
+      000051                         74 	.ds 4
+      000055                         75 _asincosf_sloc20_1_0:
+      000055                         76 	.ds 4
+      000059                         77 _asincosf_sloc21_1_0:
+      000059                         78 	.ds 1
+      00005A                         79 _asincosf_sloc22_1_0:
+      00005A                         80 	.ds 4
+      00005E                         81 _asincosf_sloc23_1_0:
+      00005E                         82 	.ds 4
+      000062                         83 _asincosf_sloc24_1_0:
+      000062                         84 	.ds 4
+      000066                         85 _asincosf_sloc25_1_0:
+      000066                         86 	.ds 4
+      00006A                         87 _asincosf_sloc26_1_0:
+      00006A                         88 	.ds 1
+      00006B                         89 _asincosf_sloc27_1_0:
+      00006B                         90 	.ds 2
+      00006D                         91 _asincosf_sloc28_1_0:
+      00006D                         92 	.ds 4
+      000071                         93 _asincosf_sloc29_1_0:
+      000071                         94 	.ds 4
+      000075                         95 _asincosf_sloc30_1_0:
+      000075                         96 	.ds 2
+      000077                         97 _asincosf_sloc31_1_0:
+      000077                         98 	.ds 4
+      00007B                         99 _asincosf_sloc32_1_0:
+      00007B                        100 	.ds 2
+      00007D                        101 _asincosf_sloc33_1_0:
+      00007D                        102 	.ds 4
+                                    103 ;--------------------------------------------------------
+                                    104 ; overlayable items in ram 
+                                    105 ;--------------------------------------------------------
+                                    106 ;--------------------------------------------------------
+                                    107 ; absolute external ram data
+                                    108 ;--------------------------------------------------------
+                                    109 	.area DABS (ABS)
+                                    110 ;--------------------------------------------------------
+                                    111 ; global & static initialisations
+                                    112 ;--------------------------------------------------------
+                                    113 	.area HOME
+                                    114 	.area GSINIT
+                                    115 	.area GSFINAL
+                                    116 	.area GSINIT
+                                    117 ;--------------------------------------------------------
+                                    118 ; Home
+                                    119 ;--------------------------------------------------------
+                                    120 	.area HOME
+                                    121 	.area HOME
+                                    122 ;--------------------------------------------------------
+                                    123 ; code
+                                    124 ;--------------------------------------------------------
+                                    125 	.area CODE
+                                    126 ;	../asincosf.c: 47: float asincosf(float x, bool isacos)
+                                    127 ;	-----------------------------------------
+                                    128 ;	 function asincosf
+                                    129 ;	-----------------------------------------
+      000000                        130 _asincosf:
+                                    131 ;	../asincosf.c: 51: bool quartPI = isacos;
+      000000r84r0F                  132 	mov	a, _asincosf_PARM_2+0
+      000002rD9r0B                  133 	mov	_asincosf_sloc21_1_0+0, a
+                                    134 ;	../asincosf.c: 56: y = fabsf(x);
+      000004 C2 01                  135 	mov	a, sp
+      000006r80r0B                  136 	mov	p, a
+      000008 72 00                  137 	push	af
+      00000A 72 00                  138 	push	af
+      00000Cr80r0F                  139 	mov	a, _asincosf_PARM_1+0
+      00000Er80r03                  140 	idxm	p, a
+      000010r00r12                  141 	inc	p
+      000012r81r0F                  142 	mov	a, _asincosf_PARM_1+1
+      000014r80r03                  143 	idxm	p, a
+      000016r00r12                  144 	inc	p
+      000018r82r0F                  145 	mov	a, _asincosf_PARM_1+2
+      00001Ar80r03                  146 	idxm	p, a
+      00001Cr00r12                  147 	inc	p
+      00001Er83r0F                  148 	mov	a, _asincosf_PARM_1+3
+      000020r80r03                  149 	idxm	p, a
+      000022r05r2F                  150 	mov	a, #_asincosf_sloc0_1_0
+      000024 72 00                  151 	push	af
+      000026r00r38                  152 	call	_fabsf
+      000028 C2 01                  153 	mov	a, sp
+      00002A FA 28                  154 	add	a, #-6
+      00002C 82 01                  155 	mov	sp, a
+      00002Er85r0F                  156 	mov	a, _asincosf_sloc0_1_0+0
+      000030rDAr0B                  157 	mov	_asincosf_sloc22_1_0+0, a
+      000032r86r0F                  158 	mov	a, _asincosf_sloc0_1_0+1
+      000034rDBr0B                  159 	mov	_asincosf_sloc22_1_0+1, a
+      000036r87r0F                  160 	mov	a, _asincosf_sloc0_1_0+2
+      000038rDCr0B                  161 	mov	_asincosf_sloc22_1_0+2, a
+      00003Ar88r0F                  162 	mov	a, _asincosf_sloc0_1_0+3
+      00003CrDDr0B                  163 	mov	_asincosf_sloc22_1_0+3, a
+                                    164 ;	../asincosf.c: 57: if (y < EPS)
+      00003ErDAr0F                  165 	mov	a, _asincosf_sloc22_1_0+0
+      000040r80r0B                  166 	mov	___fslt_PARM_1+0, a
+      000042rDBr0F                  167 	mov	a, _asincosf_sloc22_1_0+1
+      000044r81r0B                  168 	mov	___fslt_PARM_1+1, a
+      000046rDCr0F                  169 	mov	a, _asincosf_sloc22_1_0+2
+      000048r82r0B                  170 	mov	___fslt_PARM_1+2, a
+      00004ArDDr0F                  171 	mov	a, _asincosf_sloc22_1_0+3
+      00004Cr83r0B                  172 	mov	___fslt_PARM_1+3, a
+      00004Er00r13                  173 	clear	___fslt_PARM_2+0
+      000050r01r13                  174 	clear	___fslt_PARM_2+1
+      000052 80 2F                  175 	mov	a, #0x80
+      000054r82r0B                  176 	mov	___fslt_PARM_2+2, a
+      000056 39 2F                  177 	mov	a, #0x39
+      000058r83r0B                  178 	mov	___fslt_PARM_2+3, a
+      00005Ar00r38                  179 	call	___fslt
+      00005C 00 2B                  180 	cneqsn	a, #0x00
+      00005Er72r30                  181 	goto	00107$
+                                    182 ;	../asincosf.c: 59: r = y;
+      000060rDAr0F                  183 	mov	a, _asincosf_sloc22_1_0+0
+      000062rDEr0B                  184 	mov	_asincosf_sloc23_1_0+0, a
+      000064rDBr0F                  185 	mov	a, _asincosf_sloc22_1_0+1
+      000066rDFr0B                  186 	mov	_asincosf_sloc23_1_0+1, a
+      000068rDCr0F                  187 	mov	a, _asincosf_sloc22_1_0+2
+      00006ArE0r0B                  188 	mov	_asincosf_sloc23_1_0+2, a
+      00006CrDDr0F                  189 	mov	a, _asincosf_sloc22_1_0+3
+      00006ErE1r0B                  190 	mov	_asincosf_sloc23_1_0+3, a
+      000070r94r33                  191 	goto	00108$
+      000072                        192 00107$:
+                                    193 ;	../asincosf.c: 63: if (y > 0.5)
+      000072r00r13                  194 	clear	___fslt_PARM_1+0
+      000074r01r13                  195 	clear	___fslt_PARM_1+1
+      000076r02r13                  196 	clear	___fslt_PARM_1+2
+      000078 3F 2F                  197 	mov	a, #0x3f
+      00007Ar83r0B                  198 	mov	___fslt_PARM_1+3, a
+      00007CrDAr0F                  199 	mov	a, _asincosf_sloc22_1_0+0
+      00007Er80r0B                  200 	mov	___fslt_PARM_2+0, a
+      000080rDBr0F                  201 	mov	a, _asincosf_sloc22_1_0+1
+      000082r81r0B                  202 	mov	___fslt_PARM_2+1, a
+      000084rDCr0F                  203 	mov	a, _asincosf_sloc22_1_0+2
+      000086r82r0B                  204 	mov	___fslt_PARM_2+2, a
+      000088rDDr0F                  205 	mov	a, _asincosf_sloc22_1_0+3
+      00008Ar83r0B                  206 	mov	___fslt_PARM_2+3, a
+      00008Cr00r38                  207 	call	___fslt
+      00008E 00 2B                  208 	cneqsn	a, #0x00
+      000090rBCr31                  209 	goto	00104$
+                                    210 ;	../asincosf.c: 65: quartPI = !isacos;
+      000092rD9r0F                  211 	mov	a, _asincosf_sloc21_1_0+0
+      000094 01 29                  212 	sub	a, #0x01
+      000096 00 2F                  213 	mov	a, #0x00
+      000098 6D 00                  214 	slc	a
+      00009ArD9r0B                  215 	mov	_asincosf_sloc21_1_0+0, a
+                                    216 ;	../asincosf.c: 66: if (y > 1.0)
+      00009Cr00r13                  217 	clear	___fslt_PARM_1+0
+      00009Er01r13                  218 	clear	___fslt_PARM_1+1
+      0000A0 80 2F                  219 	mov	a, #0x80
+      0000A2r82r0B                  220 	mov	___fslt_PARM_1+2, a
+      0000A4 3F 2F                  221 	mov	a, #0x3f
+      0000A6r83r0B                  222 	mov	___fslt_PARM_1+3, a
+      0000A8rDAr0F                  223 	mov	a, _asincosf_sloc22_1_0+0
+      0000AAr80r0B                  224 	mov	___fslt_PARM_2+0, a
+      0000ACrDBr0F                  225 	mov	a, _asincosf_sloc22_1_0+1
+      0000AEr81r0B                  226 	mov	___fslt_PARM_2+1, a
+      0000B0rDCr0F                  227 	mov	a, _asincosf_sloc22_1_0+2
+      0000B2r82r0B                  228 	mov	___fslt_PARM_2+2, a
+      0000B4rDDr0F                  229 	mov	a, _asincosf_sloc22_1_0+3
+      0000B6r83r0B                  230 	mov	___fslt_PARM_2+3, a
+      0000B8r00r38                  231 	call	___fslt
+      0000BA 00 2B                  232 	cneqsn	a, #0x00
+      0000BCrE6r30                  233 	goto	00102$
+                                    234 ;	../asincosf.c: 68: errno = EDOM;
+      0000BE 21 2F                  235 	mov	a, #0x21
+      0000C0r80r0B                  236 	mov	_errno+0, a
+      0000C2r01r13                  237 	clear	_errno+1
+                                    238 ;	../asincosf.c: 69: return 0.0;
+      0000C4 C2 01                  239 	mov	a, sp
+      0000C6 FC 28                  240 	add	a, #0xfc
+      0000C8r80r0B                  241 	mov	p, a
+      0000CAr81r03                  242 	idxm	a, p
+      0000CCr80r0B                  243 	mov	p, a
+      0000CE 00 2F                  244 	mov	a, #0x00
+      0000D0r80r03                  245 	idxm	p, a
+      0000D2r00r12                  246 	inc	p
+      0000D4 00 2F                  247 	mov	a, #0x00
+      0000D6r80r03                  248 	idxm	p, a
+      0000D8r00r12                  249 	inc	p
+      0000DA 00 2F                  250 	mov	a, #0x00
+      0000DCr80r03                  251 	idxm	p, a
+      0000DEr00r12                  252 	inc	p
+      0000E0 00 2F                  253 	mov	a, #0x00
+      0000E2r80r03                  254 	idxm	p, a
+      0000E4 7A 00                  255 	ret
+      0000E6                        256 00102$:
+                                    257 ;	../asincosf.c: 71: g = (0.5 - y) + 0.5;
+      0000E6r00r13                  258 	clear	___fssub_PARM_1+0
+      0000E8r01r13                  259 	clear	___fssub_PARM_1+1
+      0000EA 80 2F                  260 	mov	a, #0x80
+      0000ECr82r0B                  261 	mov	___fssub_PARM_1+2, a
+      0000EE 3F 2F                  262 	mov	a, #0x3f
+      0000F0r83r0B                  263 	mov	___fssub_PARM_1+3, a
+      0000F2rDAr0F                  264 	mov	a, _asincosf_sloc22_1_0+0
+      0000F4r80r0B                  265 	mov	___fssub_PARM_2+0, a
+      0000F6rDBr0F                  266 	mov	a, _asincosf_sloc22_1_0+1
+      0000F8r81r0B                  267 	mov	___fssub_PARM_2+1, a
+      0000FArDCr0F                  268 	mov	a, _asincosf_sloc22_1_0+2
+      0000FCr82r0B                  269 	mov	___fssub_PARM_2+2, a
+      0000FErDDr0F                  270 	mov	a, _asincosf_sloc22_1_0+3
+      000100r83r0B                  271 	mov	___fssub_PARM_2+3, a
+      000102r09r2F                  272 	mov	a, #_asincosf_sloc1_1_0
+      000104 72 00                  273 	push	af
+      000106r00r38                  274 	call	___fssub
+      000108 C2 01                  275 	mov	a, sp
+      00010A FE 28                  276 	add	a, #-2
+      00010C 82 01                  277 	mov	sp, a
+      00010Er89r0F                  278 	mov	a, _asincosf_sloc1_1_0+0
+      000110r80r0B                  279 	mov	_ldexpf_PARM_1+0, a
+      000112r8Ar0F                  280 	mov	a, _asincosf_sloc1_1_0+1
+      000114r81r0B                  281 	mov	_ldexpf_PARM_1+1, a
+      000116r8Br0F                  282 	mov	a, _asincosf_sloc1_1_0+2
+      000118r82r0B                  283 	mov	_ldexpf_PARM_1+2, a
+      00011Ar8Cr0F                  284 	mov	a, _asincosf_sloc1_1_0+3
+      00011Cr83r0B                  285 	mov	_ldexpf_PARM_1+3, a
+                                    286 ;	../asincosf.c: 72: g = ldexpf(g, -1);
+      00011E FF 2F                  287 	mov	a, #0xff
+      000120r80r0B                  288 	mov	_ldexpf_PARM_2+0, a
+      000122 FF 2F                  289 	mov	a, #0xff
+      000124r81r0B                  290 	mov	_ldexpf_PARM_2+1, a
+      000126r0Dr2F                  291 	mov	a, #_asincosf_sloc2_1_0
+      000128 72 00                  292 	push	af
+      00012Ar00r38                  293 	call	_ldexpf
+      00012C C2 01                  294 	mov	a, sp
+      00012E FE 28                  295 	add	a, #-2
+      000130 82 01                  296 	mov	sp, a
+      000132r8Dr0F                  297 	mov	a, _asincosf_sloc2_1_0+0
+      000134rE2r0B                  298 	mov	_asincosf_sloc24_1_0+0, a
+      000136r8Er0F                  299 	mov	a, _asincosf_sloc2_1_0+1
+      000138rE3r0B                  300 	mov	_asincosf_sloc24_1_0+1, a
+      00013Ar8Fr0F                  301 	mov	a, _asincosf_sloc2_1_0+2
+      00013CrE4r0B                  302 	mov	_asincosf_sloc24_1_0+2, a
+      00013Er90r0F                  303 	mov	a, _asincosf_sloc2_1_0+3
+      000140rE5r0B                  304 	mov	_asincosf_sloc24_1_0+3, a
+                                    305 ;	../asincosf.c: 73: y = sqrtf(g);
+      000142 C2 01                  306 	mov	a, sp
+      000144r80r0B                  307 	mov	p, a
+      000146 72 00                  308 	push	af
+      000148 72 00                  309 	push	af
+      00014ArE2r0F                  310 	mov	a, _asincosf_sloc24_1_0+0
+      00014Cr80r03                  311 	idxm	p, a
+      00014Er00r12                  312 	inc	p
+      000150rE3r0F                  313 	mov	a, _asincosf_sloc24_1_0+1
+      000152r80r03                  314 	idxm	p, a
+      000154r00r12                  315 	inc	p
+      000156rE4r0F                  316 	mov	a, _asincosf_sloc24_1_0+2
+      000158r80r03                  317 	idxm	p, a
+      00015Ar00r12                  318 	inc	p
+      00015CrE5r0F                  319 	mov	a, _asincosf_sloc24_1_0+3
+      00015Er80r03                  320 	idxm	p, a
+      000160r11r2F                  321 	mov	a, #_asincosf_sloc3_1_0
+      000162 72 00                  322 	push	af
+      000164r00r38                  323 	call	_sqrtf
+      000166 C2 01                  324 	mov	a, sp
+      000168 FA 28                  325 	add	a, #-6
+      00016A 82 01                  326 	mov	sp, a
+      00016Cr91r0F                  327 	mov	a, _asincosf_sloc3_1_0+0
+      00016ErE6r0B                  328 	mov	_asincosf_sloc25_1_0+0, a
+      000170r92r0F                  329 	mov	a, _asincosf_sloc3_1_0+1
+      000172rE7r0B                  330 	mov	_asincosf_sloc25_1_0+1, a
+      000174r93r0F                  331 	mov	a, _asincosf_sloc3_1_0+2
+      000176rE8r0B                  332 	mov	_asincosf_sloc25_1_0+2, a
+      000178r94r0F                  333 	mov	a, _asincosf_sloc3_1_0+3
+      00017ArE9r0B                  334 	mov	_asincosf_sloc25_1_0+3, a
+                                    335 ;	../asincosf.c: 74: y = -(y + y);
+      00017CrE6r0F                  336 	mov	a, _asincosf_sloc25_1_0+0
+      00017Er80r0B                  337 	mov	___fsadd_PARM_1+0, a
+      000180rE7r0F                  338 	mov	a, _asincosf_sloc25_1_0+1
+      000182r81r0B                  339 	mov	___fsadd_PARM_1+1, a
+      000184rE8r0F                  340 	mov	a, _asincosf_sloc25_1_0+2
+      000186r82r0B                  341 	mov	___fsadd_PARM_1+2, a
+      000188rE9r0F                  342 	mov	a, _asincosf_sloc25_1_0+3
+      00018Ar83r0B                  343 	mov	___fsadd_PARM_1+3, a
+      00018CrE6r0F                  344 	mov	a, _asincosf_sloc25_1_0+0
+      00018Er80r0B                  345 	mov	___fsadd_PARM_2+0, a
+      000190rE7r0F                  346 	mov	a, _asincosf_sloc25_1_0+1
+      000192r81r0B                  347 	mov	___fsadd_PARM_2+1, a
+      000194rE8r0F                  348 	mov	a, _asincosf_sloc25_1_0+2
+      000196r82r0B                  349 	mov	___fsadd_PARM_2+2, a
+      000198rE9r0F                  350 	mov	a, _asincosf_sloc25_1_0+3
+      00019Ar83r0B                  351 	mov	___fsadd_PARM_2+3, a
+      00019Cr15r2F                  352 	mov	a, #_asincosf_sloc4_1_0
+      00019E 72 00                  353 	push	af
+      0001A0r00r38                  354 	call	___fsadd
+      0001A2 C2 01                  355 	mov	a, sp
+      0001A4 FE 28                  356 	add	a, #-2
+      0001A6 82 01                  357 	mov	sp, a
+      0001A8r95r0F                  358 	mov	a, _asincosf_sloc4_1_0+0
+      0001AArDAr0B                  359 	mov	_asincosf_sloc22_1_0+0, a
+      0001ACr96r0F                  360 	mov	a, _asincosf_sloc4_1_0+1
+      0001AErDBr0B                  361 	mov	_asincosf_sloc22_1_0+1, a
+      0001B0r97r0F                  362 	mov	a, _asincosf_sloc4_1_0+2
+      0001B2rDCr0B                  363 	mov	_asincosf_sloc22_1_0+2, a
+      0001B4r98r0F                  364 	mov	a, _asincosf_sloc4_1_0+3
+      0001B6 80 2E                  365 	xor	a, #0x80
+      0001B8rDDr0B                  366 	mov	_asincosf_sloc22_1_0+3, a
+      0001BArF8r31                  367 	goto	00105$
+      0001BC                        368 00104$:
+                                    369 ;	../asincosf.c: 78: g = y * y;
+      0001BCrDAr0F                  370 	mov	a, _asincosf_sloc22_1_0+0
+      0001BEr80r0B                  371 	mov	___fsmul_PARM_1+0, a
+      0001C0rDBr0F                  372 	mov	a, _asincosf_sloc22_1_0+1
+      0001C2r81r0B                  373 	mov	___fsmul_PARM_1+1, a
+      0001C4rDCr0F                  374 	mov	a, _asincosf_sloc22_1_0+2
+      0001C6r82r0B                  375 	mov	___fsmul_PARM_1+2, a
+      0001C8rDDr0F                  376 	mov	a, _asincosf_sloc22_1_0+3
+      0001CAr83r0B                  377 	mov	___fsmul_PARM_1+3, a
+      0001CCrDAr0F                  378 	mov	a, _asincosf_sloc22_1_0+0
+      0001CEr80r0B                  379 	mov	___fsmul_PARM_2+0, a
+      0001D0rDBr0F                  380 	mov	a, _asincosf_sloc22_1_0+1
+      0001D2r81r0B                  381 	mov	___fsmul_PARM_2+1, a
+      0001D4rDCr0F                  382 	mov	a, _asincosf_sloc22_1_0+2
+      0001D6r82r0B                  383 	mov	___fsmul_PARM_2+2, a
+      0001D8rDDr0F                  384 	mov	a, _asincosf_sloc22_1_0+3
+      0001DAr83r0B                  385 	mov	___fsmul_PARM_2+3, a
+      0001DCr19r2F                  386 	mov	a, #_asincosf_sloc5_1_0
+      0001DE 72 00                  387 	push	af
+      0001E0r00r38                  388 	call	___fsmul
+      0001E2 C2 01                  389 	mov	a, sp
+      0001E4 FE 28                  390 	add	a, #-2
+      0001E6 82 01                  391 	mov	sp, a
+      0001E8r99r0F                  392 	mov	a, _asincosf_sloc5_1_0+0
+      0001EArE2r0B                  393 	mov	_asincosf_sloc24_1_0+0, a
+      0001ECr9Ar0F                  394 	mov	a, _asincosf_sloc5_1_0+1
+      0001EErE3r0B                  395 	mov	_asincosf_sloc24_1_0+1, a
+      0001F0r9Br0F                  396 	mov	a, _asincosf_sloc5_1_0+2
+      0001F2rE4r0B                  397 	mov	_asincosf_sloc24_1_0+2, a
+      0001F4r9Cr0F                  398 	mov	a, _asincosf_sloc5_1_0+3
+      0001F6rE5r0B                  399 	mov	_asincosf_sloc24_1_0+3, a
+      0001F8                        400 00105$:
+                                    401 ;	../asincosf.c: 80: r = y + y * ((P(g) * g) / Q(g));
+      0001F8 65 2F                  402 	mov	a, #0x65
+      0001FAr80r0B                  403 	mov	___fsmul_PARM_1+0, a
+      0001FC 20 2F                  404 	mov	a, #0x20
+      0001FEr81r0B                  405 	mov	___fsmul_PARM_1+1, a
+      000200 01 2F                  406 	mov	a, #0x01
+      000202r82r0B                  407 	mov	___fsmul_PARM_1+2, a
+      000204 BF 2F                  408 	mov	a, #0xbf
+      000206r83r0B                  409 	mov	___fsmul_PARM_1+3, a
+      000208rE2r0F                  410 	mov	a, _asincosf_sloc24_1_0+0
+      00020Ar80r0B                  411 	mov	___fsmul_PARM_2+0, a
+      00020CrE3r0F                  412 	mov	a, _asincosf_sloc24_1_0+1
+      00020Er81r0B                  413 	mov	___fsmul_PARM_2+1, a
+      000210rE4r0F                  414 	mov	a, _asincosf_sloc24_1_0+2
+      000212r82r0B                  415 	mov	___fsmul_PARM_2+2, a
+      000214rE5r0F                  416 	mov	a, _asincosf_sloc24_1_0+3
+      000216r83r0B                  417 	mov	___fsmul_PARM_2+3, a
+      000218r1Dr2F                  418 	mov	a, #_asincosf_sloc6_1_0
+      00021A 72 00                  419 	push	af
+      00021Cr00r38                  420 	call	___fsmul
+      00021E C2 01                  421 	mov	a, sp
+      000220 FE 28                  422 	add	a, #-2
+      000222 82 01                  423 	mov	sp, a
+      000224r9Dr0F                  424 	mov	a, _asincosf_sloc6_1_0+0
+      000226r80r0B                  425 	mov	___fsadd_PARM_1+0, a
+      000228r9Er0F                  426 	mov	a, _asincosf_sloc6_1_0+1
+      00022Ar81r0B                  427 	mov	___fsadd_PARM_1+1, a
+      00022Cr9Fr0F                  428 	mov	a, _asincosf_sloc6_1_0+2
+      00022Er82r0B                  429 	mov	___fsadd_PARM_1+2, a
+      000230rA0r0F                  430 	mov	a, _asincosf_sloc6_1_0+3
+      000232r83r0B                  431 	mov	___fsadd_PARM_1+3, a
+      000234 6B 2F                  432 	mov	a, #0x6b
+      000236r80r0B                  433 	mov	___fsadd_PARM_2+0, a
+      000238 16 2F                  434 	mov	a, #0x16
+      00023Ar81r0B                  435 	mov	___fsadd_PARM_2+1, a
+      00023C 6F 2F                  436 	mov	a, #0x6f
+      00023Er82r0B                  437 	mov	___fsadd_PARM_2+2, a
+      000240 3F 2F                  438 	mov	a, #0x3f
+      000242r83r0B                  439 	mov	___fsadd_PARM_2+3, a
+      000244r21r2F                  440 	mov	a, #_asincosf_sloc7_1_0
+      000246 72 00                  441 	push	af
+      000248r00r38                  442 	call	___fsadd
+      00024A C2 01                  443 	mov	a, sp
+      00024C FE 28                  444 	add	a, #-2
+      00024E 82 01                  445 	mov	sp, a
+      000250rA1r0F                  446 	mov	a, _asincosf_sloc7_1_0+0
+      000252r80r0B                  447 	mov	___fsmul_PARM_1+0, a
+      000254rA2r0F                  448 	mov	a, _asincosf_sloc7_1_0+1
+      000256r81r0B                  449 	mov	___fsmul_PARM_1+1, a
+      000258rA3r0F                  450 	mov	a, _asincosf_sloc7_1_0+2
+      00025Ar82r0B                  451 	mov	___fsmul_PARM_1+2, a
+      00025CrA4r0F                  452 	mov	a, _asincosf_sloc7_1_0+3
+      00025Er83r0B                  453 	mov	___fsmul_PARM_1+3, a
+      000260rE2r0F                  454 	mov	a, _asincosf_sloc24_1_0+0
+      000262r80r0B                  455 	mov	___fsmul_PARM_2+0, a
+      000264rE3r0F                  456 	mov	a, _asincosf_sloc24_1_0+1
+      000266r81r0B                  457 	mov	___fsmul_PARM_2+1, a
+      000268rE4r0F                  458 	mov	a, _asincosf_sloc24_1_0+2
+      00026Ar82r0B                  459 	mov	___fsmul_PARM_2+2, a
+      00026CrE5r0F                  460 	mov	a, _asincosf_sloc24_1_0+3
+      00026Er83r0B                  461 	mov	___fsmul_PARM_2+3, a
+      000270r25r2F                  462 	mov	a, #_asincosf_sloc8_1_0
+      000272 72 00                  463 	push	af
+      000274r00r38                  464 	call	___fsmul
+      000276 C2 01                  465 	mov	a, sp
+      000278 FE 28                  466 	add	a, #-2
+      00027A 82 01                  467 	mov	sp, a
+      00027CrE2r0F                  468 	mov	a, _asincosf_sloc24_1_0+0
+      00027Er80r0B                  469 	mov	___fsadd_PARM_1+0, a
+      000280rE3r0F                  470 	mov	a, _asincosf_sloc24_1_0+1
+      000282r81r0B                  471 	mov	___fsadd_PARM_1+1, a
+      000284rE4r0F                  472 	mov	a, _asincosf_sloc24_1_0+2
+      000286r82r0B                  473 	mov	___fsadd_PARM_1+2, a
+      000288rE5r0F                  474 	mov	a, _asincosf_sloc24_1_0+3
+      00028Ar83r0B                  475 	mov	___fsadd_PARM_1+3, a
+      00028C 0B 2F                  476 	mov	a, #0x0b
+      00028Er80r0B                  477 	mov	___fsadd_PARM_2+0, a
+      000290 8D 2F                  478 	mov	a, #0x8d
+      000292r81r0B                  479 	mov	___fsadd_PARM_2+1, a
+      000294 B1 2F                  480 	mov	a, #0xb1
+      000296r82r0B                  481 	mov	___fsadd_PARM_2+2, a
+      000298 C0 2F                  482 	mov	a, #0xc0
+      00029Ar83r0B                  483 	mov	___fsadd_PARM_2+3, a
+      00029Cr29r2F                  484 	mov	a, #_asincosf_sloc9_1_0
+      00029E 72 00                  485 	push	af
+      0002A0r00r38                  486 	call	___fsadd
+      0002A2 C2 01                  487 	mov	a, sp
+      0002A4 FE 28                  488 	add	a, #-2
+      0002A6 82 01                  489 	mov	sp, a
+      0002A8rA9r0F                  490 	mov	a, _asincosf_sloc9_1_0+0
+      0002AAr80r0B                  491 	mov	___fsmul_PARM_1+0, a
+      0002ACrAAr0F                  492 	mov	a, _asincosf_sloc9_1_0+1
+      0002AEr81r0B                  493 	mov	___fsmul_PARM_1+1, a
+      0002B0rABr0F                  494 	mov	a, _asincosf_sloc9_1_0+2
+      0002B2r82r0B                  495 	mov	___fsmul_PARM_1+2, a
+      0002B4rACr0F                  496 	mov	a, _asincosf_sloc9_1_0+3
+      0002B6r83r0B                  497 	mov	___fsmul_PARM_1+3, a
+      0002B8rE2r0F                  498 	mov	a, _asincosf_sloc24_1_0+0
+      0002BAr80r0B                  499 	mov	___fsmul_PARM_2+0, a
+      0002BCrE3r0F                  500 	mov	a, _asincosf_sloc24_1_0+1
+      0002BEr81r0B                  501 	mov	___fsmul_PARM_2+1, a
+      0002C0rE4r0F                  502 	mov	a, _asincosf_sloc24_1_0+2
+      0002C2r82r0B                  503 	mov	___fsmul_PARM_2+2, a
+      0002C4rE5r0F                  504 	mov	a, _asincosf_sloc24_1_0+3
+      0002C6r83r0B                  505 	mov	___fsmul_PARM_2+3, a
+      0002C8r2Dr2F                  506 	mov	a, #_asincosf_sloc10_1_0
+      0002CA 72 00                  507 	push	af
+      0002CCr00r38                  508 	call	___fsmul
+      0002CE C2 01                  509 	mov	a, sp
+      0002D0 FE 28                  510 	add	a, #-2
+      0002D2 82 01                  511 	mov	sp, a
+      0002D4rADr0F                  512 	mov	a, _asincosf_sloc10_1_0+0
+      0002D6r80r0B                  513 	mov	___fsadd_PARM_1+0, a
+      0002D8rAEr0F                  514 	mov	a, _asincosf_sloc10_1_0+1
+      0002DAr81r0B                  515 	mov	___fsadd_PARM_1+1, a
+      0002DCrAFr0F                  516 	mov	a, _asincosf_sloc10_1_0+2
+      0002DEr82r0B                  517 	mov	___fsadd_PARM_1+2, a
+      0002E0rB0r0F                  518 	mov	a, _asincosf_sloc10_1_0+3
+      0002E2r83r0B                  519 	mov	___fsadd_PARM_1+3, a
+      0002E4 F0 2F                  520 	mov	a, #0xf0
+      0002E6r80r0B                  521 	mov	___fsadd_PARM_2+0, a
+      0002E8 50 2F                  522 	mov	a, #0x50
+      0002EAr81r0B                  523 	mov	___fsadd_PARM_2+1, a
+      0002EC B3 2F                  524 	mov	a, #0xb3
+      0002EEr82r0B                  525 	mov	___fsadd_PARM_2+2, a
+      0002F0 40 2F                  526 	mov	a, #0x40
+      0002F2r83r0B                  527 	mov	___fsadd_PARM_2+3, a
+      0002F4r31r2F                  528 	mov	a, #_asincosf_sloc11_1_0
+      0002F6 72 00                  529 	push	af
+      0002F8r00r38                  530 	call	___fsadd
+      0002FA C2 01                  531 	mov	a, sp
+      0002FC FE 28                  532 	add	a, #-2
+      0002FE 82 01                  533 	mov	sp, a
+      000300rA5r0F                  534 	mov	a, _asincosf_sloc8_1_0+0
+      000302r80r0B                  535 	mov	___fsdiv_PARM_1+0, a
+      000304rA6r0F                  536 	mov	a, _asincosf_sloc8_1_0+1
+      000306r81r0B                  537 	mov	___fsdiv_PARM_1+1, a
+      000308rA7r0F                  538 	mov	a, _asincosf_sloc8_1_0+2
+      00030Ar82r0B                  539 	mov	___fsdiv_PARM_1+2, a
+      00030CrA8r0F                  540 	mov	a, _asincosf_sloc8_1_0+3
+      00030Er83r0B                  541 	mov	___fsdiv_PARM_1+3, a
+      000310rB1r0F                  542 	mov	a, _asincosf_sloc11_1_0+0
+      000312r80r0B                  543 	mov	___fsdiv_PARM_2+0, a
+      000314rB2r0F                  544 	mov	a, _asincosf_sloc11_1_0+1
+      000316r81r0B                  545 	mov	___fsdiv_PARM_2+1, a
+      000318rB3r0F                  546 	mov	a, _asincosf_sloc11_1_0+2
+      00031Ar82r0B                  547 	mov	___fsdiv_PARM_2+2, a
+      00031CrB4r0F                  548 	mov	a, _asincosf_sloc11_1_0+3
+      00031Er83r0B                  549 	mov	___fsdiv_PARM_2+3, a
+      000320r35r2F                  550 	mov	a, #_asincosf_sloc12_1_0
+      000322 72 00                  551 	push	af
+      000324r00r38                  552 	call	___fsdiv
+      000326 C2 01                  553 	mov	a, sp
+      000328 FE 28                  554 	add	a, #-2
+      00032A 82 01                  555 	mov	sp, a
+      00032CrDAr0F                  556 	mov	a, _asincosf_sloc22_1_0+0
+      00032Er80r0B                  557 	mov	___fsmul_PARM_1+0, a
+      000330rDBr0F                  558 	mov	a, _asincosf_sloc22_1_0+1
+      000332r81r0B                  559 	mov	___fsmul_PARM_1+1, a
+      000334rDCr0F                  560 	mov	a, _asincosf_sloc22_1_0+2
+      000336r82r0B                  561 	mov	___fsmul_PARM_1+2, a
+      000338rDDr0F                  562 	mov	a, _asincosf_sloc22_1_0+3
+      00033Ar83r0B                  563 	mov	___fsmul_PARM_1+3, a
+      00033CrB5r0F                  564 	mov	a, _asincosf_sloc12_1_0+0
+      00033Er80r0B                  565 	mov	___fsmul_PARM_2+0, a
+      000340rB6r0F                  566 	mov	a, _asincosf_sloc12_1_0+1
+      000342r81r0B                  567 	mov	___fsmul_PARM_2+1, a
+      000344rB7r0F                  568 	mov	a, _asincosf_sloc12_1_0+2
+      000346r82r0B                  569 	mov	___fsmul_PARM_2+2, a
+      000348rB8r0F                  570 	mov	a, _asincosf_sloc12_1_0+3
+      00034Ar83r0B                  571 	mov	___fsmul_PARM_2+3, a
+      00034Cr39r2F                  572 	mov	a, #_asincosf_sloc13_1_0
+      00034E 72 00                  573 	push	af
+      000350r00r38                  574 	call	___fsmul
+      000352 C2 01                  575 	mov	a, sp
+      000354 FE 28                  576 	add	a, #-2
+      000356 82 01                  577 	mov	sp, a
+      000358rDAr0F                  578 	mov	a, _asincosf_sloc22_1_0+0
+      00035Ar80r0B                  579 	mov	___fsadd_PARM_1+0, a
+      00035CrDBr0F                  580 	mov	a, _asincosf_sloc22_1_0+1
+      00035Er81r0B                  581 	mov	___fsadd_PARM_1+1, a
+      000360rDCr0F                  582 	mov	a, _asincosf_sloc22_1_0+2
+      000362r82r0B                  583 	mov	___fsadd_PARM_1+2, a
+      000364rDDr0F                  584 	mov	a, _asincosf_sloc22_1_0+3
+      000366r83r0B                  585 	mov	___fsadd_PARM_1+3, a
+      000368rB9r0F                  586 	mov	a, _asincosf_sloc13_1_0+0
+      00036Ar80r0B                  587 	mov	___fsadd_PARM_2+0, a
+      00036CrBAr0F                  588 	mov	a, _asincosf_sloc13_1_0+1
+      00036Er81r0B                  589 	mov	___fsadd_PARM_2+1, a
+      000370rBBr0F                  590 	mov	a, _asincosf_sloc13_1_0+2
+      000372r82r0B                  591 	mov	___fsadd_PARM_2+2, a
+      000374rBCr0F                  592 	mov	a, _asincosf_sloc13_1_0+3
+      000376r83r0B                  593 	mov	___fsadd_PARM_2+3, a
+      000378r3Dr2F                  594 	mov	a, #_asincosf_sloc14_1_0
+      00037A 72 00                  595 	push	af
+      00037Cr00r38                  596 	call	___fsadd
+      00037E C2 01                  597 	mov	a, sp
+      000380 FE 28                  598 	add	a, #-2
+      000382 82 01                  599 	mov	sp, a
+      000384rBDr0F                  600 	mov	a, _asincosf_sloc14_1_0+0
+      000386rDEr0B                  601 	mov	_asincosf_sloc23_1_0+0, a
+      000388rBEr0F                  602 	mov	a, _asincosf_sloc14_1_0+1
+      00038ArDFr0B                  603 	mov	_asincosf_sloc23_1_0+1, a
+      00038CrBFr0F                  604 	mov	a, _asincosf_sloc14_1_0+2
+      00038ErE0r0B                  605 	mov	_asincosf_sloc23_1_0+2, a
+      000390rC0r0F                  606 	mov	a, _asincosf_sloc14_1_0+3
+      000392rE1r0B                  607 	mov	_asincosf_sloc23_1_0+3, a
+      000394                        608 00108$:
+                                    609 ;	../asincosf.c: 82: i = quartPI;
+      000394rD9r0F                  610 	mov	a, _asincosf_sloc21_1_0+0
+      000396rEAr0B                  611 	mov	_asincosf_sloc26_1_0+0, a
+                                    612 ;	../asincosf.c: 83: if (isacos)
+      000398r84r0F                  613 	mov	a, _asincosf_PARM_2+0
+      00039A 00 2B                  614 	cneqsn	a, #0x00
+      00039Cr30r35                  615 	goto	00115$
+                                    616 ;	../asincosf.c: 85: if (x < 0.0)
+      00039Er80r0F                  617 	mov	a, _asincosf_PARM_1+0
+      0003A0r80r0B                  618 	mov	___fslt_PARM_1+0, a
+      0003A2r81r0F                  619 	mov	a, _asincosf_PARM_1+1
+      0003A4r81r0B                  620 	mov	___fslt_PARM_1+1, a
+      0003A6r82r0F                  621 	mov	a, _asincosf_PARM_1+2
+      0003A8r82r0B                  622 	mov	___fslt_PARM_1+2, a
+      0003AAr83r0F                  623 	mov	a, _asincosf_PARM_1+3
+      0003ACr83r0B                  624 	mov	___fslt_PARM_1+3, a
+      0003AEr00r13                  625 	clear	___fslt_PARM_2+0
+      0003B0r01r13                  626 	clear	___fslt_PARM_2+1
+      0003B2r02r13                  627 	clear	___fslt_PARM_2+2
+      0003B4r03r13                  628 	clear	___fslt_PARM_2+3
+      0003B6r00r38                  629 	call	___fslt
+      0003B8 00 2B                  630 	cneqsn	a, #0x00
+      0003BAr76r34                  631 	goto	00110$
+                                    632 ;	../asincosf.c: 86: r = (b[i] + r) + b[i];
+      0003BCrEAr0F                  633 	mov	a, _asincosf_sloc26_1_0+0
+      0003BEr80r0B                  634 	mov	__muluchar_PARM_1+0, a
+      0003C0 04 2F                  635 	mov	a, #0x04
+      0003C2r80r0B                  636 	mov	__muluchar_PARM_2+0, a
+      0003C4r00r38                  637 	call	__muluchar
+      0003C6r10r28                  638 	add	a, #<(_asincosf_b_65536_26 + 0)
+      0003C8rEBr0B                  639 	mov	_asincosf_sloc27_1_0+0, a
+      0003CAr10r2F                  640 	mov	a, #>(_asincosf_b_65536_26 + 0x8000 + 0)
+      0003CCr00r0D                  641 	addc	a, p
+      0003CErECr0B                  642 	mov	_asincosf_sloc27_1_0+1, a
+      0003D0rEBr0F                  643 	mov	a, _asincosf_sloc27_1_0+0
+      0003D2r80r0B                  644 	mov	p, a
+      0003D4rECr0F                  645 	mov	a, _asincosf_sloc27_1_0+1
+      0003D6r00r38                  646 	call	__gptrget
+      0003D8rEDr0B                  647 	mov	_asincosf_sloc28_1_0+0, a
+      0003DArEBr0F                  648 	mov	a, _asincosf_sloc27_1_0+0
+      0003DCr80r0B                  649 	mov	p, a
+      0003DErECr0F                  650 	mov	a, _asincosf_sloc27_1_0+1
+      0003E0r00r12                  651 	inc	p
+      0003E2 60 00                  652 	addc	a
+      0003E4r00r38                  653 	call	__gptrget
+      0003E6rEEr0B                  654 	mov	_asincosf_sloc28_1_0+1, a
+      0003E8rEBr0F                  655 	mov	a, _asincosf_sloc27_1_0+0
+      0003EAr80r0B                  656 	mov	p, a
+      0003ECrECr0F                  657 	mov	a, _asincosf_sloc27_1_0+1
+      0003EEr00r12                  658 	inc	p
+      0003F0 60 00                  659 	addc	a
+      0003F2r00r12                  660 	inc	p
+      0003F4 60 00                  661 	addc	a
+      0003F6r00r38                  662 	call	__gptrget
+      0003F8rEFr0B                  663 	mov	_asincosf_sloc28_1_0+2, a
+      0003FArEBr0F                  664 	mov	a, _asincosf_sloc27_1_0+0
+      0003FCr80r0B                  665 	mov	p, a
+      0003FErECr0F                  666 	mov	a, _asincosf_sloc27_1_0+1
+      000400r80r13                  667 	xch	a, p
+      000402 03 28                  668 	add	a, #3
+      000404r80r13                  669 	xch	a, p
+      000406 60 00                  670 	addc	a
+      000408r00r38                  671 	call	__gptrget
+      00040ArF0r0B                  672 	mov	_asincosf_sloc28_1_0+3, a
+      00040CrEDr0F                  673 	mov	a, _asincosf_sloc28_1_0+0
+      00040Er80r0B                  674 	mov	___fsadd_PARM_1+0, a
+      000410rEEr0F                  675 	mov	a, _asincosf_sloc28_1_0+1
+      000412r81r0B                  676 	mov	___fsadd_PARM_1+1, a
+      000414rEFr0F                  677 	mov	a, _asincosf_sloc28_1_0+2
+      000416r82r0B                  678 	mov	___fsadd_PARM_1+2, a
+      000418rF0r0F                  679 	mov	a, _asincosf_sloc28_1_0+3
+      00041Ar83r0B                  680 	mov	___fsadd_PARM_1+3, a
+      00041CrDEr0F                  681 	mov	a, _asincosf_sloc23_1_0+0
+      00041Er80r0B                  682 	mov	___fsadd_PARM_2+0, a
+      000420rDFr0F                  683 	mov	a, _asincosf_sloc23_1_0+1
+      000422r81r0B                  684 	mov	___fsadd_PARM_2+1, a
+      000424rE0r0F                  685 	mov	a, _asincosf_sloc23_1_0+2
+      000426r82r0B                  686 	mov	___fsadd_PARM_2+2, a
+      000428rE1r0F                  687 	mov	a, _asincosf_sloc23_1_0+3
+      00042Ar83r0B                  688 	mov	___fsadd_PARM_2+3, a
+      00042Cr41r2F                  689 	mov	a, #_asincosf_sloc15_1_0
+      00042E 72 00                  690 	push	af
+      000430r00r38                  691 	call	___fsadd
+      000432 C2 01                  692 	mov	a, sp
+      000434 FE 28                  693 	add	a, #-2
+      000436 82 01                  694 	mov	sp, a
+      000438rC1r0F                  695 	mov	a, _asincosf_sloc15_1_0+0
+      00043Ar80r0B                  696 	mov	___fsadd_PARM_1+0, a
+      00043CrC2r0F                  697 	mov	a, _asincosf_sloc15_1_0+1
+      00043Er81r0B                  698 	mov	___fsadd_PARM_1+1, a
+      000440rC3r0F                  699 	mov	a, _asincosf_sloc15_1_0+2
+      000442r82r0B                  700 	mov	___fsadd_PARM_1+2, a
+      000444rC4r0F                  701 	mov	a, _asincosf_sloc15_1_0+3
+      000446r83r0B                  702 	mov	___fsadd_PARM_1+3, a
+      000448rEDr0F                  703 	mov	a, _asincosf_sloc28_1_0+0
+      00044Ar80r0B                  704 	mov	___fsadd_PARM_2+0, a
+      00044CrEEr0F                  705 	mov	a, _asincosf_sloc28_1_0+1
+      00044Er81r0B                  706 	mov	___fsadd_PARM_2+1, a
+      000450rEFr0F                  707 	mov	a, _asincosf_sloc28_1_0+2
+      000452r82r0B                  708 	mov	___fsadd_PARM_2+2, a
+      000454rF0r0F                  709 	mov	a, _asincosf_sloc28_1_0+3
+      000456r83r0B                  710 	mov	___fsadd_PARM_2+3, a
+      000458r45r2F                  711 	mov	a, #_asincosf_sloc16_1_0
+      00045A 72 00                  712 	push	af
+      00045Cr00r38                  713 	call	___fsadd
+      00045E C2 01                  714 	mov	a, sp
+      000460 FE 28                  715 	add	a, #-2
+      000462 82 01                  716 	mov	sp, a
+      000464rC5r0F                  717 	mov	a, _asincosf_sloc16_1_0+0
+      000466rF1r0B                  718 	mov	_asincosf_sloc29_1_0+0, a
+      000468rC6r0F                  719 	mov	a, _asincosf_sloc16_1_0+1
+      00046ArF2r0B                  720 	mov	_asincosf_sloc29_1_0+1, a
+      00046CrC7r0F                  721 	mov	a, _asincosf_sloc16_1_0+2
+      00046ErF3r0B                  722 	mov	_asincosf_sloc29_1_0+2, a
+      000470rC8r0F                  723 	mov	a, _asincosf_sloc16_1_0+3
+      000472rF4r0B                  724 	mov	_asincosf_sloc29_1_0+3, a
+      000474r0Cr36                  725 	goto	00116$
+      000476                        726 00110$:
+                                    727 ;	../asincosf.c: 88: r = (a[i] - r) + a[i];
+      000476rEAr0F                  728 	mov	a, _asincosf_sloc26_1_0+0
+      000478r80r0B                  729 	mov	__muluchar_PARM_1+0, a
+      00047A 04 2F                  730 	mov	a, #0x04
+      00047Cr80r0B                  731 	mov	__muluchar_PARM_2+0, a
+      00047Er00r38                  732 	call	__muluchar
+      000480r00r28                  733 	add	a, #<(_asincosf_a_65536_26 + 0)
+      000482rF5r0B                  734 	mov	_asincosf_sloc30_1_0+0, a
+      000484r00r2F                  735 	mov	a, #>(_asincosf_a_65536_26 + 0x8000 + 0)
+      000486r00r0D                  736 	addc	a, p
+      000488rF6r0B                  737 	mov	_asincosf_sloc30_1_0+1, a
+      00048ArF5r0F                  738 	mov	a, _asincosf_sloc30_1_0+0
+      00048Cr80r0B                  739 	mov	p, a
+      00048ErF6r0F                  740 	mov	a, _asincosf_sloc30_1_0+1
+      000490r00r38                  741 	call	__gptrget
+      000492rF7r0B                  742 	mov	_asincosf_sloc31_1_0+0, a
+      000494rF5r0F                  743 	mov	a, _asincosf_sloc30_1_0+0
+      000496r80r0B                  744 	mov	p, a
+      000498rF6r0F                  745 	mov	a, _asincosf_sloc30_1_0+1
+      00049Ar00r12                  746 	inc	p
+      00049C 60 00                  747 	addc	a
+      00049Er00r38                  748 	call	__gptrget
+      0004A0rF8r0B                  749 	mov	_asincosf_sloc31_1_0+1, a
+      0004A2rF5r0F                  750 	mov	a, _asincosf_sloc30_1_0+0
+      0004A4r80r0B                  751 	mov	p, a
+      0004A6rF6r0F                  752 	mov	a, _asincosf_sloc30_1_0+1
+      0004A8r00r12                  753 	inc	p
+      0004AA 60 00                  754 	addc	a
+      0004ACr00r12                  755 	inc	p
+      0004AE 60 00                  756 	addc	a
+      0004B0r00r38                  757 	call	__gptrget
+      0004B2rF9r0B                  758 	mov	_asincosf_sloc31_1_0+2, a
+      0004B4rF5r0F                  759 	mov	a, _asincosf_sloc30_1_0+0
+      0004B6r80r0B                  760 	mov	p, a
+      0004B8rF6r0F                  761 	mov	a, _asincosf_sloc30_1_0+1
+      0004BAr80r13                  762 	xch	a, p
+      0004BC 03 28                  763 	add	a, #3
+      0004BEr80r13                  764 	xch	a, p
+      0004C0 60 00                  765 	addc	a
+      0004C2r00r38                  766 	call	__gptrget
+      0004C4rFAr0B                  767 	mov	_asincosf_sloc31_1_0+3, a
+      0004C6rF7r0F                  768 	mov	a, _asincosf_sloc31_1_0+0
+      0004C8r80r0B                  769 	mov	___fssub_PARM_1+0, a
+      0004CArF8r0F                  770 	mov	a, _asincosf_sloc31_1_0+1
+      0004CCr81r0B                  771 	mov	___fssub_PARM_1+1, a
+      0004CErF9r0F                  772 	mov	a, _asincosf_sloc31_1_0+2
+      0004D0r82r0B                  773 	mov	___fssub_PARM_1+2, a
+      0004D2rFAr0F                  774 	mov	a, _asincosf_sloc31_1_0+3
+      0004D4r83r0B                  775 	mov	___fssub_PARM_1+3, a
+      0004D6rDEr0F                  776 	mov	a, _asincosf_sloc23_1_0+0
+      0004D8r80r0B                  777 	mov	___fssub_PARM_2+0, a
+      0004DArDFr0F                  778 	mov	a, _asincosf_sloc23_1_0+1
+      0004DCr81r0B                  779 	mov	___fssub_PARM_2+1, a
+      0004DErE0r0F                  780 	mov	a, _asincosf_sloc23_1_0+2
+      0004E0r82r0B                  781 	mov	___fssub_PARM_2+2, a
+      0004E2rE1r0F                  782 	mov	a, _asincosf_sloc23_1_0+3
+      0004E4r83r0B                  783 	mov	___fssub_PARM_2+3, a
+      0004E6r49r2F                  784 	mov	a, #_asincosf_sloc17_1_0
+      0004E8 72 00                  785 	push	af
+      0004EAr00r38                  786 	call	___fssub
+      0004EC C2 01                  787 	mov	a, sp
+      0004EE FE 28                  788 	add	a, #-2
+      0004F0 82 01                  789 	mov	sp, a
+      0004F2rC9r0F                  790 	mov	a, _asincosf_sloc17_1_0+0
+      0004F4r80r0B                  791 	mov	___fsadd_PARM_1+0, a
+      0004F6rCAr0F                  792 	mov	a, _asincosf_sloc17_1_0+1
+      0004F8r81r0B                  793 	mov	___fsadd_PARM_1+1, a
+      0004FArCBr0F                  794 	mov	a, _asincosf_sloc17_1_0+2
+      0004FCr82r0B                  795 	mov	___fsadd_PARM_1+2, a
+      0004FErCCr0F                  796 	mov	a, _asincosf_sloc17_1_0+3
+      000500r83r0B                  797 	mov	___fsadd_PARM_1+3, a
+      000502rF7r0F                  798 	mov	a, _asincosf_sloc31_1_0+0
+      000504r80r0B                  799 	mov	___fsadd_PARM_2+0, a
+      000506rF8r0F                  800 	mov	a, _asincosf_sloc31_1_0+1
+      000508r81r0B                  801 	mov	___fsadd_PARM_2+1, a
+      00050ArF9r0F                  802 	mov	a, _asincosf_sloc31_1_0+2
+      00050Cr82r0B                  803 	mov	___fsadd_PARM_2+2, a
+      00050ErFAr0F                  804 	mov	a, _asincosf_sloc31_1_0+3
+      000510r83r0B                  805 	mov	___fsadd_PARM_2+3, a
+      000512r4Dr2F                  806 	mov	a, #_asincosf_sloc18_1_0
+      000514 72 00                  807 	push	af
+      000516r00r38                  808 	call	___fsadd
+      000518 C2 01                  809 	mov	a, sp
+      00051A FE 28                  810 	add	a, #-2
+      00051C 82 01                  811 	mov	sp, a
+      00051ErCDr0F                  812 	mov	a, _asincosf_sloc18_1_0+0
+      000520rF1r0B                  813 	mov	_asincosf_sloc29_1_0+0, a
+      000522rCEr0F                  814 	mov	a, _asincosf_sloc18_1_0+1
+      000524rF2r0B                  815 	mov	_asincosf_sloc29_1_0+1, a
+      000526rCFr0F                  816 	mov	a, _asincosf_sloc18_1_0+2
+      000528rF3r0B                  817 	mov	_asincosf_sloc29_1_0+2, a
+      00052ArD0r0F                  818 	mov	a, _asincosf_sloc18_1_0+3
+      00052CrF4r0B                  819 	mov	_asincosf_sloc29_1_0+3, a
+      00052Er0Cr36                  820 	goto	00116$
+      000530                        821 00115$:
+                                    822 ;	../asincosf.c: 92: r = (a[i] + r) + a[i];
+      000530rEAr0F                  823 	mov	a, _asincosf_sloc26_1_0+0
+      000532r80r0B                  824 	mov	__muluchar_PARM_1+0, a
+      000534 04 2F                  825 	mov	a, #0x04
+      000536r80r0B                  826 	mov	__muluchar_PARM_2+0, a
+      000538r00r38                  827 	call	__muluchar
+      00053Ar00r28                  828 	add	a, #<(_asincosf_a_65536_26 + 0)
+      00053CrFBr0B                  829 	mov	_asincosf_sloc32_1_0+0, a
+      00053Er00r2F                  830 	mov	a, #>(_asincosf_a_65536_26 + 0x8000 + 0)
+      000540r00r0D                  831 	addc	a, p
+      000542rFCr0B                  832 	mov	_asincosf_sloc32_1_0+1, a
+      000544rFBr0F                  833 	mov	a, _asincosf_sloc32_1_0+0
+      000546r80r0B                  834 	mov	p, a
+      000548rFCr0F                  835 	mov	a, _asincosf_sloc32_1_0+1
+      00054Ar00r38                  836 	call	__gptrget
+      00054CrFDr0B                  837 	mov	_asincosf_sloc33_1_0+0, a
+      00054ErFBr0F                  838 	mov	a, _asincosf_sloc32_1_0+0
+      000550r80r0B                  839 	mov	p, a
+      000552rFCr0F                  840 	mov	a, _asincosf_sloc32_1_0+1
+      000554r00r12                  841 	inc	p
+      000556 60 00                  842 	addc	a
+      000558r00r38                  843 	call	__gptrget
+      00055ArFEr0B                  844 	mov	_asincosf_sloc33_1_0+1, a
+      00055CrFBr0F                  845 	mov	a, _asincosf_sloc32_1_0+0
+      00055Er80r0B                  846 	mov	p, a
+      000560rFCr0F                  847 	mov	a, _asincosf_sloc32_1_0+1
+      000562r00r12                  848 	inc	p
+      000564 60 00                  849 	addc	a
+      000566r00r12                  850 	inc	p
+      000568 60 00                  851 	addc	a
+      00056Ar00r38                  852 	call	__gptrget
+      00056CrFFr0B                  853 	mov	_asincosf_sloc33_1_0+2, a
+      00056ErFBr0F                  854 	mov	a, _asincosf_sloc32_1_0+0
+      000570r80r0B                  855 	mov	p, a
+      000572rFCr0F                  856 	mov	a, _asincosf_sloc32_1_0+1
+      000574r80r13                  857 	xch	a, p
+      000576 03 28                  858 	add	a, #3
+      000578r80r13                  859 	xch	a, p
+      00057A 60 00                  860 	addc	a
+      00057Cr00r38                  861 	call	__gptrget
+      00057Er80r0B                  862 	mov	_asincosf_sloc33_1_0+3, a
+      000580rFDr0F                  863 	mov	a, _asincosf_sloc33_1_0+0
+      000582r80r0B                  864 	mov	___fsadd_PARM_1+0, a
+      000584rFEr0F                  865 	mov	a, _asincosf_sloc33_1_0+1
+      000586r81r0B                  866 	mov	___fsadd_PARM_1+1, a
+      000588rFFr0F                  867 	mov	a, _asincosf_sloc33_1_0+2
+      00058Ar82r0B                  868 	mov	___fsadd_PARM_1+2, a
+      00058Cr80r0F                  869 	mov	a, _asincosf_sloc33_1_0+3
+      00058Er83r0B                  870 	mov	___fsadd_PARM_1+3, a
+      000590rDEr0F                  871 	mov	a, _asincosf_sloc23_1_0+0
+      000592r80r0B                  872 	mov	___fsadd_PARM_2+0, a
+      000594rDFr0F                  873 	mov	a, _asincosf_sloc23_1_0+1
+      000596r81r0B                  874 	mov	___fsadd_PARM_2+1, a
+      000598rE0r0F                  875 	mov	a, _asincosf_sloc23_1_0+2
+      00059Ar82r0B                  876 	mov	___fsadd_PARM_2+2, a
+      00059CrE1r0F                  877 	mov	a, _asincosf_sloc23_1_0+3
+      00059Er83r0B                  878 	mov	___fsadd_PARM_2+3, a
+      0005A0r51r2F                  879 	mov	a, #_asincosf_sloc19_1_0
+      0005A2 72 00                  880 	push	af
+      0005A4r00r38                  881 	call	___fsadd
+      0005A6 C2 01                  882 	mov	a, sp
+      0005A8 FE 28                  883 	add	a, #-2
+      0005AA 82 01                  884 	mov	sp, a
+      0005ACrD1r0F                  885 	mov	a, _asincosf_sloc19_1_0+0
+      0005AEr80r0B                  886 	mov	___fsadd_PARM_1+0, a
+      0005B0rD2r0F                  887 	mov	a, _asincosf_sloc19_1_0+1
+      0005B2r81r0B                  888 	mov	___fsadd_PARM_1+1, a
+      0005B4rD3r0F                  889 	mov	a, _asincosf_sloc19_1_0+2
+      0005B6r82r0B                  890 	mov	___fsadd_PARM_1+2, a
+      0005B8rD4r0F                  891 	mov	a, _asincosf_sloc19_1_0+3
+      0005BAr83r0B                  892 	mov	___fsadd_PARM_1+3, a
+      0005BCrFDr0F                  893 	mov	a, _asincosf_sloc33_1_0+0
+      0005BEr80r0B                  894 	mov	___fsadd_PARM_2+0, a
+      0005C0rFEr0F                  895 	mov	a, _asincosf_sloc33_1_0+1
+      0005C2r81r0B                  896 	mov	___fsadd_PARM_2+1, a
+      0005C4rFFr0F                  897 	mov	a, _asincosf_sloc33_1_0+2
+      0005C6r82r0B                  898 	mov	___fsadd_PARM_2+2, a
+      0005C8r80r0F                  899 	mov	a, _asincosf_sloc33_1_0+3
+      0005CAr83r0B                  900 	mov	___fsadd_PARM_2+3, a
+      0005CCr55r2F                  901 	mov	a, #_asincosf_sloc20_1_0
+      0005CE 72 00                  902 	push	af
+      0005D0r00r38                  903 	call	___fsadd
+      0005D2 C2 01                  904 	mov	a, sp
+      0005D4 FE 28                  905 	add	a, #-2
+      0005D6 82 01                  906 	mov	sp, a
+      0005D8rD5r0F                  907 	mov	a, _asincosf_sloc20_1_0+0
+      0005DArF1r0B                  908 	mov	_asincosf_sloc29_1_0+0, a
+      0005DCrD6r0F                  909 	mov	a, _asincosf_sloc20_1_0+1
+      0005DErF2r0B                  910 	mov	_asincosf_sloc29_1_0+1, a
+      0005E0rD7r0F                  911 	mov	a, _asincosf_sloc20_1_0+2
+      0005E2rF3r0B                  912 	mov	_asincosf_sloc29_1_0+2, a
+      0005E4rD8r0F                  913 	mov	a, _asincosf_sloc20_1_0+3
+      0005E6rF4r0B                  914 	mov	_asincosf_sloc29_1_0+3, a
+                                    915 ;	../asincosf.c: 93: if (x < 0.0)
+      0005E8r80r0F                  916 	mov	a, _asincosf_PARM_1+0
+      0005EAr80r0B                  917 	mov	___fslt_PARM_1+0, a
+      0005ECr81r0F                  918 	mov	a, _asincosf_PARM_1+1
+      0005EEr81r0B                  919 	mov	___fslt_PARM_1+1, a
+      0005F0r82r0F                  920 	mov	a, _asincosf_PARM_1+2
+      0005F2r82r0B                  921 	mov	___fslt_PARM_1+2, a
+      0005F4r83r0F                  922 	mov	a, _asincosf_PARM_1+3
+      0005F6r83r0B                  923 	mov	___fslt_PARM_1+3, a
+      0005F8r00r13                  924 	clear	___fslt_PARM_2+0
+      0005FAr01r13                  925 	clear	___fslt_PARM_2+1
+      0005FCr02r13                  926 	clear	___fslt_PARM_2+2
+      0005FEr03r13                  927 	clear	___fslt_PARM_2+3
+      000600r00r38                  928 	call	___fslt
+      000602 00 2B                  929 	cneqsn	a, #0x00
+      000604r0Cr36                  930 	goto	00116$
+                                    931 ;	../asincosf.c: 94: r = -r;
+      000606rF4r0F                  932 	mov	a, _asincosf_sloc29_1_0+3
+      000608 80 2E                  933 	xor	a, #0x80
+      00060ArF4r0B                  934 	mov	_asincosf_sloc29_1_0+3, a
+      00060C                        935 00116$:
+                                    936 ;	../asincosf.c: 96: return r;
+      00060C C2 01                  937 	mov	a, sp
+      00060E FC 28                  938 	add	a, #0xfc
+      000610r80r0B                  939 	mov	p, a
+      000612r81r03                  940 	idxm	a, p
+      000614r80r0B                  941 	mov	p, a
+      000616rF1r0F                  942 	mov	a, _asincosf_sloc29_1_0+0
+      000618r80r03                  943 	idxm	p, a
+      00061Ar00r12                  944 	inc	p
+      00061CrF2r0F                  945 	mov	a, _asincosf_sloc29_1_0+1
+      00061Er80r03                  946 	idxm	p, a
+      000620r00r12                  947 	inc	p
+      000622rF3r0F                  948 	mov	a, _asincosf_sloc29_1_0+2
+      000624r80r03                  949 	idxm	p, a
+      000626r00r12                  950 	inc	p
+      000628rF4r0F                  951 	mov	a, _asincosf_sloc29_1_0+3
+      00062Ar80r03                  952 	idxm	p, a
+                                    953 ;	../asincosf.c: 97: }
+      00062C 7A 00                  954 	ret
+                                    955 	.area CODE
+                                    956 	.area CONST
+      000000                        957 _asincosf_a_65536_26:
+      000000 00 02                  958 	ret #0x00
+      000002 00 02                  959 	ret #0x00
+      000004 00 02                  960 	ret #0x00
+      000006 00 02                  961 	ret #0x00	;  0.000000e+00
+      000008 DB 02                  962 	ret #0xdb
+      00000A 0F 02                  963 	ret #0x0f
+      00000C 49 02                  964 	ret #0x49
+      00000E 3F 02                  965 	ret #0x3f	;  7.853982e-01
+      000010                        966 _asincosf_b_65536_26:
+      000010 DB 02                  967 	ret #0xdb
+      000012 0F 02                  968 	ret #0x0f
+      000014 C9 02                  969 	ret #0xc9
+      000016 3F 02                  970 	ret #0x3f	;  1.570796e+00
+      000018 DB 02                  971 	ret #0xdb
+      00001A 0F 02                  972 	ret #0x0f
+      00001C 49 02                  973 	ret #0x49
+      00001E 3F 02                  974 	ret #0x3f	;  7.853982e-01
+                                    975 	.area CABS (ABS)

@@ -1,0 +1,51 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    __gptrget                                                      ****** GX
+  9 _c16rtomb                                                      000000 GR
+  1 _c16rtomb_PARM_1                                               000000 GR
+  1 _c16rtomb_PARM_2                                               000002 GR
+  1 _c16rtomb_PARM_3                                               000004 GR
+  1 _c16rtomb_buf_65536_36                                         000006 R
+  1 _c16rtomb_sloc0_1_0                                            00000D R
+  1 _c16rtomb_sloc10_1_0                                           000023 R
+  1 _c16rtomb_sloc1_1_0                                            00000F R
+  1 _c16rtomb_sloc2_1_0                                            000011 R
+  1 _c16rtomb_sloc3_1_0                                            000015 R
+  1 _c16rtomb_sloc4_1_0                                            000017 R
+  1 _c16rtomb_sloc5_1_0                                            000019 R
+  1 _c16rtomb_sloc6_1_0                                            00001B R
+  1 _c16rtomb_sloc7_1_0                                            00001D R
+  1 _c16rtomb_sloc8_1_0                                            00001F R
+  1 _c16rtomb_sloc9_1_0                                            000021 R
+  1 _c16rtomb_sps_65536_36                                         00000A R
+    _errno                                                         ****** GX
+    _wctomb                                                        ****** GX
+    _wctomb_PARM_1                                                 ****** GX
+    _wctomb_PARM_2                                                 ****** GX
+    p                                                              ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     25   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    18E   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

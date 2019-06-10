@@ -1,0 +1,89 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module wctob
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wctob_PARM_1
+                                     17 	.globl _wctob
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _wctob_PARM_1:
+      000000                         28 	.ds 4
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _wctob_sloc0_1_0:
+      000000                         34 	.ds 4
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../wctob.c: 35: int wctob(wint_t c)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function wctob
+                                     58 ;	-----------------------------------------
+      000000                         59 _wctob:
+                                     60 ;	../wctob.c: 37: if(c & 0xffffff80)
+      000000r80r0F                   61 	mov	a, _wctob_PARM_1+0
+      000002 80 2C                   62 	and	a, #0x80
+      000004r80r0B                   63 	mov	_wctob_sloc0_1_0+0, a
+      000006r81r0F                   64 	mov	a, _wctob_PARM_1+1
+      000008r81r0B                   65 	mov	_wctob_sloc0_1_0+1, a
+      00000Ar82r0F                   66 	mov	a, _wctob_PARM_1+2
+      00000Cr82r0B                   67 	mov	_wctob_sloc0_1_0+2, a
+      00000Er83r0F                   68 	mov	a, _wctob_PARM_1+3
+      000010r83r0B                   69 	mov	_wctob_sloc0_1_0+3, a
+      000012r80r0F                   70 	mov	a, _wctob_sloc0_1_0+0
+      000014r81r0E                   71 	or	a, _wctob_sloc0_1_0+1
+      000016r82r0E                   72 	or	a, _wctob_sloc0_1_0+2
+      000018r83r0E                   73 	or	a, _wctob_sloc0_1_0+3
+      00001A 00 2B                   74 	cneqsn	a, #0x00
+      00001Cr24r30                   75 	goto	00102$
+                                     76 ;	../wctob.c: 38: return WEOF;
+      00001E FF 2F                   77 	mov	a, #0xff
+      000020r80r0B                   78 	mov	p, a
+      000022 FF 02                   79 	ret	#0xff
+      000024                         80 00102$:
+                                     81 ;	../wctob.c: 39: return c;
+      000024r81r0F                   82 	mov	a, _wctob_PARM_1+1
+      000026r80r0B                   83 	mov	p, a
+      000028r80r0F                   84 	mov	a, _wctob_PARM_1+0
+                                     85 ;	../wctob.c: 40: }
+      00002A 7A 00                   86 	ret
+                                     87 	.area CODE
+                                     88 	.area CONST
+                                     89 	.area CABS (ABS)

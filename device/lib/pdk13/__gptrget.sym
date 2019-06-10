@@ -1,0 +1,17 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 13), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.=  002710 L   |     .__.ABS.=  000000 G   |     .__.CPU.=  000000 L
+    .__.H$L.=  000000 L   |   1 __gptrge   000000 GR  |   1 code       00000A R
+    p          ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 13), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE      size      0   flags    0
+   1 CODE       size     16   flags    0
+

@@ -1,0 +1,42 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    __gptrget                                                      ****** GX
+    __mulint                                                       ****** GX
+    __mulint_PARM_1                                                ****** GX
+    __mulint_PARM_2                                                ****** GX
+  9 _atoi                                                          000000 GR
+  1 _atoi_PARM_1                                                   000000 GR
+  1 _atoi_sloc0_1_0                                                000002 R
+  1 _atoi_sloc1_1_0                                                000004 R
+  1 _atoi_sloc2_1_0                                                000006 R
+  1 _atoi_sloc3_1_0                                                000007 R
+  1 _atoi_sloc4_1_0                                                000009 R
+  1 _atoi_sloc5_1_0                                                00000B R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      D   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size     CC   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

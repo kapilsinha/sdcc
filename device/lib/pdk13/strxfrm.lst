@@ -1,0 +1,93 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module strxfrm
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strlen
+                                     17 	.globl _strncpy
+                                     18 	.globl _strxfrm_PARM_3
+                                     19 	.globl _strxfrm_PARM_2
+                                     20 	.globl _strxfrm_PARM_1
+                                     21 	.globl _strxfrm
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _strxfrm_PARM_1:
+      000000                         32 	.ds 2
+      000002                         33 _strxfrm_PARM_2:
+      000002                         34 	.ds 2
+      000004                         35 _strxfrm_PARM_3:
+      000004                         36 	.ds 2
+                                     37 ;--------------------------------------------------------
+                                     38 ; overlayable items in ram 
+                                     39 ;--------------------------------------------------------
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../strxfrm.c: 31: size_t strxfrm(char *dest, const char *src, size_t n)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function strxfrm
+                                     63 ;	-----------------------------------------
+      000000                         64 _strxfrm:
+                                     65 ;	../strxfrm.c: 33: strncpy(dest, src, n);
+      000000r80r0F                   66 	mov	a, _strxfrm_PARM_1+0
+      000002r80r0B                   67 	mov	_strncpy_PARM_1+0, a
+      000004r81r0F                   68 	mov	a, _strxfrm_PARM_1+1
+      000006r81r0B                   69 	mov	_strncpy_PARM_1+1, a
+      000008r82r0F                   70 	mov	a, _strxfrm_PARM_2+0
+      00000Ar80r0B                   71 	mov	_strncpy_PARM_2+0, a
+      00000Cr83r0F                   72 	mov	a, _strxfrm_PARM_2+1
+      00000Er81r0B                   73 	mov	_strncpy_PARM_2+1, a
+      000010r84r0F                   74 	mov	a, _strxfrm_PARM_3+0
+      000012r80r0B                   75 	mov	_strncpy_PARM_3+0, a
+      000014r85r0F                   76 	mov	a, _strxfrm_PARM_3+1
+      000016r81r0B                   77 	mov	_strncpy_PARM_3+1, a
+      000018r00r38                   78 	call	_strncpy
+                                     79 ;	../strxfrm.c: 34: return(strlen(src) + 1);
+      00001Ar82r0F                   80 	mov	a, _strxfrm_PARM_2+0
+      00001Cr80r0B                   81 	mov	_strlen_PARM_1+0, a
+      00001Er83r0F                   82 	mov	a, _strxfrm_PARM_2+1
+      000020r81r0B                   83 	mov	_strlen_PARM_1+1, a
+      000022r00r38                   84 	call	_strlen
+      000024 01 28                   85 	add	a, #0x01
+      000026 72 00                   86 	push	af
+      000028r00r10                   87 	addc	p
+      00002A 73 00                   88 	pop	af
+                                     89 ;	../strxfrm.c: 35: }
+      00002C 7A 00                   90 	ret
+                                     91 	.area CODE
+                                     92 	.area CONST
+                                     93 	.area CABS (ABS)

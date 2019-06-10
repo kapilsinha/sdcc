@@ -1,0 +1,146 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strncmp
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strncmp_PARM_3
+                                     17 	.globl _strncmp_PARM_2
+                                     18 	.globl _strncmp_PARM_1
+                                     19 	.globl _strncmp
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _strncmp_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _strncmp_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _strncmp_PARM_3:
+      000004                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 	.area	OSEG (OVR,DATA)
+      000000                         39 _strncmp_sloc0_1_0:
+      000000                         40 	.ds 2
+      000002                         41 _strncmp_sloc1_1_0:
+      000002                         42 	.ds 2
+      000004                         43 _strncmp_sloc2_1_0:
+      000004                         44 	.ds 2
+      000006                         45 _strncmp_sloc3_1_0:
+      000006                         46 	.ds 1
+      000007                         47 _strncmp_sloc4_1_0:
+      000007                         48 	.ds 2
+                                     49 ;--------------------------------------------------------
+                                     50 ; absolute external ram data
+                                     51 ;--------------------------------------------------------
+                                     52 	.area DABS (ABS)
+                                     53 ;--------------------------------------------------------
+                                     54 ; global & static initialisations
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area GSINIT
+                                     58 	.area GSFINAL
+                                     59 	.area GSINIT
+                                     60 ;--------------------------------------------------------
+                                     61 ; Home
+                                     62 ;--------------------------------------------------------
+                                     63 	.area HOME
+                                     64 	.area HOME
+                                     65 ;--------------------------------------------------------
+                                     66 ; code
+                                     67 ;--------------------------------------------------------
+                                     68 	.area CODE
+                                     69 ;	../_strncmp.c: 31: int strncmp ( const char * first, const char * last, size_t count )
+                                     70 ;	-----------------------------------------
+                                     71 ;	 function strncmp
+                                     72 ;	-----------------------------------------
+      000000                         73 _strncmp:
+                                     74 ;	../_strncmp.c: 33: if (!count)
+      000000r84r0F                   75 	mov	a, _strncmp_PARM_3+0
+      000002r85r0E                   76 	or	a, _strncmp_PARM_3+1
+      000004 00 2A                   77 	ceqsn	a, #0x00
+      000006r0Cr30                   78 	goto	00114$
+                                     79 ;	../_strncmp.c: 34: return(0);
+      000008r00r13                   80 	clear	p
+      00000A 00 02                   81 	ret	#0x00
+                                     82 ;	../_strncmp.c: 36: while (--count && *first && *first == *last) {
+      00000C                         83 00114$:
+      00000Cr80r0F                   84 	mov	a, _strncmp_PARM_1+0
+      00000Er80r0B                   85 	mov	_strncmp_sloc0_1_0+0, a
+      000010r81r0F                   86 	mov	a, _strncmp_PARM_1+1
+      000012r81r0B                   87 	mov	_strncmp_sloc0_1_0+1, a
+      000014r82r0F                   88 	mov	a, _strncmp_PARM_2+0
+      000016r82r0B                   89 	mov	_strncmp_sloc1_1_0+0, a
+      000018r83r0F                   90 	mov	a, _strncmp_PARM_2+1
+      00001Ar83r0B                   91 	mov	_strncmp_sloc1_1_0+1, a
+      00001Cr84r0F                   92 	mov	a, _strncmp_PARM_3+0
+      00001Er84r0B                   93 	mov	_strncmp_sloc2_1_0+0, a
+      000020r85r0F                   94 	mov	a, _strncmp_PARM_3+1
+      000022r85r0B                   95 	mov	_strncmp_sloc2_1_0+1, a
+      000024                         96 00105$:
+      000024r84r12                   97 	dec	_strncmp_sloc2_1_0+0
+      000026r85r10                   98 	subc	_strncmp_sloc2_1_0+1
+      000028r84r0F                   99 	mov	a, _strncmp_sloc2_1_0+0
+      00002Ar85r0E                  100 	or	a, _strncmp_sloc2_1_0+1
+      00002C 00 2B                  101 	cneqsn	a, #0x00
+      00002Er54r30                  102 	goto	00107$
+      000030r80r0F                  103 	mov	a, _strncmp_sloc0_1_0+0
+      000032r80r0B                  104 	mov	p, a
+      000034r81r0F                  105 	mov	a, _strncmp_sloc0_1_0+1
+      000036r00r38                  106 	call	__gptrget
+      000038r86r0B                  107 	mov	_strncmp_sloc3_1_0+0, a
+      00003A 00 2B                  108 	cneqsn	a, #0x00
+      00003Cr54r30                  109 	goto	00107$
+      00003Er82r0F                  110 	mov	a, _strncmp_sloc1_1_0+0
+      000040r80r0B                  111 	mov	p, a
+      000042r83r0F                  112 	mov	a, _strncmp_sloc1_1_0+1
+      000044r00r38                  113 	call	__gptrget
+      000046r06r17                  114 	ceqsn	a, _strncmp_sloc3_1_0+0
+      000048r54r30                  115 	goto	00107$
+                                    116 ;	../_strncmp.c: 37: first++;
+      00004Ar00r12                  117 	inc	_strncmp_sloc0_1_0+0
+      00004Cr01r10                  118 	addc	_strncmp_sloc0_1_0+1
+                                    119 ;	../_strncmp.c: 38: last++;
+      00004Er02r12                  120 	inc	_strncmp_sloc1_1_0+0
+      000050r03r10                  121 	addc	_strncmp_sloc1_1_0+1
+      000052r24r30                  122 	goto	00105$
+      000054                        123 00107$:
+                                    124 ;	../_strncmp.c: 41: return( *first - *last );
+      000054r80r0F                  125 	mov	a, _strncmp_sloc0_1_0+0
+      000056r80r0B                  126 	mov	p, a
+      000058r81r0F                  127 	mov	a, _strncmp_sloc0_1_0+1
+      00005Ar00r38                  128 	call	__gptrget
+      00005Cr87r0B                  129 	mov	_strncmp_sloc4_1_0+0, a
+      00005Er08r13                  130 	clear	_strncmp_sloc4_1_0+1
+      000060r82r0F                  131 	mov	a, _strncmp_sloc1_1_0+0
+      000062r80r0B                  132 	mov	p, a
+      000064r83r0F                  133 	mov	a, _strncmp_sloc1_1_0+1
+      000066r00r38                  134 	call	__gptrget
+      000068r80r0B                  135 	mov	p, a
+      00006Ar87r0F                  136 	mov	a, _strncmp_sloc4_1_0+0
+      00006Cr80r0C                  137 	sub	a, p
+      00006Er80r0B                  138 	mov	p, a
+      000070r88r0F                  139 	mov	a, _strncmp_sloc4_1_0+1
+      000072 61 00                  140 	subc	a
+      000074r80r13                  141 	xch	a, p
+                                    142 ;	../_strncmp.c: 42: }
+      000076 7A 00                  143 	ret
+                                    144 	.area CODE
+                                    145 	.area CONST
+                                    146 	.area CABS (ABS)

@@ -1,0 +1,250 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module atol
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _atol_PARM_1
+                                     17 	.globl _atol
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _atol_PARM_1:
+      000000                         28 	.ds 2
+      000002                         29 _atol_sloc0_1_0:
+      000002                         30 	.ds 4
+      000006                         31 _atol_sloc1_1_0:
+      000006                         32 	.ds 4
+      00000A                         33 _atol_sloc2_1_0:
+      00000A                         34 	.ds 2
+      00000C                         35 _atol_sloc3_1_0:
+      00000C                         36 	.ds 1
+      00000D                         37 _atol_sloc4_1_0:
+      00000D                         38 	.ds 2
+      00000F                         39 _atol_sloc5_1_0:
+      00000F                         40 	.ds 4
+      000013                         41 _atol_sloc6_1_0:
+      000013                         42 	.ds 4
+                                     43 ;--------------------------------------------------------
+                                     44 ; overlayable items in ram 
+                                     45 ;--------------------------------------------------------
+                                     46 ;--------------------------------------------------------
+                                     47 ; absolute external ram data
+                                     48 ;--------------------------------------------------------
+                                     49 	.area DABS (ABS)
+                                     50 ;--------------------------------------------------------
+                                     51 ; global & static initialisations
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area GSINIT
+                                     55 	.area GSFINAL
+                                     56 	.area GSINIT
+                                     57 ;--------------------------------------------------------
+                                     58 ; Home
+                                     59 ;--------------------------------------------------------
+                                     60 	.area HOME
+                                     61 	.area HOME
+                                     62 ;--------------------------------------------------------
+                                     63 ; code
+                                     64 ;--------------------------------------------------------
+                                     65 	.area CODE
+                                     66 ;	../atol.c: 34: long int atol(const char *nptr)
+                                     67 ;	-----------------------------------------
+                                     68 ;	 function atol
+                                     69 ;	-----------------------------------------
+      000000                         70 _atol:
+                                     71 ;	../atol.c: 36: long int ret = 0;
+      000000r06r13                   72 	clear	_atol_sloc1_1_0+0
+      000002r07r13                   73 	clear	_atol_sloc1_1_0+1
+      000004r08r13                   74 	clear	_atol_sloc1_1_0+2
+      000006r09r13                   75 	clear	_atol_sloc1_1_0+3
+                                     76 ;	../atol.c: 39: while (isblank (*nptr))
+      000008r80r0F                   77 	mov	a, _atol_PARM_1+0
+      00000Ar8Ar0B                   78 	mov	_atol_sloc2_1_0+0, a
+      00000Cr81r0F                   79 	mov	a, _atol_PARM_1+1
+      00000Er8Br0B                   80 	mov	_atol_sloc2_1_0+1, a
+      000010                         81 00101$:
+      000010r8Ar0F                   82 	mov	a, _atol_sloc2_1_0+0
+      000012r80r0B                   83 	mov	p, a
+      000014r8Br0F                   84 	mov	a, _atol_sloc2_1_0+1
+      000016r00r38                   85 	call	__gptrget
+                                     86 ;	./../../include/ctype.h: 53: return ((unsigned char)c == ' ' || (unsigned char)c == '\t');
+      000018 20 2B                   87 	cneqsn	a, #0x20
+      00001Ar20r30                   88 	goto	00115$
+      00001C 09 2A                   89 	ceqsn	a, #0x09
+      00001Er26r30                   90 	goto	00131$
+      000020                         91 00115$:
+                                     92 ;	../atol.c: 40: nptr++;
+      000020r0Ar12                   93 	inc	_atol_sloc2_1_0+0
+      000022r0Br10                   94 	addc	_atol_sloc2_1_0+1
+      000024r10r30                   95 	goto	00101$
+      000026                         96 00131$:
+      000026r8Ar0F                   97 	mov	a, _atol_sloc2_1_0+0
+      000028r80r0B                   98 	mov	_atol_PARM_1+0, a
+      00002Ar8Br0F                   99 	mov	a, _atol_sloc2_1_0+1
+      00002Cr81r0B                  100 	mov	_atol_PARM_1+1, a
+                                    101 ;	../atol.c: 42: neg = (*nptr == '-');
+      00002Er8Ar0F                  102 	mov	a, _atol_sloc2_1_0+0
+      000030r80r0B                  103 	mov	p, a
+      000032r8Br0F                  104 	mov	a, _atol_sloc2_1_0+1
+      000034r00r38                  105 	call	__gptrget
+      000036 2D 2A                  106 	ceqsn	a, #0x2d
+      000038r42r30                  107 	goto	00155$
+      00003A 72 00                  108 	push	af
+      00003C 01 2F                  109 	mov	a, #0x01
+      00003Er8Cr0B                  110 	mov	_atol_sloc3_1_0+0, a
+      000040r46r30                  111 	goto	00156$
+      000042                        112 00155$:
+      000042 72 00                  113 	push	af
+      000044r0Cr13                  114 	clear	_atol_sloc3_1_0+0
+      000046                        115 00156$:
+      000046 73 00                  116 	pop	af
+                                    117 ;	../atol.c: 44: if (*nptr == '-' || *nptr == '+')
+      000048 2D 2B                  118 	cneqsn	a, #0x2d
+      00004Ar50r30                  119 	goto	00104$
+      00004C 2B 2A                  120 	ceqsn	a, #0x2b
+      00004Er5Cr30                  121 	goto	00129$
+      000050                        122 00104$:
+                                    123 ;	../atol.c: 45: nptr++;
+      000050r8Ar0F                  124 	mov	a, _atol_sloc2_1_0+0
+      000052 01 28                  125 	add	a, #0x01
+      000054r80r0B                  126 	mov	_atol_PARM_1+0, a
+      000056r8Br0F                  127 	mov	a, _atol_sloc2_1_0+1
+      000058 60 00                  128 	addc	a
+      00005Ar81r0B                  129 	mov	_atol_PARM_1+1, a
+                                    130 ;	../atol.c: 47: while (isdigit (*nptr))
+      00005C                        131 00129$:
+      00005Cr80r0F                  132 	mov	a, _atol_PARM_1+0
+      00005Er8Dr0B                  133 	mov	_atol_sloc4_1_0+0, a
+      000060r81r0F                  134 	mov	a, _atol_PARM_1+1
+      000062r8Er0B                  135 	mov	_atol_sloc4_1_0+1, a
+      000064                        136 00107$:
+      000064r8Dr0F                  137 	mov	a, _atol_sloc4_1_0+0
+      000066r80r0B                  138 	mov	p, a
+      000068r8Er0F                  139 	mov	a, _atol_sloc4_1_0+1
+      00006Ar00r38                  140 	call	__gptrget
+                                    141 ;	./../../include/ctype.h: 62: return ((unsigned char)c >= '0' && (unsigned char)c <= '9');
+      00006C 30 2A                  142 	ceqsn	a, #0x30
+      00006E 00 00                  143 	nop
+      000070 40 18                  144 	t0sn	f, c
+      000072rE2r30                  145 	goto	00109$
+      000074 3A 2A                  146 	ceqsn	a, #0x3a
+      000076 40 1A                  147 	t1sn	f, c
+      000078rE2r30                  148 	goto	00109$
+                                    149 ;	../atol.c: 48: ret = ret * 10 + (*(nptr++) - '0');
+      00007A 0A 2F                  150 	mov	a, #0x0a
+      00007Cr80r0B                  151 	mov	__mullong_PARM_1+0, a
+      00007Er01r13                  152 	clear	__mullong_PARM_1+1
+      000080r02r13                  153 	clear	__mullong_PARM_1+2
+      000082r03r13                  154 	clear	__mullong_PARM_1+3
+      000084r86r0F                  155 	mov	a, _atol_sloc1_1_0+0
+      000086r80r0B                  156 	mov	__mullong_PARM_2+0, a
+      000088r87r0F                  157 	mov	a, _atol_sloc1_1_0+1
+      00008Ar81r0B                  158 	mov	__mullong_PARM_2+1, a
+      00008Cr88r0F                  159 	mov	a, _atol_sloc1_1_0+2
+      00008Er82r0B                  160 	mov	__mullong_PARM_2+2, a
+      000090r89r0F                  161 	mov	a, _atol_sloc1_1_0+3
+      000092r83r0B                  162 	mov	__mullong_PARM_2+3, a
+      000094r02r2F                  163 	mov	a, #_atol_sloc0_1_0
+      000096 72 00                  164 	push	af
+      000098r00r38                  165 	call	__mullong
+      00009A C2 01                  166 	mov	a, sp
+      00009C FE 28                  167 	add	a, #-2
+      00009E 82 01                  168 	mov	sp, a
+      0000A0r8Dr0F                  169 	mov	a, _atol_sloc4_1_0+0
+      0000A2r80r0B                  170 	mov	p, a
+      0000A4r8Er0F                  171 	mov	a, _atol_sloc4_1_0+1
+      0000A6r00r38                  172 	call	__gptrget
+      0000A8r0Dr12                  173 	inc	_atol_sloc4_1_0+0
+      0000AAr0Er10                  174 	addc	_atol_sloc4_1_0+1
+      0000AC 30 29                  175 	sub	a, #0x30
+      0000AE 72 00                  176 	push	af
+      0000B0 00 2F                  177 	mov	a, #0x00
+      0000B2 61 00                  178 	subc	a
+      0000B4r80r0B                  179 	mov	p, a
+      0000B6 73 00                  180 	pop	af
+      0000B8r8Fr0B                  181 	mov	_atol_sloc5_1_0+0, a
+      0000BAr80r0F                  182 	mov	a, p
+      0000BCr90r0B                  183 	mov	_atol_sloc5_1_0+1, a
+      0000BE 6B 00                  184 	sl	a
+      0000C0 00 2F                  185 	mov	a, #0x00
+      0000C2 61 00                  186 	subc	a
+      0000C4r91r0B                  187 	mov	_atol_sloc5_1_0+2, a
+      0000C6r92r0B                  188 	mov	_atol_sloc5_1_0+3, a
+      0000C8r82r0F                  189 	mov	a, _atol_sloc0_1_0+0
+      0000CAr0Fr0C                  190 	add	a, _atol_sloc5_1_0+0
+      0000CCr86r0B                  191 	mov	_atol_sloc1_1_0+0, a
+      0000CEr83r0F                  192 	mov	a, _atol_sloc0_1_0+1
+      0000D0r10r0D                  193 	addc	a, _atol_sloc5_1_0+1
+      0000D2r87r0B                  194 	mov	_atol_sloc1_1_0+1, a
+      0000D4r84r0F                  195 	mov	a, _atol_sloc0_1_0+2
+      0000D6r11r0D                  196 	addc	a, _atol_sloc5_1_0+2
+      0000D8r88r0B                  197 	mov	_atol_sloc1_1_0+2, a
+      0000DAr85r0F                  198 	mov	a, _atol_sloc0_1_0+3
+      0000DCr12r0D                  199 	addc	a, _atol_sloc5_1_0+3
+      0000DEr89r0B                  200 	mov	_atol_sloc1_1_0+3, a
+      0000E0r64r30                  201 	goto	00107$
+      0000E2                        202 00109$:
+                                    203 ;	../atol.c: 50: return (neg ? -ret : ret); // Since -LONG_MIN is LONG_MIN in sdcc, the result value always turns out ok.
+      0000E2r8Cr0F                  204 	mov	a, _atol_sloc3_1_0+0
+      0000E4 00 2B                  205 	cneqsn	a, #0x00
+      0000E6r02r31                  206 	goto	00120$
+      0000E8 00 2F                  207 	mov	a, #0x00
+      0000EAr86r0C                  208 	sub	a, _atol_sloc1_1_0+0
+      0000ECr93r0B                  209 	mov	_atol_sloc6_1_0+0, a
+      0000EE 00 2F                  210 	mov	a, #0x00
+      0000F0r87r0D                  211 	subc	a, _atol_sloc1_1_0+1
+      0000F2r94r0B                  212 	mov	_atol_sloc6_1_0+1, a
+      0000F4 00 2F                  213 	mov	a, #0x00
+      0000F6r88r0D                  214 	subc	a, _atol_sloc1_1_0+2
+      0000F8r95r0B                  215 	mov	_atol_sloc6_1_0+2, a
+      0000FA 00 2F                  216 	mov	a, #0x00
+      0000FCr89r0D                  217 	subc	a, _atol_sloc1_1_0+3
+      0000FEr96r0B                  218 	mov	_atol_sloc6_1_0+3, a
+      000100r12r31                  219 	goto	00121$
+      000102                        220 00120$:
+      000102r86r0F                  221 	mov	a, _atol_sloc1_1_0+0
+      000104r93r0B                  222 	mov	_atol_sloc6_1_0+0, a
+      000106r87r0F                  223 	mov	a, _atol_sloc1_1_0+1
+      000108r94r0B                  224 	mov	_atol_sloc6_1_0+1, a
+      00010Ar88r0F                  225 	mov	a, _atol_sloc1_1_0+2
+      00010Cr95r0B                  226 	mov	_atol_sloc6_1_0+2, a
+      00010Er89r0F                  227 	mov	a, _atol_sloc1_1_0+3
+      000110r96r0B                  228 	mov	_atol_sloc6_1_0+3, a
+      000112                        229 00121$:
+      000112 C2 01                  230 	mov	a, sp
+      000114 FC 28                  231 	add	a, #0xfc
+      000116r80r0B                  232 	mov	p, a
+      000118r81r03                  233 	idxm	a, p
+      00011Ar80r0B                  234 	mov	p, a
+      00011Cr93r0F                  235 	mov	a, _atol_sloc6_1_0+0
+      00011Er80r03                  236 	idxm	p, a
+      000120r00r12                  237 	inc	p
+      000122r94r0F                  238 	mov	a, _atol_sloc6_1_0+1
+      000124r80r03                  239 	idxm	p, a
+      000126r00r12                  240 	inc	p
+      000128r95r0F                  241 	mov	a, _atol_sloc6_1_0+2
+      00012Ar80r03                  242 	idxm	p, a
+      00012Cr00r12                  243 	inc	p
+      00012Er96r0F                  244 	mov	a, _atol_sloc6_1_0+3
+      000130r80r03                  245 	idxm	p, a
+                                    246 ;	../atol.c: 51: }
+      000132 7A 00                  247 	ret
+                                    248 	.area CODE
+                                    249 	.area CONST
+                                    250 	.area CABS (ABS)

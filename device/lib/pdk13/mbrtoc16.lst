@@ -1,0 +1,413 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbrtoc16
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbrtowc
+                                     17 	.globl _mbrtoc16_PARM_4
+                                     18 	.globl _mbrtoc16_PARM_3
+                                     19 	.globl _mbrtoc16_PARM_2
+                                     20 	.globl _mbrtoc16_PARM_1
+                                     21 	.globl _mbrtoc16
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _mbrtoc16_PARM_1:
+      000000                         32 	.ds 2
+      000002                         33 _mbrtoc16_PARM_2:
+      000002                         34 	.ds 2
+      000004                         35 _mbrtoc16_PARM_3:
+      000004                         36 	.ds 2
+      000006                         37 _mbrtoc16_PARM_4:
+      000006                         38 	.ds 2
+      000008                         39 _mbrtoc16_codepoint_65536_16:
+      000008                         40 	.ds 4
+      00000C                         41 _mbrtoc16_sps_65536_16:
+      00000C                         42 	.ds 3
+      00000F                         43 _mbrtoc16_sloc0_1_0:
+      00000F                         44 	.ds 2
+      000011                         45 _mbrtoc16_sloc1_1_0:
+      000011                         46 	.ds 2
+      000013                         47 _mbrtoc16_sloc2_1_0:
+      000013                         48 	.ds 2
+      000015                         49 _mbrtoc16_sloc3_1_0:
+      000015                         50 	.ds 2
+      000017                         51 _mbrtoc16_sloc4_1_0:
+      000017                         52 	.ds 2
+      000019                         53 _mbrtoc16_sloc5_1_0:
+      000019                         54 	.ds 2
+      00001B                         55 _mbrtoc16_sloc6_1_0:
+      00001B                         56 	.ds 2
+      00001D                         57 _mbrtoc16_sloc7_1_0:
+      00001D                         58 	.ds 2
+      00001F                         59 _mbrtoc16_sloc8_1_0:
+      00001F                         60 	.ds 2
+      000021                         61 _mbrtoc16_sloc9_1_0:
+      000021                         62 	.ds 2
+      000023                         63 _mbrtoc16_sloc10_1_0:
+      000023                         64 	.ds 2
+      000025                         65 _mbrtoc16_sloc11_1_0:
+      000025                         66 	.ds 4
+      000029                         67 _mbrtoc16_sloc12_1_0:
+      000029                         68 	.ds 2
+      00002B                         69 _mbrtoc16_sloc13_1_0:
+      00002B                         70 	.ds 2
+      00002D                         71 _mbrtoc16_sloc14_1_0:
+      00002D                         72 	.ds 2
+      00002F                         73 _mbrtoc16_sloc15_1_0:
+      00002F                         74 	.ds 2
+      000031                         75 _mbrtoc16_sloc16_1_0:
+      000031                         76 	.ds 2
+      000033                         77 _mbrtoc16_sloc17_1_0:
+      000033                         78 	.ds 2
+      000035                         79 _mbrtoc16_sloc18_1_0:
+      000035                         80 	.ds 2
+                                     81 ;--------------------------------------------------------
+                                     82 ; overlayable items in ram 
+                                     83 ;--------------------------------------------------------
+                                     84 ;--------------------------------------------------------
+                                     85 ; absolute external ram data
+                                     86 ;--------------------------------------------------------
+                                     87 	.area DABS (ABS)
+                                     88 ;--------------------------------------------------------
+                                     89 ; global & static initialisations
+                                     90 ;--------------------------------------------------------
+                                     91 	.area HOME
+                                     92 	.area GSINIT
+                                     93 	.area GSFINAL
+                                     94 	.area GSINIT
+                                     95 ;--------------------------------------------------------
+                                     96 ; Home
+                                     97 ;--------------------------------------------------------
+                                     98 	.area HOME
+                                     99 	.area HOME
+                                    100 ;--------------------------------------------------------
+                                    101 ; code
+                                    102 ;--------------------------------------------------------
+                                    103 	.area CODE
+                                    104 ;	../mbrtoc16.c: 34: size_t mbrtoc16(char16_t *restrict pc16, const char *restrict s, size_t n, mbstate_t *restrict ps)
+                                    105 ;	-----------------------------------------
+                                    106 ;	 function mbrtoc16
+                                    107 ;	-----------------------------------------
+      000000                        108 _mbrtoc16:
+                                    109 ;	../mbrtoc16.c: 41: if(!s)
+      000000r82r0F                  110 	mov	a, _mbrtoc16_PARM_2+0
+      000002r83r0E                  111 	or	a, _mbrtoc16_PARM_2+1
+      000004 00 2A                  112 	ceqsn	a, #0x00
+      000006r1Er30                  113 	goto	00102$
+                                    114 ;	../mbrtoc16.c: 42: return(mbrtoc16(0, "", 1, ps));
+      000008r00r2F                  115 	mov	a, #<(___str_0 + 0)
+      00000Ar82r0B                  116 	mov	_mbrtoc16_PARM_2+0, a
+      00000Cr00r2F                  117 	mov	a, #>(___str_0 + 0x8000 + 0)
+      00000Er83r0B                  118 	mov	_mbrtoc16_PARM_2+1, a
+      000010r00r13                  119 	clear	_mbrtoc16_PARM_1+0
+      000012r01r13                  120 	clear	_mbrtoc16_PARM_1+1
+      000014 01 2F                  121 	mov	a, #0x01
+      000016r84r0B                  122 	mov	_mbrtoc16_PARM_3+0, a
+      000018r05r13                  123 	clear	_mbrtoc16_PARM_3+1
+      00001Ar00r38                  124 	call	_mbrtoc16
+      00001C 7A 00                  125 	ret
+      00001E                        126 00102$:
+                                    127 ;	../mbrtoc16.c: 44: if(!ps)
+      00001Er86r0F                  128 	mov	a, _mbrtoc16_PARM_4+0
+      000020r87r0E                  129 	or	a, _mbrtoc16_PARM_4+1
+      000022 00 2A                  130 	ceqsn	a, #0x00
+      000024r2Cr30                  131 	goto	00104$
+                                    132 ;	../mbrtoc16.c: 45: ps = &sps;
+      000026r0Cr2F                  133 	mov	a, #(_mbrtoc16_sps_65536_16 + 0)
+      000028r86r0B                  134 	mov	_mbrtoc16_PARM_4+0, a
+      00002Ar07r13                  135 	clear	_mbrtoc16_PARM_4+1
+      00002C                        136 00104$:
+                                    137 ;	../mbrtoc16.c: 47: if(!ps->c[0] && (ps->c[1] || ps->c[2]))
+      00002Cr86r0F                  138 	mov	a, _mbrtoc16_PARM_4+0
+      00002Er8Fr0B                  139 	mov	_mbrtoc16_sloc0_1_0+0, a
+      000030r87r0F                  140 	mov	a, _mbrtoc16_PARM_4+1
+      000032r90r0B                  141 	mov	_mbrtoc16_sloc0_1_0+1, a
+      000034r8Fr0F                  142 	mov	a, _mbrtoc16_sloc0_1_0+0
+      000036r80r0B                  143 	mov	p, a
+      000038r90r0F                  144 	mov	a, _mbrtoc16_sloc0_1_0+1
+      00003Ar00r38                  145 	call	__gptrget
+      00003C 00 2A                  146 	ceqsn	a, #0x00
+      00003ErE0r30                  147 	goto	00108$
+      000040r8Fr0F                  148 	mov	a, _mbrtoc16_sloc0_1_0+0
+      000042 01 28                  149 	add	a, #0x01
+      000044r80r0B                  150 	mov	p, a
+      000046r90r0F                  151 	mov	a, _mbrtoc16_sloc0_1_0+1
+      000048 60 00                  152 	addc	a
+      00004Ar00r38                  153 	call	__gptrget
+      00004C 00 2A                  154 	ceqsn	a, #0x00
+      00004Er60r30                  155 	goto	00107$
+      000050r8Fr0F                  156 	mov	a, _mbrtoc16_sloc0_1_0+0
+      000052 02 28                  157 	add	a, #0x02
+      000054r80r0B                  158 	mov	p, a
+      000056r90r0F                  159 	mov	a, _mbrtoc16_sloc0_1_0+1
+      000058 60 00                  160 	addc	a
+      00005Ar00r38                  161 	call	__gptrget
+      00005C 00 2B                  162 	cneqsn	a, #0x00
+      00005ErE0r30                  163 	goto	00108$
+      000060                        164 00107$:
+                                    165 ;	../mbrtoc16.c: 49: if(pc16)
+      000060r80r0F                  166 	mov	a, _mbrtoc16_PARM_1+0
+      000062r81r0E                  167 	or	a, _mbrtoc16_PARM_1+1
+      000064 00 2B                  168 	cneqsn	a, #0x00
+      000066rB0r30                  169 	goto	00106$
+                                    170 ;	../mbrtoc16.c: 50: *pc16 = ps->c[1] + (ps->c[2] << 8);
+      000068r80r0F                  171 	mov	a, _mbrtoc16_PARM_1+0
+      00006Ar91r0B                  172 	mov	_mbrtoc16_sloc1_1_0+0, a
+      00006Cr81r0F                  173 	mov	a, _mbrtoc16_PARM_1+1
+      00006Er92r0B                  174 	mov	_mbrtoc16_sloc1_1_0+1, a
+      000070r86r0F                  175 	mov	a, _mbrtoc16_PARM_4+0
+      000072r93r0B                  176 	mov	_mbrtoc16_sloc2_1_0+0, a
+      000074r87r0F                  177 	mov	a, _mbrtoc16_PARM_4+1
+      000076r94r0B                  178 	mov	_mbrtoc16_sloc2_1_0+1, a
+      000078r93r0F                  179 	mov	a, _mbrtoc16_sloc2_1_0+0
+      00007A 01 28                  180 	add	a, #0x01
+      00007Cr80r0B                  181 	mov	p, a
+      00007Er94r0F                  182 	mov	a, _mbrtoc16_sloc2_1_0+1
+      000080 60 00                  183 	addc	a
+      000082r00r38                  184 	call	__gptrget
+      000084r95r0B                  185 	mov	_mbrtoc16_sloc3_1_0+0, a
+      000086r16r13                  186 	clear	_mbrtoc16_sloc3_1_0+1
+      000088r93r0F                  187 	mov	a, _mbrtoc16_sloc2_1_0+0
+      00008A 02 28                  188 	add	a, #0x02
+      00008Cr80r0B                  189 	mov	p, a
+      00008Er94r0F                  190 	mov	a, _mbrtoc16_sloc2_1_0+1
+      000090 60 00                  191 	addc	a
+      000092r00r38                  192 	call	__gptrget
+      000094r80r0B                  193 	mov	p, a
+      000096 00 2F                  194 	mov	a, #0x00
+      000098r15r0C                  195 	add	a, _mbrtoc16_sloc3_1_0+0
+      00009Ar97r0B                  196 	mov	_mbrtoc16_sloc4_1_0+0, a
+      00009Cr96r0F                  197 	mov	a, _mbrtoc16_sloc3_1_0+1
+      00009Er00r0D                  198 	addc	a, p
+      0000A0r98r0B                  199 	mov	_mbrtoc16_sloc4_1_0+1, a
+      0000A2r91r0F                  200 	mov	a, _mbrtoc16_sloc1_1_0+0
+      0000A4r80r0B                  201 	mov	p, a
+      0000A6r97r0F                  202 	mov	a, _mbrtoc16_sloc4_1_0+0
+      0000A8r80r03                  203 	idxm	p, a
+      0000AAr00r12                  204 	inc	p
+      0000ACr98r0F                  205 	mov	a, _mbrtoc16_sloc4_1_0+1
+      0000AEr80r03                  206 	idxm	p, a
+      0000B0                        207 00106$:
+                                    208 ;	../mbrtoc16.c: 51: ps->c[1] = ps->c[2] = 0;
+      0000B0r86r0F                  209 	mov	a, _mbrtoc16_PARM_4+0
+      0000B2r99r0B                  210 	mov	_mbrtoc16_sloc5_1_0+0, a
+      0000B4r87r0F                  211 	mov	a, _mbrtoc16_PARM_4+1
+      0000B6r9Ar0B                  212 	mov	_mbrtoc16_sloc5_1_0+1, a
+      0000B8r99r0F                  213 	mov	a, _mbrtoc16_sloc5_1_0+0
+      0000BA 01 28                  214 	add	a, #0x01
+      0000BCr9Br0B                  215 	mov	_mbrtoc16_sloc6_1_0+0, a
+      0000BEr9Ar0F                  216 	mov	a, _mbrtoc16_sloc5_1_0+1
+      0000C0 60 00                  217 	addc	a
+      0000C2r9Cr0B                  218 	mov	_mbrtoc16_sloc6_1_0+1, a
+      0000C4r99r0F                  219 	mov	a, _mbrtoc16_sloc5_1_0+0
+      0000C6 02 28                  220 	add	a, #0x02
+      0000C8r80r0B                  221 	mov	p, a
+      0000CAr9Ar0F                  222 	mov	a, _mbrtoc16_sloc5_1_0+1
+      0000CC 60 00                  223 	addc	a
+      0000CE 00 2F                  224 	mov	a, #0x00
+      0000D0r80r03                  225 	idxm	p, a
+      0000D2r9Br0F                  226 	mov	a, _mbrtoc16_sloc6_1_0+0
+      0000D4r80r0B                  227 	mov	p, a
+      0000D6 00 2F                  228 	mov	a, #0x00
+      0000D8r80r03                  229 	idxm	p, a
+                                    230 ;	../mbrtoc16.c: 52: return(-3);
+      0000DA FF 2F                  231 	mov	a, #0xff
+      0000DCr80r0B                  232 	mov	p, a
+      0000DE FD 02                  233 	ret	#0xfd
+      0000E0                        234 00108$:
+                                    235 ;	../mbrtoc16.c: 55: ret = mbrtowc(&codepoint, s, n, ps);
+      0000E0r08r2F                  236 	mov	a, #(_mbrtoc16_codepoint_65536_16 + 0)
+      0000E2r80r0B                  237 	mov	_mbrtowc_PARM_1+0, a
+      0000E4r01r13                  238 	clear	_mbrtowc_PARM_1+1
+      0000E6r82r0F                  239 	mov	a, _mbrtoc16_PARM_2+0
+      0000E8r80r0B                  240 	mov	_mbrtowc_PARM_2+0, a
+      0000EAr83r0F                  241 	mov	a, _mbrtoc16_PARM_2+1
+      0000ECr81r0B                  242 	mov	_mbrtowc_PARM_2+1, a
+      0000EEr84r0F                  243 	mov	a, _mbrtoc16_PARM_3+0
+      0000F0r80r0B                  244 	mov	_mbrtowc_PARM_3+0, a
+      0000F2r85r0F                  245 	mov	a, _mbrtoc16_PARM_3+1
+      0000F4r81r0B                  246 	mov	_mbrtowc_PARM_3+1, a
+      0000F6r86r0F                  247 	mov	a, _mbrtoc16_PARM_4+0
+      0000F8r80r0B                  248 	mov	_mbrtowc_PARM_4+0, a
+      0000FAr87r0F                  249 	mov	a, _mbrtoc16_PARM_4+1
+      0000FCr81r0B                  250 	mov	_mbrtowc_PARM_4+1, a
+      0000FEr00r38                  251 	call	_mbrtowc
+      000100r9Dr0B                  252 	mov	_mbrtoc16_sloc7_1_0+0, a
+      000102r80r0F                  253 	mov	a, p
+      000104r9Er0B                  254 	mov	_mbrtoc16_sloc7_1_0+1, a
+                                    255 ;	../mbrtoc16.c: 57: if(ret > MB_LEN_MAX)
+      000106 04 2F                  256 	mov	a, #0x04
+      000108r9Dr0C                  257 	sub	a, _mbrtoc16_sloc7_1_0+0
+      00010A 00 2F                  258 	mov	a, #0x00
+      00010Cr9Er0D                  259 	subc	a, _mbrtoc16_sloc7_1_0+1
+      00010E 40 1A                  260 	t1sn	f, c
+      000110r1Ar31                  261 	goto	00112$
+                                    262 ;	../mbrtoc16.c: 58: return(ret);
+      000112r9Er0F                  263 	mov	a, _mbrtoc16_sloc7_1_0+1
+      000114r80r0B                  264 	mov	p, a
+      000116r9Dr0F                  265 	mov	a, _mbrtoc16_sloc7_1_0+0
+      000118 7A 00                  266 	ret
+      00011A                        267 00112$:
+                                    268 ;	../mbrtoc16.c: 60: if (codepoint <= 0xffff) // Basic multilingual plane
+      00011A FF 2F                  269 	mov	a, #0xff
+      00011Cr88r0C                  270 	sub	a, _mbrtoc16_codepoint_65536_16+0
+      00011E FF 2F                  271 	mov	a, #0xff
+      000120r89r0D                  272 	subc	a, _mbrtoc16_codepoint_65536_16+1
+      000122 00 2F                  273 	mov	a, #0x00
+      000124r8Ar0D                  274 	subc	a, _mbrtoc16_codepoint_65536_16+2
+      000126 00 2F                  275 	mov	a, #0x00
+      000128r8Br0D                  276 	subc	a, _mbrtoc16_codepoint_65536_16+3
+      00012A 40 18                  277 	t0sn	f, c
+      00012Cr5Cr31                  278 	goto	00116$
+                                    279 ;	../mbrtoc16.c: 62: if(pc16)
+      00012Er80r0F                  280 	mov	a, _mbrtoc16_PARM_1+0
+      000130r81r0E                  281 	or	a, _mbrtoc16_PARM_1+1
+      000132 00 2B                  282 	cneqsn	a, #0x00
+      000134r54r31                  283 	goto	00114$
+                                    284 ;	../mbrtoc16.c: 63: *pc16 = codepoint;
+      000136r80r0F                  285 	mov	a, _mbrtoc16_PARM_1+0
+      000138r9Fr0B                  286 	mov	_mbrtoc16_sloc8_1_0+0, a
+      00013Ar81r0F                  287 	mov	a, _mbrtoc16_PARM_1+1
+      00013CrA0r0B                  288 	mov	_mbrtoc16_sloc8_1_0+1, a
+      00013Er88r0F                  289 	mov	a, _mbrtoc16_codepoint_65536_16+0
+      000140rA1r0B                  290 	mov	_mbrtoc16_sloc9_1_0+0, a
+      000142r89r0F                  291 	mov	a, _mbrtoc16_codepoint_65536_16+1
+      000144rA2r0B                  292 	mov	_mbrtoc16_sloc9_1_0+1, a
+      000146r9Fr0F                  293 	mov	a, _mbrtoc16_sloc8_1_0+0
+      000148r80r0B                  294 	mov	p, a
+      00014ArA1r0F                  295 	mov	a, _mbrtoc16_sloc9_1_0+0
+      00014Cr80r03                  296 	idxm	p, a
+      00014Er00r12                  297 	inc	p
+      000150rA2r0F                  298 	mov	a, _mbrtoc16_sloc9_1_0+1
+      000152r80r03                  299 	idxm	p, a
+      000154                        300 00114$:
+                                    301 ;	../mbrtoc16.c: 64: return(ret);
+      000154r9Er0F                  302 	mov	a, _mbrtoc16_sloc7_1_0+1
+      000156r80r0B                  303 	mov	p, a
+      000158r9Dr0F                  304 	mov	a, _mbrtoc16_sloc7_1_0+0
+      00015A 7A 00                  305 	ret
+      00015C                        306 00116$:
+                                    307 ;	../mbrtoc16.c: 67: codepoint -= 0x100000;
+      00015C 10 2F                  308 	mov	a, #0x10
+      00015Er8Ar08                  309 	sub	_mbrtoc16_codepoint_65536_16+2, a
+      000160r8Br10                  310 	subc	_mbrtoc16_codepoint_65536_16+3
+                                    311 ;	../mbrtoc16.c: 68: if(pc16)
+      000162r80r0F                  312 	mov	a, _mbrtoc16_PARM_1+0
+      000164r81r0E                  313 	or	a, _mbrtoc16_PARM_1+1
+      000166 00 2B                  314 	cneqsn	a, #0x00
+      000168rB2r31                  315 	goto	00118$
+                                    316 ;	../mbrtoc16.c: 69: *pc16 = ((codepoint >> 10) & 0x3ff) + 0xd800;
+      00016Ar80r0F                  317 	mov	a, _mbrtoc16_PARM_1+0
+      00016CrA3r0B                  318 	mov	_mbrtoc16_sloc10_1_0+0, a
+      00016Er81r0F                  319 	mov	a, _mbrtoc16_PARM_1+1
+      000170rA4r0B                  320 	mov	_mbrtoc16_sloc10_1_0+1, a
+      000172r89r0F                  321 	mov	a, _mbrtoc16_codepoint_65536_16+1
+      000174rA5r0B                  322 	mov	_mbrtoc16_sloc11_1_0+0, a
+      000176r8Ar0F                  323 	mov	a, _mbrtoc16_codepoint_65536_16+2
+      000178rA6r0B                  324 	mov	_mbrtoc16_sloc11_1_0+1, a
+      00017Ar8Br0F                  325 	mov	a, _mbrtoc16_codepoint_65536_16+3
+      00017CrA7r0B                  326 	mov	_mbrtoc16_sloc11_1_0+2, a
+      00017Er28r13                  327 	clear	_mbrtoc16_sloc11_1_0+3
+      000180r27r15                  328 	sr	_mbrtoc16_sloc11_1_0+2
+      000182r26r16                  329 	src	_mbrtoc16_sloc11_1_0+1
+      000184r25r16                  330 	src	_mbrtoc16_sloc11_1_0+0
+      000186r27r15                  331 	sr	_mbrtoc16_sloc11_1_0+2
+      000188r26r16                  332 	src	_mbrtoc16_sloc11_1_0+1
+      00018Ar25r16                  333 	src	_mbrtoc16_sloc11_1_0+0
+      00018CrA6r0F                  334 	mov	a, _mbrtoc16_sloc11_1_0+1
+      00018Er80r0B                  335 	mov	p, a
+      000190rA5r0F                  336 	mov	a, _mbrtoc16_sloc11_1_0+0
+      000192rA9r0B                  337 	mov	_mbrtoc16_sloc12_1_0+0, a
+      000194r80r0F                  338 	mov	a, p
+      000196 03 2C                  339 	and	a, #0x03
+      000198rAAr0B                  340 	mov	_mbrtoc16_sloc12_1_0+1, a
+      00019ArA9r0F                  341 	mov	a, _mbrtoc16_sloc12_1_0+0
+      00019CrABr0B                  342 	mov	_mbrtoc16_sloc13_1_0+0, a
+      00019ErAAr0F                  343 	mov	a, _mbrtoc16_sloc12_1_0+1
+      0001A0 D8 28                  344 	add	a, #0xd8
+      0001A2rACr0B                  345 	mov	_mbrtoc16_sloc13_1_0+1, a
+      0001A4rA3r0F                  346 	mov	a, _mbrtoc16_sloc10_1_0+0
+      0001A6r80r0B                  347 	mov	p, a
+      0001A8rABr0F                  348 	mov	a, _mbrtoc16_sloc13_1_0+0
+      0001AAr80r03                  349 	idxm	p, a
+      0001ACr00r12                  350 	inc	p
+      0001AErACr0F                  351 	mov	a, _mbrtoc16_sloc13_1_0+1
+      0001B0r80r03                  352 	idxm	p, a
+      0001B2                        353 00118$:
+                                    354 ;	../mbrtoc16.c: 70: low_surrogate = (codepoint & 0x3ff) + 0xdc00;
+      0001B2r89r0F                  355 	mov	a, _mbrtoc16_codepoint_65536_16+1
+      0001B4r80r0B                  356 	mov	p, a
+      0001B6r88r0F                  357 	mov	a, _mbrtoc16_codepoint_65536_16+0
+      0001B8rADr0B                  358 	mov	_mbrtoc16_sloc14_1_0+0, a
+      0001BAr80r0F                  359 	mov	a, p
+      0001BC 03 2C                  360 	and	a, #0x03
+      0001BErAEr0B                  361 	mov	_mbrtoc16_sloc14_1_0+1, a
+      0001C0rADr0F                  362 	mov	a, _mbrtoc16_sloc14_1_0+0
+      0001C2rAFr0B                  363 	mov	_mbrtoc16_sloc15_1_0+0, a
+      0001C4rAEr0F                  364 	mov	a, _mbrtoc16_sloc14_1_0+1
+      0001C6 DC 28                  365 	add	a, #0xdc
+      0001C8rB0r0B                  366 	mov	_mbrtoc16_sloc15_1_0+1, a
+                                    367 ;	../mbrtoc16.c: 71: ps->c[0] = 0;
+      0001CAr86r0F                  368 	mov	a, _mbrtoc16_PARM_4+0
+      0001CCrB1r0B                  369 	mov	_mbrtoc16_sloc16_1_0+0, a
+      0001CEr87r0F                  370 	mov	a, _mbrtoc16_PARM_4+1
+      0001D0rB2r0B                  371 	mov	_mbrtoc16_sloc16_1_0+1, a
+      0001D2rB1r0F                  372 	mov	a, _mbrtoc16_sloc16_1_0+0
+      0001D4r80r0B                  373 	mov	p, a
+      0001D6 00 2F                  374 	mov	a, #0x00
+      0001D8r80r03                  375 	idxm	p, a
+                                    376 ;	../mbrtoc16.c: 72: ps->c[1] = low_surrogate & 0xff;
+      0001DArB1r0F                  377 	mov	a, _mbrtoc16_sloc16_1_0+0
+      0001DC 01 28                  378 	add	a, #0x01
+      0001DErB3r0B                  379 	mov	_mbrtoc16_sloc17_1_0+0, a
+      0001E0rB2r0F                  380 	mov	a, _mbrtoc16_sloc16_1_0+1
+      0001E2 60 00                  381 	addc	a
+      0001E4rB4r0B                  382 	mov	_mbrtoc16_sloc17_1_0+1, a
+      0001E6rAFr0F                  383 	mov	a, _mbrtoc16_sloc15_1_0+0
+      0001E8r80r0B                  384 	mov	p, a
+      0001EArB3r0F                  385 	mov	a, _mbrtoc16_sloc17_1_0+0
+      0001ECr80r13                  386 	xch	a, p
+      0001EEr80r03                  387 	idxm	p, a
+                                    388 ;	../mbrtoc16.c: 73: ps->c[2] = low_surrogate >> 8;
+      0001F0rB1r0F                  389 	mov	a, _mbrtoc16_sloc16_1_0+0
+      0001F2 02 28                  390 	add	a, #0x02
+      0001F4rB5r0B                  391 	mov	_mbrtoc16_sloc18_1_0+0, a
+      0001F6rB2r0F                  392 	mov	a, _mbrtoc16_sloc16_1_0+1
+      0001F8 60 00                  393 	addc	a
+      0001FArB6r0B                  394 	mov	_mbrtoc16_sloc18_1_0+1, a
+      0001FCr00r13                  395 	clear	p
+      0001FErB0r0F                  396 	mov	a, _mbrtoc16_sloc15_1_0+1
+      000200r80r0B                  397 	mov	p, a
+      000202rB5r0F                  398 	mov	a, _mbrtoc16_sloc18_1_0+0
+      000204r80r13                  399 	xch	a, p
+      000206r80r03                  400 	idxm	p, a
+                                    401 ;	../mbrtoc16.c: 75: return(ret);
+      000208r9Er0F                  402 	mov	a, _mbrtoc16_sloc7_1_0+1
+      00020Ar80r0B                  403 	mov	p, a
+      00020Cr9Dr0F                  404 	mov	a, _mbrtoc16_sloc7_1_0+0
+                                    405 ;	../mbrtoc16.c: 76: }
+      00020E 7A 00                  406 	ret
+                                    407 	.area CODE
+                                    408 	.area CONST
+                                    409 	.area CONST
+      000000                        410 ___str_0:
+      000000 00 02                  411 	ret #0x00
+                                    412 	.area CODE
+                                    413 	.area CABS (ABS)

@@ -1,0 +1,108 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strcspn
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strchr
+                                     17 	.globl _strcspn_PARM_2
+                                     18 	.globl _strcspn_PARM_1
+                                     19 	.globl _strcspn
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _strcspn_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _strcspn_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _strcspn_sloc0_1_0:
+      000004                         34 	.ds 2
+      000006                         35 _strcspn_sloc1_1_0:
+      000006                         36 	.ds 2
+                                     37 ;--------------------------------------------------------
+                                     38 ; overlayable items in ram 
+                                     39 ;--------------------------------------------------------
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_strcspn.c: 31: size_t strcspn ( const char * string, const char * control )
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function strcspn
+                                     63 ;	-----------------------------------------
+      000000                         64 _strcspn:
+                                     65 ;	../_strcspn.c: 36: while (ch = *string) {
+      000000r04r13                   66 	clear	_strcspn_sloc0_1_0+0
+      000002r05r13                   67 	clear	_strcspn_sloc0_1_0+1
+      000004r80r0F                   68 	mov	a, _strcspn_PARM_1+0
+      000006r86r0B                   69 	mov	_strcspn_sloc1_1_0+0, a
+      000008r81r0F                   70 	mov	a, _strcspn_PARM_1+1
+      00000Ar87r0B                   71 	mov	_strcspn_sloc1_1_0+1, a
+      00000C                         72 00104$:
+      00000Cr86r0F                   73 	mov	a, _strcspn_sloc1_1_0+0
+      00000Er80r0B                   74 	mov	p, a
+      000010r87r0F                   75 	mov	a, _strcspn_sloc1_1_0+1
+      000012r00r38                   76 	call	__gptrget
+      000014r80r0B                   77 	mov	p, a
+      000016 00 2B                   78 	cneqsn	a, #0x00
+      000018r3Ar30                   79 	goto	00106$
+                                     80 ;	../_strcspn.c: 37: if (strchr(control,ch))
+      00001Ar80r0F                   81 	mov	a, p
+      00001Cr80r0B                   82 	mov	_strchr_PARM_2+0, a
+      00001Er01r13                   83 	clear	_strchr_PARM_2+1
+      000020r82r0F                   84 	mov	a, _strcspn_PARM_2+0
+      000022r80r0B                   85 	mov	_strchr_PARM_1+0, a
+      000024r83r0F                   86 	mov	a, _strcspn_PARM_2+1
+      000026r81r0B                   87 	mov	_strchr_PARM_1+1, a
+      000028r00r38                   88 	call	_strchr
+      00002Ar80r0E                   89 	or	a, p
+      00002C 00 2A                   90 	ceqsn	a, #0x00
+      00002Er3Ar30                   91 	goto	00106$
+                                     92 ;	../_strcspn.c: 40: count++;
+      000030r04r12                   93 	inc	_strcspn_sloc0_1_0+0
+      000032r05r10                   94 	addc	_strcspn_sloc0_1_0+1
+                                     95 ;	../_strcspn.c: 41: string++;
+      000034r06r12                   96 	inc	_strcspn_sloc1_1_0+0
+      000036r07r10                   97 	addc	_strcspn_sloc1_1_0+1
+      000038r0Cr30                   98 	goto	00104$
+      00003A                         99 00106$:
+                                    100 ;	../_strcspn.c: 44: return count;
+      00003Ar85r0F                  101 	mov	a, _strcspn_sloc0_1_0+1
+      00003Cr80r0B                  102 	mov	p, a
+      00003Er84r0F                  103 	mov	a, _strcspn_sloc0_1_0+0
+                                    104 ;	../_strcspn.c: 45: }  
+      000040 7A 00                  105 	ret
+                                    106 	.area CODE
+                                    107 	.area CONST
+                                    108 	.area CABS (ABS)

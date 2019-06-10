@@ -1,0 +1,112 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  A ___str_0                                                       000000 R
+    __gptrget                                                      ****** GX
+    __gptrget2                                                     ****** GX
+    __mulint                                                       ****** GX
+    __mulint_PARM_1                                                ****** GX
+    __mulint_PARM_2                                                ****** GX
+  9 __output_char                                                  000000 R
+  1 __output_char_PARM_1                                           00000C R
+  9 __print_format                                                 0000E2 GR
+  1 __print_format_PARM_1                                          000010 GR
+  1 __print_format_PARM_2                                          000012 GR
+  1 __print_format_PARM_3                                          000014 GR
+  1 __print_format_PARM_4                                          000016 GR
+  1 __print_format_sloc10_1_0                                      000026 R
+  1 __print_format_sloc11_1_0                                      000027 R
+  1 __print_format_sloc12_1_0                                      000028 R
+  1 __print_format_sloc13_1_0                                      000029 R
+  1 __print_format_sloc14_1_0                                      00002A R
+  1 __print_format_sloc15_1_0                                      00002C R
+  1 __print_format_sloc16_1_0                                      00002E R
+  1 __print_format_sloc17_1_0                                      000030 R
+  1 __print_format_sloc18_1_0                                      000031 R
+  1 __print_format_sloc19_1_0                                      000033 R
+  1 __print_format_sloc20_1_0                                      000035 R
+  1 __print_format_sloc21_1_0                                      000037 R
+  1 __print_format_sloc22_1_0                                      000038 R
+  1 __print_format_sloc23_1_0                                      00003A R
+  1 __print_format_sloc24_1_0                                      00003C R
+  1 __print_format_sloc25_1_0                                      000040 R
+  1 __print_format_sloc26_1_0                                      000042 R
+  1 __print_format_sloc27_1_0                                      000046 R
+  1 __print_format_sloc28_1_0                                      00004A R
+  1 __print_format_sloc29_1_0                                      00004C R
+  1 __print_format_sloc30_1_0                                      000050 R
+  1 __print_format_sloc31_1_0                                      000054 R
+  1 __print_format_sloc32_1_0                                      000058 R
+  1 __print_format_sloc33_1_0                                      00005C R
+  1 __print_format_sloc34_1_0                                      000060 R
+  1 __print_format_sloc35_1_0                                      000064 R
+  1 __print_format_sloc36_1_0                                      000068 R
+  1 __print_format_sloc37_1_0                                      000069 R
+  1 __print_format_sloc38_1_0                                      00006B R
+  1 __print_format_sloc39_1_0                                      00006D R
+  1 __print_format_sloc3_1_0                                       00001E R
+  1 __print_format_sloc40_1_0                                      00006E R
+  1 __print_format_sloc41_1_0                                      000072 R
+  1 __print_format_sloc42_1_0                                      000074 R
+  1 __print_format_sloc43_1_0                                      000076 R
+  1 __print_format_sloc44_1_0                                      000078 R
+  1 __print_format_sloc45_1_0                                      00007A R
+  1 __print_format_sloc46_1_0                                      00007C R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  1 __print_format_sloc47_1_0                                      00007E R
+  1 __print_format_sloc48_1_0                                      000080 R
+  1 __print_format_sloc49_1_0                                      000082 R
+  1 __print_format_sloc4_1_0                                       000020 R
+  1 __print_format_sloc5_1_0                                       000021 R
+  1 __print_format_sloc6_1_0                                       000022 R
+  1 __print_format_sloc7_1_0                                       000023 R
+  1 __print_format_sloc8_1_0                                       000024 R
+  1 __print_format_sloc9_1_0                                       000025 R
+  1 __print_format_store_262144_84                                 000018 R
+  9 _calculate_digit                                               000078 R
+  1 _calculate_digit_PARM_1                                        00000F R
+  2 _calculate_digit_sloc0_1_0                                     000000 R
+  2 _calculate_digit_sloc1_1_0                                     000004 R
+  2 _calculate_digit_sloc2_1_0                                     000005 R
+  1 _charsOutputted                                                00000A R
+  1 _lower_case                                                    000000 R
+  9 _output_2digits                                                000060 R
+  1 _output_2digits_PARM_1                                         00000E R
+  1 _output_char                                                   000001 R
+  9 _output_digit                                                  00003C R
+  1 _output_digit_PARM_1                                           00000D R
+  1 _p                                                             000003 R
+    _strlen                                                        ****** GX
+    _strlen_PARM_1                                                 ****** GX
+  1 _value                                                         000005 R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 3.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     84   flags    0
+   2 OSEG                                       size      9   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    854   flags    0
+   A CONST                                      size     16   flags    0
+   B CABS                                       size      0   flags    8
+

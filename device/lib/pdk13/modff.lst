@@ -1,0 +1,156 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module modff
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _modff_PARM_2
+                                     17 	.globl _modff_PARM_1
+                                     18 	.globl _modff
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _modff_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 _modff_PARM_2:
+      000004                         31 	.ds 2
+      000006                         32 _modff_sloc0_1_0:
+      000006                         33 	.ds 4
+      00000A                         34 _modff_sloc1_1_0:
+      00000A                         35 	.ds 4
+      00000E                         36 _modff_sloc2_1_0:
+      00000E                         37 	.ds 4
+      000012                         38 _modff_sloc3_1_0:
+      000012                         39 	.ds 2
+                                     40 ;--------------------------------------------------------
+                                     41 ; overlayable items in ram 
+                                     42 ;--------------------------------------------------------
+                                     43 ;--------------------------------------------------------
+                                     44 ; absolute external ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DABS (ABS)
+                                     47 ;--------------------------------------------------------
+                                     48 ; global & static initialisations
+                                     49 ;--------------------------------------------------------
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area GSINIT
+                                     54 ;--------------------------------------------------------
+                                     55 ; Home
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area HOME
+                                     59 ;--------------------------------------------------------
+                                     60 ; code
+                                     61 ;--------------------------------------------------------
+                                     62 	.area CODE
+                                     63 ;	../modff.c: 33: float modff(float x, float * y)
+                                     64 ;	-----------------------------------------
+                                     65 ;	 function modff
+                                     66 ;	-----------------------------------------
+      000000                         67 _modff:
+                                     68 ;	../modff.c: 35: *y=(long)x;
+      000000r84r0F                   69 	mov	a, _modff_PARM_2+0
+      000002r92r0B                   70 	mov	_modff_sloc3_1_0+0, a
+      000004r85r0F                   71 	mov	a, _modff_PARM_2+1
+      000006r93r0B                   72 	mov	_modff_sloc3_1_0+1, a
+      000008r80r0F                   73 	mov	a, _modff_PARM_1+0
+      00000Ar80r0B                   74 	mov	___fs2slong_PARM_1+0, a
+      00000Cr81r0F                   75 	mov	a, _modff_PARM_1+1
+      00000Er81r0B                   76 	mov	___fs2slong_PARM_1+1, a
+      000010r82r0F                   77 	mov	a, _modff_PARM_1+2
+      000012r82r0B                   78 	mov	___fs2slong_PARM_1+2, a
+      000014r83r0F                   79 	mov	a, _modff_PARM_1+3
+      000016r83r0B                   80 	mov	___fs2slong_PARM_1+3, a
+      000018r06r2F                   81 	mov	a, #_modff_sloc0_1_0
+      00001A 72 00                   82 	push	af
+      00001Cr00r38                   83 	call	___fs2slong
+      00001E C2 01                   84 	mov	a, sp
+      000020 FE 28                   85 	add	a, #-2
+      000022 82 01                   86 	mov	sp, a
+      000024r86r0F                   87 	mov	a, _modff_sloc0_1_0+0
+      000026r80r0B                   88 	mov	___slong2fs_PARM_1+0, a
+      000028r87r0F                   89 	mov	a, _modff_sloc0_1_0+1
+      00002Ar81r0B                   90 	mov	___slong2fs_PARM_1+1, a
+      00002Cr88r0F                   91 	mov	a, _modff_sloc0_1_0+2
+      00002Er82r0B                   92 	mov	___slong2fs_PARM_1+2, a
+      000030r89r0F                   93 	mov	a, _modff_sloc0_1_0+3
+      000032r83r0B                   94 	mov	___slong2fs_PARM_1+3, a
+      000034r0Ar2F                   95 	mov	a, #_modff_sloc1_1_0
+      000036 72 00                   96 	push	af
+      000038r00r38                   97 	call	___slong2fs
+      00003A C2 01                   98 	mov	a, sp
+      00003C FE 28                   99 	add	a, #-2
+      00003E 82 01                  100 	mov	sp, a
+      000040r92r0F                  101 	mov	a, _modff_sloc3_1_0+0
+      000042r80r0B                  102 	mov	p, a
+      000044r8Ar0F                  103 	mov	a, _modff_sloc1_1_0+0
+      000046r80r03                  104 	idxm	p, a
+      000048r00r12                  105 	inc	p
+      00004Ar8Br0F                  106 	mov	a, _modff_sloc1_1_0+1
+      00004Cr80r03                  107 	idxm	p, a
+      00004Er00r12                  108 	inc	p
+      000050r8Cr0F                  109 	mov	a, _modff_sloc1_1_0+2
+      000052r80r03                  110 	idxm	p, a
+      000054r00r12                  111 	inc	p
+      000056r8Dr0F                  112 	mov	a, _modff_sloc1_1_0+3
+      000058r80r03                  113 	idxm	p, a
+                                    114 ;	../modff.c: 36: return (x-*y);
+      00005Ar80r0F                  115 	mov	a, _modff_PARM_1+0
+      00005Cr80r0B                  116 	mov	___fssub_PARM_1+0, a
+      00005Er81r0F                  117 	mov	a, _modff_PARM_1+1
+      000060r81r0B                  118 	mov	___fssub_PARM_1+1, a
+      000062r82r0F                  119 	mov	a, _modff_PARM_1+2
+      000064r82r0B                  120 	mov	___fssub_PARM_1+2, a
+      000066r83r0F                  121 	mov	a, _modff_PARM_1+3
+      000068r83r0B                  122 	mov	___fssub_PARM_1+3, a
+      00006Ar8Ar0F                  123 	mov	a, _modff_sloc1_1_0+0
+      00006Cr80r0B                  124 	mov	___fssub_PARM_2+0, a
+      00006Er8Br0F                  125 	mov	a, _modff_sloc1_1_0+1
+      000070r81r0B                  126 	mov	___fssub_PARM_2+1, a
+      000072r8Cr0F                  127 	mov	a, _modff_sloc1_1_0+2
+      000074r82r0B                  128 	mov	___fssub_PARM_2+2, a
+      000076r8Dr0F                  129 	mov	a, _modff_sloc1_1_0+3
+      000078r83r0B                  130 	mov	___fssub_PARM_2+3, a
+      00007Ar0Er2F                  131 	mov	a, #_modff_sloc2_1_0
+      00007C 72 00                  132 	push	af
+      00007Er00r38                  133 	call	___fssub
+      000080 C2 01                  134 	mov	a, sp
+      000082 FE 28                  135 	add	a, #-2
+      000084 82 01                  136 	mov	sp, a
+      000086 FC 28                  137 	add	a, #0xfc
+      000088r80r0B                  138 	mov	p, a
+      00008Ar81r03                  139 	idxm	a, p
+      00008Cr80r0B                  140 	mov	p, a
+      00008Er8Er0F                  141 	mov	a, _modff_sloc2_1_0+0
+      000090r80r03                  142 	idxm	p, a
+      000092r00r12                  143 	inc	p
+      000094r8Fr0F                  144 	mov	a, _modff_sloc2_1_0+1
+      000096r80r03                  145 	idxm	p, a
+      000098r00r12                  146 	inc	p
+      00009Ar90r0F                  147 	mov	a, _modff_sloc2_1_0+2
+      00009Cr80r03                  148 	idxm	p, a
+      00009Er00r12                  149 	inc	p
+      0000A0r91r0F                  150 	mov	a, _modff_sloc2_1_0+3
+      0000A2r80r03                  151 	idxm	p, a
+                                    152 ;	../modff.c: 37: }
+      0000A4 7A 00                  153 	ret
+                                    154 	.area CODE
+                                    155 	.area CONST
+                                    156 	.area CABS (ABS)

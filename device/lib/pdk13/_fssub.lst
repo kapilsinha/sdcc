@@ -1,0 +1,118 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fssub
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fssub_PARM_2
+                                     17 	.globl ___fssub_PARM_1
+                                     18 	.globl ___fssub
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fssub_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fssub_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 ___fssub_sloc0_1_0:
+      000008                         33 	.ds 4
+      00000C                         34 ___fssub_sloc1_1_0:
+      00000C                         35 	.ds 4
+                                     36 ;--------------------------------------------------------
+                                     37 ; overlayable items in ram 
+                                     38 ;--------------------------------------------------------
+                                     39 ;--------------------------------------------------------
+                                     40 ; absolute external ram data
+                                     41 ;--------------------------------------------------------
+                                     42 	.area DABS (ABS)
+                                     43 ;--------------------------------------------------------
+                                     44 ; global & static initialisations
+                                     45 ;--------------------------------------------------------
+                                     46 	.area HOME
+                                     47 	.area GSINIT
+                                     48 	.area GSFINAL
+                                     49 	.area GSINIT
+                                     50 ;--------------------------------------------------------
+                                     51 ; Home
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area HOME
+                                     55 ;--------------------------------------------------------
+                                     56 ; code
+                                     57 ;--------------------------------------------------------
+                                     58 	.area CODE
+                                     59 ;	../_fssub.c: 73: float __fssub (float a1, float a2)
+                                     60 ;	-----------------------------------------
+                                     61 ;	 function __fssub
+                                     62 ;	-----------------------------------------
+      000000                         63 ___fssub:
+                                     64 ;	../_fssub.c: 75: float neg = -a1;
+      000000r80r0F                   65 	mov	a, ___fssub_PARM_1+0
+      000002r80r0B                   66 	mov	___fsadd_PARM_1+0, a
+      000004r81r0F                   67 	mov	a, ___fssub_PARM_1+1
+      000006r81r0B                   68 	mov	___fsadd_PARM_1+1, a
+      000008r82r0F                   69 	mov	a, ___fssub_PARM_1+2
+      00000Ar82r0B                   70 	mov	___fsadd_PARM_1+2, a
+      00000Cr83r0F                   71 	mov	a, ___fssub_PARM_1+3
+      00000E 80 2E                   72 	xor	a, #0x80
+      000010r83r0B                   73 	mov	___fsadd_PARM_1+3, a
+                                     74 ;	../_fssub.c: 76: return -(neg + a2);
+      000012r84r0F                   75 	mov	a, ___fssub_PARM_2+0
+      000014r80r0B                   76 	mov	___fsadd_PARM_2+0, a
+      000016r85r0F                   77 	mov	a, ___fssub_PARM_2+1
+      000018r81r0B                   78 	mov	___fsadd_PARM_2+1, a
+      00001Ar86r0F                   79 	mov	a, ___fssub_PARM_2+2
+      00001Cr82r0B                   80 	mov	___fsadd_PARM_2+2, a
+      00001Er87r0F                   81 	mov	a, ___fssub_PARM_2+3
+      000020r83r0B                   82 	mov	___fsadd_PARM_2+3, a
+      000022r08r2F                   83 	mov	a, #___fssub_sloc0_1_0
+      000024 72 00                   84 	push	af
+      000026r00r38                   85 	call	___fsadd
+      000028 C2 01                   86 	mov	a, sp
+      00002A FE 28                   87 	add	a, #-2
+      00002C 82 01                   88 	mov	sp, a
+      00002Er88r0F                   89 	mov	a, ___fssub_sloc0_1_0+0
+      000030r8Cr0B                   90 	mov	___fssub_sloc1_1_0+0, a
+      000032r89r0F                   91 	mov	a, ___fssub_sloc0_1_0+1
+      000034r8Dr0B                   92 	mov	___fssub_sloc1_1_0+1, a
+      000036r8Ar0F                   93 	mov	a, ___fssub_sloc0_1_0+2
+      000038r8Er0B                   94 	mov	___fssub_sloc1_1_0+2, a
+      00003Ar8Br0F                   95 	mov	a, ___fssub_sloc0_1_0+3
+      00003C 80 2E                   96 	xor	a, #0x80
+      00003Er8Fr0B                   97 	mov	___fssub_sloc1_1_0+3, a
+      000040 C2 01                   98 	mov	a, sp
+      000042 FC 28                   99 	add	a, #0xfc
+      000044r80r0B                  100 	mov	p, a
+      000046r81r03                  101 	idxm	a, p
+      000048r80r0B                  102 	mov	p, a
+      00004Ar8Cr0F                  103 	mov	a, ___fssub_sloc1_1_0+0
+      00004Cr80r03                  104 	idxm	p, a
+      00004Er00r12                  105 	inc	p
+      000050r8Dr0F                  106 	mov	a, ___fssub_sloc1_1_0+1
+      000052r80r03                  107 	idxm	p, a
+      000054r00r12                  108 	inc	p
+      000056r8Er0F                  109 	mov	a, ___fssub_sloc1_1_0+2
+      000058r80r03                  110 	idxm	p, a
+      00005Ar00r12                  111 	inc	p
+      00005Cr8Fr0F                  112 	mov	a, ___fssub_sloc1_1_0+3
+      00005Er80r03                  113 	idxm	p, a
+                                    114 ;	../_fssub.c: 77: }
+      000060 7A 00                  115 	ret
+                                    116 	.area CODE
+                                    117 	.area CONST
+                                    118 	.area CABS (ABS)

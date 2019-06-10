@@ -1,0 +1,86 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+  9 ___fsdiv                                                       000446 GR
+  1 ___fsdiv_PARM_1                                                000022 GR
+  1 ___fsdiv_PARM_2                                                000026 GR
+  1 ___fsdiv_f_65536_27                                            00002A R
+  9 ___fsdiv_org                                                   000000 R
+  1 ___fsdiv_org_PARM_1                                            000000 R
+  1 ___fsdiv_org_PARM_2                                            000004 R
+  1 ___fsdiv_org_exp_65536_21                                      000020 R
+  1 ___fsdiv_org_fl1_65536_21                                      000008 R
+  1 ___fsdiv_org_fl2_65536_21                                      00000C R
+  1 ___fsdiv_org_mant1_65536_21                                    000018 R
+  1 ___fsdiv_org_mant2_65536_21                                    00001C R
+  1 ___fsdiv_org_mask_65536_21                                     000014 R
+  1 ___fsdiv_org_result_65536_21                                   000010 R
+  2 ___fsdiv_org_sloc0_1_0                                         000000 R
+  2 ___fsdiv_org_sloc10_1_0                                        000026 R
+  2 ___fsdiv_org_sloc11_1_0                                        00002A R
+  2 ___fsdiv_org_sloc12_1_0                                        00002E R
+  2 ___fsdiv_org_sloc13_1_0                                        000032 R
+  2 ___fsdiv_org_sloc14_1_0                                        000036 R
+  2 ___fsdiv_org_sloc15_1_0                                        00003A R
+  2 ___fsdiv_org_sloc16_1_0                                        00003E R
+  2 ___fsdiv_org_sloc17_1_0                                        00003F R
+  2 ___fsdiv_org_sloc18_1_0                                        000043 R
+  2 ___fsdiv_org_sloc19_1_0                                        000047 R
+  2 ___fsdiv_org_sloc1_1_0                                         000004 R
+  2 ___fsdiv_org_sloc20_1_0                                        00004B R
+  2 ___fsdiv_org_sloc21_1_0                                        00004F R
+  2 ___fsdiv_org_sloc22_1_0                                        000053 R
+  2 ___fsdiv_org_sloc23_1_0                                        000057 R
+  2 ___fsdiv_org_sloc24_1_0                                        00005B R
+  2 ___fsdiv_org_sloc25_1_0                                        00005F R
+  2 ___fsdiv_org_sloc26_1_0                                        000063 R
+  2 ___fsdiv_org_sloc27_1_0                                        000067 R
+  2 ___fsdiv_org_sloc28_1_0                                        00006B R
+  2 ___fsdiv_org_sloc29_1_0                                        00006F R
+  2 ___fsdiv_org_sloc2_1_0                                         000008 R
+  2 ___fsdiv_org_sloc30_1_0                                        000073 R
+  2 ___fsdiv_org_sloc31_1_0                                        000077 R
+  2 ___fsdiv_org_sloc32_1_0                                        00007B R
+  2 ___fsdiv_org_sloc33_1_0                                        00007F R
+  2 ___fsdiv_org_sloc3_1_0                                         00000C R
+  2 ___fsdiv_org_sloc4_1_0                                         000010 R
+  2 ___fsdiv_org_sloc5_1_0                                         000014 R
+  2 ___fsdiv_org_sloc6_1_0                                         000018 R
+  2 ___fsdiv_org_sloc7_1_0                                         00001A R
+  2 ___fsdiv_org_sloc8_1_0                                         00001E R
+  2 ___fsdiv_org_sloc9_1_0                                         000022 R
+  1 ___fsdiv_sloc34_1_0                                            00002E R
+    ___fslt                                                        ****** GX
+    ___fslt_PARM_1                                                 ****** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    ___fslt_PARM_2                                                 ****** GX
+    p                                                              ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 3.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     32   flags    0
+   2 OSEG                                       size     83   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    542   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

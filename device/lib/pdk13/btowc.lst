@@ -1,0 +1,114 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module btowc
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _btowc_PARM_1
+                                     17 	.globl _btowc
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _btowc_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _btowc_sloc0_1_0:
+      000000                         34 	.ds 4
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../btowc.c: 35: wint_t btowc(int c)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function btowc
+                                     58 ;	-----------------------------------------
+      000000                         59 _btowc:
+                                     60 ;	../btowc.c: 37: if(c & 0x80)
+      000000r80r0F                   61 	mov	a, _btowc_PARM_1+0
+      000002 80 2C                   62 	and	a, #0x80
+      000004 00 2B                   63 	cneqsn	a, #0x00
+      000006r2Ar30                   64 	goto	00102$
+                                     65 ;	../btowc.c: 38: return WEOF;
+      000008 C2 01                   66 	mov	a, sp
+      00000A FC 28                   67 	add	a, #0xfc
+      00000Cr80r0B                   68 	mov	p, a
+      00000Er81r03                   69 	idxm	a, p
+      000010r80r0B                   70 	mov	p, a
+      000012 FF 2F                   71 	mov	a, #0xff
+      000014r80r03                   72 	idxm	p, a
+      000016r00r12                   73 	inc	p
+      000018 FF 2F                   74 	mov	a, #0xff
+      00001Ar80r03                   75 	idxm	p, a
+      00001Cr00r12                   76 	inc	p
+      00001E FF 2F                   77 	mov	a, #0xff
+      000020r80r03                   78 	idxm	p, a
+      000022r00r12                   79 	inc	p
+      000024 FF 2F                   80 	mov	a, #0xff
+      000026r80r03                   81 	idxm	p, a
+      000028 7A 00                   82 	ret
+      00002A                         83 00102$:
+                                     84 ;	../btowc.c: 39: return c;
+      00002Ar80r0F                   85 	mov	a, _btowc_PARM_1+0
+      00002Cr80r0B                   86 	mov	_btowc_sloc0_1_0+0, a
+      00002Er81r0F                   87 	mov	a, _btowc_PARM_1+1
+      000030r81r0B                   88 	mov	_btowc_sloc0_1_0+1, a
+      000032 6B 00                   89 	sl	a
+      000034 00 2F                   90 	mov	a, #0x00
+      000036 61 00                   91 	subc	a
+      000038r82r0B                   92 	mov	_btowc_sloc0_1_0+2, a
+      00003Ar83r0B                   93 	mov	_btowc_sloc0_1_0+3, a
+      00003C C2 01                   94 	mov	a, sp
+      00003E FC 28                   95 	add	a, #0xfc
+      000040r80r0B                   96 	mov	p, a
+      000042r81r03                   97 	idxm	a, p
+      000044r80r0B                   98 	mov	p, a
+      000046r80r0F                   99 	mov	a, _btowc_sloc0_1_0+0
+      000048r80r03                  100 	idxm	p, a
+      00004Ar00r12                  101 	inc	p
+      00004Cr81r0F                  102 	mov	a, _btowc_sloc0_1_0+1
+      00004Er80r03                  103 	idxm	p, a
+      000050r00r12                  104 	inc	p
+      000052r82r0F                  105 	mov	a, _btowc_sloc0_1_0+2
+      000054r80r03                  106 	idxm	p, a
+      000056r00r12                  107 	inc	p
+      000058r83r0F                  108 	mov	a, _btowc_sloc0_1_0+3
+      00005Ar80r03                  109 	idxm	p, a
+                                    110 ;	../btowc.c: 40: }
+      00005C 7A 00                  111 	ret
+                                    112 	.area CODE
+                                    113 	.area CONST
+                                    114 	.area CABS (ABS)

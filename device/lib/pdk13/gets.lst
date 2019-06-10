@@ -1,0 +1,172 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module gets
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _gets
+                                     17 	.globl _putchar
+                                     18 	.globl _getchar
+                                     19 	.globl _gets_PARM_1
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _gets_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _gets_sloc0_1_0:
+      000002                         32 	.ds 2
+      000004                         33 _gets_sloc1_1_0:
+      000004                         34 	.ds 1
+      000005                         35 _gets_sloc2_1_0:
+      000005                         36 	.ds 2
+      000007                         37 _gets_sloc3_1_0:
+      000007                         38 	.ds 2
+                                     39 ;--------------------------------------------------------
+                                     40 ; overlayable items in ram 
+                                     41 ;--------------------------------------------------------
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area DABS (ABS)
+                                     46 ;--------------------------------------------------------
+                                     47 ; global & static initialisations
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area GSINIT
+                                     51 	.area GSFINAL
+                                     52 	.area GSINIT
+                                     53 ;--------------------------------------------------------
+                                     54 ; Home
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area HOME
+                                     58 ;--------------------------------------------------------
+                                     59 ; code
+                                     60 ;--------------------------------------------------------
+                                     61 	.area CODE
+                                     62 ;	../gets.c: 32: gets (char *s)
+                                     63 ;	-----------------------------------------
+                                     64 ;	 function gets
+                                     65 ;	-----------------------------------------
+      000000                         66 _gets:
+                                     67 ;	../gets.c: 35: unsigned int count = 0;
+      000000r02r13                   68 	clear	_gets_sloc0_1_0+0
+      000002r03r13                   69 	clear	_gets_sloc0_1_0+1
+                                     70 ;	../gets.c: 37: while (1)
+      000004                         71 00109$:
+                                     72 ;	../gets.c: 39: c = getchar ();
+      000004r00r38                   73 	call	_getchar
+                                     74 ;	../gets.c: 40: switch(c)
+      000006r84r0B                   75 	mov	_gets_sloc1_1_0+0, a
+      000008 08 2B                   76 	cneqsn	a, #0x08
+      00000Ar1Ar30                   77 	goto	00101$
+      00000Cr84r0F                   78 	mov	a, _gets_sloc1_1_0+0
+      00000E 0A 2B                   79 	cneqsn	a, #0x0a
+      000010r44r30                   80 	goto	00105$
+      000012r84r0F                   81 	mov	a, _gets_sloc1_1_0+0
+      000014 0D 2B                   82 	cneqsn	a, #0x0d
+      000016r44r30                   83 	goto	00105$
+      000018r6Cr30                   84 	goto	00106$
+                                     85 ;	../gets.c: 42: case '\b': /* backspace */
+      00001A                         86 00101$:
+                                     87 ;	../gets.c: 43: if (count)
+      00001Ar82r0F                   88 	mov	a, _gets_sloc0_1_0+0
+      00001Cr83r0E                   89 	or	a, _gets_sloc0_1_0+1
+      00001E 00 2B                   90 	cneqsn	a, #0x00
+      000020r04r30                   91 	goto	00109$
+                                     92 ;	../gets.c: 45: putchar ('\b');
+      000022 08 2F                   93 	mov	a, #0x08
+      000024r80r0B                   94 	mov	_putchar_PARM_1+0, a
+      000026r01r13                   95 	clear	_putchar_PARM_1+1
+      000028r00r38                   96 	call	_putchar
+                                     97 ;	../gets.c: 46: putchar (' ');
+      00002A 20 2F                   98 	mov	a, #0x20
+      00002Cr80r0B                   99 	mov	_putchar_PARM_1+0, a
+      00002Er01r13                  100 	clear	_putchar_PARM_1+1
+      000030r00r38                  101 	call	_putchar
+                                    102 ;	../gets.c: 47: putchar ('\b');
+      000032 08 2F                  103 	mov	a, #0x08
+      000034r80r0B                  104 	mov	_putchar_PARM_1+0, a
+      000036r01r13                  105 	clear	_putchar_PARM_1+1
+      000038r00r38                  106 	call	_putchar
+                                    107 ;	../gets.c: 48: --s;
+      00003Ar80r12                  108 	dec	_gets_PARM_1+0
+      00003Cr81r10                  109 	subc	_gets_PARM_1+1
+                                    110 ;	../gets.c: 49: --count;
+      00003Er82r12                  111 	dec	_gets_sloc0_1_0+0
+      000040r83r10                  112 	subc	_gets_sloc0_1_0+1
+                                    113 ;	../gets.c: 51: break;
+      000042r04r30                  114 	goto	00109$
+                                    115 ;	../gets.c: 54: case '\r': /* CR or LF */
+      000044                        116 00105$:
+                                    117 ;	../gets.c: 55: putchar ('\r');
+      000044 0D 2F                  118 	mov	a, #0x0d
+      000046r80r0B                  119 	mov	_putchar_PARM_1+0, a
+      000048r01r13                  120 	clear	_putchar_PARM_1+1
+      00004Ar00r38                  121 	call	_putchar
+                                    122 ;	../gets.c: 56: putchar ('\n');
+      00004C 0A 2F                  123 	mov	a, #0x0a
+      00004Er80r0B                  124 	mov	_putchar_PARM_1+0, a
+      000050r01r13                  125 	clear	_putchar_PARM_1+1
+      000052r00r38                  126 	call	_putchar
+                                    127 ;	../gets.c: 57: *s = 0;
+      000054r80r0F                  128 	mov	a, _gets_PARM_1+0
+      000056r85r0B                  129 	mov	_gets_sloc2_1_0+0, a
+      000058r81r0F                  130 	mov	a, _gets_PARM_1+1
+      00005Ar86r0B                  131 	mov	_gets_sloc2_1_0+1, a
+      00005Cr85r0F                  132 	mov	a, _gets_sloc2_1_0+0
+      00005Er80r0B                  133 	mov	p, a
+      000060 00 2F                  134 	mov	a, #0x00
+      000062r80r03                  135 	idxm	p, a
+                                    136 ;	../gets.c: 58: return s;
+      000064r86r0F                  137 	mov	a, _gets_sloc2_1_0+1
+      000066r80r0B                  138 	mov	p, a
+      000068r85r0F                  139 	mov	a, _gets_sloc2_1_0+0
+      00006A 7A 00                  140 	ret
+                                    141 ;	../gets.c: 60: default:
+      00006C                        142 00106$:
+                                    143 ;	../gets.c: 61: *s++ = c;
+      00006Cr80r0F                  144 	mov	a, _gets_PARM_1+0
+      00006Er87r0B                  145 	mov	_gets_sloc3_1_0+0, a
+      000070r81r0F                  146 	mov	a, _gets_PARM_1+1
+      000072r88r0B                  147 	mov	_gets_sloc3_1_0+1, a
+      000074r87r0F                  148 	mov	a, _gets_sloc3_1_0+0
+      000076r80r0B                  149 	mov	p, a
+      000078r84r0F                  150 	mov	a, _gets_sloc1_1_0+0
+      00007Ar80r03                  151 	idxm	p, a
+      00007Cr87r0F                  152 	mov	a, _gets_sloc3_1_0+0
+      00007E 01 28                  153 	add	a, #0x01
+      000080r80r0B                  154 	mov	_gets_PARM_1+0, a
+      000082r88r0F                  155 	mov	a, _gets_sloc3_1_0+1
+      000084 60 00                  156 	addc	a
+      000086r81r0B                  157 	mov	_gets_PARM_1+1, a
+                                    158 ;	../gets.c: 62: ++count;
+      000088r02r12                  159 	inc	_gets_sloc0_1_0+0
+      00008Ar03r10                  160 	addc	_gets_sloc0_1_0+1
+                                    161 ;	../gets.c: 63: putchar (c);
+      00008Cr84r0F                  162 	mov	a, _gets_sloc1_1_0+0
+      00008Er80r0B                  163 	mov	_putchar_PARM_1+0, a
+      000090r01r13                  164 	clear	_putchar_PARM_1+1
+      000092r00r38                  165 	call	_putchar
+                                    166 ;	../gets.c: 65: }
+      000094r04r30                  167 	goto	00109$
+                                    168 ;	../gets.c: 67: }
+      000096 7A 00                  169 	ret
+                                    170 	.area CODE
+                                    171 	.area CONST
+                                    172 	.area CABS (ABS)

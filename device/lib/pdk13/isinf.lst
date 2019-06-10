@@ -1,0 +1,108 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module isinf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _isinf_PARM_1
+                                     17 	.globl _isinf
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _isinf_PARM_1:
+      000000                         28 	.ds 4
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _isinf_sloc0_1_0:
+      000000                         34 	.ds 4
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../isinf.c: 33: int isinf (float f)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function isinf
+                                     58 ;	-----------------------------------------
+      000000                         59 _isinf:
+                                     60 ;	../isinf.c: 35: unsigned long *pl = (unsigned long *) &f;
+                                     61 ;	../isinf.c: 36: return *pl == 0x7f800000 || *pl == 0xff800000;
+      000000r80r0F                   62 	mov	a, _isinf_PARM_1+0
+      000002r80r0B                   63 	mov	_isinf_sloc0_1_0+0, a
+      000004r81r0F                   64 	mov	a, _isinf_PARM_1+1
+      000006r81r0B                   65 	mov	_isinf_sloc0_1_0+1, a
+      000008r82r0F                   66 	mov	a, _isinf_PARM_1+2
+      00000Ar82r0B                   67 	mov	_isinf_sloc0_1_0+2, a
+      00000Cr83r0F                   68 	mov	a, _isinf_PARM_1+3
+      00000Er83r0B                   69 	mov	_isinf_sloc0_1_0+3, a
+      000010r80r0F                   70 	mov	a, _isinf_sloc0_1_0+0
+      000012 00 2A                   71 	ceqsn	a, #0x00
+      000014r28r30                   72 	goto	00114$
+      000016r81r0F                   73 	mov	a, _isinf_sloc0_1_0+1
+      000018 00 2A                   74 	ceqsn	a, #0x00
+      00001Ar28r30                   75 	goto	00114$
+      00001Cr82r0F                   76 	mov	a, _isinf_sloc0_1_0+2
+      00001E 80 2A                   77 	ceqsn	a, #0x80
+      000020r28r30                   78 	goto	00114$
+      000022r83r0F                   79 	mov	a, _isinf_sloc0_1_0+3
+      000024 7F 2B                   80 	cneqsn	a, #0x7f
+      000026r44r30                   81 	goto	00104$
+      000028                         82 00114$:
+      000028r80r0F                   83 	mov	a, _isinf_sloc0_1_0+0
+      00002A 00 2A                   84 	ceqsn	a, #0x00
+      00002Cr40r30                   85 	goto	00115$
+      00002Er81r0F                   86 	mov	a, _isinf_sloc0_1_0+1
+      000030 00 2A                   87 	ceqsn	a, #0x00
+      000032r40r30                   88 	goto	00115$
+      000034r82r0F                   89 	mov	a, _isinf_sloc0_1_0+2
+      000036 80 2A                   90 	ceqsn	a, #0x80
+      000038r40r30                   91 	goto	00115$
+      00003Ar83r0F                   92 	mov	a, _isinf_sloc0_1_0+3
+      00003C FF 2B                   93 	cneqsn	a, #0xff
+      00003Er44r30                   94 	goto	00104$
+      000040                         95 00115$:
+      000040r00r13                   96 	clear	p
+      000042r48r30                   97 	goto	00105$
+      000044                         98 00104$:
+      000044 01 2F                   99 	mov	a, #0x01
+      000046r80r0B                  100 	mov	p, a
+      000048                        101 00105$:
+      000048 00 2F                  102 	mov	a, #0x00
+      00004Ar80r13                  103 	xch	a, p
+                                    104 ;	../isinf.c: 37: }
+      00004C 7A 00                  105 	ret
+                                    106 	.area CODE
+                                    107 	.area CONST
+                                    108 	.area CABS (ABS)

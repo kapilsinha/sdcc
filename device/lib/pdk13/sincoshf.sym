@@ -1,0 +1,74 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___fsadd                                                       ****** GX
+    ___fsadd_PARM_1                                                ****** GX
+    ___fsadd_PARM_2                                                ****** GX
+    ___fsdiv                                                       ****** GX
+    ___fsdiv_PARM_1                                                ****** GX
+    ___fsdiv_PARM_2                                                ****** GX
+    ___fslt                                                        ****** GX
+    ___fslt_PARM_1                                                 ****** GX
+    ___fslt_PARM_2                                                 ****** GX
+    ___fsmul                                                       ****** GX
+    ___fsmul_PARM_1                                                ****** GX
+    ___fsmul_PARM_2                                                ****** GX
+    ___fssub                                                       ****** GX
+    ___fssub_PARM_1                                                ****** GX
+    ___fssub_PARM_2                                                ****** GX
+    _errno                                                         ****** GX
+    _expf                                                          ****** GX
+  9 _sincoshf                                                      000000 GR
+  1 _sincoshf_PARM_1                                               000000 GR
+  1 _sincoshf_PARM_2                                               000004 GR
+  1 _sincoshf_sloc0_1_0                                            000005 R
+  1 _sincoshf_sloc10_1_0                                           00002D R
+  1 _sincoshf_sloc11_1_0                                           000031 R
+  1 _sincoshf_sloc12_1_0                                           000035 R
+  1 _sincoshf_sloc13_1_0                                           000039 R
+  1 _sincoshf_sloc14_1_0                                           00003D R
+  1 _sincoshf_sloc15_1_0                                           000041 R
+  1 _sincoshf_sloc16_1_0                                           000045 R
+  1 _sincoshf_sloc17_1_0                                           000049 R
+  1 _sincoshf_sloc18_1_0                                           00004A R
+  1 _sincoshf_sloc19_1_0                                           00004E R
+  1 _sincoshf_sloc1_1_0                                            000009 R
+  1 _sincoshf_sloc20_1_0                                           000052 R
+  1 _sincoshf_sloc21_1_0                                           000056 R
+  1 _sincoshf_sloc22_1_0                                           00005A R
+  1 _sincoshf_sloc23_1_0                                           00005E R
+  1 _sincoshf_sloc2_1_0                                            00000D R
+  1 _sincoshf_sloc3_1_0                                            000011 R
+  1 _sincoshf_sloc4_1_0                                            000015 R
+  1 _sincoshf_sloc5_1_0                                            000019 R
+  1 _sincoshf_sloc6_1_0                                            00001D R
+  1 _sincoshf_sloc7_1_0                                            000021 R
+  1 _sincoshf_sloc8_1_0                                            000025 R
+  1 _sincoshf_sloc9_1_0                                            000029 R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     62   flags    0
+   2 OSEG                                       size      0   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    472   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

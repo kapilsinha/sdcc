@@ -1,0 +1,903 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module tancotf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _tancotf
+                                     17 	.globl _fabsf
+                                     18 	.globl _tancotf_PARM_2
+                                     19 	.globl _tancotf_PARM_1
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _tancotf_PARM_1:
+      000000                         30 	.ds 4
+      000004                         31 _tancotf_PARM_2:
+      000004                         32 	.ds 1
+      000005                         33 _tancotf_sloc0_1_0:
+      000005                         34 	.ds 4
+      000009                         35 _tancotf_sloc1_1_0:
+      000009                         36 	.ds 4
+      00000D                         37 _tancotf_sloc2_1_0:
+      00000D                         38 	.ds 4
+      000011                         39 _tancotf_sloc3_1_0:
+      000011                         40 	.ds 4
+      000015                         41 _tancotf_sloc4_1_0:
+      000015                         42 	.ds 4
+      000019                         43 _tancotf_sloc5_1_0:
+      000019                         44 	.ds 4
+      00001D                         45 _tancotf_sloc6_1_0:
+      00001D                         46 	.ds 4
+      000021                         47 _tancotf_sloc7_1_0:
+      000021                         48 	.ds 4
+      000025                         49 _tancotf_sloc8_1_0:
+      000025                         50 	.ds 4
+      000029                         51 _tancotf_sloc9_1_0:
+      000029                         52 	.ds 4
+      00002D                         53 _tancotf_sloc10_1_0:
+      00002D                         54 	.ds 4
+      000031                         55 _tancotf_sloc11_1_0:
+      000031                         56 	.ds 4
+      000035                         57 _tancotf_sloc12_1_0:
+      000035                         58 	.ds 4
+      000039                         59 _tancotf_sloc13_1_0:
+      000039                         60 	.ds 4
+      00003D                         61 _tancotf_sloc14_1_0:
+      00003D                         62 	.ds 4
+      000041                         63 _tancotf_sloc15_1_0:
+      000041                         64 	.ds 4
+      000045                         65 _tancotf_sloc16_1_0:
+      000045                         66 	.ds 4
+      000049                         67 _tancotf_sloc17_1_0:
+      000049                         68 	.ds 4
+      00004D                         69 _tancotf_sloc18_1_0:
+      00004D                         70 	.ds 4
+      000051                         71 _tancotf_sloc19_1_0:
+      000051                         72 	.ds 4
+      000055                         73 _tancotf_sloc20_1_0:
+      000055                         74 	.ds 4
+      000059                         75 _tancotf_sloc21_1_0:
+      000059                         76 	.ds 4
+      00005D                         77 _tancotf_sloc22_1_0:
+      00005D                         78 	.ds 4
+      000061                         79 _tancotf_sloc23_1_0:
+      000061                         80 	.ds 4
+      000065                         81 _tancotf_sloc24_1_0:
+      000065                         82 	.ds 4
+      000069                         83 _tancotf_sloc25_1_0:
+      000069                         84 	.ds 2
+      00006B                         85 _tancotf_sloc26_1_0:
+      00006B                         86 	.ds 4
+      00006F                         87 _tancotf_sloc27_1_0:
+      00006F                         88 	.ds 4
+      000073                         89 _tancotf_sloc28_1_0:
+      000073                         90 	.ds 4
+      000077                         91 _tancotf_sloc29_1_0:
+      000077                         92 	.ds 4
+      00007B                         93 _tancotf_sloc30_1_0:
+      00007B                         94 	.ds 4
+      00007F                         95 _tancotf_sloc31_1_0:
+      00007F                         96 	.ds 4
+      000083                         97 _tancotf_sloc32_1_0:
+      000083                         98 	.ds 4
+                                     99 ;--------------------------------------------------------
+                                    100 ; overlayable items in ram 
+                                    101 ;--------------------------------------------------------
+                                    102 ;--------------------------------------------------------
+                                    103 ; absolute external ram data
+                                    104 ;--------------------------------------------------------
+                                    105 	.area DABS (ABS)
+                                    106 ;--------------------------------------------------------
+                                    107 ; global & static initialisations
+                                    108 ;--------------------------------------------------------
+                                    109 	.area HOME
+                                    110 	.area GSINIT
+                                    111 	.area GSFINAL
+                                    112 	.area GSINIT
+                                    113 ;--------------------------------------------------------
+                                    114 ; Home
+                                    115 ;--------------------------------------------------------
+                                    116 	.area HOME
+                                    117 	.area HOME
+                                    118 ;--------------------------------------------------------
+                                    119 ; code
+                                    120 ;--------------------------------------------------------
+                                    121 	.area CODE
+                                    122 ;	../tancotf.c: 53: float tancotf(float x, bool iscotan)
+                                    123 ;	-----------------------------------------
+                                    124 ;	 function tancotf
+                                    125 ;	-----------------------------------------
+      000000                        126 _tancotf:
+                                    127 ;	../tancotf.c: 58: if (fabsf(x) > YMAX)
+      000000 C2 01                  128 	mov	a, sp
+      000002r80r0B                  129 	mov	p, a
+      000004 72 00                  130 	push	af
+      000006 72 00                  131 	push	af
+      000008r80r0F                  132 	mov	a, _tancotf_PARM_1+0
+      00000Ar80r03                  133 	idxm	p, a
+      00000Cr00r12                  134 	inc	p
+      00000Er81r0F                  135 	mov	a, _tancotf_PARM_1+1
+      000010r80r03                  136 	idxm	p, a
+      000012r00r12                  137 	inc	p
+      000014r82r0F                  138 	mov	a, _tancotf_PARM_1+2
+      000016r80r03                  139 	idxm	p, a
+      000018r00r12                  140 	inc	p
+      00001Ar83r0F                  141 	mov	a, _tancotf_PARM_1+3
+      00001Cr80r03                  142 	idxm	p, a
+      00001Er05r2F                  143 	mov	a, #_tancotf_sloc0_1_0
+      000020 72 00                  144 	push	af
+      000022r00r38                  145 	call	_fabsf
+      000024 C2 01                  146 	mov	a, sp
+      000026 FA 28                  147 	add	a, #-6
+      000028 82 01                  148 	mov	sp, a
+      00002Ar00r13                  149 	clear	___fslt_PARM_1+0
+      00002C 08 2F                  150 	mov	a, #0x08
+      00002Er81r0B                  151 	mov	___fslt_PARM_1+1, a
+      000030 C9 2F                  152 	mov	a, #0xc9
+      000032r82r0B                  153 	mov	___fslt_PARM_1+2, a
+      000034 45 2F                  154 	mov	a, #0x45
+      000036r83r0B                  155 	mov	___fslt_PARM_1+3, a
+      000038r85r0F                  156 	mov	a, _tancotf_sloc0_1_0+0
+      00003Ar80r0B                  157 	mov	___fslt_PARM_2+0, a
+      00003Cr86r0F                  158 	mov	a, _tancotf_sloc0_1_0+1
+      00003Er81r0B                  159 	mov	___fslt_PARM_2+1, a
+      000040r87r0F                  160 	mov	a, _tancotf_sloc0_1_0+2
+      000042r82r0B                  161 	mov	___fslt_PARM_2+2, a
+      000044r88r0F                  162 	mov	a, _tancotf_sloc0_1_0+3
+      000046r83r0B                  163 	mov	___fslt_PARM_2+3, a
+      000048r00r38                  164 	call	___fslt
+      00004A 00 2B                  165 	cneqsn	a, #0x00
+      00004Cr76r30                  166 	goto	00102$
+                                    167 ;	../tancotf.c: 60: errno = ERANGE;
+      00004E 22 2F                  168 	mov	a, #0x22
+      000050r80r0B                  169 	mov	_errno+0, a
+      000052r01r13                  170 	clear	_errno+1
+                                    171 ;	../tancotf.c: 61: return 0.0;
+      000054 C2 01                  172 	mov	a, sp
+      000056 FC 28                  173 	add	a, #0xfc
+      000058r80r0B                  174 	mov	p, a
+      00005Ar81r03                  175 	idxm	a, p
+      00005Cr80r0B                  176 	mov	p, a
+      00005E 00 2F                  177 	mov	a, #0x00
+      000060r80r03                  178 	idxm	p, a
+      000062r00r12                  179 	inc	p
+      000064 00 2F                  180 	mov	a, #0x00
+      000066r80r03                  181 	idxm	p, a
+      000068r00r12                  182 	inc	p
+      00006A 00 2F                  183 	mov	a, #0x00
+      00006Cr80r03                  184 	idxm	p, a
+      00006Er00r12                  185 	inc	p
+      000070 00 2F                  186 	mov	a, #0x00
+      000072r80r03                  187 	idxm	p, a
+      000074 7A 00                  188 	ret
+      000076                        189 00102$:
+                                    190 ;	../tancotf.c: 65: n=(x*TWO_O_PI+(x>0.0?0.5:-0.5)); /*works for +-x*/
+      000076 83 2F                  191 	mov	a, #0x83
+      000078r80r0B                  192 	mov	___fsmul_PARM_1+0, a
+      00007A F9 2F                  193 	mov	a, #0xf9
+      00007Cr81r0B                  194 	mov	___fsmul_PARM_1+1, a
+      00007E 22 2F                  195 	mov	a, #0x22
+      000080r82r0B                  196 	mov	___fsmul_PARM_1+2, a
+      000082 3F 2F                  197 	mov	a, #0x3f
+      000084r83r0B                  198 	mov	___fsmul_PARM_1+3, a
+      000086r80r0F                  199 	mov	a, _tancotf_PARM_1+0
+      000088r80r0B                  200 	mov	___fsmul_PARM_2+0, a
+      00008Ar81r0F                  201 	mov	a, _tancotf_PARM_1+1
+      00008Cr81r0B                  202 	mov	___fsmul_PARM_2+1, a
+      00008Er82r0F                  203 	mov	a, _tancotf_PARM_1+2
+      000090r82r0B                  204 	mov	___fsmul_PARM_2+2, a
+      000092r83r0F                  205 	mov	a, _tancotf_PARM_1+3
+      000094r83r0B                  206 	mov	___fsmul_PARM_2+3, a
+      000096r09r2F                  207 	mov	a, #_tancotf_sloc1_1_0
+      000098 72 00                  208 	push	af
+      00009Ar00r38                  209 	call	___fsmul
+      00009C C2 01                  210 	mov	a, sp
+      00009E FE 28                  211 	add	a, #-2
+      0000A0 82 01                  212 	mov	sp, a
+      0000A2r00r13                  213 	clear	___fslt_PARM_1+0
+      0000A4r01r13                  214 	clear	___fslt_PARM_1+1
+      0000A6r02r13                  215 	clear	___fslt_PARM_1+2
+      0000A8r03r13                  216 	clear	___fslt_PARM_1+3
+      0000AAr80r0F                  217 	mov	a, _tancotf_PARM_1+0
+      0000ACr80r0B                  218 	mov	___fslt_PARM_2+0, a
+      0000AEr81r0F                  219 	mov	a, _tancotf_PARM_1+1
+      0000B0r81r0B                  220 	mov	___fslt_PARM_2+1, a
+      0000B2r82r0F                  221 	mov	a, _tancotf_PARM_1+2
+      0000B4r82r0B                  222 	mov	___fslt_PARM_2+2, a
+      0000B6r83r0F                  223 	mov	a, _tancotf_PARM_1+3
+      0000B8r83r0B                  224 	mov	___fslt_PARM_2+3, a
+      0000BAr00r38                  225 	call	___fslt
+      0000BC 00 2B                  226 	cneqsn	a, #0x00
+      0000BErCCr30                  227 	goto	00117$
+      0000C0r65r13                  228 	clear	_tancotf_sloc24_1_0+0
+      0000C2r66r13                  229 	clear	_tancotf_sloc24_1_0+1
+      0000C4r67r13                  230 	clear	_tancotf_sloc24_1_0+2
+      0000C6 3F 2F                  231 	mov	a, #0x3f
+      0000C8rE8r0B                  232 	mov	_tancotf_sloc24_1_0+3, a
+      0000CArD6r30                  233 	goto	00118$
+      0000CC                        234 00117$:
+      0000CCr65r13                  235 	clear	_tancotf_sloc24_1_0+0
+      0000CEr66r13                  236 	clear	_tancotf_sloc24_1_0+1
+      0000D0r67r13                  237 	clear	_tancotf_sloc24_1_0+2
+      0000D2 BF 2F                  238 	mov	a, #0xbf
+      0000D4rE8r0B                  239 	mov	_tancotf_sloc24_1_0+3, a
+      0000D6                        240 00118$:
+      0000D6r89r0F                  241 	mov	a, _tancotf_sloc1_1_0+0
+      0000D8r80r0B                  242 	mov	___fsadd_PARM_1+0, a
+      0000DAr8Ar0F                  243 	mov	a, _tancotf_sloc1_1_0+1
+      0000DCr81r0B                  244 	mov	___fsadd_PARM_1+1, a
+      0000DEr8Br0F                  245 	mov	a, _tancotf_sloc1_1_0+2
+      0000E0r82r0B                  246 	mov	___fsadd_PARM_1+2, a
+      0000E2r8Cr0F                  247 	mov	a, _tancotf_sloc1_1_0+3
+      0000E4r83r0B                  248 	mov	___fsadd_PARM_1+3, a
+      0000E6rE5r0F                  249 	mov	a, _tancotf_sloc24_1_0+0
+      0000E8r80r0B                  250 	mov	___fsadd_PARM_2+0, a
+      0000EArE6r0F                  251 	mov	a, _tancotf_sloc24_1_0+1
+      0000ECr81r0B                  252 	mov	___fsadd_PARM_2+1, a
+      0000EErE7r0F                  253 	mov	a, _tancotf_sloc24_1_0+2
+      0000F0r82r0B                  254 	mov	___fsadd_PARM_2+2, a
+      0000F2rE8r0F                  255 	mov	a, _tancotf_sloc24_1_0+3
+      0000F4r83r0B                  256 	mov	___fsadd_PARM_2+3, a
+      0000F6r0Dr2F                  257 	mov	a, #_tancotf_sloc2_1_0
+      0000F8 72 00                  258 	push	af
+      0000FAr00r38                  259 	call	___fsadd
+      0000FC C2 01                  260 	mov	a, sp
+      0000FE FE 28                  261 	add	a, #-2
+      000100 82 01                  262 	mov	sp, a
+      000102r8Dr0F                  263 	mov	a, _tancotf_sloc2_1_0+0
+      000104r80r0B                  264 	mov	___fs2sint_PARM_1+0, a
+      000106r8Er0F                  265 	mov	a, _tancotf_sloc2_1_0+1
+      000108r81r0B                  266 	mov	___fs2sint_PARM_1+1, a
+      00010Ar8Fr0F                  267 	mov	a, _tancotf_sloc2_1_0+2
+      00010Cr82r0B                  268 	mov	___fs2sint_PARM_1+2, a
+      00010Er90r0F                  269 	mov	a, _tancotf_sloc2_1_0+3
+      000110r83r0B                  270 	mov	___fs2sint_PARM_1+3, a
+      000112r00r38                  271 	call	___fs2sint
+      000114rE9r0B                  272 	mov	_tancotf_sloc25_1_0+0, a
+      000116r80r0F                  273 	mov	a, p
+      000118rEAr0B                  274 	mov	_tancotf_sloc25_1_0+1, a
+                                    275 ;	../tancotf.c: 66: xn=n;
+      00011ArE9r0F                  276 	mov	a, _tancotf_sloc25_1_0+0
+      00011Cr80r0B                  277 	mov	___sint2fs_PARM_1+0, a
+      00011ErEAr0F                  278 	mov	a, _tancotf_sloc25_1_0+1
+      000120r81r0B                  279 	mov	___sint2fs_PARM_1+1, a
+      000122r11r2F                  280 	mov	a, #_tancotf_sloc3_1_0
+      000124 72 00                  281 	push	af
+      000126r00r38                  282 	call	___sint2fs
+      000128 C2 01                  283 	mov	a, sp
+      00012A FE 28                  284 	add	a, #-2
+      00012C 82 01                  285 	mov	sp, a
+      00012Er91r0F                  286 	mov	a, _tancotf_sloc3_1_0+0
+      000130rEBr0B                  287 	mov	_tancotf_sloc26_1_0+0, a
+      000132r92r0F                  288 	mov	a, _tancotf_sloc3_1_0+1
+      000134rECr0B                  289 	mov	_tancotf_sloc26_1_0+1, a
+      000136r93r0F                  290 	mov	a, _tancotf_sloc3_1_0+2
+      000138rEDr0B                  291 	mov	_tancotf_sloc26_1_0+2, a
+      00013Ar94r0F                  292 	mov	a, _tancotf_sloc3_1_0+3
+      00013CrEEr0B                  293 	mov	_tancotf_sloc26_1_0+3, a
+                                    294 ;	../tancotf.c: 68: xnum=(int)x;
+      00013Er80r0F                  295 	mov	a, _tancotf_PARM_1+0
+      000140r80r0B                  296 	mov	___fs2sint_PARM_1+0, a
+      000142r81r0F                  297 	mov	a, _tancotf_PARM_1+1
+      000144r81r0B                  298 	mov	___fs2sint_PARM_1+1, a
+      000146r82r0F                  299 	mov	a, _tancotf_PARM_1+2
+      000148r82r0B                  300 	mov	___fs2sint_PARM_1+2, a
+      00014Ar83r0F                  301 	mov	a, _tancotf_PARM_1+3
+      00014Cr83r0B                  302 	mov	___fs2sint_PARM_1+3, a
+      00014Er00r38                  303 	call	___fs2sint
+      000150r80r0B                  304 	mov	___sint2fs_PARM_1+0, a
+      000152r80r0F                  305 	mov	a, p
+      000154r81r0B                  306 	mov	___sint2fs_PARM_1+1, a
+      000156r15r2F                  307 	mov	a, #_tancotf_sloc4_1_0
+      000158 72 00                  308 	push	af
+      00015Ar00r38                  309 	call	___sint2fs
+      00015C C2 01                  310 	mov	a, sp
+      00015E FE 28                  311 	add	a, #-2
+      000160 82 01                  312 	mov	sp, a
+      000162r95r0F                  313 	mov	a, _tancotf_sloc4_1_0+0
+      000164rEFr0B                  314 	mov	_tancotf_sloc27_1_0+0, a
+      000166r96r0F                  315 	mov	a, _tancotf_sloc4_1_0+1
+      000168rF0r0B                  316 	mov	_tancotf_sloc27_1_0+1, a
+      00016Ar97r0F                  317 	mov	a, _tancotf_sloc4_1_0+2
+      00016CrF1r0B                  318 	mov	_tancotf_sloc27_1_0+2, a
+      00016Er98r0F                  319 	mov	a, _tancotf_sloc4_1_0+3
+      000170rF2r0B                  320 	mov	_tancotf_sloc27_1_0+3, a
+                                    321 ;	../tancotf.c: 69: xden=x-xnum;
+      000172r80r0F                  322 	mov	a, _tancotf_PARM_1+0
+      000174r80r0B                  323 	mov	___fssub_PARM_1+0, a
+      000176r81r0F                  324 	mov	a, _tancotf_PARM_1+1
+      000178r81r0B                  325 	mov	___fssub_PARM_1+1, a
+      00017Ar82r0F                  326 	mov	a, _tancotf_PARM_1+2
+      00017Cr82r0B                  327 	mov	___fssub_PARM_1+2, a
+      00017Er83r0F                  328 	mov	a, _tancotf_PARM_1+3
+      000180r83r0B                  329 	mov	___fssub_PARM_1+3, a
+      000182rEFr0F                  330 	mov	a, _tancotf_sloc27_1_0+0
+      000184r80r0B                  331 	mov	___fssub_PARM_2+0, a
+      000186rF0r0F                  332 	mov	a, _tancotf_sloc27_1_0+1
+      000188r81r0B                  333 	mov	___fssub_PARM_2+1, a
+      00018ArF1r0F                  334 	mov	a, _tancotf_sloc27_1_0+2
+      00018Cr82r0B                  335 	mov	___fssub_PARM_2+2, a
+      00018ErF2r0F                  336 	mov	a, _tancotf_sloc27_1_0+3
+      000190r83r0B                  337 	mov	___fssub_PARM_2+3, a
+      000192r19r2F                  338 	mov	a, #_tancotf_sloc5_1_0
+      000194 72 00                  339 	push	af
+      000196r00r38                  340 	call	___fssub
+      000198 C2 01                  341 	mov	a, sp
+      00019A FE 28                  342 	add	a, #-2
+      00019C 82 01                  343 	mov	sp, a
+      00019Er99r0F                  344 	mov	a, _tancotf_sloc5_1_0+0
+      0001A0rF3r0B                  345 	mov	_tancotf_sloc28_1_0+0, a
+      0001A2r9Ar0F                  346 	mov	a, _tancotf_sloc5_1_0+1
+      0001A4rF4r0B                  347 	mov	_tancotf_sloc28_1_0+1, a
+      0001A6r9Br0F                  348 	mov	a, _tancotf_sloc5_1_0+2
+      0001A8rF5r0B                  349 	mov	_tancotf_sloc28_1_0+2, a
+      0001AAr9Cr0F                  350 	mov	a, _tancotf_sloc5_1_0+3
+      0001ACrF6r0B                  351 	mov	_tancotf_sloc28_1_0+3, a
+                                    352 ;	../tancotf.c: 70: f=((xnum-xn*C1)+xden)-xn*C2;
+      0001AEr00r13                  353 	clear	___fsmul_PARM_1+0
+      0001B0r01r13                  354 	clear	___fsmul_PARM_1+1
+      0001B2 C9 2F                  355 	mov	a, #0xc9
+      0001B4r82r0B                  356 	mov	___fsmul_PARM_1+2, a
+      0001B6 3F 2F                  357 	mov	a, #0x3f
+      0001B8r83r0B                  358 	mov	___fsmul_PARM_1+3, a
+      0001BArEBr0F                  359 	mov	a, _tancotf_sloc26_1_0+0
+      0001BCr80r0B                  360 	mov	___fsmul_PARM_2+0, a
+      0001BErECr0F                  361 	mov	a, _tancotf_sloc26_1_0+1
+      0001C0r81r0B                  362 	mov	___fsmul_PARM_2+1, a
+      0001C2rEDr0F                  363 	mov	a, _tancotf_sloc26_1_0+2
+      0001C4r82r0B                  364 	mov	___fsmul_PARM_2+2, a
+      0001C6rEEr0F                  365 	mov	a, _tancotf_sloc26_1_0+3
+      0001C8r83r0B                  366 	mov	___fsmul_PARM_2+3, a
+      0001CAr1Dr2F                  367 	mov	a, #_tancotf_sloc6_1_0
+      0001CC 72 00                  368 	push	af
+      0001CEr00r38                  369 	call	___fsmul
+      0001D0 C2 01                  370 	mov	a, sp
+      0001D2 FE 28                  371 	add	a, #-2
+      0001D4 82 01                  372 	mov	sp, a
+      0001D6rEFr0F                  373 	mov	a, _tancotf_sloc27_1_0+0
+      0001D8r80r0B                  374 	mov	___fssub_PARM_1+0, a
+      0001DArF0r0F                  375 	mov	a, _tancotf_sloc27_1_0+1
+      0001DCr81r0B                  376 	mov	___fssub_PARM_1+1, a
+      0001DErF1r0F                  377 	mov	a, _tancotf_sloc27_1_0+2
+      0001E0r82r0B                  378 	mov	___fssub_PARM_1+2, a
+      0001E2rF2r0F                  379 	mov	a, _tancotf_sloc27_1_0+3
+      0001E4r83r0B                  380 	mov	___fssub_PARM_1+3, a
+      0001E6r9Dr0F                  381 	mov	a, _tancotf_sloc6_1_0+0
+      0001E8r80r0B                  382 	mov	___fssub_PARM_2+0, a
+      0001EAr9Er0F                  383 	mov	a, _tancotf_sloc6_1_0+1
+      0001ECr81r0B                  384 	mov	___fssub_PARM_2+1, a
+      0001EEr9Fr0F                  385 	mov	a, _tancotf_sloc6_1_0+2
+      0001F0r82r0B                  386 	mov	___fssub_PARM_2+2, a
+      0001F2rA0r0F                  387 	mov	a, _tancotf_sloc6_1_0+3
+      0001F4r83r0B                  388 	mov	___fssub_PARM_2+3, a
+      0001F6r21r2F                  389 	mov	a, #_tancotf_sloc7_1_0
+      0001F8 72 00                  390 	push	af
+      0001FAr00r38                  391 	call	___fssub
+      0001FC C2 01                  392 	mov	a, sp
+      0001FE FE 28                  393 	add	a, #-2
+      000200 82 01                  394 	mov	sp, a
+      000202rA1r0F                  395 	mov	a, _tancotf_sloc7_1_0+0
+      000204r80r0B                  396 	mov	___fsadd_PARM_1+0, a
+      000206rA2r0F                  397 	mov	a, _tancotf_sloc7_1_0+1
+      000208r81r0B                  398 	mov	___fsadd_PARM_1+1, a
+      00020ArA3r0F                  399 	mov	a, _tancotf_sloc7_1_0+2
+      00020Cr82r0B                  400 	mov	___fsadd_PARM_1+2, a
+      00020ErA4r0F                  401 	mov	a, _tancotf_sloc7_1_0+3
+      000210r83r0B                  402 	mov	___fsadd_PARM_1+3, a
+      000212rF3r0F                  403 	mov	a, _tancotf_sloc28_1_0+0
+      000214r80r0B                  404 	mov	___fsadd_PARM_2+0, a
+      000216rF4r0F                  405 	mov	a, _tancotf_sloc28_1_0+1
+      000218r81r0B                  406 	mov	___fsadd_PARM_2+1, a
+      00021ArF5r0F                  407 	mov	a, _tancotf_sloc28_1_0+2
+      00021Cr82r0B                  408 	mov	___fsadd_PARM_2+2, a
+      00021ErF6r0F                  409 	mov	a, _tancotf_sloc28_1_0+3
+      000220r83r0B                  410 	mov	___fsadd_PARM_2+3, a
+      000222r25r2F                  411 	mov	a, #_tancotf_sloc8_1_0
+      000224 72 00                  412 	push	af
+      000226r00r38                  413 	call	___fsadd
+      000228 C2 01                  414 	mov	a, sp
+      00022A FE 28                  415 	add	a, #-2
+      00022C 82 01                  416 	mov	sp, a
+      00022E 22 2F                  417 	mov	a, #0x22
+      000230r80r0B                  418 	mov	___fsmul_PARM_1+0, a
+      000232 AA 2F                  419 	mov	a, #0xaa
+      000234r81r0B                  420 	mov	___fsmul_PARM_1+1, a
+      000236 FD 2F                  421 	mov	a, #0xfd
+      000238r82r0B                  422 	mov	___fsmul_PARM_1+2, a
+      00023A 39 2F                  423 	mov	a, #0x39
+      00023Cr83r0B                  424 	mov	___fsmul_PARM_1+3, a
+      00023ErEBr0F                  425 	mov	a, _tancotf_sloc26_1_0+0
+      000240r80r0B                  426 	mov	___fsmul_PARM_2+0, a
+      000242rECr0F                  427 	mov	a, _tancotf_sloc26_1_0+1
+      000244r81r0B                  428 	mov	___fsmul_PARM_2+1, a
+      000246rEDr0F                  429 	mov	a, _tancotf_sloc26_1_0+2
+      000248r82r0B                  430 	mov	___fsmul_PARM_2+2, a
+      00024ArEEr0F                  431 	mov	a, _tancotf_sloc26_1_0+3
+      00024Cr83r0B                  432 	mov	___fsmul_PARM_2+3, a
+      00024Er29r2F                  433 	mov	a, #_tancotf_sloc9_1_0
+      000250 72 00                  434 	push	af
+      000252r00r38                  435 	call	___fsmul
+      000254 C2 01                  436 	mov	a, sp
+      000256 FE 28                  437 	add	a, #-2
+      000258 82 01                  438 	mov	sp, a
+      00025ArA5r0F                  439 	mov	a, _tancotf_sloc8_1_0+0
+      00025Cr80r0B                  440 	mov	___fssub_PARM_1+0, a
+      00025ErA6r0F                  441 	mov	a, _tancotf_sloc8_1_0+1
+      000260r81r0B                  442 	mov	___fssub_PARM_1+1, a
+      000262rA7r0F                  443 	mov	a, _tancotf_sloc8_1_0+2
+      000264r82r0B                  444 	mov	___fssub_PARM_1+2, a
+      000266rA8r0F                  445 	mov	a, _tancotf_sloc8_1_0+3
+      000268r83r0B                  446 	mov	___fssub_PARM_1+3, a
+      00026ArA9r0F                  447 	mov	a, _tancotf_sloc9_1_0+0
+      00026Cr80r0B                  448 	mov	___fssub_PARM_2+0, a
+      00026ErAAr0F                  449 	mov	a, _tancotf_sloc9_1_0+1
+      000270r81r0B                  450 	mov	___fssub_PARM_2+1, a
+      000272rABr0F                  451 	mov	a, _tancotf_sloc9_1_0+2
+      000274r82r0B                  452 	mov	___fssub_PARM_2+2, a
+      000276rACr0F                  453 	mov	a, _tancotf_sloc9_1_0+3
+      000278r83r0B                  454 	mov	___fssub_PARM_2+3, a
+      00027Ar2Dr2F                  455 	mov	a, #_tancotf_sloc10_1_0
+      00027C 72 00                  456 	push	af
+      00027Er00r38                  457 	call	___fssub
+      000280 C2 01                  458 	mov	a, sp
+      000282 FE 28                  459 	add	a, #-2
+      000284 82 01                  460 	mov	sp, a
+      000286rADr0F                  461 	mov	a, _tancotf_sloc10_1_0+0
+      000288rF7r0B                  462 	mov	_tancotf_sloc29_1_0+0, a
+      00028ArAEr0F                  463 	mov	a, _tancotf_sloc10_1_0+1
+      00028CrF8r0B                  464 	mov	_tancotf_sloc29_1_0+1, a
+      00028ErAFr0F                  465 	mov	a, _tancotf_sloc10_1_0+2
+      000290rF9r0B                  466 	mov	_tancotf_sloc29_1_0+2, a
+      000292rB0r0F                  467 	mov	a, _tancotf_sloc10_1_0+3
+      000294rFAr0B                  468 	mov	_tancotf_sloc29_1_0+3, a
+                                    469 ;	../tancotf.c: 72: if (fabsf(f) < EPS)
+      000296 C2 01                  470 	mov	a, sp
+      000298r80r0B                  471 	mov	p, a
+      00029A 72 00                  472 	push	af
+      00029C 72 00                  473 	push	af
+      00029ErF7r0F                  474 	mov	a, _tancotf_sloc29_1_0+0
+      0002A0r80r03                  475 	idxm	p, a
+      0002A2r00r12                  476 	inc	p
+      0002A4rF8r0F                  477 	mov	a, _tancotf_sloc29_1_0+1
+      0002A6r80r03                  478 	idxm	p, a
+      0002A8r00r12                  479 	inc	p
+      0002AArF9r0F                  480 	mov	a, _tancotf_sloc29_1_0+2
+      0002ACr80r03                  481 	idxm	p, a
+      0002AEr00r12                  482 	inc	p
+      0002B0rFAr0F                  483 	mov	a, _tancotf_sloc29_1_0+3
+      0002B2r80r03                  484 	idxm	p, a
+      0002B4r31r2F                  485 	mov	a, #_tancotf_sloc11_1_0
+      0002B6 72 00                  486 	push	af
+      0002B8r00r38                  487 	call	_fabsf
+      0002BA C2 01                  488 	mov	a, sp
+      0002BC FA 28                  489 	add	a, #-6
+      0002BE 82 01                  490 	mov	sp, a
+      0002C0rB1r0F                  491 	mov	a, _tancotf_sloc11_1_0+0
+      0002C2r80r0B                  492 	mov	___fslt_PARM_1+0, a
+      0002C4rB2r0F                  493 	mov	a, _tancotf_sloc11_1_0+1
+      0002C6r81r0B                  494 	mov	___fslt_PARM_1+1, a
+      0002C8rB3r0F                  495 	mov	a, _tancotf_sloc11_1_0+2
+      0002CAr82r0B                  496 	mov	___fslt_PARM_1+2, a
+      0002CCrB4r0F                  497 	mov	a, _tancotf_sloc11_1_0+3
+      0002CEr83r0B                  498 	mov	___fslt_PARM_1+3, a
+      0002D0r00r13                  499 	clear	___fslt_PARM_2+0
+      0002D2r01r13                  500 	clear	___fslt_PARM_2+1
+      0002D4 80 2F                  501 	mov	a, #0x80
+      0002D6r82r0B                  502 	mov	___fslt_PARM_2+2, a
+      0002D8 39 2F                  503 	mov	a, #0x39
+      0002DAr83r0B                  504 	mov	___fslt_PARM_2+3, a
+      0002DCr00r38                  505 	call	___fslt
+      0002DE 00 2B                  506 	cneqsn	a, #0x00
+      0002E0r00r33                  507 	goto	00104$
+                                    508 ;	../tancotf.c: 74: xnum = f;
+      0002E2rF7r0F                  509 	mov	a, _tancotf_sloc29_1_0+0
+      0002E4rFBr0B                  510 	mov	_tancotf_sloc30_1_0+0, a
+      0002E6rF8r0F                  511 	mov	a, _tancotf_sloc29_1_0+1
+      0002E8rFCr0B                  512 	mov	_tancotf_sloc30_1_0+1, a
+      0002EArF9r0F                  513 	mov	a, _tancotf_sloc29_1_0+2
+      0002ECrFDr0B                  514 	mov	_tancotf_sloc30_1_0+2, a
+      0002EErFAr0F                  515 	mov	a, _tancotf_sloc29_1_0+3
+      0002F0rFEr0B                  516 	mov	_tancotf_sloc30_1_0+3, a
+                                    517 ;	../tancotf.c: 75: xden = 1.0;
+      0002F2r7Fr13                  518 	clear	_tancotf_sloc31_1_0+0
+      0002F4r00r13                  519 	clear	_tancotf_sloc31_1_0+1
+      0002F6 80 2F                  520 	mov	a, #0x80
+      0002F8r81r0B                  521 	mov	_tancotf_sloc31_1_0+2, a
+      0002FA 3F 2F                  522 	mov	a, #0x3f
+      0002FCr82r0B                  523 	mov	_tancotf_sloc31_1_0+3, a
+      0002FEr8Cr34                  524 	goto	00105$
+      000300                        525 00104$:
+                                    526 ;	../tancotf.c: 79: g = f*f;
+      000300rF7r0F                  527 	mov	a, _tancotf_sloc29_1_0+0
+      000302r80r0B                  528 	mov	___fsmul_PARM_1+0, a
+      000304rF8r0F                  529 	mov	a, _tancotf_sloc29_1_0+1
+      000306r81r0B                  530 	mov	___fsmul_PARM_1+1, a
+      000308rF9r0F                  531 	mov	a, _tancotf_sloc29_1_0+2
+      00030Ar82r0B                  532 	mov	___fsmul_PARM_1+2, a
+      00030CrFAr0F                  533 	mov	a, _tancotf_sloc29_1_0+3
+      00030Er83r0B                  534 	mov	___fsmul_PARM_1+3, a
+      000310rF7r0F                  535 	mov	a, _tancotf_sloc29_1_0+0
+      000312r80r0B                  536 	mov	___fsmul_PARM_2+0, a
+      000314rF8r0F                  537 	mov	a, _tancotf_sloc29_1_0+1
+      000316r81r0B                  538 	mov	___fsmul_PARM_2+1, a
+      000318rF9r0F                  539 	mov	a, _tancotf_sloc29_1_0+2
+      00031Ar82r0B                  540 	mov	___fsmul_PARM_2+2, a
+      00031CrFAr0F                  541 	mov	a, _tancotf_sloc29_1_0+3
+      00031Er83r0B                  542 	mov	___fsmul_PARM_2+3, a
+      000320r35r2F                  543 	mov	a, #_tancotf_sloc12_1_0
+      000322 72 00                  544 	push	af
+      000324r00r38                  545 	call	___fsmul
+      000326 C2 01                  546 	mov	a, sp
+      000328 FE 28                  547 	add	a, #-2
+      00032A 82 01                  548 	mov	sp, a
+      00032CrB5r0F                  549 	mov	a, _tancotf_sloc12_1_0+0
+      00032Er83r0B                  550 	mov	_tancotf_sloc32_1_0+0, a
+      000330rB6r0F                  551 	mov	a, _tancotf_sloc12_1_0+1
+      000332r84r0B                  552 	mov	_tancotf_sloc32_1_0+1, a
+      000334rB7r0F                  553 	mov	a, _tancotf_sloc12_1_0+2
+      000336r85r0B                  554 	mov	_tancotf_sloc32_1_0+2, a
+      000338rB8r0F                  555 	mov	a, _tancotf_sloc12_1_0+3
+      00033Ar86r0B                  556 	mov	_tancotf_sloc32_1_0+3, a
+                                    557 ;	../tancotf.c: 80: xnum = P(f,g);
+      00033C B8 2F                  558 	mov	a, #0xb8
+      00033Er80r0B                  559 	mov	___fsmul_PARM_1+0, a
+      000340 33 2F                  560 	mov	a, #0x33
+      000342r81r0B                  561 	mov	___fsmul_PARM_1+1, a
+      000344 C4 2F                  562 	mov	a, #0xc4
+      000346r82r0B                  563 	mov	___fsmul_PARM_1+2, a
+      000348 BD 2F                  564 	mov	a, #0xbd
+      00034Ar83r0B                  565 	mov	___fsmul_PARM_1+3, a
+      00034Cr83r0F                  566 	mov	a, _tancotf_sloc32_1_0+0
+      00034Er80r0B                  567 	mov	___fsmul_PARM_2+0, a
+      000350r84r0F                  568 	mov	a, _tancotf_sloc32_1_0+1
+      000352r81r0B                  569 	mov	___fsmul_PARM_2+1, a
+      000354r85r0F                  570 	mov	a, _tancotf_sloc32_1_0+2
+      000356r82r0B                  571 	mov	___fsmul_PARM_2+2, a
+      000358r86r0F                  572 	mov	a, _tancotf_sloc32_1_0+3
+      00035Ar83r0B                  573 	mov	___fsmul_PARM_2+3, a
+      00035Cr39r2F                  574 	mov	a, #_tancotf_sloc13_1_0
+      00035E 72 00                  575 	push	af
+      000360r00r38                  576 	call	___fsmul
+      000362 C2 01                  577 	mov	a, sp
+      000364 FE 28                  578 	add	a, #-2
+      000366 82 01                  579 	mov	sp, a
+      000368rB9r0F                  580 	mov	a, _tancotf_sloc13_1_0+0
+      00036Ar80r0B                  581 	mov	___fsmul_PARM_1+0, a
+      00036CrBAr0F                  582 	mov	a, _tancotf_sloc13_1_0+1
+      00036Er81r0B                  583 	mov	___fsmul_PARM_1+1, a
+      000370rBBr0F                  584 	mov	a, _tancotf_sloc13_1_0+2
+      000372r82r0B                  585 	mov	___fsmul_PARM_1+2, a
+      000374rBCr0F                  586 	mov	a, _tancotf_sloc13_1_0+3
+      000376r83r0B                  587 	mov	___fsmul_PARM_1+3, a
+      000378rF7r0F                  588 	mov	a, _tancotf_sloc29_1_0+0
+      00037Ar80r0B                  589 	mov	___fsmul_PARM_2+0, a
+      00037CrF8r0F                  590 	mov	a, _tancotf_sloc29_1_0+1
+      00037Er81r0B                  591 	mov	___fsmul_PARM_2+1, a
+      000380rF9r0F                  592 	mov	a, _tancotf_sloc29_1_0+2
+      000382r82r0B                  593 	mov	___fsmul_PARM_2+2, a
+      000384rFAr0F                  594 	mov	a, _tancotf_sloc29_1_0+3
+      000386r83r0B                  595 	mov	___fsmul_PARM_2+3, a
+      000388r3Dr2F                  596 	mov	a, #_tancotf_sloc14_1_0
+      00038A 72 00                  597 	push	af
+      00038Cr00r38                  598 	call	___fsmul
+      00038E C2 01                  599 	mov	a, sp
+      000390 FE 28                  600 	add	a, #-2
+      000392 82 01                  601 	mov	sp, a
+      000394rBDr0F                  602 	mov	a, _tancotf_sloc14_1_0+0
+      000396r80r0B                  603 	mov	___fsadd_PARM_1+0, a
+      000398rBEr0F                  604 	mov	a, _tancotf_sloc14_1_0+1
+      00039Ar81r0B                  605 	mov	___fsadd_PARM_1+1, a
+      00039CrBFr0F                  606 	mov	a, _tancotf_sloc14_1_0+2
+      00039Er82r0B                  607 	mov	___fsadd_PARM_1+2, a
+      0003A0rC0r0F                  608 	mov	a, _tancotf_sloc14_1_0+3
+      0003A2r83r0B                  609 	mov	___fsadd_PARM_1+3, a
+      0003A4rF7r0F                  610 	mov	a, _tancotf_sloc29_1_0+0
+      0003A6r80r0B                  611 	mov	___fsadd_PARM_2+0, a
+      0003A8rF8r0F                  612 	mov	a, _tancotf_sloc29_1_0+1
+      0003AAr81r0B                  613 	mov	___fsadd_PARM_2+1, a
+      0003ACrF9r0F                  614 	mov	a, _tancotf_sloc29_1_0+2
+      0003AEr82r0B                  615 	mov	___fsadd_PARM_2+2, a
+      0003B0rFAr0F                  616 	mov	a, _tancotf_sloc29_1_0+3
+      0003B2r83r0B                  617 	mov	___fsadd_PARM_2+3, a
+      0003B4r41r2F                  618 	mov	a, #_tancotf_sloc15_1_0
+      0003B6 72 00                  619 	push	af
+      0003B8r00r38                  620 	call	___fsadd
+      0003BA C2 01                  621 	mov	a, sp
+      0003BC FE 28                  622 	add	a, #-2
+      0003BE 82 01                  623 	mov	sp, a
+      0003C0rC1r0F                  624 	mov	a, _tancotf_sloc15_1_0+0
+      0003C2rFBr0B                  625 	mov	_tancotf_sloc30_1_0+0, a
+      0003C4rC2r0F                  626 	mov	a, _tancotf_sloc15_1_0+1
+      0003C6rFCr0B                  627 	mov	_tancotf_sloc30_1_0+1, a
+      0003C8rC3r0F                  628 	mov	a, _tancotf_sloc15_1_0+2
+      0003CArFDr0B                  629 	mov	_tancotf_sloc30_1_0+2, a
+      0003CCrC4r0F                  630 	mov	a, _tancotf_sloc15_1_0+3
+      0003CErFEr0B                  631 	mov	_tancotf_sloc30_1_0+3, a
+                                    632 ;	../tancotf.c: 81: xden = Q(g);
+      0003D0 75 2F                  633 	mov	a, #0x75
+      0003D2r80r0B                  634 	mov	___fsmul_PARM_1+0, a
+      0003D4 33 2F                  635 	mov	a, #0x33
+      0003D6r81r0B                  636 	mov	___fsmul_PARM_1+1, a
+      0003D8 1F 2F                  637 	mov	a, #0x1f
+      0003DAr82r0B                  638 	mov	___fsmul_PARM_1+2, a
+      0003DC 3C 2F                  639 	mov	a, #0x3c
+      0003DEr83r0B                  640 	mov	___fsmul_PARM_1+3, a
+      0003E0r83r0F                  641 	mov	a, _tancotf_sloc32_1_0+0
+      0003E2r80r0B                  642 	mov	___fsmul_PARM_2+0, a
+      0003E4r84r0F                  643 	mov	a, _tancotf_sloc32_1_0+1
+      0003E6r81r0B                  644 	mov	___fsmul_PARM_2+1, a
+      0003E8r85r0F                  645 	mov	a, _tancotf_sloc32_1_0+2
+      0003EAr82r0B                  646 	mov	___fsmul_PARM_2+2, a
+      0003ECr86r0F                  647 	mov	a, _tancotf_sloc32_1_0+3
+      0003EEr83r0B                  648 	mov	___fsmul_PARM_2+3, a
+      0003F0r45r2F                  649 	mov	a, #_tancotf_sloc16_1_0
+      0003F2 72 00                  650 	push	af
+      0003F4r00r38                  651 	call	___fsmul
+      0003F6 C2 01                  652 	mov	a, sp
+      0003F8 FE 28                  653 	add	a, #-2
+      0003FA 82 01                  654 	mov	sp, a
+      0003FCrC5r0F                  655 	mov	a, _tancotf_sloc16_1_0+0
+      0003FEr80r0B                  656 	mov	___fsadd_PARM_1+0, a
+      000400rC6r0F                  657 	mov	a, _tancotf_sloc16_1_0+1
+      000402r81r0B                  658 	mov	___fsadd_PARM_1+1, a
+      000404rC7r0F                  659 	mov	a, _tancotf_sloc16_1_0+2
+      000406r82r0B                  660 	mov	___fsadd_PARM_1+2, a
+      000408rC8r0F                  661 	mov	a, _tancotf_sloc16_1_0+3
+      00040Ar83r0B                  662 	mov	___fsadd_PARM_1+3, a
+      00040C AF 2F                  663 	mov	a, #0xaf
+      00040Er80r0B                  664 	mov	___fsadd_PARM_2+0, a
+      000410 B7 2F                  665 	mov	a, #0xb7
+      000412r81r0B                  666 	mov	___fsadd_PARM_2+1, a
+      000414 DB 2F                  667 	mov	a, #0xdb
+      000416r82r0B                  668 	mov	___fsadd_PARM_2+2, a
+      000418 BE 2F                  669 	mov	a, #0xbe
+      00041Ar83r0B                  670 	mov	___fsadd_PARM_2+3, a
+      00041Cr49r2F                  671 	mov	a, #_tancotf_sloc17_1_0
+      00041E 72 00                  672 	push	af
+      000420r00r38                  673 	call	___fsadd
+      000422 C2 01                  674 	mov	a, sp
+      000424 FE 28                  675 	add	a, #-2
+      000426 82 01                  676 	mov	sp, a
+      000428rC9r0F                  677 	mov	a, _tancotf_sloc17_1_0+0
+      00042Ar80r0B                  678 	mov	___fsmul_PARM_1+0, a
+      00042CrCAr0F                  679 	mov	a, _tancotf_sloc17_1_0+1
+      00042Er81r0B                  680 	mov	___fsmul_PARM_1+1, a
+      000430rCBr0F                  681 	mov	a, _tancotf_sloc17_1_0+2
+      000432r82r0B                  682 	mov	___fsmul_PARM_1+2, a
+      000434rCCr0F                  683 	mov	a, _tancotf_sloc17_1_0+3
+      000436r83r0B                  684 	mov	___fsmul_PARM_1+3, a
+      000438r83r0F                  685 	mov	a, _tancotf_sloc32_1_0+0
+      00043Ar80r0B                  686 	mov	___fsmul_PARM_2+0, a
+      00043Cr84r0F                  687 	mov	a, _tancotf_sloc32_1_0+1
+      00043Er81r0B                  688 	mov	___fsmul_PARM_2+1, a
+      000440r85r0F                  689 	mov	a, _tancotf_sloc32_1_0+2
+      000442r82r0B                  690 	mov	___fsmul_PARM_2+2, a
+      000444r86r0F                  691 	mov	a, _tancotf_sloc32_1_0+3
+      000446r83r0B                  692 	mov	___fsmul_PARM_2+3, a
+      000448r4Dr2F                  693 	mov	a, #_tancotf_sloc18_1_0
+      00044A 72 00                  694 	push	af
+      00044Cr00r38                  695 	call	___fsmul
+      00044E C2 01                  696 	mov	a, sp
+      000450 FE 28                  697 	add	a, #-2
+      000452 82 01                  698 	mov	sp, a
+      000454rCDr0F                  699 	mov	a, _tancotf_sloc18_1_0+0
+      000456r80r0B                  700 	mov	___fsadd_PARM_1+0, a
+      000458rCEr0F                  701 	mov	a, _tancotf_sloc18_1_0+1
+      00045Ar81r0B                  702 	mov	___fsadd_PARM_1+1, a
+      00045CrCFr0F                  703 	mov	a, _tancotf_sloc18_1_0+2
+      00045Er82r0B                  704 	mov	___fsadd_PARM_1+2, a
+      000460rD0r0F                  705 	mov	a, _tancotf_sloc18_1_0+3
+      000462r83r0B                  706 	mov	___fsadd_PARM_1+3, a
+      000464r00r13                  707 	clear	___fsadd_PARM_2+0
+      000466r01r13                  708 	clear	___fsadd_PARM_2+1
+      000468 80 2F                  709 	mov	a, #0x80
+      00046Ar82r0B                  710 	mov	___fsadd_PARM_2+2, a
+      00046C 3F 2F                  711 	mov	a, #0x3f
+      00046Er83r0B                  712 	mov	___fsadd_PARM_2+3, a
+      000470r51r2F                  713 	mov	a, #_tancotf_sloc19_1_0
+      000472 72 00                  714 	push	af
+      000474r00r38                  715 	call	___fsadd
+      000476 C2 01                  716 	mov	a, sp
+      000478 FE 28                  717 	add	a, #-2
+      00047A 82 01                  718 	mov	sp, a
+      00047CrD1r0F                  719 	mov	a, _tancotf_sloc19_1_0+0
+      00047ErFFr0B                  720 	mov	_tancotf_sloc31_1_0+0, a
+      000480rD2r0F                  721 	mov	a, _tancotf_sloc19_1_0+1
+      000482r80r0B                  722 	mov	_tancotf_sloc31_1_0+1, a
+      000484rD3r0F                  723 	mov	a, _tancotf_sloc19_1_0+2
+      000486r81r0B                  724 	mov	_tancotf_sloc31_1_0+2, a
+      000488rD4r0F                  725 	mov	a, _tancotf_sloc19_1_0+3
+      00048Ar82r0B                  726 	mov	_tancotf_sloc31_1_0+3, a
+      00048C                        727 00105$:
+                                    728 ;	../tancotf.c: 84: if(n&1)
+      00048CrE9r0F                  729 	mov	a, _tancotf_sloc25_1_0+0
+      00048E 01 2C                  730 	and	a, #0x01
+      000490 00 2B                  731 	cneqsn	a, #0x00
+      000492r36r35                  732 	goto	00113$
+                                    733 ;	../tancotf.c: 87: if(iscotan) return (-xnum/xden);
+      000494r84r0F                  734 	mov	a, _tancotf_PARM_2+0
+      000496 00 2B                  735 	cneqsn	a, #0x00
+      000498rE8r34                  736 	goto	00107$
+      00049ArFBr0F                  737 	mov	a, _tancotf_sloc30_1_0+0
+      00049Cr80r0B                  738 	mov	___fsdiv_PARM_1+0, a
+      00049ErFCr0F                  739 	mov	a, _tancotf_sloc30_1_0+1
+      0004A0r81r0B                  740 	mov	___fsdiv_PARM_1+1, a
+      0004A2rFDr0F                  741 	mov	a, _tancotf_sloc30_1_0+2
+      0004A4r82r0B                  742 	mov	___fsdiv_PARM_1+2, a
+      0004A6rFEr0F                  743 	mov	a, _tancotf_sloc30_1_0+3
+      0004A8 80 2E                  744 	xor	a, #0x80
+      0004AAr83r0B                  745 	mov	___fsdiv_PARM_1+3, a
+      0004ACrFFr0F                  746 	mov	a, _tancotf_sloc31_1_0+0
+      0004AEr80r0B                  747 	mov	___fsdiv_PARM_2+0, a
+      0004B0r80r0F                  748 	mov	a, _tancotf_sloc31_1_0+1
+      0004B2r81r0B                  749 	mov	___fsdiv_PARM_2+1, a
+      0004B4r81r0F                  750 	mov	a, _tancotf_sloc31_1_0+2
+      0004B6r82r0B                  751 	mov	___fsdiv_PARM_2+2, a
+      0004B8r82r0F                  752 	mov	a, _tancotf_sloc31_1_0+3
+      0004BAr83r0B                  753 	mov	___fsdiv_PARM_2+3, a
+      0004BCr55r2F                  754 	mov	a, #_tancotf_sloc20_1_0
+      0004BE 72 00                  755 	push	af
+      0004C0r00r38                  756 	call	___fsdiv
+      0004C2 C2 01                  757 	mov	a, sp
+      0004C4 FE 28                  758 	add	a, #-2
+      0004C6 82 01                  759 	mov	sp, a
+      0004C8 FC 28                  760 	add	a, #0xfc
+      0004CAr80r0B                  761 	mov	p, a
+      0004CCr81r03                  762 	idxm	a, p
+      0004CEr80r0B                  763 	mov	p, a
+      0004D0rD5r0F                  764 	mov	a, _tancotf_sloc20_1_0+0
+      0004D2r80r03                  765 	idxm	p, a
+      0004D4r00r12                  766 	inc	p
+      0004D6rD6r0F                  767 	mov	a, _tancotf_sloc20_1_0+1
+      0004D8r80r03                  768 	idxm	p, a
+      0004DAr00r12                  769 	inc	p
+      0004DCrD7r0F                  770 	mov	a, _tancotf_sloc20_1_0+2
+      0004DEr80r03                  771 	idxm	p, a
+      0004E0r00r12                  772 	inc	p
+      0004E2rD8r0F                  773 	mov	a, _tancotf_sloc20_1_0+3
+      0004E4r80r03                  774 	idxm	p, a
+      0004E6 7A 00                  775 	ret
+      0004E8                        776 00107$:
+                                    777 ;	../tancotf.c: 88: else return (-xden/xnum);
+      0004E8rFFr0F                  778 	mov	a, _tancotf_sloc31_1_0+0
+      0004EAr80r0B                  779 	mov	___fsdiv_PARM_1+0, a
+      0004ECr80r0F                  780 	mov	a, _tancotf_sloc31_1_0+1
+      0004EEr81r0B                  781 	mov	___fsdiv_PARM_1+1, a
+      0004F0r81r0F                  782 	mov	a, _tancotf_sloc31_1_0+2
+      0004F2r82r0B                  783 	mov	___fsdiv_PARM_1+2, a
+      0004F4r82r0F                  784 	mov	a, _tancotf_sloc31_1_0+3
+      0004F6 80 2E                  785 	xor	a, #0x80
+      0004F8r83r0B                  786 	mov	___fsdiv_PARM_1+3, a
+      0004FArFBr0F                  787 	mov	a, _tancotf_sloc30_1_0+0
+      0004FCr80r0B                  788 	mov	___fsdiv_PARM_2+0, a
+      0004FErFCr0F                  789 	mov	a, _tancotf_sloc30_1_0+1
+      000500r81r0B                  790 	mov	___fsdiv_PARM_2+1, a
+      000502rFDr0F                  791 	mov	a, _tancotf_sloc30_1_0+2
+      000504r82r0B                  792 	mov	___fsdiv_PARM_2+2, a
+      000506rFEr0F                  793 	mov	a, _tancotf_sloc30_1_0+3
+      000508r83r0B                  794 	mov	___fsdiv_PARM_2+3, a
+      00050Ar59r2F                  795 	mov	a, #_tancotf_sloc21_1_0
+      00050C 72 00                  796 	push	af
+      00050Er00r38                  797 	call	___fsdiv
+      000510 C2 01                  798 	mov	a, sp
+      000512 FE 28                  799 	add	a, #-2
+      000514 82 01                  800 	mov	sp, a
+      000516 FC 28                  801 	add	a, #0xfc
+      000518r80r0B                  802 	mov	p, a
+      00051Ar81r03                  803 	idxm	a, p
+      00051Cr80r0B                  804 	mov	p, a
+      00051ErD9r0F                  805 	mov	a, _tancotf_sloc21_1_0+0
+      000520r80r03                  806 	idxm	p, a
+      000522r00r12                  807 	inc	p
+      000524rDAr0F                  808 	mov	a, _tancotf_sloc21_1_0+1
+      000526r80r03                  809 	idxm	p, a
+      000528r00r12                  810 	inc	p
+      00052ArDBr0F                  811 	mov	a, _tancotf_sloc21_1_0+2
+      00052Cr80r03                  812 	idxm	p, a
+      00052Er00r12                  813 	inc	p
+      000530rDCr0F                  814 	mov	a, _tancotf_sloc21_1_0+3
+      000532r80r03                  815 	idxm	p, a
+      000534 7A 00                  816 	ret
+      000536                        817 00113$:
+                                    818 ;	../tancotf.c: 92: if(iscotan) return (xden/xnum);
+      000536r84r0F                  819 	mov	a, _tancotf_PARM_2+0
+      000538 00 2B                  820 	cneqsn	a, #0x00
+      00053Ar88r35                  821 	goto	00110$
+      00053CrFFr0F                  822 	mov	a, _tancotf_sloc31_1_0+0
+      00053Er80r0B                  823 	mov	___fsdiv_PARM_1+0, a
+      000540r80r0F                  824 	mov	a, _tancotf_sloc31_1_0+1
+      000542r81r0B                  825 	mov	___fsdiv_PARM_1+1, a
+      000544r81r0F                  826 	mov	a, _tancotf_sloc31_1_0+2
+      000546r82r0B                  827 	mov	___fsdiv_PARM_1+2, a
+      000548r82r0F                  828 	mov	a, _tancotf_sloc31_1_0+3
+      00054Ar83r0B                  829 	mov	___fsdiv_PARM_1+3, a
+      00054CrFBr0F                  830 	mov	a, _tancotf_sloc30_1_0+0
+      00054Er80r0B                  831 	mov	___fsdiv_PARM_2+0, a
+      000550rFCr0F                  832 	mov	a, _tancotf_sloc30_1_0+1
+      000552r81r0B                  833 	mov	___fsdiv_PARM_2+1, a
+      000554rFDr0F                  834 	mov	a, _tancotf_sloc30_1_0+2
+      000556r82r0B                  835 	mov	___fsdiv_PARM_2+2, a
+      000558rFEr0F                  836 	mov	a, _tancotf_sloc30_1_0+3
+      00055Ar83r0B                  837 	mov	___fsdiv_PARM_2+3, a
+      00055Cr5Dr2F                  838 	mov	a, #_tancotf_sloc22_1_0
+      00055E 72 00                  839 	push	af
+      000560r00r38                  840 	call	___fsdiv
+      000562 C2 01                  841 	mov	a, sp
+      000564 FE 28                  842 	add	a, #-2
+      000566 82 01                  843 	mov	sp, a
+      000568 FC 28                  844 	add	a, #0xfc
+      00056Ar80r0B                  845 	mov	p, a
+      00056Cr81r03                  846 	idxm	a, p
+      00056Er80r0B                  847 	mov	p, a
+      000570rDDr0F                  848 	mov	a, _tancotf_sloc22_1_0+0
+      000572r80r03                  849 	idxm	p, a
+      000574r00r12                  850 	inc	p
+      000576rDEr0F                  851 	mov	a, _tancotf_sloc22_1_0+1
+      000578r80r03                  852 	idxm	p, a
+      00057Ar00r12                  853 	inc	p
+      00057CrDFr0F                  854 	mov	a, _tancotf_sloc22_1_0+2
+      00057Er80r03                  855 	idxm	p, a
+      000580r00r12                  856 	inc	p
+      000582rE0r0F                  857 	mov	a, _tancotf_sloc22_1_0+3
+      000584r80r03                  858 	idxm	p, a
+      000586 7A 00                  859 	ret
+      000588                        860 00110$:
+                                    861 ;	../tancotf.c: 93: else return (xnum/xden);
+      000588rFBr0F                  862 	mov	a, _tancotf_sloc30_1_0+0
+      00058Ar80r0B                  863 	mov	___fsdiv_PARM_1+0, a
+      00058CrFCr0F                  864 	mov	a, _tancotf_sloc30_1_0+1
+      00058Er81r0B                  865 	mov	___fsdiv_PARM_1+1, a
+      000590rFDr0F                  866 	mov	a, _tancotf_sloc30_1_0+2
+      000592r82r0B                  867 	mov	___fsdiv_PARM_1+2, a
+      000594rFEr0F                  868 	mov	a, _tancotf_sloc30_1_0+3
+      000596r83r0B                  869 	mov	___fsdiv_PARM_1+3, a
+      000598rFFr0F                  870 	mov	a, _tancotf_sloc31_1_0+0
+      00059Ar80r0B                  871 	mov	___fsdiv_PARM_2+0, a
+      00059Cr80r0F                  872 	mov	a, _tancotf_sloc31_1_0+1
+      00059Er81r0B                  873 	mov	___fsdiv_PARM_2+1, a
+      0005A0r81r0F                  874 	mov	a, _tancotf_sloc31_1_0+2
+      0005A2r82r0B                  875 	mov	___fsdiv_PARM_2+2, a
+      0005A4r82r0F                  876 	mov	a, _tancotf_sloc31_1_0+3
+      0005A6r83r0B                  877 	mov	___fsdiv_PARM_2+3, a
+      0005A8r61r2F                  878 	mov	a, #_tancotf_sloc23_1_0
+      0005AA 72 00                  879 	push	af
+      0005ACr00r38                  880 	call	___fsdiv
+      0005AE C2 01                  881 	mov	a, sp
+      0005B0 FE 28                  882 	add	a, #-2
+      0005B2 82 01                  883 	mov	sp, a
+      0005B4 FC 28                  884 	add	a, #0xfc
+      0005B6r80r0B                  885 	mov	p, a
+      0005B8r81r03                  886 	idxm	a, p
+      0005BAr80r0B                  887 	mov	p, a
+      0005BCrE1r0F                  888 	mov	a, _tancotf_sloc23_1_0+0
+      0005BEr80r03                  889 	idxm	p, a
+      0005C0r00r12                  890 	inc	p
+      0005C2rE2r0F                  891 	mov	a, _tancotf_sloc23_1_0+1
+      0005C4r80r03                  892 	idxm	p, a
+      0005C6r00r12                  893 	inc	p
+      0005C8rE3r0F                  894 	mov	a, _tancotf_sloc23_1_0+2
+      0005CAr80r03                  895 	idxm	p, a
+      0005CCr00r12                  896 	inc	p
+      0005CErE4r0F                  897 	mov	a, _tancotf_sloc23_1_0+3
+      0005D0r80r03                  898 	idxm	p, a
+                                    899 ;	../tancotf.c: 95: }
+      0005D2 7A 00                  900 	ret
+                                    901 	.area CODE
+                                    902 	.area CONST
+                                    903 	.area CABS (ABS)

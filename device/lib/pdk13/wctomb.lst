@@ -1,0 +1,386 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module wctomb
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wctomb_PARM_2
+                                     17 	.globl _wctomb_PARM_1
+                                     18 	.globl _wctomb
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _wctomb_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _wctomb_PARM_2:
+      000002                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _wctomb_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 _wctomb_sloc1_1_0:
+      000002                         39 	.ds 2
+      000004                         40 _wctomb_sloc2_1_0:
+      000004                         41 	.ds 2
+      000006                         42 _wctomb_sloc3_1_0:
+      000006                         43 	.ds 2
+      000008                         44 _wctomb_sloc4_1_0:
+      000008                         45 	.ds 2
+      00000A                         46 _wctomb_sloc5_1_0:
+      00000A                         47 	.ds 4
+      00000E                         48 _wctomb_sloc6_1_0:
+      00000E                         49 	.ds 2
+      000010                         50 _wctomb_sloc7_1_0:
+      000010                         51 	.ds 2
+      000012                         52 _wctomb_sloc8_1_0:
+      000012                         53 	.ds 2
+      000014                         54 _wctomb_sloc9_1_0:
+      000014                         55 	.ds 2
+      000016                         56 _wctomb_sloc10_1_0:
+      000016                         57 	.ds 4
+      00001A                         58 _wctomb_sloc11_1_0:
+      00001A                         59 	.ds 2
+      00001C                         60 _wctomb_sloc12_1_0:
+      00001C                         61 	.ds 4
+      000020                         62 _wctomb_sloc13_1_0:
+      000020                         63 	.ds 2
+      000022                         64 _wctomb_sloc14_1_0:
+      000022                         65 	.ds 2
+      000024                         66 _wctomb_sloc15_1_0:
+      000024                         67 	.ds 2
+                                     68 ;--------------------------------------------------------
+                                     69 ; absolute external ram data
+                                     70 ;--------------------------------------------------------
+                                     71 	.area DABS (ABS)
+                                     72 ;--------------------------------------------------------
+                                     73 ; global & static initialisations
+                                     74 ;--------------------------------------------------------
+                                     75 	.area HOME
+                                     76 	.area GSINIT
+                                     77 	.area GSFINAL
+                                     78 	.area GSINIT
+                                     79 ;--------------------------------------------------------
+                                     80 ; Home
+                                     81 ;--------------------------------------------------------
+                                     82 	.area HOME
+                                     83 	.area HOME
+                                     84 ;--------------------------------------------------------
+                                     85 ; code
+                                     86 ;--------------------------------------------------------
+                                     87 	.area CODE
+                                     88 ;	../wctomb.c: 31: int wctomb(char *s, wchar_t wc)
+                                     89 ;	-----------------------------------------
+                                     90 ;	 function wctomb
+                                     91 ;	-----------------------------------------
+      000000                         92 _wctomb:
+                                     93 ;	../wctomb.c: 35: if(!s)
+      000000r80r0F                   94 	mov	a, _wctomb_PARM_1+0
+      000002r81r0E                   95 	or	a, _wctomb_PARM_1+1
+      000004 00 2A                   96 	ceqsn	a, #0x00
+      000006r0Cr30                   97 	goto	00102$
+                                     98 ;	../wctomb.c: 36: return(0);
+      000008r00r13                   99 	clear	p
+      00000A 00 02                  100 	ret	#0x00
+      00000C                        101 00102$:
+                                    102 ;	../wctomb.c: 38: if(wc < 0x80)
+      00000Cr82r0F                  103 	mov	a, _wctomb_PARM_2+0
+      00000E 80 29                  104 	sub	a, #0x80
+      000010r83r0F                  105 	mov	a, _wctomb_PARM_2+1
+      000012 61 00                  106 	subc	a
+      000014r84r0F                  107 	mov	a, _wctomb_PARM_2+2
+      000016 61 00                  108 	subc	a
+      000018r85r0F                  109 	mov	a, _wctomb_PARM_2+3
+      00001A 61 00                  110 	subc	a
+      00001C 40 1A                  111 	t1sn	f, c
+      00001Er36r30                  112 	goto	00117$
+                                    113 ;	../wctomb.c: 40: s[0] = wc;
+      000020r80r0F                  114 	mov	a, _wctomb_PARM_1+0
+      000022r80r0B                  115 	mov	_wctomb_sloc0_1_0+0, a
+      000024r81r0F                  116 	mov	a, _wctomb_PARM_1+1
+      000026r81r0B                  117 	mov	_wctomb_sloc0_1_0+1, a
+      000028r82r0F                  118 	mov	a, _wctomb_PARM_2+0
+      00002Ar80r0B                  119 	mov	p, a
+      00002Cr80r0F                  120 	mov	a, _wctomb_sloc0_1_0+0
+      00002Er80r13                  121 	xch	a, p
+      000030r80r03                  122 	idxm	p, a
+                                    123 ;	../wctomb.c: 41: return(1);
+      000032r00r13                  124 	clear	p
+      000034 01 02                  125 	ret	#0x01
+      000036                        126 00117$:
+                                    127 ;	../wctomb.c: 43: else if(wc < 0x800)
+      000036r83r0F                  128 	mov	a, _wctomb_PARM_2+1
+      000038 08 29                  129 	sub	a, #0x08
+      00003Ar84r0F                  130 	mov	a, _wctomb_PARM_2+2
+      00003C 61 00                  131 	subc	a
+      00003Er85r0F                  132 	mov	a, _wctomb_PARM_2+3
+      000040 61 00                  133 	subc	a
+      000042 40 1A                  134 	t1sn	f, c
+      000044r90r30                  135 	goto	00114$
+                                    136 ;	../wctomb.c: 45: s[0] = (wc >> 6) & 0x1f | 0xc0;
+      000046r80r0F                  137 	mov	a, _wctomb_PARM_1+0
+      000048r82r0B                  138 	mov	_wctomb_sloc1_1_0+0, a
+      00004Ar81r0F                  139 	mov	a, _wctomb_PARM_1+1
+      00004Cr83r0B                  140 	mov	_wctomb_sloc1_1_0+1, a
+      00004Er83r0F                  141 	mov	a, _wctomb_PARM_2+1
+      000050r80r0B                  142 	mov	p, a
+      000052r82r0F                  143 	mov	a, _wctomb_PARM_2+0
+      000054r84r0B                  144 	mov	_wctomb_sloc2_1_0+0, a
+      000056r80r0F                  145 	mov	a, p
+      000058r85r0B                  146 	mov	_wctomb_sloc2_1_0+1, a
+      00005A 06 2F                  147 	mov	a, #6
+      00005C                        148 00149$:
+      00005Cr05r15                  149 	sr	_wctomb_sloc2_1_0+1
+      00005Er04r16                  150 	src	_wctomb_sloc2_1_0+0
+      000060 63 00                  151 	dzsn	a
+      000062r5Cr30                  152 	goto	00149$
+      000064r84r0F                  153 	mov	a, _wctomb_sloc2_1_0+0
+      000066 1F 2C                  154 	and	a, #0x1f
+      000068 C0 2D                  155 	or	a, #0xc0
+      00006Ar80r0B                  156 	mov	p, a
+      00006Cr82r0F                  157 	mov	a, _wctomb_sloc1_1_0+0
+      00006Er80r13                  158 	xch	a, p
+      000070r80r03                  159 	idxm	p, a
+                                    160 ;	../wctomb.c: 46: s[1] = (wc >> 0) & 0x3f | 0x80;
+      000072r82r0F                  161 	mov	a, _wctomb_sloc1_1_0+0
+      000074 01 28                  162 	add	a, #0x01
+      000076r86r0B                  163 	mov	_wctomb_sloc3_1_0+0, a
+      000078r83r0F                  164 	mov	a, _wctomb_sloc1_1_0+1
+      00007A 60 00                  165 	addc	a
+      00007Cr87r0B                  166 	mov	_wctomb_sloc3_1_0+1, a
+      00007Er82r0F                  167 	mov	a, _wctomb_PARM_2+0
+      000080 3F 2C                  168 	and	a, #0x3f
+      000082 80 2D                  169 	or	a, #0x80
+      000084r80r0B                  170 	mov	p, a
+      000086r86r0F                  171 	mov	a, _wctomb_sloc3_1_0+0
+      000088r80r13                  172 	xch	a, p
+      00008Ar80r03                  173 	idxm	p, a
+                                    174 ;	../wctomb.c: 47: return(2);
+      00008Cr00r13                  175 	clear	p
+      00008E 02 02                  176 	ret	#0x02
+      000090                        177 00114$:
+                                    178 ;	../wctomb.c: 49: else if(wc >= 0xd800 && wc < 0xe000) // Unpaired surrogate
+      000090r83r0F                  179 	mov	a, _wctomb_PARM_2+1
+      000092 D8 29                  180 	sub	a, #0xd8
+      000094r84r0F                  181 	mov	a, _wctomb_PARM_2+2
+      000096 61 00                  182 	subc	a
+      000098r85r0F                  183 	mov	a, _wctomb_PARM_2+3
+      00009A 61 00                  184 	subc	a
+      00009C 40 18                  185 	t0sn	f, c
+      00009ErB6r30                  186 	goto	00110$
+      0000A0r83r0F                  187 	mov	a, _wctomb_PARM_2+1
+      0000A2 E0 29                  188 	sub	a, #0xe0
+      0000A4r84r0F                  189 	mov	a, _wctomb_PARM_2+2
+      0000A6 61 00                  190 	subc	a
+      0000A8r85r0F                  191 	mov	a, _wctomb_PARM_2+3
+      0000AA 61 00                  192 	subc	a
+      0000AC 40 1A                  193 	t1sn	f, c
+      0000AErB6r30                  194 	goto	00110$
+                                    195 ;	../wctomb.c: 50: return(-1);
+      0000B0 FF 2F                  196 	mov	a, #0xff
+      0000B2r80r0B                  197 	mov	p, a
+      0000B4 FF 02                  198 	ret	#0xff
+      0000B6                        199 00110$:
+                                    200 ;	../wctomb.c: 51: else if(wc < 0x10000)
+      0000B6r84r0F                  201 	mov	a, _wctomb_PARM_2+2
+      0000B8 01 29                  202 	sub	a, #0x01
+      0000BAr85r0F                  203 	mov	a, _wctomb_PARM_2+3
+      0000BC 61 00                  204 	subc	a
+      0000BE 40 1A                  205 	t1sn	f, c
+      0000C0r40r31                  206 	goto	00107$
+                                    207 ;	../wctomb.c: 53: s[0] = (wc >> 12) & 0x0f | 0xe0;
+      0000C2r80r0F                  208 	mov	a, _wctomb_PARM_1+0
+      0000C4r88r0B                  209 	mov	_wctomb_sloc4_1_0+0, a
+      0000C6r81r0F                  210 	mov	a, _wctomb_PARM_1+1
+      0000C8r89r0B                  211 	mov	_wctomb_sloc4_1_0+1, a
+      0000CAr83r0F                  212 	mov	a, _wctomb_PARM_2+1
+      0000CCr8Ar0B                  213 	mov	_wctomb_sloc5_1_0+0, a
+      0000CEr84r0F                  214 	mov	a, _wctomb_PARM_2+2
+      0000D0r8Br0B                  215 	mov	_wctomb_sloc5_1_0+1, a
+      0000D2r85r0F                  216 	mov	a, _wctomb_PARM_2+3
+      0000D4r8Cr0B                  217 	mov	_wctomb_sloc5_1_0+2, a
+      0000D6r0Dr13                  218 	clear	_wctomb_sloc5_1_0+3
+      0000D8 04 2F                  219 	mov	a, #4
+      0000DA                        220 00150$:
+      0000DAr0Cr15                  221 	sr	_wctomb_sloc5_1_0+2
+      0000DCr0Br16                  222 	src	_wctomb_sloc5_1_0+1
+      0000DEr0Ar16                  223 	src	_wctomb_sloc5_1_0+0
+      0000E0 63 00                  224 	dzsn	a
+      0000E2rDAr30                  225 	goto	00150$
+      0000E4r8Ar0F                  226 	mov	a, _wctomb_sloc5_1_0+0
+      0000E6 0F 2C                  227 	and	a, #0x0f
+      0000E8 E0 2D                  228 	or	a, #0xe0
+      0000EAr80r0B                  229 	mov	p, a
+      0000ECr88r0F                  230 	mov	a, _wctomb_sloc4_1_0+0
+      0000EEr80r13                  231 	xch	a, p
+      0000F0r80r03                  232 	idxm	p, a
+                                    233 ;	../wctomb.c: 54: s[1] = (wc >> 6) & 0x3f  | 0x80;
+      0000F2r88r0F                  234 	mov	a, _wctomb_sloc4_1_0+0
+      0000F4 01 28                  235 	add	a, #0x01
+      0000F6r8Er0B                  236 	mov	_wctomb_sloc6_1_0+0, a
+      0000F8r89r0F                  237 	mov	a, _wctomb_sloc4_1_0+1
+      0000FA 60 00                  238 	addc	a
+      0000FCr8Fr0B                  239 	mov	_wctomb_sloc6_1_0+1, a
+      0000FEr83r0F                  240 	mov	a, _wctomb_PARM_2+1
+      000100r80r0B                  241 	mov	p, a
+      000102r82r0F                  242 	mov	a, _wctomb_PARM_2+0
+      000104r90r0B                  243 	mov	_wctomb_sloc7_1_0+0, a
+      000106r80r0F                  244 	mov	a, p
+      000108r91r0B                  245 	mov	_wctomb_sloc7_1_0+1, a
+      00010A 06 2F                  246 	mov	a, #6
+      00010C                        247 00151$:
+      00010Cr11r15                  248 	sr	_wctomb_sloc7_1_0+1
+      00010Er10r16                  249 	src	_wctomb_sloc7_1_0+0
+      000110 63 00                  250 	dzsn	a
+      000112r0Cr31                  251 	goto	00151$
+      000114r90r0F                  252 	mov	a, _wctomb_sloc7_1_0+0
+      000116 3F 2C                  253 	and	a, #0x3f
+      000118 80 2D                  254 	or	a, #0x80
+      00011Ar80r0B                  255 	mov	p, a
+      00011Cr8Er0F                  256 	mov	a, _wctomb_sloc6_1_0+0
+      00011Er80r13                  257 	xch	a, p
+      000120r80r03                  258 	idxm	p, a
+                                    259 ;	../wctomb.c: 55: s[2] = (wc >> 0) & 0x3f  | 0x80;
+      000122r88r0F                  260 	mov	a, _wctomb_sloc4_1_0+0
+      000124 02 28                  261 	add	a, #0x02
+      000126r92r0B                  262 	mov	_wctomb_sloc8_1_0+0, a
+      000128r89r0F                  263 	mov	a, _wctomb_sloc4_1_0+1
+      00012A 60 00                  264 	addc	a
+      00012Cr93r0B                  265 	mov	_wctomb_sloc8_1_0+1, a
+      00012Er82r0F                  266 	mov	a, _wctomb_PARM_2+0
+      000130 3F 2C                  267 	and	a, #0x3f
+      000132 80 2D                  268 	or	a, #0x80
+      000134r80r0B                  269 	mov	p, a
+      000136r92r0F                  270 	mov	a, _wctomb_sloc8_1_0+0
+      000138r80r13                  271 	xch	a, p
+      00013Ar80r03                  272 	idxm	p, a
+                                    273 ;	../wctomb.c: 56: return(3);
+      00013Cr00r13                  274 	clear	p
+      00013E 03 02                  275 	ret	#0x03
+      000140                        276 00107$:
+                                    277 ;	../wctomb.c: 58: else if(wc < 0x110000)
+      000140r84r0F                  278 	mov	a, _wctomb_PARM_2+2
+      000142 11 29                  279 	sub	a, #0x11
+      000144r85r0F                  280 	mov	a, _wctomb_PARM_2+3
+      000146 61 00                  281 	subc	a
+      000148 40 1A                  282 	t1sn	f, c
+      00014ArF8r31                  283 	goto	00104$
+                                    284 ;	../wctomb.c: 60: s[0] = (wc >> 18) & 0x07 | 0xf0;
+      00014Cr80r0F                  285 	mov	a, _wctomb_PARM_1+0
+      00014Er94r0B                  286 	mov	_wctomb_sloc9_1_0+0, a
+      000150r81r0F                  287 	mov	a, _wctomb_PARM_1+1
+      000152r95r0B                  288 	mov	_wctomb_sloc9_1_0+1, a
+      000154r84r0F                  289 	mov	a, _wctomb_PARM_2+2
+      000156r96r0B                  290 	mov	_wctomb_sloc10_1_0+0, a
+      000158r85r0F                  291 	mov	a, _wctomb_PARM_2+3
+      00015Ar97r0B                  292 	mov	_wctomb_sloc10_1_0+1, a
+      00015Cr18r13                  293 	clear	_wctomb_sloc10_1_0+2
+      00015Er19r13                  294 	clear	_wctomb_sloc10_1_0+3
+      000160r17r15                  295 	sr	_wctomb_sloc10_1_0+1
+      000162r16r16                  296 	src	_wctomb_sloc10_1_0+0
+      000164r17r15                  297 	sr	_wctomb_sloc10_1_0+1
+      000166r16r16                  298 	src	_wctomb_sloc10_1_0+0
+      000168r96r0F                  299 	mov	a, _wctomb_sloc10_1_0+0
+      00016A 07 2C                  300 	and	a, #0x07
+      00016C F0 2D                  301 	or	a, #0xf0
+      00016Er80r0B                  302 	mov	p, a
+      000170r94r0F                  303 	mov	a, _wctomb_sloc9_1_0+0
+      000172r80r13                  304 	xch	a, p
+      000174r80r03                  305 	idxm	p, a
+                                    306 ;	../wctomb.c: 61: s[1] = (wc >> 12) & 0x3f | 0x80;
+      000176r94r0F                  307 	mov	a, _wctomb_sloc9_1_0+0
+      000178 01 28                  308 	add	a, #0x01
+      00017Ar9Ar0B                  309 	mov	_wctomb_sloc11_1_0+0, a
+      00017Cr95r0F                  310 	mov	a, _wctomb_sloc9_1_0+1
+      00017E 60 00                  311 	addc	a
+      000180r9Br0B                  312 	mov	_wctomb_sloc11_1_0+1, a
+      000182r83r0F                  313 	mov	a, _wctomb_PARM_2+1
+      000184r9Cr0B                  314 	mov	_wctomb_sloc12_1_0+0, a
+      000186r84r0F                  315 	mov	a, _wctomb_PARM_2+2
+      000188r9Dr0B                  316 	mov	_wctomb_sloc12_1_0+1, a
+      00018Ar85r0F                  317 	mov	a, _wctomb_PARM_2+3
+      00018Cr9Er0B                  318 	mov	_wctomb_sloc12_1_0+2, a
+      00018Er1Fr13                  319 	clear	_wctomb_sloc12_1_0+3
+      000190 04 2F                  320 	mov	a, #4
+      000192                        321 00152$:
+      000192r1Er15                  322 	sr	_wctomb_sloc12_1_0+2
+      000194r1Dr16                  323 	src	_wctomb_sloc12_1_0+1
+      000196r1Cr16                  324 	src	_wctomb_sloc12_1_0+0
+      000198 63 00                  325 	dzsn	a
+      00019Ar92r31                  326 	goto	00152$
+      00019Cr9Cr0F                  327 	mov	a, _wctomb_sloc12_1_0+0
+      00019E 3F 2C                  328 	and	a, #0x3f
+      0001A0 80 2D                  329 	or	a, #0x80
+      0001A2r80r0B                  330 	mov	p, a
+      0001A4r9Ar0F                  331 	mov	a, _wctomb_sloc11_1_0+0
+      0001A6r80r13                  332 	xch	a, p
+      0001A8r80r03                  333 	idxm	p, a
+                                    334 ;	../wctomb.c: 62: s[2] = (wc >> 6) & 0x3f  | 0x80;
+      0001AAr94r0F                  335 	mov	a, _wctomb_sloc9_1_0+0
+      0001AC 02 28                  336 	add	a, #0x02
+      0001AErA0r0B                  337 	mov	_wctomb_sloc13_1_0+0, a
+      0001B0r95r0F                  338 	mov	a, _wctomb_sloc9_1_0+1
+      0001B2 60 00                  339 	addc	a
+      0001B4rA1r0B                  340 	mov	_wctomb_sloc13_1_0+1, a
+      0001B6r83r0F                  341 	mov	a, _wctomb_PARM_2+1
+      0001B8r80r0B                  342 	mov	p, a
+      0001BAr82r0F                  343 	mov	a, _wctomb_PARM_2+0
+      0001BCrA2r0B                  344 	mov	_wctomb_sloc14_1_0+0, a
+      0001BEr80r0F                  345 	mov	a, p
+      0001C0rA3r0B                  346 	mov	_wctomb_sloc14_1_0+1, a
+      0001C2 06 2F                  347 	mov	a, #6
+      0001C4                        348 00153$:
+      0001C4r23r15                  349 	sr	_wctomb_sloc14_1_0+1
+      0001C6r22r16                  350 	src	_wctomb_sloc14_1_0+0
+      0001C8 63 00                  351 	dzsn	a
+      0001CArC4r31                  352 	goto	00153$
+      0001CCrA2r0F                  353 	mov	a, _wctomb_sloc14_1_0+0
+      0001CE 3F 2C                  354 	and	a, #0x3f
+      0001D0 80 2D                  355 	or	a, #0x80
+      0001D2r80r0B                  356 	mov	p, a
+      0001D4rA0r0F                  357 	mov	a, _wctomb_sloc13_1_0+0
+      0001D6r80r13                  358 	xch	a, p
+      0001D8r80r03                  359 	idxm	p, a
+                                    360 ;	../wctomb.c: 63: s[3] = (wc >> 0) & 0x3f  | 0x80;
+      0001DAr94r0F                  361 	mov	a, _wctomb_sloc9_1_0+0
+      0001DC 03 28                  362 	add	a, #0x03
+      0001DErA4r0B                  363 	mov	_wctomb_sloc15_1_0+0, a
+      0001E0r95r0F                  364 	mov	a, _wctomb_sloc9_1_0+1
+      0001E2 60 00                  365 	addc	a
+      0001E4rA5r0B                  366 	mov	_wctomb_sloc15_1_0+1, a
+      0001E6r82r0F                  367 	mov	a, _wctomb_PARM_2+0
+      0001E8 3F 2C                  368 	and	a, #0x3f
+      0001EA 80 2D                  369 	or	a, #0x80
+      0001ECr80r0B                  370 	mov	p, a
+      0001EErA4r0F                  371 	mov	a, _wctomb_sloc15_1_0+0
+      0001F0r80r13                  372 	xch	a, p
+      0001F2r80r03                  373 	idxm	p, a
+                                    374 ;	../wctomb.c: 64: return(4);
+      0001F4r00r13                  375 	clear	p
+      0001F6 04 02                  376 	ret	#0x04
+      0001F8                        377 00104$:
+                                    378 ;	../wctomb.c: 67: return(-1);
+      0001F8 FF 2F                  379 	mov	a, #0xff
+      0001FAr80r0B                  380 	mov	p, a
+      0001FC FF 02                  381 	ret	#0xff
+                                    382 ;	../wctomb.c: 68: }
+      0001FE 7A 00                  383 	ret
+                                    384 	.area CODE
+                                    385 	.area CONST
+                                    386 	.area CABS (ABS)

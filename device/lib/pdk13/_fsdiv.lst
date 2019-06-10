@@ -1,0 +1,898 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fsdiv
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fsdiv_PARM_2
+                                     17 	.globl ___fsdiv_PARM_1
+                                     18 	.globl ___fsdiv
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fsdiv_org_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fsdiv_org_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 ___fsdiv_org_fl1_65536_21:
+      000008                         33 	.ds 4
+      00000C                         34 ___fsdiv_org_fl2_65536_21:
+      00000C                         35 	.ds 4
+      000010                         36 ___fsdiv_org_result_65536_21:
+      000010                         37 	.ds 4
+      000014                         38 ___fsdiv_org_mask_65536_21:
+      000014                         39 	.ds 4
+      000018                         40 ___fsdiv_org_mant1_65536_21:
+      000018                         41 	.ds 4
+      00001C                         42 ___fsdiv_org_mant2_65536_21:
+      00001C                         43 	.ds 4
+      000020                         44 ___fsdiv_org_exp_65536_21:
+      000020                         45 	.ds 2
+      000022                         46 ___fsdiv_PARM_1:
+      000022                         47 	.ds 4
+      000026                         48 ___fsdiv_PARM_2:
+      000026                         49 	.ds 4
+      00002A                         50 ___fsdiv_f_65536_27:
+      00002A                         51 	.ds 4
+      00002E                         52 ___fsdiv_sloc34_1_0:
+      00002E                         53 	.ds 4
+                                     54 ;--------------------------------------------------------
+                                     55 ; overlayable items in ram 
+                                     56 ;--------------------------------------------------------
+                                     57 	.area	OSEG (OVR,DATA)
+      000000                         58 ___fsdiv_org_sloc0_1_0:
+      000000                         59 	.ds 4
+      000004                         60 ___fsdiv_org_sloc1_1_0:
+      000004                         61 	.ds 4
+      000008                         62 ___fsdiv_org_sloc2_1_0:
+      000008                         63 	.ds 4
+      00000C                         64 ___fsdiv_org_sloc3_1_0:
+      00000C                         65 	.ds 4
+      000010                         66 ___fsdiv_org_sloc4_1_0:
+      000010                         67 	.ds 4
+      000014                         68 ___fsdiv_org_sloc5_1_0:
+      000014                         69 	.ds 4
+      000018                         70 ___fsdiv_org_sloc6_1_0:
+      000018                         71 	.ds 2
+      00001A                         72 ___fsdiv_org_sloc7_1_0:
+      00001A                         73 	.ds 4
+      00001E                         74 ___fsdiv_org_sloc8_1_0:
+      00001E                         75 	.ds 4
+      000022                         76 ___fsdiv_org_sloc9_1_0:
+      000022                         77 	.ds 4
+      000026                         78 ___fsdiv_org_sloc10_1_0:
+      000026                         79 	.ds 4
+      00002A                         80 ___fsdiv_org_sloc11_1_0:
+      00002A                         81 	.ds 4
+      00002E                         82 ___fsdiv_org_sloc12_1_0:
+      00002E                         83 	.ds 4
+      000032                         84 ___fsdiv_org_sloc13_1_0:
+      000032                         85 	.ds 4
+      000036                         86 ___fsdiv_org_sloc14_1_0:
+      000036                         87 	.ds 4
+      00003A                         88 ___fsdiv_org_sloc15_1_0:
+      00003A                         89 	.ds 4
+      00003E                         90 ___fsdiv_org_sloc16_1_0:
+      00003E                         91 	.ds 1
+      00003F                         92 ___fsdiv_org_sloc17_1_0:
+      00003F                         93 	.ds 4
+      000043                         94 ___fsdiv_org_sloc18_1_0:
+      000043                         95 	.ds 4
+      000047                         96 ___fsdiv_org_sloc19_1_0:
+      000047                         97 	.ds 4
+      00004B                         98 ___fsdiv_org_sloc20_1_0:
+      00004B                         99 	.ds 4
+      00004F                        100 ___fsdiv_org_sloc21_1_0:
+      00004F                        101 	.ds 4
+      000053                        102 ___fsdiv_org_sloc22_1_0:
+      000053                        103 	.ds 4
+      000057                        104 ___fsdiv_org_sloc23_1_0:
+      000057                        105 	.ds 4
+      00005B                        106 ___fsdiv_org_sloc24_1_0:
+      00005B                        107 	.ds 4
+      00005F                        108 ___fsdiv_org_sloc25_1_0:
+      00005F                        109 	.ds 4
+      000063                        110 ___fsdiv_org_sloc26_1_0:
+      000063                        111 	.ds 4
+      000067                        112 ___fsdiv_org_sloc27_1_0:
+      000067                        113 	.ds 4
+      00006B                        114 ___fsdiv_org_sloc28_1_0:
+      00006B                        115 	.ds 4
+      00006F                        116 ___fsdiv_org_sloc29_1_0:
+      00006F                        117 	.ds 4
+      000073                        118 ___fsdiv_org_sloc30_1_0:
+      000073                        119 	.ds 4
+      000077                        120 ___fsdiv_org_sloc31_1_0:
+      000077                        121 	.ds 4
+      00007B                        122 ___fsdiv_org_sloc32_1_0:
+      00007B                        123 	.ds 4
+      00007F                        124 ___fsdiv_org_sloc33_1_0:
+      00007F                        125 	.ds 4
+                                    126 ;--------------------------------------------------------
+                                    127 ; absolute external ram data
+                                    128 ;--------------------------------------------------------
+                                    129 	.area DABS (ABS)
+                                    130 ;--------------------------------------------------------
+                                    131 ; global & static initialisations
+                                    132 ;--------------------------------------------------------
+                                    133 	.area HOME
+                                    134 	.area GSINIT
+                                    135 	.area GSFINAL
+                                    136 	.area GSINIT
+                                    137 ;--------------------------------------------------------
+                                    138 ; Home
+                                    139 ;--------------------------------------------------------
+                                    140 	.area HOME
+                                    141 	.area HOME
+                                    142 ;--------------------------------------------------------
+                                    143 ; code
+                                    144 ;--------------------------------------------------------
+                                    145 	.area CODE
+                                    146 ;	../_fsdiv.c: 274: static float __fsdiv_org (float a1, float a2)
+                                    147 ;	-----------------------------------------
+                                    148 ;	 function __fsdiv_org
+                                    149 ;	-----------------------------------------
+      000000                        150 ___fsdiv_org:
+                                    151 ;	../_fsdiv.c: 283: fl1.f = a1;
+      000000r80r0F                  152 	mov	a, ___fsdiv_org_PARM_1+0
+      000002r88r0B                  153 	mov	___fsdiv_org_fl1_65536_21+0, a
+      000004r81r0F                  154 	mov	a, ___fsdiv_org_PARM_1+1
+      000006r89r0B                  155 	mov	___fsdiv_org_fl1_65536_21+1, a
+      000008r82r0F                  156 	mov	a, ___fsdiv_org_PARM_1+2
+      00000Ar8Ar0B                  157 	mov	___fsdiv_org_fl1_65536_21+2, a
+      00000Cr83r0F                  158 	mov	a, ___fsdiv_org_PARM_1+3
+      00000Er8Br0B                  159 	mov	___fsdiv_org_fl1_65536_21+3, a
+                                    160 ;	../_fsdiv.c: 284: fl2.f = a2;
+      000010r84r0F                  161 	mov	a, ___fsdiv_org_PARM_2+0
+      000012r8Cr0B                  162 	mov	___fsdiv_org_fl2_65536_21+0, a
+      000014r85r0F                  163 	mov	a, ___fsdiv_org_PARM_2+1
+      000016r8Dr0B                  164 	mov	___fsdiv_org_fl2_65536_21+1, a
+      000018r86r0F                  165 	mov	a, ___fsdiv_org_PARM_2+2
+      00001Ar8Er0B                  166 	mov	___fsdiv_org_fl2_65536_21+2, a
+      00001Cr87r0F                  167 	mov	a, ___fsdiv_org_PARM_2+3
+      00001Er8Fr0B                  168 	mov	___fsdiv_org_fl2_65536_21+3, a
+                                    169 ;	../_fsdiv.c: 287: exp = EXP (fl1.l) ;
+      000020r88r0F                  170 	mov	a, ___fsdiv_org_fl1_65536_21+0
+      000022r80r0B                  171 	mov	___fsdiv_org_sloc0_1_0+0, a
+      000024r89r0F                  172 	mov	a, ___fsdiv_org_fl1_65536_21+1
+      000026r81r0B                  173 	mov	___fsdiv_org_sloc0_1_0+1, a
+      000028r8Ar0F                  174 	mov	a, ___fsdiv_org_fl1_65536_21+2
+      00002Ar82r0B                  175 	mov	___fsdiv_org_sloc0_1_0+2, a
+      00002Cr8Br0F                  176 	mov	a, ___fsdiv_org_fl1_65536_21+3
+      00002Er83r0B                  177 	mov	___fsdiv_org_sloc0_1_0+3, a
+      000030r80r0F                  178 	mov	a, ___fsdiv_org_sloc0_1_0+0
+      000032r84r0B                  179 	mov	___fsdiv_org_sloc1_1_0+0, a
+      000034r81r0F                  180 	mov	a, ___fsdiv_org_sloc0_1_0+1
+      000036r85r0B                  181 	mov	___fsdiv_org_sloc1_1_0+1, a
+      000038r82r0F                  182 	mov	a, ___fsdiv_org_sloc0_1_0+2
+      00003Ar86r0B                  183 	mov	___fsdiv_org_sloc1_1_0+2, a
+      00003Cr83r0F                  184 	mov	a, ___fsdiv_org_sloc0_1_0+3
+      00003Er87r0B                  185 	mov	___fsdiv_org_sloc1_1_0+3, a
+      000040r86r0F                  186 	mov	a, ___fsdiv_org_sloc1_1_0+2
+      000042r88r0B                  187 	mov	___fsdiv_org_sloc2_1_0+0, a
+      000044r87r0F                  188 	mov	a, ___fsdiv_org_sloc1_1_0+3
+      000046r89r0B                  189 	mov	___fsdiv_org_sloc2_1_0+1, a
+      000048r0Ar13                  190 	clear	___fsdiv_org_sloc2_1_0+2
+      00004Ar0Br13                  191 	clear	___fsdiv_org_sloc2_1_0+3
+      00004C 07 2F                  192 	mov	a, #7
+      00004E                        193 00164$:
+      00004Er09r15                  194 	sr	___fsdiv_org_sloc2_1_0+1
+      000050r08r16                  195 	src	___fsdiv_org_sloc2_1_0+0
+      000052 63 00                  196 	dzsn	a
+      000054r4Er30                  197 	goto	00164$
+      000056r89r0F                  198 	mov	a, ___fsdiv_org_sloc2_1_0+1
+      000058r80r0B                  199 	mov	p, a
+      00005Ar88r0F                  200 	mov	a, ___fsdiv_org_sloc2_1_0+0
+      00005CrA0r0B                  201 	mov	___fsdiv_org_exp_65536_21+0, a
+      00005Er21r13                  202 	clear	___fsdiv_org_exp_65536_21+1
+                                    203 ;	../_fsdiv.c: 288: exp -= EXP (fl2.l);
+      000060r8Cr0F                  204 	mov	a, ___fsdiv_org_fl2_65536_21+0
+      000062r8Cr0B                  205 	mov	___fsdiv_org_sloc3_1_0+0, a
+      000064r8Dr0F                  206 	mov	a, ___fsdiv_org_fl2_65536_21+1
+      000066r8Dr0B                  207 	mov	___fsdiv_org_sloc3_1_0+1, a
+      000068r8Er0F                  208 	mov	a, ___fsdiv_org_fl2_65536_21+2
+      00006Ar8Er0B                  209 	mov	___fsdiv_org_sloc3_1_0+2, a
+      00006Cr8Fr0F                  210 	mov	a, ___fsdiv_org_fl2_65536_21+3
+      00006Er8Fr0B                  211 	mov	___fsdiv_org_sloc3_1_0+3, a
+      000070r8Cr0F                  212 	mov	a, ___fsdiv_org_sloc3_1_0+0
+      000072r90r0B                  213 	mov	___fsdiv_org_sloc4_1_0+0, a
+      000074r8Dr0F                  214 	mov	a, ___fsdiv_org_sloc3_1_0+1
+      000076r91r0B                  215 	mov	___fsdiv_org_sloc4_1_0+1, a
+      000078r8Er0F                  216 	mov	a, ___fsdiv_org_sloc3_1_0+2
+      00007Ar92r0B                  217 	mov	___fsdiv_org_sloc4_1_0+2, a
+      00007Cr8Fr0F                  218 	mov	a, ___fsdiv_org_sloc3_1_0+3
+      00007Er93r0B                  219 	mov	___fsdiv_org_sloc4_1_0+3, a
+      000080r92r0F                  220 	mov	a, ___fsdiv_org_sloc4_1_0+2
+      000082r94r0B                  221 	mov	___fsdiv_org_sloc5_1_0+0, a
+      000084r93r0F                  222 	mov	a, ___fsdiv_org_sloc4_1_0+3
+      000086r95r0B                  223 	mov	___fsdiv_org_sloc5_1_0+1, a
+      000088r16r13                  224 	clear	___fsdiv_org_sloc5_1_0+2
+      00008Ar17r13                  225 	clear	___fsdiv_org_sloc5_1_0+3
+      00008C 07 2F                  226 	mov	a, #7
+      00008E                        227 00165$:
+      00008Er15r15                  228 	sr	___fsdiv_org_sloc5_1_0+1
+      000090r14r16                  229 	src	___fsdiv_org_sloc5_1_0+0
+      000092 63 00                  230 	dzsn	a
+      000094r8Er30                  231 	goto	00165$
+      000096r95r0F                  232 	mov	a, ___fsdiv_org_sloc5_1_0+1
+      000098r80r0B                  233 	mov	p, a
+      00009Ar94r0F                  234 	mov	a, ___fsdiv_org_sloc5_1_0+0
+      00009Cr98r0B                  235 	mov	___fsdiv_org_sloc6_1_0+0, a
+      00009Er19r13                  236 	clear	___fsdiv_org_sloc6_1_0+1
+      0000A0rA1r0F                  237 	mov	a, ___fsdiv_org_exp_65536_21+1
+      0000A2r80r0B                  238 	mov	p, a
+      0000A4rA0r0F                  239 	mov	a, ___fsdiv_org_exp_65536_21+0
+      0000A6r98r0C                  240 	sub	a, ___fsdiv_org_sloc6_1_0+0
+      0000A8rA0r0B                  241 	mov	___fsdiv_org_exp_65536_21+0, a
+      0000AAr80r0F                  242 	mov	a, p
+      0000ACr99r0D                  243 	subc	a, ___fsdiv_org_sloc6_1_0+1
+      0000AErA1r0B                  244 	mov	___fsdiv_org_exp_65536_21+1, a
+                                    245 ;	../_fsdiv.c: 289: exp += EXCESS;
+      0000B0 7E 2F                  246 	mov	a, #0x7e
+      0000B2r20r08                  247 	add	___fsdiv_org_exp_65536_21+0, a
+      0000B4r21r10                  248 	addc	___fsdiv_org_exp_65536_21+1
+                                    249 ;	../_fsdiv.c: 292: sign = SIGN (fl1.l) ^ SIGN (fl2.l);
+      0000B6r88r0F                  250 	mov	a, ___fsdiv_org_fl1_65536_21+0
+      0000B8r9Ar0B                  251 	mov	___fsdiv_org_sloc7_1_0+0, a
+      0000BAr89r0F                  252 	mov	a, ___fsdiv_org_fl1_65536_21+1
+      0000BCr9Br0B                  253 	mov	___fsdiv_org_sloc7_1_0+1, a
+      0000BEr8Ar0F                  254 	mov	a, ___fsdiv_org_fl1_65536_21+2
+      0000C0r9Cr0B                  255 	mov	___fsdiv_org_sloc7_1_0+2, a
+      0000C2r8Br0F                  256 	mov	a, ___fsdiv_org_fl1_65536_21+3
+      0000C4r9Dr0B                  257 	mov	___fsdiv_org_sloc7_1_0+3, a
+      0000C6r9Ar0F                  258 	mov	a, ___fsdiv_org_sloc7_1_0+0
+      0000C8r9Er0B                  259 	mov	___fsdiv_org_sloc8_1_0+0, a
+      0000CAr9Br0F                  260 	mov	a, ___fsdiv_org_sloc7_1_0+1
+      0000CCr9Fr0B                  261 	mov	___fsdiv_org_sloc8_1_0+1, a
+      0000CEr9Cr0F                  262 	mov	a, ___fsdiv_org_sloc7_1_0+2
+      0000D0rA0r0B                  263 	mov	___fsdiv_org_sloc8_1_0+2, a
+      0000D2r9Dr0F                  264 	mov	a, ___fsdiv_org_sloc7_1_0+3
+      0000D4rA1r0B                  265 	mov	___fsdiv_org_sloc8_1_0+3, a
+      0000D6rA2r0B                  266 	mov	___fsdiv_org_sloc9_1_0+0, a
+      0000D8r23r13                  267 	clear	___fsdiv_org_sloc9_1_0+1
+      0000DAr24r13                  268 	clear	___fsdiv_org_sloc9_1_0+2
+      0000DCr25r13                  269 	clear	___fsdiv_org_sloc9_1_0+3
+      0000DE 07 2F                  270 	mov	a, #7
+      0000E0                        271 00166$:
+      0000E0r22r15                  272 	sr	___fsdiv_org_sloc9_1_0+0
+      0000E2 63 00                  273 	dzsn	a
+      0000E4rE0r30                  274 	goto	00166$
+      0000E6rA2r0F                  275 	mov	a, ___fsdiv_org_sloc9_1_0+0
+      0000E8 01 2C                  276 	and	a, #0x01
+      0000EArA6r0B                  277 	mov	___fsdiv_org_sloc10_1_0+0, a
+      0000ECr27r13                  278 	clear	___fsdiv_org_sloc10_1_0+1
+      0000EEr28r13                  279 	clear	___fsdiv_org_sloc10_1_0+2
+      0000F0r29r13                  280 	clear	___fsdiv_org_sloc10_1_0+3
+      0000F2r8Cr0F                  281 	mov	a, ___fsdiv_org_fl2_65536_21+0
+      0000F4rAAr0B                  282 	mov	___fsdiv_org_sloc11_1_0+0, a
+      0000F6r8Dr0F                  283 	mov	a, ___fsdiv_org_fl2_65536_21+1
+      0000F8rABr0B                  284 	mov	___fsdiv_org_sloc11_1_0+1, a
+      0000FAr8Er0F                  285 	mov	a, ___fsdiv_org_fl2_65536_21+2
+      0000FCrACr0B                  286 	mov	___fsdiv_org_sloc11_1_0+2, a
+      0000FEr8Fr0F                  287 	mov	a, ___fsdiv_org_fl2_65536_21+3
+      000100rADr0B                  288 	mov	___fsdiv_org_sloc11_1_0+3, a
+      000102rAAr0F                  289 	mov	a, ___fsdiv_org_sloc11_1_0+0
+      000104rAEr0B                  290 	mov	___fsdiv_org_sloc12_1_0+0, a
+      000106rABr0F                  291 	mov	a, ___fsdiv_org_sloc11_1_0+1
+      000108rAFr0B                  292 	mov	___fsdiv_org_sloc12_1_0+1, a
+      00010ArACr0F                  293 	mov	a, ___fsdiv_org_sloc11_1_0+2
+      00010CrB0r0B                  294 	mov	___fsdiv_org_sloc12_1_0+2, a
+      00010ErADr0F                  295 	mov	a, ___fsdiv_org_sloc11_1_0+3
+      000110rB1r0B                  296 	mov	___fsdiv_org_sloc12_1_0+3, a
+      000112rB2r0B                  297 	mov	___fsdiv_org_sloc13_1_0+0, a
+      000114r33r13                  298 	clear	___fsdiv_org_sloc13_1_0+1
+      000116r34r13                  299 	clear	___fsdiv_org_sloc13_1_0+2
+      000118r35r13                  300 	clear	___fsdiv_org_sloc13_1_0+3
+      00011A 07 2F                  301 	mov	a, #7
+      00011C                        302 00167$:
+      00011Cr32r15                  303 	sr	___fsdiv_org_sloc13_1_0+0
+      00011E 63 00                  304 	dzsn	a
+      000120r1Cr31                  305 	goto	00167$
+      000122rB2r0F                  306 	mov	a, ___fsdiv_org_sloc13_1_0+0
+      000124 01 2C                  307 	and	a, #0x01
+      000126rB6r0B                  308 	mov	___fsdiv_org_sloc14_1_0+0, a
+      000128r37r13                  309 	clear	___fsdiv_org_sloc14_1_0+1
+      00012Ar38r13                  310 	clear	___fsdiv_org_sloc14_1_0+2
+      00012Cr39r13                  311 	clear	___fsdiv_org_sloc14_1_0+3
+      00012ErA6r0F                  312 	mov	a, ___fsdiv_org_sloc10_1_0+0
+      000130r36r0F                  313 	xor	a, ___fsdiv_org_sloc14_1_0+0
+      000132rBAr0B                  314 	mov	___fsdiv_org_sloc15_1_0+0, a
+      000134rA7r0F                  315 	mov	a, ___fsdiv_org_sloc10_1_0+1
+      000136r37r0F                  316 	xor	a, ___fsdiv_org_sloc14_1_0+1
+      000138rBBr0B                  317 	mov	___fsdiv_org_sloc15_1_0+1, a
+      00013ArA8r0F                  318 	mov	a, ___fsdiv_org_sloc10_1_0+2
+      00013Cr38r0F                  319 	xor	a, ___fsdiv_org_sloc14_1_0+2
+      00013ErBCr0B                  320 	mov	___fsdiv_org_sloc15_1_0+2, a
+      000140rA9r0F                  321 	mov	a, ___fsdiv_org_sloc10_1_0+3
+      000142r39r0F                  322 	xor	a, ___fsdiv_org_sloc14_1_0+3
+      000144rBDr0B                  323 	mov	___fsdiv_org_sloc15_1_0+3, a
+      000146rBAr0F                  324 	mov	a, ___fsdiv_org_sloc15_1_0+0
+      000148rBEr0B                  325 	mov	___fsdiv_org_sloc16_1_0+0, a
+                                    326 ;	../_fsdiv.c: 295: if (!fl2.l)
+      00014Ar8Cr0F                  327 	mov	a, ___fsdiv_org_fl2_65536_21+0
+      00014CrBFr0B                  328 	mov	___fsdiv_org_sloc17_1_0+0, a
+      00014Er8Dr0F                  329 	mov	a, ___fsdiv_org_fl2_65536_21+1
+      000150rC0r0B                  330 	mov	___fsdiv_org_sloc17_1_0+1, a
+      000152r8Er0F                  331 	mov	a, ___fsdiv_org_fl2_65536_21+2
+      000154rC1r0B                  332 	mov	___fsdiv_org_sloc17_1_0+2, a
+      000156r8Fr0F                  333 	mov	a, ___fsdiv_org_fl2_65536_21+3
+      000158rC2r0B                  334 	mov	___fsdiv_org_sloc17_1_0+3, a
+      00015ArBFr0F                  335 	mov	a, ___fsdiv_org_sloc17_1_0+0
+      00015CrC0r0E                  336 	or	a, ___fsdiv_org_sloc17_1_0+1
+      00015ErC1r0E                  337 	or	a, ___fsdiv_org_sloc17_1_0+2
+      000160rC2r0E                  338 	or	a, ___fsdiv_org_sloc17_1_0+3
+      000162 00 2A                  339 	ceqsn	a, #0x00
+      000164rA4r31                  340 	goto	00102$
+                                    341 ;	../_fsdiv.c: 297: fl2.l = 0x7FC00000;
+      000166r0Cr13                  342 	clear	___fsdiv_org_fl2_65536_21+0
+      000168r0Dr13                  343 	clear	___fsdiv_org_fl2_65536_21+1
+      00016A C0 2F                  344 	mov	a, #0xc0
+      00016Cr8Er0B                  345 	mov	___fsdiv_org_fl2_65536_21+2, a
+      00016E 7F 2F                  346 	mov	a, #0x7f
+      000170r8Fr0B                  347 	mov	___fsdiv_org_fl2_65536_21+3, a
+                                    348 ;	../_fsdiv.c: 298: return (fl2.f);
+      000172r8Cr0F                  349 	mov	a, ___fsdiv_org_fl2_65536_21+0
+      000174rC3r0B                  350 	mov	___fsdiv_org_sloc18_1_0+0, a
+      000176r8Dr0F                  351 	mov	a, ___fsdiv_org_fl2_65536_21+1
+      000178rC4r0B                  352 	mov	___fsdiv_org_sloc18_1_0+1, a
+      00017Ar8Er0F                  353 	mov	a, ___fsdiv_org_fl2_65536_21+2
+      00017CrC5r0B                  354 	mov	___fsdiv_org_sloc18_1_0+2, a
+      00017Er8Fr0F                  355 	mov	a, ___fsdiv_org_fl2_65536_21+3
+      000180rC6r0B                  356 	mov	___fsdiv_org_sloc18_1_0+3, a
+      000182 C2 01                  357 	mov	a, sp
+      000184 FC 28                  358 	add	a, #0xfc
+      000186r80r0B                  359 	mov	p, a
+      000188r81r03                  360 	idxm	a, p
+      00018Ar80r0B                  361 	mov	p, a
+      00018CrC3r0F                  362 	mov	a, ___fsdiv_org_sloc18_1_0+0
+      00018Er80r03                  363 	idxm	p, a
+      000190r00r12                  364 	inc	p
+      000192rC4r0F                  365 	mov	a, ___fsdiv_org_sloc18_1_0+1
+      000194r80r03                  366 	idxm	p, a
+      000196r00r12                  367 	inc	p
+      000198rC5r0F                  368 	mov	a, ___fsdiv_org_sloc18_1_0+2
+      00019Ar80r03                  369 	idxm	p, a
+      00019Cr00r12                  370 	inc	p
+      00019ErC6r0F                  371 	mov	a, ___fsdiv_org_sloc18_1_0+3
+      0001A0r80r03                  372 	idxm	p, a
+      0001A2 7A 00                  373 	ret
+      0001A4                        374 00102$:
+                                    375 ;	../_fsdiv.c: 302: if (!fl1.l)
+      0001A4r88r0F                  376 	mov	a, ___fsdiv_org_fl1_65536_21+0
+      0001A6rC7r0B                  377 	mov	___fsdiv_org_sloc19_1_0+0, a
+      0001A8r89r0F                  378 	mov	a, ___fsdiv_org_fl1_65536_21+1
+      0001AArC8r0B                  379 	mov	___fsdiv_org_sloc19_1_0+1, a
+      0001ACr8Ar0F                  380 	mov	a, ___fsdiv_org_fl1_65536_21+2
+      0001AErC9r0B                  381 	mov	___fsdiv_org_sloc19_1_0+2, a
+      0001B0r8Br0F                  382 	mov	a, ___fsdiv_org_fl1_65536_21+3
+      0001B2rCAr0B                  383 	mov	___fsdiv_org_sloc19_1_0+3, a
+      0001B4rC7r0F                  384 	mov	a, ___fsdiv_org_sloc19_1_0+0
+      0001B6rC8r0E                  385 	or	a, ___fsdiv_org_sloc19_1_0+1
+      0001B8rC9r0E                  386 	or	a, ___fsdiv_org_sloc19_1_0+2
+      0001BArCAr0E                  387 	or	a, ___fsdiv_org_sloc19_1_0+3
+      0001BC 00 2A                  388 	ceqsn	a, #0x00
+      0001BErE2r31                  389 	goto	00104$
+                                    390 ;	../_fsdiv.c: 303: return (0);
+      0001C0 C2 01                  391 	mov	a, sp
+      0001C2 FC 28                  392 	add	a, #0xfc
+      0001C4r80r0B                  393 	mov	p, a
+      0001C6r81r03                  394 	idxm	a, p
+      0001C8r80r0B                  395 	mov	p, a
+      0001CA 00 2F                  396 	mov	a, #0x00
+      0001CCr80r03                  397 	idxm	p, a
+      0001CEr00r12                  398 	inc	p
+      0001D0 00 2F                  399 	mov	a, #0x00
+      0001D2r80r03                  400 	idxm	p, a
+      0001D4r00r12                  401 	inc	p
+      0001D6 00 2F                  402 	mov	a, #0x00
+      0001D8r80r03                  403 	idxm	p, a
+      0001DAr00r12                  404 	inc	p
+      0001DC 00 2F                  405 	mov	a, #0x00
+      0001DEr80r03                  406 	idxm	p, a
+      0001E0 7A 00                  407 	ret
+      0001E2                        408 00104$:
+                                    409 ;	../_fsdiv.c: 306: mant1 = MANT (fl1.l);
+      0001E2r88r0F                  410 	mov	a, ___fsdiv_org_fl1_65536_21+0
+      0001E4rCBr0B                  411 	mov	___fsdiv_org_sloc20_1_0+0, a
+      0001E6r89r0F                  412 	mov	a, ___fsdiv_org_fl1_65536_21+1
+      0001E8rCCr0B                  413 	mov	___fsdiv_org_sloc20_1_0+1, a
+      0001EAr8Ar0F                  414 	mov	a, ___fsdiv_org_fl1_65536_21+2
+      0001ECrCDr0B                  415 	mov	___fsdiv_org_sloc20_1_0+2, a
+      0001EEr8Br0F                  416 	mov	a, ___fsdiv_org_fl1_65536_21+3
+      0001F0rCEr0B                  417 	mov	___fsdiv_org_sloc20_1_0+3, a
+      0001F2rCBr0F                  418 	mov	a, ___fsdiv_org_sloc20_1_0+0
+      0001F4rCFr0B                  419 	mov	___fsdiv_org_sloc21_1_0+0, a
+      0001F6rCCr0F                  420 	mov	a, ___fsdiv_org_sloc20_1_0+1
+      0001F8rD0r0B                  421 	mov	___fsdiv_org_sloc21_1_0+1, a
+      0001FArCDr0F                  422 	mov	a, ___fsdiv_org_sloc20_1_0+2
+      0001FC 7F 2C                  423 	and	a, #0x7f
+      0001FErD1r0B                  424 	mov	___fsdiv_org_sloc21_1_0+2, a
+      000200r52r13                  425 	clear	___fsdiv_org_sloc21_1_0+3
+      000202rCFr0F                  426 	mov	a, ___fsdiv_org_sloc21_1_0+0
+      000204r98r0B                  427 	mov	___fsdiv_org_mant1_65536_21+0, a
+      000206rD0r0F                  428 	mov	a, ___fsdiv_org_sloc21_1_0+1
+      000208r99r0B                  429 	mov	___fsdiv_org_mant1_65536_21+1, a
+      00020ArD1r0F                  430 	mov	a, ___fsdiv_org_sloc21_1_0+2
+      00020C 80 2D                  431 	or	a, #0x80
+      00020Er9Ar0B                  432 	mov	___fsdiv_org_mant1_65536_21+2, a
+      000210rD2r0F                  433 	mov	a, ___fsdiv_org_sloc21_1_0+3
+      000212r9Br0B                  434 	mov	___fsdiv_org_mant1_65536_21+3, a
+                                    435 ;	../_fsdiv.c: 307: mant2 = MANT (fl2.l);
+      000214r8Cr0F                  436 	mov	a, ___fsdiv_org_fl2_65536_21+0
+      000216rD3r0B                  437 	mov	___fsdiv_org_sloc22_1_0+0, a
+      000218r8Dr0F                  438 	mov	a, ___fsdiv_org_fl2_65536_21+1
+      00021ArD4r0B                  439 	mov	___fsdiv_org_sloc22_1_0+1, a
+      00021Cr8Er0F                  440 	mov	a, ___fsdiv_org_fl2_65536_21+2
+      00021ErD5r0B                  441 	mov	___fsdiv_org_sloc22_1_0+2, a
+      000220r8Fr0F                  442 	mov	a, ___fsdiv_org_fl2_65536_21+3
+      000222rD6r0B                  443 	mov	___fsdiv_org_sloc22_1_0+3, a
+      000224rD3r0F                  444 	mov	a, ___fsdiv_org_sloc22_1_0+0
+      000226rD7r0B                  445 	mov	___fsdiv_org_sloc23_1_0+0, a
+      000228rD4r0F                  446 	mov	a, ___fsdiv_org_sloc22_1_0+1
+      00022ArD8r0B                  447 	mov	___fsdiv_org_sloc23_1_0+1, a
+      00022CrD5r0F                  448 	mov	a, ___fsdiv_org_sloc22_1_0+2
+      00022E 7F 2C                  449 	and	a, #0x7f
+      000230rD9r0B                  450 	mov	___fsdiv_org_sloc23_1_0+2, a
+      000232r5Ar13                  451 	clear	___fsdiv_org_sloc23_1_0+3
+      000234rD7r0F                  452 	mov	a, ___fsdiv_org_sloc23_1_0+0
+      000236r9Cr0B                  453 	mov	___fsdiv_org_mant2_65536_21+0, a
+      000238rD8r0F                  454 	mov	a, ___fsdiv_org_sloc23_1_0+1
+      00023Ar9Dr0B                  455 	mov	___fsdiv_org_mant2_65536_21+1, a
+      00023CrD9r0F                  456 	mov	a, ___fsdiv_org_sloc23_1_0+2
+      00023E 80 2D                  457 	or	a, #0x80
+      000240r9Er0B                  458 	mov	___fsdiv_org_mant2_65536_21+2, a
+      000242rDAr0F                  459 	mov	a, ___fsdiv_org_sloc23_1_0+3
+      000244r9Fr0B                  460 	mov	___fsdiv_org_mant2_65536_21+3, a
+                                    461 ;	../_fsdiv.c: 310: if (mant1 < mant2)
+      000246r98r0F                  462 	mov	a, ___fsdiv_org_mant1_65536_21+0
+      000248r9Cr0C                  463 	sub	a, ___fsdiv_org_mant2_65536_21+0
+      00024Ar99r0F                  464 	mov	a, ___fsdiv_org_mant1_65536_21+1
+      00024Cr9Dr0D                  465 	subc	a, ___fsdiv_org_mant2_65536_21+1
+      00024Er9Ar0F                  466 	mov	a, ___fsdiv_org_mant1_65536_21+2
+      000250r9Er0D                  467 	subc	a, ___fsdiv_org_mant2_65536_21+2
+      000252r9Br0F                  468 	mov	a, ___fsdiv_org_mant1_65536_21+3
+      000254r9Fr0D                  469 	subc	a, ___fsdiv_org_mant2_65536_21+3
+      000256 C0 18                  470 	t0sn	f, ov
+      000258 80 2E                  471 	xor	a, #0x80
+      00025A 6B 00                  472 	sl	a
+      00025C 40 1A                  473 	t1sn	f, c
+      00025Er78r32                  474 	goto	00106$
+                                    475 ;	../_fsdiv.c: 312: mant1 <<= 1;
+      000260r98r15                  476 	sl	___fsdiv_org_mant1_65536_21+0
+      000262r99r16                  477 	slc	___fsdiv_org_mant1_65536_21+1
+      000264r9Ar16                  478 	slc	___fsdiv_org_mant1_65536_21+2
+      000266r9Br16                  479 	slc	___fsdiv_org_mant1_65536_21+3
+                                    480 ;	../_fsdiv.c: 313: exp--;
+      000268rA1r0F                  481 	mov	a, ___fsdiv_org_exp_65536_21+1
+      00026Ar80r0B                  482 	mov	p, a
+      00026CrA0r0F                  483 	mov	a, ___fsdiv_org_exp_65536_21+0
+      00026E 01 29                  484 	sub	a, #0x01
+      000270rA0r0B                  485 	mov	___fsdiv_org_exp_65536_21+0, a
+      000272r80r0F                  486 	mov	a, p
+      000274 61 00                  487 	subc	a
+      000276rA1r0B                  488 	mov	___fsdiv_org_exp_65536_21+1, a
+      000278                        489 00106$:
+                                    490 ;	../_fsdiv.c: 317: mask = 0x1000000;
+      000278r14r13                  491 	clear	___fsdiv_org_mask_65536_21+0
+      00027Ar15r13                  492 	clear	___fsdiv_org_mask_65536_21+1
+      00027Cr16r13                  493 	clear	___fsdiv_org_mask_65536_21+2
+      00027E 01 2F                  494 	mov	a, #0x01
+      000280r97r0B                  495 	mov	___fsdiv_org_mask_65536_21+3, a
+                                    496 ;	../_fsdiv.c: 318: result = 0;
+      000282r10r13                  497 	clear	___fsdiv_org_result_65536_21+0
+      000284r11r13                  498 	clear	___fsdiv_org_result_65536_21+1
+      000286r12r13                  499 	clear	___fsdiv_org_result_65536_21+2
+      000288r13r13                  500 	clear	___fsdiv_org_result_65536_21+3
+                                    501 ;	../_fsdiv.c: 319: while (mask)
+      00028A                        502 00109$:
+      00028Ar94r0F                  503 	mov	a, ___fsdiv_org_mask_65536_21+0
+      00028Cr95r0E                  504 	or	a, ___fsdiv_org_mask_65536_21+1
+      00028Er96r0E                  505 	or	a, ___fsdiv_org_mask_65536_21+2
+      000290r97r0E                  506 	or	a, ___fsdiv_org_mask_65536_21+3
+      000292 00 2B                  507 	cneqsn	a, #0x00
+      000294rFAr32                  508 	goto	00111$
+                                    509 ;	../_fsdiv.c: 321: if (mant1 >= mant2)
+      000296r98r0F                  510 	mov	a, ___fsdiv_org_mant1_65536_21+0
+      000298r9Cr0C                  511 	sub	a, ___fsdiv_org_mant2_65536_21+0
+      00029Ar99r0F                  512 	mov	a, ___fsdiv_org_mant1_65536_21+1
+      00029Cr9Dr0D                  513 	subc	a, ___fsdiv_org_mant2_65536_21+1
+      00029Er9Ar0F                  514 	mov	a, ___fsdiv_org_mant1_65536_21+2
+      0002A0r9Er0D                  515 	subc	a, ___fsdiv_org_mant2_65536_21+2
+      0002A2r9Br0F                  516 	mov	a, ___fsdiv_org_mant1_65536_21+3
+      0002A4r9Fr0D                  517 	subc	a, ___fsdiv_org_mant2_65536_21+3
+      0002A6 C0 18                  518 	t0sn	f, ov
+      0002A8 80 2E                  519 	xor	a, #0x80
+      0002AA 6B 00                  520 	sl	a
+      0002AC 40 18                  521 	t0sn	f, c
+      0002AErE8r32                  522 	goto	00108$
+                                    523 ;	../_fsdiv.c: 323: result |= mask;
+      0002B0r90r0F                  524 	mov	a, ___fsdiv_org_result_65536_21+0
+      0002B2rDBr0B                  525 	mov	___fsdiv_org_sloc24_1_0+0, a
+      0002B4r91r0F                  526 	mov	a, ___fsdiv_org_result_65536_21+1
+      0002B6rDCr0B                  527 	mov	___fsdiv_org_sloc24_1_0+1, a
+      0002B8r92r0F                  528 	mov	a, ___fsdiv_org_result_65536_21+2
+      0002BArDDr0B                  529 	mov	___fsdiv_org_sloc24_1_0+2, a
+      0002BCr93r0F                  530 	mov	a, ___fsdiv_org_result_65536_21+3
+      0002BErDEr0B                  531 	mov	___fsdiv_org_sloc24_1_0+3, a
+      0002C0rDBr0F                  532 	mov	a, ___fsdiv_org_sloc24_1_0+0
+      0002C2r94r0E                  533 	or	a, ___fsdiv_org_mask_65536_21+0
+      0002C4r90r0B                  534 	mov	___fsdiv_org_result_65536_21+0, a
+      0002C6rDCr0F                  535 	mov	a, ___fsdiv_org_sloc24_1_0+1
+      0002C8r95r0E                  536 	or	a, ___fsdiv_org_mask_65536_21+1
+      0002CAr91r0B                  537 	mov	___fsdiv_org_result_65536_21+1, a
+      0002CCrDDr0F                  538 	mov	a, ___fsdiv_org_sloc24_1_0+2
+      0002CEr96r0E                  539 	or	a, ___fsdiv_org_mask_65536_21+2
+      0002D0r92r0B                  540 	mov	___fsdiv_org_result_65536_21+2, a
+      0002D2rDEr0F                  541 	mov	a, ___fsdiv_org_sloc24_1_0+3
+      0002D4r97r0E                  542 	or	a, ___fsdiv_org_mask_65536_21+3
+      0002D6r93r0B                  543 	mov	___fsdiv_org_result_65536_21+3, a
+                                    544 ;	../_fsdiv.c: 324: mant1 -= mant2;
+      0002D8r9Cr0F                  545 	mov	a, ___fsdiv_org_mant2_65536_21+0
+      0002DAr98r08                  546 	sub	___fsdiv_org_mant1_65536_21+0, a
+      0002DCr9Dr0F                  547 	mov	a, ___fsdiv_org_mant2_65536_21+1
+      0002DEr99r09                  548 	subc	___fsdiv_org_mant1_65536_21+1, a
+      0002E0r9Er0F                  549 	mov	a, ___fsdiv_org_mant2_65536_21+2
+      0002E2r9Ar09                  550 	subc	___fsdiv_org_mant1_65536_21+2, a
+      0002E4r9Fr0F                  551 	mov	a, ___fsdiv_org_mant2_65536_21+3
+      0002E6r9Br09                  552 	subc	___fsdiv_org_mant1_65536_21+3, a
+      0002E8                        553 00108$:
+                                    554 ;	../_fsdiv.c: 326: mant1 <<= 1;
+      0002E8r98r15                  555 	sl	___fsdiv_org_mant1_65536_21+0
+      0002EAr99r16                  556 	slc	___fsdiv_org_mant1_65536_21+1
+      0002ECr9Ar16                  557 	slc	___fsdiv_org_mant1_65536_21+2
+      0002EEr9Br16                  558 	slc	___fsdiv_org_mant1_65536_21+3
+                                    559 ;	../_fsdiv.c: 327: mask >>= 1;
+      0002F0r17r15                  560 	sr	___fsdiv_org_mask_65536_21+3
+      0002F2r16r16                  561 	src	___fsdiv_org_mask_65536_21+2
+      0002F4r15r16                  562 	src	___fsdiv_org_mask_65536_21+1
+      0002F6r14r16                  563 	src	___fsdiv_org_mask_65536_21+0
+      0002F8r8Ar32                  564 	goto	00109$
+      0002FA                        565 00111$:
+                                    566 ;	../_fsdiv.c: 331: result += 1;
+      0002FAr10r12                  567 	inc	___fsdiv_org_result_65536_21+0
+      0002FCr11r10                  568 	addc	___fsdiv_org_result_65536_21+1
+      0002FEr12r10                  569 	addc	___fsdiv_org_result_65536_21+2
+      000300r13r10                  570 	addc	___fsdiv_org_result_65536_21+3
+                                    571 ;	../_fsdiv.c: 334: exp++;
+      000302rA1r0F                  572 	mov	a, ___fsdiv_org_exp_65536_21+1
+      000304r80r0B                  573 	mov	p, a
+      000306rA0r0F                  574 	mov	a, ___fsdiv_org_exp_65536_21+0
+      000308 01 28                  575 	add	a, #0x01
+      00030ArA0r0B                  576 	mov	___fsdiv_org_exp_65536_21+0, a
+      00030C 00 2F                  577 	mov	a, #0x00
+      00030Er00r0D                  578 	addc	a, p
+      000310rA1r0B                  579 	mov	___fsdiv_org_exp_65536_21+1, a
+                                    580 ;	../_fsdiv.c: 335: result >>= 1;
+      000312r93r0F                  581 	mov	a, ___fsdiv_org_result_65536_21+3
+      000314 6B 00                  582 	sl	a
+      000316r13r16                  583 	src	___fsdiv_org_result_65536_21+3
+      000318r12r16                  584 	src	___fsdiv_org_result_65536_21+2
+      00031Ar11r16                  585 	src	___fsdiv_org_result_65536_21+1
+      00031Cr10r16                  586 	src	___fsdiv_org_result_65536_21+0
+                                    587 ;	../_fsdiv.c: 337: result &= ~HIDDEN;
+      00031E 7F 2F                  588 	mov	a, #0x7f
+      000320r12r0A                  589 	and	___fsdiv_org_result_65536_21+2, a
+                                    590 ;	../_fsdiv.c: 340: if (exp >= 0x100)
+      000322rA1r0F                  591 	mov	a, ___fsdiv_org_exp_65536_21+1
+      000324 01 29                  592 	sub	a, #0x01
+      000326 C0 18                  593 	t0sn	f, ov
+      000328 80 2E                  594 	xor	a, #0x80
+      00032A 6B 00                  595 	sl	a
+      00032C 40 18                  596 	t0sn	f, c
+      00032Er70r33                  597 	goto	00116$
+                                    598 ;	../_fsdiv.c: 341: fl1.l = (sign ? SIGNBIT : 0) | __INFINITY;
+      000330rBEr0F                  599 	mov	a, ___fsdiv_org_sloc16_1_0+0
+      000332 00 2B                  600 	cneqsn	a, #0x00
+      000334r42r33                  601 	goto	00120$
+      000336r5Fr13                  602 	clear	___fsdiv_org_sloc25_1_0+0
+      000338r60r13                  603 	clear	___fsdiv_org_sloc25_1_0+1
+      00033Ar61r13                  604 	clear	___fsdiv_org_sloc25_1_0+2
+      00033C 80 2F                  605 	mov	a, #0x80
+      00033ErE2r0B                  606 	mov	___fsdiv_org_sloc25_1_0+3, a
+      000340r4Ar33                  607 	goto	00121$
+      000342                        608 00120$:
+      000342r5Fr13                  609 	clear	___fsdiv_org_sloc25_1_0+0
+      000344r60r13                  610 	clear	___fsdiv_org_sloc25_1_0+1
+      000346r61r13                  611 	clear	___fsdiv_org_sloc25_1_0+2
+      000348r62r13                  612 	clear	___fsdiv_org_sloc25_1_0+3
+      00034A                        613 00121$:
+      00034ArDFr0F                  614 	mov	a, ___fsdiv_org_sloc25_1_0+0
+      00034CrE3r0B                  615 	mov	___fsdiv_org_sloc26_1_0+0, a
+      00034ErE0r0F                  616 	mov	a, ___fsdiv_org_sloc25_1_0+1
+      000350rE4r0B                  617 	mov	___fsdiv_org_sloc26_1_0+1, a
+      000352rE1r0F                  618 	mov	a, ___fsdiv_org_sloc25_1_0+2
+      000354 80 2D                  619 	or	a, #0x80
+      000356rE5r0B                  620 	mov	___fsdiv_org_sloc26_1_0+2, a
+      000358rE2r0F                  621 	mov	a, ___fsdiv_org_sloc25_1_0+3
+      00035A 7F 2D                  622 	or	a, #0x7f
+      00035CrE6r0B                  623 	mov	___fsdiv_org_sloc26_1_0+3, a
+      00035ErE3r0F                  624 	mov	a, ___fsdiv_org_sloc26_1_0+0
+      000360r88r0B                  625 	mov	___fsdiv_org_fl1_65536_21+0, a
+      000362rE4r0F                  626 	mov	a, ___fsdiv_org_sloc26_1_0+1
+      000364r89r0B                  627 	mov	___fsdiv_org_fl1_65536_21+1, a
+      000366rE5r0F                  628 	mov	a, ___fsdiv_org_sloc26_1_0+2
+      000368r8Ar0B                  629 	mov	___fsdiv_org_fl1_65536_21+2, a
+      00036ArE6r0F                  630 	mov	a, ___fsdiv_org_sloc26_1_0+3
+      00036Cr8Br0B                  631 	mov	___fsdiv_org_fl1_65536_21+3, a
+      00036Er14r34                  632 	goto	00117$
+      000370                        633 00116$:
+                                    634 ;	../_fsdiv.c: 342: else if (exp < 0)
+      000370rA1r0F                  635 	mov	a, ___fsdiv_org_exp_65536_21+1
+      000372 80 29                  636 	sub	a, #0x80
+      000374 40 18                  637 	t0sn	f, c
+      000376r82r33                  638 	goto	00113$
+                                    639 ;	../_fsdiv.c: 343: fl1.l = 0;
+      000378r08r13                  640 	clear	___fsdiv_org_fl1_65536_21+0
+      00037Ar09r13                  641 	clear	___fsdiv_org_fl1_65536_21+1
+      00037Cr0Ar13                  642 	clear	___fsdiv_org_fl1_65536_21+2
+      00037Er0Br13                  643 	clear	___fsdiv_org_fl1_65536_21+3
+      000380r14r34                  644 	goto	00117$
+      000382                        645 00113$:
+                                    646 ;	../_fsdiv.c: 345: fl1.l = PACK (sign ? SIGNBIT : 0 , exp, result);
+      000382rBEr0F                  647 	mov	a, ___fsdiv_org_sloc16_1_0+0
+      000384 00 2B                  648 	cneqsn	a, #0x00
+      000386r94r33                  649 	goto	00122$
+      000388r67r13                  650 	clear	___fsdiv_org_sloc27_1_0+0
+      00038Ar68r13                  651 	clear	___fsdiv_org_sloc27_1_0+1
+      00038Cr69r13                  652 	clear	___fsdiv_org_sloc27_1_0+2
+      00038E 80 2F                  653 	mov	a, #0x80
+      000390rEAr0B                  654 	mov	___fsdiv_org_sloc27_1_0+3, a
+      000392r9Cr33                  655 	goto	00123$
+      000394                        656 00122$:
+      000394r67r13                  657 	clear	___fsdiv_org_sloc27_1_0+0
+      000396r68r13                  658 	clear	___fsdiv_org_sloc27_1_0+1
+      000398r69r13                  659 	clear	___fsdiv_org_sloc27_1_0+2
+      00039Ar6Ar13                  660 	clear	___fsdiv_org_sloc27_1_0+3
+      00039C                        661 00123$:
+      00039CrA0r0F                  662 	mov	a, ___fsdiv_org_exp_65536_21+0
+      00039ErEBr0B                  663 	mov	___fsdiv_org_sloc28_1_0+0, a
+      0003A0rA1r0F                  664 	mov	a, ___fsdiv_org_exp_65536_21+1
+      0003A2rECr0B                  665 	mov	___fsdiv_org_sloc28_1_0+1, a
+      0003A4 6B 00                  666 	sl	a
+      0003A6 00 2F                  667 	mov	a, #0x00
+      0003A8 61 00                  668 	subc	a
+      0003AArEDr0B                  669 	mov	___fsdiv_org_sloc28_1_0+2, a
+      0003ACrEEr0B                  670 	mov	___fsdiv_org_sloc28_1_0+3, a
+      0003AErEBr0F                  671 	mov	a, ___fsdiv_org_sloc28_1_0+0
+      0003B0rF1r0B                  672 	mov	___fsdiv_org_sloc29_1_0+2, a
+      0003B2rECr0F                  673 	mov	a, ___fsdiv_org_sloc28_1_0+1
+      0003B4rF2r0B                  674 	mov	___fsdiv_org_sloc29_1_0+3, a
+      0003B6r6Fr13                  675 	clear	___fsdiv_org_sloc29_1_0+0
+      0003B8r70r13                  676 	clear	___fsdiv_org_sloc29_1_0+1
+      0003BA 07 2F                  677 	mov	a, #7
+      0003BC                        678 00168$:
+      0003BCrF1r15                  679 	sl	___fsdiv_org_sloc29_1_0+2
+      0003BErF2r16                  680 	slc	___fsdiv_org_sloc29_1_0+3
+      0003C0 63 00                  681 	dzsn	a
+      0003C2rBCr33                  682 	goto	00168$
+      0003C4rE7r0F                  683 	mov	a, ___fsdiv_org_sloc27_1_0+0
+      0003C6rEFr0E                  684 	or	a, ___fsdiv_org_sloc29_1_0+0
+      0003C8rF3r0B                  685 	mov	___fsdiv_org_sloc30_1_0+0, a
+      0003CArE8r0F                  686 	mov	a, ___fsdiv_org_sloc27_1_0+1
+      0003CCrF0r0E                  687 	or	a, ___fsdiv_org_sloc29_1_0+1
+      0003CErF4r0B                  688 	mov	___fsdiv_org_sloc30_1_0+1, a
+      0003D0rE9r0F                  689 	mov	a, ___fsdiv_org_sloc27_1_0+2
+      0003D2rF1r0E                  690 	or	a, ___fsdiv_org_sloc29_1_0+2
+      0003D4rF5r0B                  691 	mov	___fsdiv_org_sloc30_1_0+2, a
+      0003D6rEAr0F                  692 	mov	a, ___fsdiv_org_sloc27_1_0+3
+      0003D8rF2r0E                  693 	or	a, ___fsdiv_org_sloc29_1_0+3
+      0003DArF6r0B                  694 	mov	___fsdiv_org_sloc30_1_0+3, a
+      0003DCr90r0F                  695 	mov	a, ___fsdiv_org_result_65536_21+0
+      0003DErF7r0B                  696 	mov	___fsdiv_org_sloc31_1_0+0, a
+      0003E0r91r0F                  697 	mov	a, ___fsdiv_org_result_65536_21+1
+      0003E2rF8r0B                  698 	mov	___fsdiv_org_sloc31_1_0+1, a
+      0003E4r92r0F                  699 	mov	a, ___fsdiv_org_result_65536_21+2
+      0003E6rF9r0B                  700 	mov	___fsdiv_org_sloc31_1_0+2, a
+      0003E8r93r0F                  701 	mov	a, ___fsdiv_org_result_65536_21+3
+      0003EArFAr0B                  702 	mov	___fsdiv_org_sloc31_1_0+3, a
+      0003ECrF3r0F                  703 	mov	a, ___fsdiv_org_sloc30_1_0+0
+      0003EErF7r0E                  704 	or	a, ___fsdiv_org_sloc31_1_0+0
+      0003F0rFBr0B                  705 	mov	___fsdiv_org_sloc32_1_0+0, a
+      0003F2rF4r0F                  706 	mov	a, ___fsdiv_org_sloc30_1_0+1
+      0003F4rF8r0E                  707 	or	a, ___fsdiv_org_sloc31_1_0+1
+      0003F6rFCr0B                  708 	mov	___fsdiv_org_sloc32_1_0+1, a
+      0003F8rF5r0F                  709 	mov	a, ___fsdiv_org_sloc30_1_0+2
+      0003FArF9r0E                  710 	or	a, ___fsdiv_org_sloc31_1_0+2
+      0003FCrFDr0B                  711 	mov	___fsdiv_org_sloc32_1_0+2, a
+      0003FErF6r0F                  712 	mov	a, ___fsdiv_org_sloc30_1_0+3
+      000400rFAr0E                  713 	or	a, ___fsdiv_org_sloc31_1_0+3
+      000402rFEr0B                  714 	mov	___fsdiv_org_sloc32_1_0+3, a
+      000404rFBr0F                  715 	mov	a, ___fsdiv_org_sloc32_1_0+0
+      000406r88r0B                  716 	mov	___fsdiv_org_fl1_65536_21+0, a
+      000408rFCr0F                  717 	mov	a, ___fsdiv_org_sloc32_1_0+1
+      00040Ar89r0B                  718 	mov	___fsdiv_org_fl1_65536_21+1, a
+      00040CrFDr0F                  719 	mov	a, ___fsdiv_org_sloc32_1_0+2
+      00040Er8Ar0B                  720 	mov	___fsdiv_org_fl1_65536_21+2, a
+      000410rFEr0F                  721 	mov	a, ___fsdiv_org_sloc32_1_0+3
+      000412r8Br0B                  722 	mov	___fsdiv_org_fl1_65536_21+3, a
+      000414                        723 00117$:
+                                    724 ;	../_fsdiv.c: 346: return (fl1.f);
+      000414r88r0F                  725 	mov	a, ___fsdiv_org_fl1_65536_21+0
+      000416rFFr0B                  726 	mov	___fsdiv_org_sloc33_1_0+0, a
+      000418r89r0F                  727 	mov	a, ___fsdiv_org_fl1_65536_21+1
+      00041Ar80r0B                  728 	mov	___fsdiv_org_sloc33_1_0+1, a
+      00041Cr8Ar0F                  729 	mov	a, ___fsdiv_org_fl1_65536_21+2
+      00041Er81r0B                  730 	mov	___fsdiv_org_sloc33_1_0+2, a
+      000420r8Br0F                  731 	mov	a, ___fsdiv_org_fl1_65536_21+3
+      000422r82r0B                  732 	mov	___fsdiv_org_sloc33_1_0+3, a
+      000424 C2 01                  733 	mov	a, sp
+      000426 FC 28                  734 	add	a, #0xfc
+      000428r80r0B                  735 	mov	p, a
+      00042Ar81r03                  736 	idxm	a, p
+      00042Cr80r0B                  737 	mov	p, a
+      00042ErFFr0F                  738 	mov	a, ___fsdiv_org_sloc33_1_0+0
+      000430r80r03                  739 	idxm	p, a
+      000432r00r12                  740 	inc	p
+      000434r80r0F                  741 	mov	a, ___fsdiv_org_sloc33_1_0+1
+      000436r80r03                  742 	idxm	p, a
+      000438r00r12                  743 	inc	p
+      00043Ar81r0F                  744 	mov	a, ___fsdiv_org_sloc33_1_0+2
+      00043Cr80r03                  745 	idxm	p, a
+      00043Er00r12                  746 	inc	p
+      000440r82r0F                  747 	mov	a, ___fsdiv_org_sloc33_1_0+3
+      000442r80r03                  748 	idxm	p, a
+                                    749 ;	../_fsdiv.c: 347: }
+      000444 7A 00                  750 	ret
+                                    751 ;	../_fsdiv.c: 349: float __fsdiv (float a1, float a2)
+                                    752 ;	-----------------------------------------
+                                    753 ;	 function __fsdiv
+                                    754 ;	-----------------------------------------
+      000446                        755 ___fsdiv:
+                                    756 ;	../_fsdiv.c: 352: unsigned long *p = (unsigned long *) &f;
+                                    757 ;	../_fsdiv.c: 354: if (a2 == 0.0f && a1 > 0.0f)
+      000446rA9r0F                  758 	mov	a, ___fsdiv_PARM_2+3
+      000448 7F 2C                  759 	and	a, #0x7f
+      00044ArA6r0E                  760 	or	a, ___fsdiv_PARM_2+0
+      00044CrA7r0E                  761 	or	a, ___fsdiv_PARM_2+1
+      00044ErA8r0E                  762 	or	a, ___fsdiv_PARM_2+2
+      000450 00 2A                  763 	ceqsn	a, #0x00
+      000452r80r34                  764 	goto	00110$
+      000454r00r13                  765 	clear	___fslt_PARM_1+0
+      000456r01r13                  766 	clear	___fslt_PARM_1+1
+      000458r02r13                  767 	clear	___fslt_PARM_1+2
+      00045Ar03r13                  768 	clear	___fslt_PARM_1+3
+      00045CrA2r0F                  769 	mov	a, ___fsdiv_PARM_1+0
+      00045Er80r0B                  770 	mov	___fslt_PARM_2+0, a
+      000460rA3r0F                  771 	mov	a, ___fsdiv_PARM_1+1
+      000462r81r0B                  772 	mov	___fslt_PARM_2+1, a
+      000464rA4r0F                  773 	mov	a, ___fsdiv_PARM_1+2
+      000466r82r0B                  774 	mov	___fslt_PARM_2+2, a
+      000468rA5r0F                  775 	mov	a, ___fsdiv_PARM_1+3
+      00046Ar83r0B                  776 	mov	___fslt_PARM_2+3, a
+      00046Cr00r38                  777 	call	___fslt
+      00046E 00 2B                  778 	cneqsn	a, #0x00
+      000470r80r34                  779 	goto	00110$
+                                    780 ;	../_fsdiv.c: 355: *p = 0x7f800000; // inf
+      000472r2Ar13                  781 	clear	___fsdiv_f_65536_27+0
+      000474r2Br13                  782 	clear	___fsdiv_f_65536_27+1
+      000476 80 2F                  783 	mov	a, #0x80
+      000478rACr0B                  784 	mov	___fsdiv_f_65536_27+2, a
+      00047A 7F 2F                  785 	mov	a, #0x7f
+      00047CrADr0B                  786 	mov	___fsdiv_f_65536_27+3, a
+      00047Er20r35                  787 	goto	00111$
+      000480                        788 00110$:
+                                    789 ;	../_fsdiv.c: 356: else if (a2 == 0.0f && a1 < 0.0f)
+      000480rA9r0F                  790 	mov	a, ___fsdiv_PARM_2+3
+      000482 7F 2C                  791 	and	a, #0x7f
+      000484rA6r0E                  792 	or	a, ___fsdiv_PARM_2+0
+      000486rA7r0E                  793 	or	a, ___fsdiv_PARM_2+1
+      000488rA8r0E                  794 	or	a, ___fsdiv_PARM_2+2
+      00048A 00 2A                  795 	ceqsn	a, #0x00
+      00048CrBAr34                  796 	goto	00106$
+      00048ErA2r0F                  797 	mov	a, ___fsdiv_PARM_1+0
+      000490r80r0B                  798 	mov	___fslt_PARM_1+0, a
+      000492rA3r0F                  799 	mov	a, ___fsdiv_PARM_1+1
+      000494r81r0B                  800 	mov	___fslt_PARM_1+1, a
+      000496rA4r0F                  801 	mov	a, ___fsdiv_PARM_1+2
+      000498r82r0B                  802 	mov	___fslt_PARM_1+2, a
+      00049ArA5r0F                  803 	mov	a, ___fsdiv_PARM_1+3
+      00049Cr83r0B                  804 	mov	___fslt_PARM_1+3, a
+      00049Er00r13                  805 	clear	___fslt_PARM_2+0
+      0004A0r01r13                  806 	clear	___fslt_PARM_2+1
+      0004A2r02r13                  807 	clear	___fslt_PARM_2+2
+      0004A4r03r13                  808 	clear	___fslt_PARM_2+3
+      0004A6r00r38                  809 	call	___fslt
+      0004A8 00 2B                  810 	cneqsn	a, #0x00
+      0004AArBAr34                  811 	goto	00106$
+                                    812 ;	../_fsdiv.c: 357: *p = 0xff800000; // -inf
+      0004ACr2Ar13                  813 	clear	___fsdiv_f_65536_27+0
+      0004AEr2Br13                  814 	clear	___fsdiv_f_65536_27+1
+      0004B0 80 2F                  815 	mov	a, #0x80
+      0004B2rACr0B                  816 	mov	___fsdiv_f_65536_27+2, a
+      0004B4 FF 2F                  817 	mov	a, #0xff
+      0004B6rADr0B                  818 	mov	___fsdiv_f_65536_27+3, a
+      0004B8r20r35                  819 	goto	00111$
+      0004BA                        820 00106$:
+                                    821 ;	../_fsdiv.c: 358: else if (a2 == 0.0f && a1 == 0.0f)
+      0004BArA9r0F                  822 	mov	a, ___fsdiv_PARM_2+3
+      0004BC 7F 2C                  823 	and	a, #0x7f
+      0004BErA6r0E                  824 	or	a, ___fsdiv_PARM_2+0
+      0004C0rA7r0E                  825 	or	a, ___fsdiv_PARM_2+1
+      0004C2rA8r0E                  826 	or	a, ___fsdiv_PARM_2+2
+      0004C4 00 2A                  827 	ceqsn	a, #0x00
+      0004C6rE4r34                  828 	goto	00102$
+      0004C8rA5r0F                  829 	mov	a, ___fsdiv_PARM_1+3
+      0004CA 7F 2C                  830 	and	a, #0x7f
+      0004CCrA2r0E                  831 	or	a, ___fsdiv_PARM_1+0
+      0004CErA3r0E                  832 	or	a, ___fsdiv_PARM_1+1
+      0004D0rA4r0E                  833 	or	a, ___fsdiv_PARM_1+2
+      0004D2 00 2A                  834 	ceqsn	a, #0x00
+      0004D4rE4r34                  835 	goto	00102$
+                                    836 ;	../_fsdiv.c: 359: *p = 0xffc00000; // nan
+      0004D6r2Ar13                  837 	clear	___fsdiv_f_65536_27+0
+      0004D8r2Br13                  838 	clear	___fsdiv_f_65536_27+1
+      0004DA C0 2F                  839 	mov	a, #0xc0
+      0004DCrACr0B                  840 	mov	___fsdiv_f_65536_27+2, a
+      0004DE FF 2F                  841 	mov	a, #0xff
+      0004E0rADr0B                  842 	mov	___fsdiv_f_65536_27+3, a
+      0004E2r20r35                  843 	goto	00111$
+      0004E4                        844 00102$:
+                                    845 ;	../_fsdiv.c: 361: f = __fsdiv_org (a1, a2);
+      0004E4rA2r0F                  846 	mov	a, ___fsdiv_PARM_1+0
+      0004E6r80r0B                  847 	mov	___fsdiv_org_PARM_1+0, a
+      0004E8rA3r0F                  848 	mov	a, ___fsdiv_PARM_1+1
+      0004EAr81r0B                  849 	mov	___fsdiv_org_PARM_1+1, a
+      0004ECrA4r0F                  850 	mov	a, ___fsdiv_PARM_1+2
+      0004EEr82r0B                  851 	mov	___fsdiv_org_PARM_1+2, a
+      0004F0rA5r0F                  852 	mov	a, ___fsdiv_PARM_1+3
+      0004F2r83r0B                  853 	mov	___fsdiv_org_PARM_1+3, a
+      0004F4rA6r0F                  854 	mov	a, ___fsdiv_PARM_2+0
+      0004F6r84r0B                  855 	mov	___fsdiv_org_PARM_2+0, a
+      0004F8rA7r0F                  856 	mov	a, ___fsdiv_PARM_2+1
+      0004FAr85r0B                  857 	mov	___fsdiv_org_PARM_2+1, a
+      0004FCrA8r0F                  858 	mov	a, ___fsdiv_PARM_2+2
+      0004FEr86r0B                  859 	mov	___fsdiv_org_PARM_2+2, a
+      000500rA9r0F                  860 	mov	a, ___fsdiv_PARM_2+3
+      000502r87r0B                  861 	mov	___fsdiv_org_PARM_2+3, a
+      000504r2Er2F                  862 	mov	a, #___fsdiv_sloc34_1_0
+      000506 72 00                  863 	push	af
+      000508r00r38                  864 	call	___fsdiv_org
+      00050A C2 01                  865 	mov	a, sp
+      00050C FE 28                  866 	add	a, #-2
+      00050E 82 01                  867 	mov	sp, a
+      000510rAEr0F                  868 	mov	a, ___fsdiv_sloc34_1_0+0
+      000512rAAr0B                  869 	mov	___fsdiv_f_65536_27+0, a
+      000514rAFr0F                  870 	mov	a, ___fsdiv_sloc34_1_0+1
+      000516rABr0B                  871 	mov	___fsdiv_f_65536_27+1, a
+      000518rB0r0F                  872 	mov	a, ___fsdiv_sloc34_1_0+2
+      00051ArACr0B                  873 	mov	___fsdiv_f_65536_27+2, a
+      00051CrB1r0F                  874 	mov	a, ___fsdiv_sloc34_1_0+3
+      00051ErADr0B                  875 	mov	___fsdiv_f_65536_27+3, a
+      000520                        876 00111$:
+                                    877 ;	../_fsdiv.c: 363: return f; 
+      000520 C2 01                  878 	mov	a, sp
+      000522 FC 28                  879 	add	a, #0xfc
+      000524r80r0B                  880 	mov	p, a
+      000526r81r03                  881 	idxm	a, p
+      000528r80r0B                  882 	mov	p, a
+      00052ArAAr0F                  883 	mov	a, ___fsdiv_f_65536_27+0
+      00052Cr80r03                  884 	idxm	p, a
+      00052Er00r12                  885 	inc	p
+      000530rABr0F                  886 	mov	a, ___fsdiv_f_65536_27+1
+      000532r80r03                  887 	idxm	p, a
+      000534r00r12                  888 	inc	p
+      000536rACr0F                  889 	mov	a, ___fsdiv_f_65536_27+2
+      000538r80r03                  890 	idxm	p, a
+      00053Ar00r12                  891 	inc	p
+      00053CrADr0F                  892 	mov	a, ___fsdiv_f_65536_27+3
+      00053Er80r03                  893 	idxm	p, a
+                                    894 ;	../_fsdiv.c: 364: }
+      000540 7A 00                  895 	ret
+                                    896 	.area CODE
+                                    897 	.area CONST
+                                    898 	.area CABS (ABS)

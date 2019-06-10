@@ -1,0 +1,272 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _mullong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __mullong_PARM_2
+                                     17 	.globl __mullong_PARM_1
+                                     18 	.globl __mullong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __mullong_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 __mullong_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 __mullong_t_65536_2:
+      000008                         33 	.ds 4
+      00000C                         34 __mullong_sloc0_1_0:
+      00000C                         35 	.ds 1
+      00000D                         36 __mullong_sloc1_1_0:
+      00000D                         37 	.ds 1
+      00000E                         38 __mullong_sloc2_1_0:
+      00000E                         39 	.ds 2
+      000010                         40 __mullong_sloc3_1_0:
+      000010                         41 	.ds 2
+      000012                         42 __mullong_sloc4_1_0:
+      000012                         43 	.ds 4
+      000016                         44 __mullong_sloc5_1_0:
+      000016                         45 	.ds 4
+      00001A                         46 __mullong_sloc6_1_0:
+      00001A                         47 	.ds 4
+      00001E                         48 __mullong_sloc7_1_0:
+      00001E                         49 	.ds 4
+      000022                         50 __mullong_sloc8_1_0:
+      000022                         51 	.ds 4
+      000026                         52 __mullong_sloc9_1_0:
+      000026                         53 	.ds 4
+                                     54 ;--------------------------------------------------------
+                                     55 ; overlayable items in ram 
+                                     56 ;--------------------------------------------------------
+                                     57 ;--------------------------------------------------------
+                                     58 ; absolute external ram data
+                                     59 ;--------------------------------------------------------
+                                     60 	.area DABS (ABS)
+                                     61 ;--------------------------------------------------------
+                                     62 ; global & static initialisations
+                                     63 ;--------------------------------------------------------
+                                     64 	.area HOME
+                                     65 	.area GSINIT
+                                     66 	.area GSFINAL
+                                     67 	.area GSINIT
+                                     68 ;--------------------------------------------------------
+                                     69 ; Home
+                                     70 ;--------------------------------------------------------
+                                     71 	.area HOME
+                                     72 	.area HOME
+                                     73 ;--------------------------------------------------------
+                                     74 ; code
+                                     75 ;--------------------------------------------------------
+                                     76 	.area CODE
+                                     77 ;	../_mullong.c: 734: _mullong (long a, long b)
+                                     78 ;	-----------------------------------------
+                                     79 ;	 function _mullong
+                                     80 ;	-----------------------------------------
+      000000                         81 __mullong:
+                                     82 ;	../_mullong.c: 738: t.i.hi = bcast(a)->b.b0 * bcast(b)->b.b2;           // A
+      000000r80r0F                   83 	mov	a, __mullong_PARM_1+0
+      000002r80r0B                   84 	mov	__muluchar_PARM_1+0, a
+      000004r86r0F                   85 	mov	a, __mullong_PARM_2+2
+      000006r80r0B                   86 	mov	__muluchar_PARM_2+0, a
+      000008r00r38                   87 	call	__muluchar
+      00000Ar8Ar0B                   88 	mov	__mullong_t_65536_2+2, a
+      00000Cr80r0F                   89 	mov	a, p
+      00000Er8Br0B                   90 	mov	__mullong_t_65536_2+3, a
+                                     91 ;	../_mullong.c: 739: t.i.lo = bcast(a)->b.b0 * bcast(b)->b.b0;           // A
+      000010r80r0F                   92 	mov	a, __mullong_PARM_1+0
+      000012r80r0B                   93 	mov	__muluchar_PARM_1+0, a
+      000014r84r0F                   94 	mov	a, __mullong_PARM_2+0
+      000016r80r0B                   95 	mov	__muluchar_PARM_2+0, a
+      000018r00r38                   96 	call	__muluchar
+      00001Ar88r0B                   97 	mov	__mullong_t_65536_2+0, a
+      00001Cr80r0F                   98 	mov	a, p
+      00001Er89r0B                   99 	mov	__mullong_t_65536_2+1, a
+                                    100 ;	../_mullong.c: 740: t.b.b3 += bcast(a)->b.b3 * bcast(b)->b.b0;          // G
+      000020r8Br0F                  101 	mov	a, __mullong_t_65536_2+3
+      000022r8Cr0B                  102 	mov	__mullong_sloc0_1_0+0, a
+      000024r83r0F                  103 	mov	a, __mullong_PARM_1+3
+      000026r80r0B                  104 	mov	__muluchar_PARM_1+0, a
+      000028r84r0F                  105 	mov	a, __mullong_PARM_2+0
+      00002Ar80r0B                  106 	mov	__muluchar_PARM_2+0, a
+      00002Cr00r38                  107 	call	__muluchar
+      00002Er0Cr0C                  108 	add	a, __mullong_sloc0_1_0+0
+      000030r8Dr0B                  109 	mov	__mullong_sloc1_1_0+0, a
+      000032r8Br0B                  110 	mov	__mullong_t_65536_2+3, a
+                                    111 ;	../_mullong.c: 741: t.b.b3 += bcast(a)->b.b2 * bcast(b)->b.b1;          // F
+      000034r82r0F                  112 	mov	a, __mullong_PARM_1+2
+      000036r80r0B                  113 	mov	__muluchar_PARM_1+0, a
+      000038r85r0F                  114 	mov	a, __mullong_PARM_2+1
+      00003Ar80r0B                  115 	mov	__muluchar_PARM_2+0, a
+      00003Cr00r38                  116 	call	__muluchar
+      00003Er0Dr0C                  117 	add	a, __mullong_sloc1_1_0+0
+      000040r8Br0B                  118 	mov	__mullong_t_65536_2+3, a
+                                    119 ;	../_mullong.c: 742: t.i.hi += bcast(a)->b.b2 * bcast(b)->b.b0;          // E <- b lost in .lst
+      000042r8Ar0F                  120 	mov	a, __mullong_t_65536_2+2
+      000044r8Er0B                  121 	mov	__mullong_sloc2_1_0+0, a
+      000046r8Br0F                  122 	mov	a, __mullong_t_65536_2+3
+      000048r8Fr0B                  123 	mov	__mullong_sloc2_1_0+1, a
+      00004Ar82r0F                  124 	mov	a, __mullong_PARM_1+2
+      00004Cr80r0B                  125 	mov	__muluchar_PARM_1+0, a
+      00004Er84r0F                  126 	mov	a, __mullong_PARM_2+0
+      000050r80r0B                  127 	mov	__muluchar_PARM_2+0, a
+      000052r00r38                  128 	call	__muluchar
+      000054r0Er0C                  129 	add	a, __mullong_sloc2_1_0+0
+      000056r90r0B                  130 	mov	__mullong_sloc3_1_0+0, a
+      000058r8Fr0F                  131 	mov	a, __mullong_sloc2_1_0+1
+      00005Ar00r0D                  132 	addc	a, p
+      00005Cr91r0B                  133 	mov	__mullong_sloc3_1_0+1, a
+      00005Er90r0F                  134 	mov	a, __mullong_sloc3_1_0+0
+      000060r8Ar0B                  135 	mov	__mullong_t_65536_2+2, a
+      000062r91r0F                  136 	mov	a, __mullong_sloc3_1_0+1
+      000064r8Br0B                  137 	mov	__mullong_t_65536_2+3, a
+                                    138 ;	../_mullong.c: 744: t.i.hi += bcast(a)->b.b1 * bcast(b)->b.b1;          // D <- b lost in .lst
+      000066r81r0F                  139 	mov	a, __mullong_PARM_1+1
+      000068r80r0B                  140 	mov	__muluchar_PARM_1+0, a
+      00006Ar85r0F                  141 	mov	a, __mullong_PARM_2+1
+      00006Cr80r0B                  142 	mov	__muluchar_PARM_2+0, a
+      00006Er00r38                  143 	call	__muluchar
+      000070r10r0C                  144 	add	a, __mullong_sloc3_1_0+0
+      000072r80r13                  145 	xch	a, p
+      000074r11r0D                  146 	addc	a, __mullong_sloc3_1_0+1
+      000076r8Br0B                  147 	mov	__mullong_t_65536_2+3, a
+      000078r80r0F                  148 	mov	a, p
+      00007Ar8Ar0B                  149 	mov	__mullong_t_65536_2+2, a
+                                    150 ;	../_mullong.c: 746: bcast(a)->bi.b3 = bcast(a)->b.b1 * bcast(b)->b.b2;  // C
+      00007Cr81r0F                  151 	mov	a, __mullong_PARM_1+1
+      00007Er80r0B                  152 	mov	__muluchar_PARM_1+0, a
+      000080r86r0F                  153 	mov	a, __mullong_PARM_2+2
+      000082r80r0B                  154 	mov	__muluchar_PARM_2+0, a
+      000084r00r38                  155 	call	__muluchar
+      000086r83r0B                  156 	mov	__mullong_PARM_1+3, a
+                                    157 ;	../_mullong.c: 747: bcast(a)->bi.i12 = bcast(a)->b.b1 * bcast(b)->b.b0; // C
+      000088r81r0F                  158 	mov	a, __mullong_PARM_1+1
+      00008Ar80r0B                  159 	mov	__muluchar_PARM_1+0, a
+      00008Cr84r0F                  160 	mov	a, __mullong_PARM_2+0
+      00008Er80r0B                  161 	mov	__muluchar_PARM_2+0, a
+      000090r00r38                  162 	call	__muluchar
+      000092r81r0B                  163 	mov	__mullong_PARM_1+1, a
+      000094r80r0F                  164 	mov	a, p
+      000096r82r0B                  165 	mov	__mullong_PARM_1+2, a
+                                    166 ;	../_mullong.c: 749: bcast(b)->bi.b3 = bcast(a)->b.b0 * bcast(b)->b.b3;  // B
+      000098r80r0F                  167 	mov	a, __mullong_PARM_1+0
+      00009Ar80r0B                  168 	mov	__muluchar_PARM_1+0, a
+      00009Cr87r0F                  169 	mov	a, __mullong_PARM_2+3
+      00009Er80r0B                  170 	mov	__muluchar_PARM_2+0, a
+      0000A0r00r38                  171 	call	__muluchar
+      0000A2r87r0B                  172 	mov	__mullong_PARM_2+3, a
+                                    173 ;	../_mullong.c: 750: bcast(b)->bi.i12 = bcast(a)->b.b0 * bcast(b)->b.b1; // B
+      0000A4r80r0F                  174 	mov	a, __mullong_PARM_1+0
+      0000A6r80r0B                  175 	mov	__muluchar_PARM_1+0, a
+      0000A8r85r0F                  176 	mov	a, __mullong_PARM_2+1
+      0000AAr80r0B                  177 	mov	__muluchar_PARM_2+0, a
+      0000ACr00r38                  178 	call	__muluchar
+      0000AEr85r0B                  179 	mov	__mullong_PARM_2+1, a
+      0000B0r80r0F                  180 	mov	a, p
+      0000B2r86r0B                  181 	mov	__mullong_PARM_2+2, a
+                                    182 ;	../_mullong.c: 752: bcast(b)->bi.b0 = 0;                                // B
+      0000B4r04r13                  183 	clear	__mullong_PARM_2+0
+                                    184 ;	../_mullong.c: 753: bcast(a)->bi.b0 = 0;                                // C
+      0000B6r00r13                  185 	clear	__mullong_PARM_1+0
+                                    186 ;	../_mullong.c: 754: t.l += a;
+      0000B8r88r0F                  187 	mov	a, __mullong_t_65536_2+0
+      0000BAr92r0B                  188 	mov	__mullong_sloc4_1_0+0, a
+      0000BCr89r0F                  189 	mov	a, __mullong_t_65536_2+1
+      0000BEr93r0B                  190 	mov	__mullong_sloc4_1_0+1, a
+      0000C0r8Ar0F                  191 	mov	a, __mullong_t_65536_2+2
+      0000C2r94r0B                  192 	mov	__mullong_sloc4_1_0+2, a
+      0000C4r8Br0F                  193 	mov	a, __mullong_t_65536_2+3
+      0000C6r95r0B                  194 	mov	__mullong_sloc4_1_0+3, a
+      0000C8r80r0F                  195 	mov	a, __mullong_PARM_1+0
+      0000CAr96r0B                  196 	mov	__mullong_sloc5_1_0+0, a
+      0000CCr81r0F                  197 	mov	a, __mullong_PARM_1+1
+      0000CEr97r0B                  198 	mov	__mullong_sloc5_1_0+1, a
+      0000D0r82r0F                  199 	mov	a, __mullong_PARM_1+2
+      0000D2r98r0B                  200 	mov	__mullong_sloc5_1_0+2, a
+      0000D4r83r0F                  201 	mov	a, __mullong_PARM_1+3
+      0000D6r99r0B                  202 	mov	__mullong_sloc5_1_0+3, a
+      0000D8r92r0F                  203 	mov	a, __mullong_sloc4_1_0+0
+      0000DAr16r0C                  204 	add	a, __mullong_sloc5_1_0+0
+      0000DCr9Ar0B                  205 	mov	__mullong_sloc6_1_0+0, a
+      0000DEr93r0F                  206 	mov	a, __mullong_sloc4_1_0+1
+      0000E0r17r0D                  207 	addc	a, __mullong_sloc5_1_0+1
+      0000E2r9Br0B                  208 	mov	__mullong_sloc6_1_0+1, a
+      0000E4r94r0F                  209 	mov	a, __mullong_sloc4_1_0+2
+      0000E6r18r0D                  210 	addc	a, __mullong_sloc5_1_0+2
+      0000E8r9Cr0B                  211 	mov	__mullong_sloc6_1_0+2, a
+      0000EAr95r0F                  212 	mov	a, __mullong_sloc4_1_0+3
+      0000ECr19r0D                  213 	addc	a, __mullong_sloc5_1_0+3
+      0000EEr9Dr0B                  214 	mov	__mullong_sloc6_1_0+3, a
+      0000F0r9Ar0F                  215 	mov	a, __mullong_sloc6_1_0+0
+      0000F2r88r0B                  216 	mov	__mullong_t_65536_2+0, a
+      0000F4r9Br0F                  217 	mov	a, __mullong_sloc6_1_0+1
+      0000F6r89r0B                  218 	mov	__mullong_t_65536_2+1, a
+      0000F8r9Cr0F                  219 	mov	a, __mullong_sloc6_1_0+2
+      0000FAr8Ar0B                  220 	mov	__mullong_t_65536_2+2, a
+      0000FCr9Dr0F                  221 	mov	a, __mullong_sloc6_1_0+3
+      0000FEr8Br0B                  222 	mov	__mullong_t_65536_2+3, a
+                                    223 ;	../_mullong.c: 756: return t.l + b;
+      000100r88r0F                  224 	mov	a, __mullong_t_65536_2+0
+      000102rA6r0B                  225 	mov	__mullong_sloc9_1_0+0, a
+      000104r89r0F                  226 	mov	a, __mullong_t_65536_2+1
+      000106rA7r0B                  227 	mov	__mullong_sloc9_1_0+1, a
+      000108r8Ar0F                  228 	mov	a, __mullong_t_65536_2+2
+      00010ArA8r0B                  229 	mov	__mullong_sloc9_1_0+2, a
+      00010Cr8Br0F                  230 	mov	a, __mullong_t_65536_2+3
+      00010ErA9r0B                  231 	mov	__mullong_sloc9_1_0+3, a
+      000110r84r0F                  232 	mov	a, __mullong_PARM_2+0
+      000112r9Er0B                  233 	mov	__mullong_sloc7_1_0+0, a
+      000114r85r0F                  234 	mov	a, __mullong_PARM_2+1
+      000116r9Fr0B                  235 	mov	__mullong_sloc7_1_0+1, a
+      000118r86r0F                  236 	mov	a, __mullong_PARM_2+2
+      00011ArA0r0B                  237 	mov	__mullong_sloc7_1_0+2, a
+      00011Cr87r0F                  238 	mov	a, __mullong_PARM_2+3
+      00011ErA1r0B                  239 	mov	__mullong_sloc7_1_0+3, a
+      000120r9Ar0F                  240 	mov	a, __mullong_sloc6_1_0+0
+      000122r1Er0C                  241 	add	a, __mullong_sloc7_1_0+0
+      000124rA2r0B                  242 	mov	__mullong_sloc8_1_0+0, a
+      000126r9Br0F                  243 	mov	a, __mullong_sloc6_1_0+1
+      000128r1Fr0D                  244 	addc	a, __mullong_sloc7_1_0+1
+      00012ArA3r0B                  245 	mov	__mullong_sloc8_1_0+1, a
+      00012Cr9Cr0F                  246 	mov	a, __mullong_sloc6_1_0+2
+      00012Er20r0D                  247 	addc	a, __mullong_sloc7_1_0+2
+      000130rA4r0B                  248 	mov	__mullong_sloc8_1_0+2, a
+      000132r9Dr0F                  249 	mov	a, __mullong_sloc6_1_0+3
+      000134r21r0D                  250 	addc	a, __mullong_sloc7_1_0+3
+      000136rA5r0B                  251 	mov	__mullong_sloc8_1_0+3, a
+      000138 C2 01                  252 	mov	a, sp
+      00013A FC 28                  253 	add	a, #0xfc
+      00013Cr80r0B                  254 	mov	p, a
+      00013Er81r03                  255 	idxm	a, p
+      000140r80r0B                  256 	mov	p, a
+      000142rA2r0F                  257 	mov	a, __mullong_sloc8_1_0+0
+      000144r80r03                  258 	idxm	p, a
+      000146r00r12                  259 	inc	p
+      000148rA3r0F                  260 	mov	a, __mullong_sloc8_1_0+1
+      00014Ar80r03                  261 	idxm	p, a
+      00014Cr00r12                  262 	inc	p
+      00014ErA4r0F                  263 	mov	a, __mullong_sloc8_1_0+2
+      000150r80r03                  264 	idxm	p, a
+      000152r00r12                  265 	inc	p
+      000154rA5r0F                  266 	mov	a, __mullong_sloc8_1_0+3
+      000156r80r03                  267 	idxm	p, a
+                                    268 ;	../_mullong.c: 757: }
+      000158 7A 00                  269 	ret
+                                    270 	.area CODE
+                                    271 	.area CONST
+                                    272 	.area CABS (ABS)

@@ -1,0 +1,270 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module asinf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _asincosf
+                                     17 	.globl _asinf
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; overlayable items in ram 
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 ;--------------------------------------------------------
+                                     35 ; global & static initialisations
+                                     36 ;--------------------------------------------------------
+                                     37 	.area HOME
+                                     38 	.area GSINIT
+                                     39 	.area GSFINAL
+                                     40 	.area GSINIT
+                                     41 ;--------------------------------------------------------
+                                     42 ; Home
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area HOME
+                                     46 ;--------------------------------------------------------
+                                     47 ; code
+                                     48 ;--------------------------------------------------------
+                                     49 	.area CODE
+                                     50 ;	../asinf.c: 36: float asinf(float x) _FLOAT_FUNC_REENTRANT
+                                     51 ;	-----------------------------------------
+                                     52 ;	 function asinf
+                                     53 ;	-----------------------------------------
+      000000                         54 _asinf:
+      000000 72 00                   55 	push	af
+      000002 72 00                   56 	push	af
+                                     57 ;	../asinf.c: 38: if (x == 1.0) return  HALF_PI;
+      000004 C2 01                   58 	mov	a, sp
+      000006 F4 28                   59 	add	a, #0xf4
+      000008r80r0B                   60 	mov	p, a
+      00000Ar81r03                   61 	idxm	a, p
+      00000Cr80r0B                   62 	mov	___fseq_PARM_1+0, a
+      00000Er00r12                   63 	inc	p
+      000010r81r03                   64 	idxm	a, p
+      000012r81r0B                   65 	mov	___fseq_PARM_1+1, a
+      000014r00r12                   66 	inc	p
+      000016r81r03                   67 	idxm	a, p
+      000018r82r0B                   68 	mov	___fseq_PARM_1+2, a
+      00001Ar00r12                   69 	inc	p
+      00001Cr81r03                   70 	idxm	a, p
+      00001Er83r0B                   71 	mov	___fseq_PARM_1+3, a
+      000020r00r13                   72 	clear	___fseq_PARM_2+0
+      000022r01r13                   73 	clear	___fseq_PARM_2+1
+      000024 80 2F                   74 	mov	a, #0x80
+      000026r82r0B                   75 	mov	___fseq_PARM_2+2, a
+      000028 3F 2F                   76 	mov	a, #0x3f
+      00002Ar83r0B                   77 	mov	___fseq_PARM_2+3, a
+      00002Cr00r38                   78 	call	___fseq
+      00002E 00 2B                   79 	cneqsn	a, #0x00
+      000030r54r30                   80 	goto	00108$
+      000032 C2 01                   81 	mov	a, sp
+      000034 F8 28                   82 	add	a, #0xf8
+      000036r80r0B                   83 	mov	p, a
+      000038r81r03                   84 	idxm	a, p
+      00003Ar80r0B                   85 	mov	p, a
+      00003C DB 2F                   86 	mov	a, #0xdb
+      00003Er80r03                   87 	idxm	p, a
+      000040r00r12                   88 	inc	p
+      000042 0F 2F                   89 	mov	a, #0x0f
+      000044r80r03                   90 	idxm	p, a
+      000046r00r12                   91 	inc	p
+      000048 C9 2F                   92 	mov	a, #0xc9
+      00004Ar80r03                   93 	idxm	p, a
+      00004Cr00r12                   94 	inc	p
+      00004E 3F 2F                   95 	mov	a, #0x3f
+      000050r80r03                   96 	idxm	p, a
+      000052r90r31                   97 	goto	00110$
+      000054                         98 00108$:
+                                     99 ;	../asinf.c: 39: else if (x ==-1.0) return -HALF_PI;
+      000054 C2 01                  100 	mov	a, sp
+      000056 F4 28                  101 	add	a, #0xf4
+      000058r80r0B                  102 	mov	p, a
+      00005Ar81r03                  103 	idxm	a, p
+      00005Cr80r0B                  104 	mov	___fseq_PARM_1+0, a
+      00005Er00r12                  105 	inc	p
+      000060r81r03                  106 	idxm	a, p
+      000062r81r0B                  107 	mov	___fseq_PARM_1+1, a
+      000064r00r12                  108 	inc	p
+      000066r81r03                  109 	idxm	a, p
+      000068r82r0B                  110 	mov	___fseq_PARM_1+2, a
+      00006Ar00r12                  111 	inc	p
+      00006Cr81r03                  112 	idxm	a, p
+      00006Er83r0B                  113 	mov	___fseq_PARM_1+3, a
+      000070r00r13                  114 	clear	___fseq_PARM_2+0
+      000072r01r13                  115 	clear	___fseq_PARM_2+1
+      000074 80 2F                  116 	mov	a, #0x80
+      000076r82r0B                  117 	mov	___fseq_PARM_2+2, a
+      000078 BF 2F                  118 	mov	a, #0xbf
+      00007Ar83r0B                  119 	mov	___fseq_PARM_2+3, a
+      00007Cr00r38                  120 	call	___fseq
+      00007E 00 2B                  121 	cneqsn	a, #0x00
+      000080rA4r30                  122 	goto	00105$
+      000082 C2 01                  123 	mov	a, sp
+      000084 F8 28                  124 	add	a, #0xf8
+      000086r80r0B                  125 	mov	p, a
+      000088r81r03                  126 	idxm	a, p
+      00008Ar80r0B                  127 	mov	p, a
+      00008C DB 2F                  128 	mov	a, #0xdb
+      00008Er80r03                  129 	idxm	p, a
+      000090r00r12                  130 	inc	p
+      000092 0F 2F                  131 	mov	a, #0x0f
+      000094r80r03                  132 	idxm	p, a
+      000096r00r12                  133 	inc	p
+      000098 C9 2F                  134 	mov	a, #0xc9
+      00009Ar80r03                  135 	idxm	p, a
+      00009Cr00r12                  136 	inc	p
+      00009E BF 2F                  137 	mov	a, #0xbf
+      0000A0r80r03                  138 	idxm	p, a
+      0000A2r90r31                  139 	goto	00110$
+      0000A4                        140 00105$:
+                                    141 ;	../asinf.c: 40: else if (x == 0.0) return 0.0;
+      0000A4 C2 01                  142 	mov	a, sp
+      0000A6 F7 28                  143 	add	a, #0xf7
+      0000A8r80r0B                  144 	mov	p, a
+      0000AAr81r03                  145 	idxm	a, p
+      0000AC 7F 2C                  146 	and	a, #0x7f
+      0000AE 72 00                  147 	push	af
+      0000B0 FD 2F                  148 	mov	a, #-3
+      0000B2r00r08                  149 	add	p, a
+      0000B4r81r03                  150 	idxm	a, p
+      0000B6r80r0B                  151 	mov	p, a
+      0000B8 73 00                  152 	pop	af
+      0000BAr80r0E                  153 	or	a, p
+      0000BC 72 00                  154 	push	af
+      0000BE C2 01                  155 	mov	a, sp
+      0000C0 F3 28                  156 	add	a, #0xf3
+      0000C2r80r0B                  157 	mov	p, a
+      0000C4r81r03                  158 	idxm	a, p
+      0000C6r80r0B                  159 	mov	p, a
+      0000C8 73 00                  160 	pop	af
+      0000CAr80r0E                  161 	or	a, p
+      0000CC 72 00                  162 	push	af
+      0000CE C2 01                  163 	mov	a, sp
+      0000D0 F4 28                  164 	add	a, #0xf4
+      0000D2r80r0B                  165 	mov	p, a
+      0000D4r81r03                  166 	idxm	a, p
+      0000D6r80r0B                  167 	mov	p, a
+      0000D8 73 00                  168 	pop	af
+      0000DAr80r0E                  169 	or	a, p
+      0000DC 00 2A                  170 	ceqsn	a, #0x00
+      0000DEr02r31                  171 	goto	00102$
+      0000E0 C2 01                  172 	mov	a, sp
+      0000E2 F8 28                  173 	add	a, #0xf8
+      0000E4r80r0B                  174 	mov	p, a
+      0000E6r81r03                  175 	idxm	a, p
+      0000E8r80r0B                  176 	mov	p, a
+      0000EA 00 2F                  177 	mov	a, #0x00
+      0000ECr80r03                  178 	idxm	p, a
+      0000EEr00r12                  179 	inc	p
+      0000F0 00 2F                  180 	mov	a, #0x00
+      0000F2r80r03                  181 	idxm	p, a
+      0000F4r00r12                  182 	inc	p
+      0000F6 00 2F                  183 	mov	a, #0x00
+      0000F8r80r03                  184 	idxm	p, a
+      0000FAr00r12                  185 	inc	p
+      0000FC 00 2F                  186 	mov	a, #0x00
+      0000FEr80r03                  187 	idxm	p, a
+      000100r90r31                  188 	goto	00110$
+      000102                        189 00102$:
+                                    190 ;	../asinf.c: 41: else               return asincosf(x, false);
+      000102 C2 01                  191 	mov	a, sp
+      000104 F4 28                  192 	add	a, #0xf4
+      000106r80r0B                  193 	mov	p, a
+      000108r81r03                  194 	idxm	a, p
+      00010Ar80r0B                  195 	mov	_asincosf_PARM_1+0, a
+      00010Cr00r12                  196 	inc	p
+      00010Er81r03                  197 	idxm	a, p
+      000110r81r0B                  198 	mov	_asincosf_PARM_1+1, a
+      000112r00r12                  199 	inc	p
+      000114r81r03                  200 	idxm	a, p
+      000116r82r0B                  201 	mov	_asincosf_PARM_1+2, a
+      000118r00r12                  202 	inc	p
+      00011Ar81r03                  203 	idxm	a, p
+      00011Cr83r0B                  204 	mov	_asincosf_PARM_1+3, a
+      00011Er00r13                  205 	clear	_asincosf_PARM_2+0
+      000120 C2 01                  206 	mov	a, sp
+      000122 FC 28                  207 	add	a, #0xfc
+      000124 72 00                  208 	push	af
+      000126r00r38                  209 	call	_asincosf
+      000128 C2 01                  210 	mov	a, sp
+      00012A FE 28                  211 	add	a, #-2
+      00012C 82 01                  212 	mov	sp, a
+      00012E FC 28                  213 	add	a, #0xfc
+      000130r80r0B                  214 	mov	p, a
+      000132r81r03                  215 	idxm	a, p
+      000134 72 00                  216 	push	af
+      000136 FC 2F                  217 	mov	a, #-4
+      000138r00r08                  218 	add	p, a
+      00013Ar81r03                  219 	idxm	a, p
+      00013Cr80r0B                  220 	mov	p, a
+      00013E 73 00                  221 	pop	af
+      000140r80r03                  222 	idxm	p, a
+      000142 C2 01                  223 	mov	a, sp
+      000144 FD 28                  224 	add	a, #0xfd
+      000146r80r0B                  225 	mov	p, a
+      000148r81r03                  226 	idxm	a, p
+      00014A 72 00                  227 	push	af
+      00014C FB 2F                  228 	mov	a, #-5
+      00014Er00r08                  229 	add	p, a
+      000150r81r03                  230 	idxm	a, p
+      000152r80r0B                  231 	mov	p, a
+      000154 73 00                  232 	pop	af
+      000156r00r12                  233 	inc	p
+      000158r80r03                  234 	idxm	p, a
+      00015A C2 01                  235 	mov	a, sp
+      00015C FE 28                  236 	add	a, #0xfe
+      00015Er80r0B                  237 	mov	p, a
+      000160r81r03                  238 	idxm	a, p
+      000162 72 00                  239 	push	af
+      000164 FA 2F                  240 	mov	a, #-6
+      000166r00r08                  241 	add	p, a
+      000168r81r03                  242 	idxm	a, p
+      00016Ar80r0B                  243 	mov	p, a
+      00016C 73 00                  244 	pop	af
+      00016Er00r12                  245 	inc	p
+      000170r00r12                  246 	inc	p
+      000172r80r03                  247 	idxm	p, a
+      000174 C2 01                  248 	mov	a, sp
+      000176 FF 28                  249 	add	a, #0xff
+      000178r80r0B                  250 	mov	p, a
+      00017Ar81r03                  251 	idxm	a, p
+      00017C 72 00                  252 	push	af
+      00017E F9 2F                  253 	mov	a, #-7
+      000180r00r08                  254 	add	p, a
+      000182r81r03                  255 	idxm	a, p
+      000184r80r0B                  256 	mov	p, a
+      000186 73 00                  257 	pop	af
+      000188r00r12                  258 	inc	p
+      00018Ar00r12                  259 	inc	p
+      00018Cr00r12                  260 	inc	p
+      00018Er80r03                  261 	idxm	p, a
+      000190                        262 00110$:
+                                    263 ;	../asinf.c: 42: }
+      000190 C2 01                  264 	mov	a, sp
+      000192 FC 28                  265 	add	a, #-4
+      000194 82 01                  266 	mov	sp, a
+      000196 7A 00                  267 	ret
+                                    268 	.area CODE
+                                    269 	.area CONST
+                                    270 	.area CABS (ABS)

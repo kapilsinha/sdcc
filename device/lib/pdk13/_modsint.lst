@@ -1,0 +1,135 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _modsint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __modsint_PARM_2
+                                     17 	.globl __modsint_PARM_1
+                                     18 	.globl __modsint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __modsint_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 __modsint_PARM_2:
+      000002                         31 	.ds 2
+      000004                         32 __modsint_sloc0_1_0:
+      000004                         33 	.ds 1
+      000005                         34 __modsint_sloc1_1_0:
+      000005                         35 	.ds 2
+      000007                         36 __modsint_sloc2_1_0:
+      000007                         37 	.ds 2
+                                     38 ;--------------------------------------------------------
+                                     39 ; overlayable items in ram 
+                                     40 ;--------------------------------------------------------
+                                     41 ;--------------------------------------------------------
+                                     42 ; absolute external ram data
+                                     43 ;--------------------------------------------------------
+                                     44 	.area DABS (ABS)
+                                     45 ;--------------------------------------------------------
+                                     46 ; global & static initialisations
+                                     47 ;--------------------------------------------------------
+                                     48 	.area HOME
+                                     49 	.area GSINIT
+                                     50 	.area GSFINAL
+                                     51 	.area GSINIT
+                                     52 ;--------------------------------------------------------
+                                     53 ; Home
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area HOME
+                                     57 ;--------------------------------------------------------
+                                     58 ; code
+                                     59 ;--------------------------------------------------------
+                                     60 	.area CODE
+                                     61 ;	../_modsint.c: 203: int _modsint (int a, int b)
+                                     62 ;	-----------------------------------------
+                                     63 ;	 function _modsint
+                                     64 ;	-----------------------------------------
+      000000                         65 __modsint:
+                                     66 ;	../_modsint.c: 207: r = (unsigned)(a < 0 ? -a : a) % (unsigned)(b < 0 ? -b : b);
+      000000r81r0F                   67 	mov	a, __modsint_PARM_1+1
+      000002 6B 00                   68 	sl	a
+      000004 00 2F                   69 	mov	a, #0x00
+      000006 6D 00                   70 	slc	a
+      000008r84r0B                   71 	mov	__modsint_sloc0_1_0+0, a
+      00000A 00 2B                   72 	cneqsn	a, #0x00
+      00000Cr1Ar30                   73 	goto	00106$
+      00000E 00 2F                   74 	mov	a, #0x00
+      000010r80r0C                   75 	sub	a, __modsint_PARM_1+0
+      000012r80r0B                   76 	mov	p, a
+      000014 00 2F                   77 	mov	a, #0x00
+      000016r81r0D                   78 	subc	a, __modsint_PARM_1+1
+      000018r20r30                   79 	goto	00107$
+      00001A                         80 00106$:
+      00001Ar80r0F                   81 	mov	a, __modsint_PARM_1+0
+      00001Cr80r0B                   82 	mov	p, a
+      00001Er81r0F                   83 	mov	a, __modsint_PARM_1+1
+      000020                         84 00107$:
+      000020r86r0B                   85 	mov	__modsint_sloc1_1_0+1, a
+      000022r80r0F                   86 	mov	a, p
+      000024r85r0B                   87 	mov	__modsint_sloc1_1_0+0, a
+      000026r83r0F                   88 	mov	a, __modsint_PARM_2+1
+      000028 80 29                   89 	sub	a, #0x80
+      00002A 40 18                   90 	t0sn	f, c
+      00002Cr3Ar30                   91 	goto	00108$
+      00002E 00 2F                   92 	mov	a, #0x00
+      000030r82r0C                   93 	sub	a, __modsint_PARM_2+0
+      000032r80r0B                   94 	mov	p, a
+      000034 00 2F                   95 	mov	a, #0x00
+      000036r83r0D                   96 	subc	a, __modsint_PARM_2+1
+      000038r40r30                   97 	goto	00109$
+      00003A                         98 00108$:
+      00003Ar82r0F                   99 	mov	a, __modsint_PARM_2+0
+      00003Cr80r0B                  100 	mov	p, a
+      00003Er83r0F                  101 	mov	a, __modsint_PARM_2+1
+      000040                        102 00109$:
+      000040r81r0B                  103 	mov	__moduint_PARM_2+1, a
+      000042r80r0F                  104 	mov	a, p
+      000044r80r0B                  105 	mov	__moduint_PARM_2+0, a
+      000046r85r0F                  106 	mov	a, __modsint_sloc1_1_0+0
+      000048r80r0B                  107 	mov	__moduint_PARM_1+0, a
+      00004Ar86r0F                  108 	mov	a, __modsint_sloc1_1_0+1
+      00004Cr81r0B                  109 	mov	__moduint_PARM_1+1, a
+      00004Er00r38                  110 	call	__moduint
+      000050r87r0B                  111 	mov	__modsint_sloc2_1_0+0, a
+      000052r80r0F                  112 	mov	a, p
+      000054r88r0B                  113 	mov	__modsint_sloc2_1_0+1, a
+                                    114 ;	../_modsint.c: 209: if (a < 0)
+      000056r84r0F                  115 	mov	a, __modsint_sloc0_1_0+0
+      000058 00 2B                  116 	cneqsn	a, #0x00
+      00005Ar6Ar30                  117 	goto	00102$
+                                    118 ;	../_modsint.c: 210: return -r;
+      00005C 00 2F                  119 	mov	a, #0x00
+      00005Er87r0C                  120 	sub	a, __modsint_sloc2_1_0+0
+      000060r80r0B                  121 	mov	p, a
+      000062 00 2F                  122 	mov	a, #0x00
+      000064r88r0D                  123 	subc	a, __modsint_sloc2_1_0+1
+      000066r80r13                  124 	xch	a, p
+      000068 7A 00                  125 	ret
+      00006A                        126 00102$:
+                                    127 ;	../_modsint.c: 212: return r;
+      00006Ar88r0F                  128 	mov	a, __modsint_sloc2_1_0+1
+      00006Cr80r0B                  129 	mov	p, a
+      00006Er87r0F                  130 	mov	a, __modsint_sloc2_1_0+0
+                                    131 ;	../_modsint.c: 213: }
+      000070 7A 00                  132 	ret
+                                    133 	.area CODE
+                                    134 	.area CONST
+                                    135 	.area CABS (ABS)

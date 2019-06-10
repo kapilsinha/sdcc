@@ -1,0 +1,178 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module free
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _free_PARM_1
+                                     17 	.globl _free
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _free_PARM_1:
+      000000                         28 	.ds 2
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _free_sloc0_1_0:
+      000000                         34 	.ds 1
+      000001                         35 _free_sloc1_1_0:
+      000001                         36 	.ds 1
+      000002                         37 _free_sloc2_1_0:
+      000002                         38 	.ds 1
+      000003                         39 _free_sloc3_1_0:
+      000003                         40 	.ds 1
+      000004                         41 _free_sloc4_1_0:
+      000004                         42 	.ds 1
+      000005                         43 _free_sloc5_1_0:
+      000005                         44 	.ds 1
+                                     45 ;--------------------------------------------------------
+                                     46 ; absolute external ram data
+                                     47 ;--------------------------------------------------------
+                                     48 	.area DABS (ABS)
+                                     49 ;--------------------------------------------------------
+                                     50 ; global & static initialisations
+                                     51 ;--------------------------------------------------------
+                                     52 	.area HOME
+                                     53 	.area GSINIT
+                                     54 	.area GSFINAL
+                                     55 	.area GSINIT
+                                     56 ;--------------------------------------------------------
+                                     57 ; Home
+                                     58 ;--------------------------------------------------------
+                                     59 	.area HOME
+                                     60 	.area HOME
+                                     61 ;--------------------------------------------------------
+                                     62 ; code
+                                     63 ;--------------------------------------------------------
+                                     64 	.area CODE
+                                     65 ;	../free.c: 50: void free(void *ptr)
+                                     66 ;	-----------------------------------------
+                                     67 ;	 function free
+                                     68 ;	-----------------------------------------
+      000000                         69 _free:
+                                     70 ;	../free.c: 55: if(!ptr)
+      000000r80r0F                   71 	mov	a, _free_PARM_1+0
+      000002r81r0E                   72 	or	a, _free_PARM_1+1
+      000004 00 2A                   73 	ceqsn	a, #0x00
+      000006r0Ar30                   74 	goto	00102$
+                                     75 ;	../free.c: 56: return;
+      000008 7A 00                   76 	ret
+      00000A                         77 00102$:
+                                     78 ;	../free.c: 58: prev_free = 0;
+      00000Ar00r13                   79 	clear	_free_sloc0_1_0+0
+                                     80 ;	../free.c: 59: for(h = __sdcc_heap_free, f = &__sdcc_heap_free; h && h < ptr; prev_free = h, f = &(h->next_free), h = h->next_free); // Find adjacent blocks in free list
+      00000Cr80r0F                   81 	mov	a, ___sdcc_heap_free+0
+      00000Er80r0B                   82 	mov	p, a
+      000010r00r2F                   83 	mov	a, #(___sdcc_heap_free + 0)
+      000012r81r0B                   84 	mov	_free_sloc1_1_0+0, a
+      000014                         85 00111$:
+      000014r80r0F                   86 	mov	a, p
+      000016 00 2B                   87 	cneqsn	a, #0x00
+      000018r36r30                   88 	goto	00103$
+      00001Ar80r0F                   89 	mov	a, _free_PARM_1+0
+      00001Cr82r0B                   90 	mov	_free_sloc2_1_0+0, a
+      00001Er80r0F                   91 	mov	a, p
+      000020r82r0C                   92 	sub	a, _free_sloc2_1_0+0
+      000022 40 1A                   93 	t1sn	f, c
+      000024r36r30                   94 	goto	00103$
+      000026r80r0F                   95 	mov	a, p
+      000028r80r0B                   96 	mov	_free_sloc0_1_0+0, a
+      00002Ar00r12                   97 	inc	p
+      00002Cr80r0F                   98 	mov	a, p
+      00002Er81r0B                   99 	mov	_free_sloc1_1_0+0, a
+      000030r81r03                  100 	idxm	a, p
+      000032r80r0B                  101 	mov	p, a
+      000034r14r30                  102 	goto	00111$
+      000036                        103 00103$:
+                                    104 ;	../free.c: 60: next_free = h;
+      000036r80r0F                  105 	mov	a, p
+      000038r83r0B                  106 	mov	_free_sloc3_1_0+0, a
+                                    107 ;	../free.c: 62: h = (void HEAPSPACE *)((char HEAPSPACE *)(ptr) - offsetof(struct header, next_free));
+      00003Ar80r0F                  108 	mov	a, _free_PARM_1+0
+      00003C 01 29                  109 	sub	a, #0x01
+                                    110 ;	../free.c: 65: h->next_free = next_free;
+      00003Er84r0B                  111 	mov	_free_sloc4_1_0+0, a
+      000040 01 28                  112 	add	a, #0x01
+      000042r85r0B                  113 	mov	_free_sloc5_1_0+0, a
+      000044r80r0B                  114 	mov	p, a
+      000046r83r0F                  115 	mov	a, _free_sloc3_1_0+0
+      000048r80r03                  116 	idxm	p, a
+                                    117 ;	../free.c: 66: *f = h;
+      00004Ar81r0F                  118 	mov	a, _free_sloc1_1_0+0
+      00004Cr80r0B                  119 	mov	p, a
+      00004Er84r0F                  120 	mov	a, _free_sloc4_1_0+0
+      000050r80r03                  121 	idxm	p, a
+                                    122 ;	../free.c: 68: if(next_free == h->next) // Merge with next block
+      000052r84r0F                  123 	mov	a, _free_sloc4_1_0+0
+      000054r80r0B                  124 	mov	p, a
+      000056r81r03                  125 	idxm	a, p
+      000058r03r17                  126 	ceqsn	a, _free_sloc3_1_0+0
+      00005Ar7Cr30                  127 	goto	00105$
+                                    128 ;	../free.c: 70: h->next_free = h->next->next_free;
+      00005C 01 28                  129 	add	a, #0x01
+      00005Er80r0B                  130 	mov	p, a
+      000060r81r03                  131 	idxm	a, p
+      000062r80r0B                  132 	mov	p, a
+      000064r85r0F                  133 	mov	a, _free_sloc5_1_0+0
+      000066r80r13                  134 	xch	a, p
+      000068r80r03                  135 	idxm	p, a
+                                    136 ;	../free.c: 71: h->next = h->next->next;
+      00006Ar84r0F                  137 	mov	a, _free_sloc4_1_0+0
+      00006Cr80r0B                  138 	mov	p, a
+      00006Er81r03                  139 	idxm	a, p
+      000070r80r0B                  140 	mov	p, a
+      000072r81r03                  141 	idxm	a, p
+      000074r80r0B                  142 	mov	p, a
+      000076r84r0F                  143 	mov	a, _free_sloc4_1_0+0
+      000078r80r13                  144 	xch	a, p
+      00007Ar80r03                  145 	idxm	p, a
+      00007C                        146 00105$:
+                                    147 ;	../free.c: 74: if (prev_free && prev_free->next == h) // Merge with previous block
+      00007Cr80r0F                  148 	mov	a, _free_sloc0_1_0+0
+      00007E 00 2B                  149 	cneqsn	a, #0x00
+      000080rAAr30                  150 	goto	00113$
+      000082r80r0F                  151 	mov	a, _free_sloc0_1_0+0
+      000084r80r0B                  152 	mov	p, a
+      000086r81r03                  153 	idxm	a, p
+      000088r04r17                  154 	ceqsn	a, _free_sloc4_1_0+0
+      00008ArAAr30                  155 	goto	00113$
+                                    156 ;	../free.c: 76: prev_free->next = h->next;
+      00008Cr84r0F                  157 	mov	a, _free_sloc4_1_0+0
+      00008Er80r0B                  158 	mov	p, a
+      000090r81r03                  159 	idxm	a, p
+      000092r80r0B                  160 	mov	p, a
+      000094r80r0F                  161 	mov	a, _free_sloc0_1_0+0
+      000096r80r13                  162 	xch	a, p
+      000098r80r03                  163 	idxm	p, a
+                                    164 ;	../free.c: 77: prev_free->next_free = h->next_free;
+      00009Ar80r0F                  165 	mov	a, _free_sloc0_1_0+0
+      00009C 01 28                  166 	add	a, #0x01
+      00009Er85r0F                  167 	mov	a, _free_sloc5_1_0+0
+      0000A0r80r0B                  168 	mov	p, a
+      0000A2r81r03                  169 	idxm	a, p
+      0000A4r80r0B                  170 	mov	p, a
+      0000A6r80r13                  171 	xch	a, p
+      0000A8r80r03                  172 	idxm	p, a
+      0000AA                        173 00113$:
+                                    174 ;	../free.c: 79: }
+      0000AA 7A 00                  175 	ret
+                                    176 	.area CODE
+                                    177 	.area CONST
+                                    178 	.area CABS (ABS)

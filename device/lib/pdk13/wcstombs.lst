@@ -1,0 +1,232 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module wcstombs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _wctomb
+                                     17 	.globl _wcstombs_PARM_3
+                                     18 	.globl _wcstombs_PARM_2
+                                     19 	.globl _wcstombs_PARM_1
+                                     20 	.globl _wcstombs
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _wcstombs_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _wcstombs_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _wcstombs_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _wcstombs_buffer_65536_30:
+      000006                         37 	.ds 4
+      00000A                         38 _wcstombs_sloc0_1_0:
+      00000A                         39 	.ds 2
+      00000C                         40 _wcstombs_sloc1_1_0:
+      00000C                         41 	.ds 2
+      00000E                         42 _wcstombs_sloc2_1_0:
+      00000E                         43 	.ds 2
+      000010                         44 _wcstombs_sloc3_1_0:
+      000010                         45 	.ds 2
+      000012                         46 _wcstombs_sloc4_1_0:
+      000012                         47 	.ds 2
+                                     48 ;--------------------------------------------------------
+                                     49 ; overlayable items in ram 
+                                     50 ;--------------------------------------------------------
+                                     51 ;--------------------------------------------------------
+                                     52 ; absolute external ram data
+                                     53 ;--------------------------------------------------------
+                                     54 	.area DABS (ABS)
+                                     55 ;--------------------------------------------------------
+                                     56 ; global & static initialisations
+                                     57 ;--------------------------------------------------------
+                                     58 	.area HOME
+                                     59 	.area GSINIT
+                                     60 	.area GSFINAL
+                                     61 	.area GSINIT
+                                     62 ;--------------------------------------------------------
+                                     63 ; Home
+                                     64 ;--------------------------------------------------------
+                                     65 	.area HOME
+                                     66 	.area HOME
+                                     67 ;--------------------------------------------------------
+                                     68 ; code
+                                     69 ;--------------------------------------------------------
+                                     70 	.area CODE
+                                     71 ;	../wcstombs.c: 33: size_t wcstombs(char *restrict s, const wchar_t *restrict pwcs, size_t n)
+                                     72 ;	-----------------------------------------
+                                     73 ;	 function wcstombs
+                                     74 ;	-----------------------------------------
+      000000                         75 _wcstombs:
+                                     76 ;	../wcstombs.c: 35: size_t m = 0;
+      000000r0Ar13                   77 	clear	_wcstombs_sloc0_1_0+0
+      000002r0Br13                   78 	clear	_wcstombs_sloc0_1_0+1
+                                     79 ;	../wcstombs.c: 38: while(n > MB_LEN_MAX || n >= wctomb(buffer, *pwcs))
+      000004r82r0F                   80 	mov	a, _wcstombs_PARM_2+0
+      000006r8Cr0B                   81 	mov	_wcstombs_sloc1_1_0+0, a
+      000008r83r0F                   82 	mov	a, _wcstombs_PARM_2+1
+      00000Ar8Dr0B                   83 	mov	_wcstombs_sloc1_1_0+1, a
+      00000C                         84 00107$:
+      00000C 04 2F                   85 	mov	a, #0x04
+      00000Er84r0C                   86 	sub	a, _wcstombs_PARM_3+0
+      000010 00 2F                   87 	mov	a, #0x00
+      000012r85r0D                   88 	subc	a, _wcstombs_PARM_3+1
+      000014 40 18                   89 	t0sn	f, c
+      000016r6Er30                   90 	goto	00108$
+      000018r06r2F                   91 	mov	a, #(_wcstombs_buffer_65536_30 + 0)
+      00001Ar80r0B                   92 	mov	_wctomb_PARM_1+0, a
+      00001Cr01r13                   93 	clear	_wctomb_PARM_1+1
+      00001Er8Cr0F                   94 	mov	a, _wcstombs_sloc1_1_0+0
+      000020r80r0B                   95 	mov	p, a
+      000022r8Dr0F                   96 	mov	a, _wcstombs_sloc1_1_0+1
+      000024r00r38                   97 	call	__gptrget
+      000026r80r0B                   98 	mov	_wctomb_PARM_2+0, a
+      000028r8Cr0F                   99 	mov	a, _wcstombs_sloc1_1_0+0
+      00002Ar80r0B                  100 	mov	p, a
+      00002Cr8Dr0F                  101 	mov	a, _wcstombs_sloc1_1_0+1
+      00002Er00r12                  102 	inc	p
+      000030 60 00                  103 	addc	a
+      000032r00r38                  104 	call	__gptrget
+      000034r81r0B                  105 	mov	_wctomb_PARM_2+1, a
+      000036r8Cr0F                  106 	mov	a, _wcstombs_sloc1_1_0+0
+      000038r80r0B                  107 	mov	p, a
+      00003Ar8Dr0F                  108 	mov	a, _wcstombs_sloc1_1_0+1
+      00003Cr00r12                  109 	inc	p
+      00003E 60 00                  110 	addc	a
+      000040r00r12                  111 	inc	p
+      000042 60 00                  112 	addc	a
+      000044r00r38                  113 	call	__gptrget
+      000046r82r0B                  114 	mov	_wctomb_PARM_2+2, a
+      000048r8Cr0F                  115 	mov	a, _wcstombs_sloc1_1_0+0
+      00004Ar80r0B                  116 	mov	p, a
+      00004Cr8Dr0F                  117 	mov	a, _wcstombs_sloc1_1_0+1
+      00004Er80r13                  118 	xch	a, p
+      000050 03 28                  119 	add	a, #3
+      000052r80r13                  120 	xch	a, p
+      000054 60 00                  121 	addc	a
+      000056r00r38                  122 	call	__gptrget
+      000058r83r0B                  123 	mov	_wctomb_PARM_2+3, a
+      00005Ar00r38                  124 	call	_wctomb
+      00005Cr8Er0B                  125 	mov	_wcstombs_sloc2_1_0+0, a
+      00005Er80r0F                  126 	mov	a, p
+      000060r8Fr0B                  127 	mov	_wcstombs_sloc2_1_0+1, a
+      000062r84r0F                  128 	mov	a, _wcstombs_PARM_3+0
+      000064r8Er0C                  129 	sub	a, _wcstombs_sloc2_1_0+0
+      000066r85r0F                  130 	mov	a, _wcstombs_PARM_3+1
+      000068r8Fr0D                  131 	subc	a, _wcstombs_sloc2_1_0+1
+      00006A 40 18                  132 	t0sn	f, c
+      00006Cr08r31                  133 	goto	00109$
+      00006E                        134 00108$:
+                                    135 ;	../wcstombs.c: 40: int b = wctomb(s, *pwcs);
+      00006Er8Cr0F                  136 	mov	a, _wcstombs_sloc1_1_0+0
+      000070r80r0B                  137 	mov	p, a
+      000072r8Dr0F                  138 	mov	a, _wcstombs_sloc1_1_0+1
+      000074r00r38                  139 	call	__gptrget
+      000076r80r0B                  140 	mov	_wctomb_PARM_2+0, a
+      000078r8Cr0F                  141 	mov	a, _wcstombs_sloc1_1_0+0
+      00007Ar80r0B                  142 	mov	p, a
+      00007Cr8Dr0F                  143 	mov	a, _wcstombs_sloc1_1_0+1
+      00007Er00r12                  144 	inc	p
+      000080 60 00                  145 	addc	a
+      000082r00r38                  146 	call	__gptrget
+      000084r81r0B                  147 	mov	_wctomb_PARM_2+1, a
+      000086r8Cr0F                  148 	mov	a, _wcstombs_sloc1_1_0+0
+      000088r80r0B                  149 	mov	p, a
+      00008Ar8Dr0F                  150 	mov	a, _wcstombs_sloc1_1_0+1
+      00008Cr00r12                  151 	inc	p
+      00008E 60 00                  152 	addc	a
+      000090r00r12                  153 	inc	p
+      000092 60 00                  154 	addc	a
+      000094r00r38                  155 	call	__gptrget
+      000096r82r0B                  156 	mov	_wctomb_PARM_2+2, a
+      000098r8Cr0F                  157 	mov	a, _wcstombs_sloc1_1_0+0
+      00009Ar80r0B                  158 	mov	p, a
+      00009Cr8Dr0F                  159 	mov	a, _wcstombs_sloc1_1_0+1
+      00009Er80r13                  160 	xch	a, p
+      0000A0 03 28                  161 	add	a, #3
+      0000A2r80r13                  162 	xch	a, p
+      0000A4 60 00                  163 	addc	a
+      0000A6r00r38                  164 	call	__gptrget
+      0000A8r83r0B                  165 	mov	_wctomb_PARM_2+3, a
+      0000AAr80r0F                  166 	mov	a, _wcstombs_PARM_1+0
+      0000ACr80r0B                  167 	mov	_wctomb_PARM_1+0, a
+      0000AEr81r0F                  168 	mov	a, _wcstombs_PARM_1+1
+      0000B0r81r0B                  169 	mov	_wctomb_PARM_1+1, a
+      0000B2r00r38                  170 	call	_wctomb
+      0000B4r90r0B                  171 	mov	_wcstombs_sloc3_1_0+0, a
+      0000B6r80r0F                  172 	mov	a, p
+      0000B8r91r0B                  173 	mov	_wcstombs_sloc3_1_0+1, a
+                                    174 ;	../wcstombs.c: 42: if(b == 1 && !*s)
+      0000BAr90r0F                  175 	mov	a, _wcstombs_sloc3_1_0+0
+      0000BC 01 2A                  176 	ceqsn	a, #0x01
+      0000BErD2r30                  177 	goto	00102$
+      0000C0r91r0F                  178 	mov	a, _wcstombs_sloc3_1_0+1
+      0000C2 00 2A                  179 	ceqsn	a, #0x00
+      0000C4rD2r30                  180 	goto	00102$
+      0000C6r80r0F                  181 	mov	a, _wcstombs_PARM_1+0
+      0000C8r80r0B                  182 	mov	p, a
+      0000CAr81r0F                  183 	mov	a, _wcstombs_PARM_1+1
+      0000CCr00r38                  184 	call	__gptrget
+      0000CE 00 2B                  185 	cneqsn	a, #0x00
+      0000D0r08r31                  186 	goto	00109$
+                                    187 ;	../wcstombs.c: 43: break;
+      0000D2                        188 00102$:
+                                    189 ;	../wcstombs.c: 44: if(b < 0)
+      0000D2r91r0F                  190 	mov	a, _wcstombs_sloc3_1_0+1
+      0000D4 80 29                  191 	sub	a, #0x80
+      0000D6 40 18                  192 	t0sn	f, c
+      0000D8rE0r30                  193 	goto	00105$
+                                    194 ;	../wcstombs.c: 45: return(-1);
+      0000DA FF 2F                  195 	mov	a, #0xff
+      0000DCr80r0B                  196 	mov	p, a
+      0000DE FF 02                  197 	ret	#0xff
+      0000E0                        198 00105$:
+                                    199 ;	../wcstombs.c: 47: n -= b;
+      0000E0r90r0F                  200 	mov	a, _wcstombs_sloc3_1_0+0
+      0000E2r92r0B                  201 	mov	_wcstombs_sloc4_1_0+0, a
+      0000E4r91r0F                  202 	mov	a, _wcstombs_sloc3_1_0+1
+      0000E6r93r0B                  203 	mov	_wcstombs_sloc4_1_0+1, a
+      0000E8r92r0F                  204 	mov	a, _wcstombs_sloc4_1_0+0
+      0000EAr84r08                  205 	sub	_wcstombs_PARM_3+0, a
+      0000ECr93r0F                  206 	mov	a, _wcstombs_sloc4_1_0+1
+      0000EEr85r09                  207 	subc	_wcstombs_PARM_3+1, a
+                                    208 ;	../wcstombs.c: 48: m += b;
+      0000F0r92r0F                  209 	mov	a, _wcstombs_sloc4_1_0+0
+      0000F2r0Ar08                  210 	add	_wcstombs_sloc0_1_0+0, a
+      0000F4r93r0F                  211 	mov	a, _wcstombs_sloc4_1_0+1
+      0000F6r0Br09                  212 	addc	_wcstombs_sloc0_1_0+1, a
+                                    213 ;	../wcstombs.c: 49: s += b;
+      0000F8r90r0F                  214 	mov	a, _wcstombs_sloc3_1_0+0
+      0000FAr00r08                  215 	add	_wcstombs_PARM_1+0, a
+      0000FCr91r0F                  216 	mov	a, _wcstombs_sloc3_1_0+1
+      0000FEr01r09                  217 	addc	_wcstombs_PARM_1+1, a
+                                    218 ;	../wcstombs.c: 50: pwcs++;
+      000100 04 2F                  219 	mov	a, #0x04
+      000102r0Cr08                  220 	add	_wcstombs_sloc1_1_0+0, a
+      000104r0Dr10                  221 	addc	_wcstombs_sloc1_1_0+1
+      000106r0Cr30                  222 	goto	00107$
+      000108                        223 00109$:
+                                    224 ;	../wcstombs.c: 53: return(m);
+      000108r8Br0F                  225 	mov	a, _wcstombs_sloc0_1_0+1
+      00010Ar80r0B                  226 	mov	p, a
+      00010Cr8Ar0F                  227 	mov	a, _wcstombs_sloc0_1_0+0
+                                    228 ;	../wcstombs.c: 54: }
+      00010E 7A 00                  229 	ret
+                                    230 	.area CODE
+                                    231 	.area CONST
+                                    232 	.area CABS (ABS)

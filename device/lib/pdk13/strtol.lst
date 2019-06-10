@@ -1,0 +1,400 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module strtol
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strtoul
+                                     17 	.globl _strtol_PARM_3
+                                     18 	.globl _strtol_PARM_2
+                                     19 	.globl _strtol_PARM_1
+                                     20 	.globl _strtol
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _strtol_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _strtol_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _strtol_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _strtol_rptr_65536_50:
+      000006                         37 	.ds 2
+      000008                         38 _strtol_sloc0_1_0:
+      000008                         39 	.ds 4
+      00000C                         40 _strtol_sloc1_1_0:
+      00000C                         41 	.ds 2
+      00000E                         42 _strtol_sloc2_1_0:
+      00000E                         43 	.ds 2
+      000010                         44 _strtol_sloc3_1_0:
+      000010                         45 	.ds 1
+      000011                         46 _strtol_sloc4_1_0:
+      000011                         47 	.ds 2
+      000013                         48 _strtol_sloc5_1_0:
+      000013                         49 	.ds 4
+      000017                         50 _strtol_sloc6_1_0:
+      000017                         51 	.ds 2
+      000019                         52 _strtol_sloc7_1_0:
+      000019                         53 	.ds 2
+      00001B                         54 _strtol_sloc8_1_0:
+      00001B                         55 	.ds 4
+                                     56 ;--------------------------------------------------------
+                                     57 ; overlayable items in ram 
+                                     58 ;--------------------------------------------------------
+                                     59 ;--------------------------------------------------------
+                                     60 ; absolute external ram data
+                                     61 ;--------------------------------------------------------
+                                     62 	.area DABS (ABS)
+                                     63 ;--------------------------------------------------------
+                                     64 ; global & static initialisations
+                                     65 ;--------------------------------------------------------
+                                     66 	.area HOME
+                                     67 	.area GSINIT
+                                     68 	.area GSFINAL
+                                     69 	.area GSINIT
+                                     70 ;--------------------------------------------------------
+                                     71 ; Home
+                                     72 ;--------------------------------------------------------
+                                     73 	.area HOME
+                                     74 	.area HOME
+                                     75 ;--------------------------------------------------------
+                                     76 ; code
+                                     77 ;--------------------------------------------------------
+                                     78 	.area CODE
+                                     79 ;	../strtol.c: 38: long int strtol(const char *nptr, char **endptr, int base)
+                                     80 ;	-----------------------------------------
+                                     81 ;	 function strtol
+                                     82 ;	-----------------------------------------
+      000000                         83 _strtol:
+                                     84 ;	../strtol.c: 40: const char *ptr = nptr;
+      000000r80r0F                   85 	mov	a, _strtol_PARM_1+0
+      000002r8Cr0B                   86 	mov	_strtol_sloc1_1_0+0, a
+      000004r81r0F                   87 	mov	a, _strtol_PARM_1+1
+      000006r8Dr0B                   88 	mov	_strtol_sloc1_1_0+1, a
+                                     89 ;	../strtol.c: 45: while (isblank (*ptr))
+      000008                         90 00101$:
+      000008r8Cr0F                   91 	mov	a, _strtol_sloc1_1_0+0
+      00000Ar80r0B                   92 	mov	p, a
+      00000Cr8Dr0F                   93 	mov	a, _strtol_sloc1_1_0+1
+      00000Er00r38                   94 	call	__gptrget
+                                     95 ;	./../../include/ctype.h: 53: return ((unsigned char)c == ' ' || (unsigned char)c == '\t');
+      000010 20 2B                   96 	cneqsn	a, #0x20
+      000012r18r30                   97 	goto	00132$
+      000014 09 2A                   98 	ceqsn	a, #0x09
+      000016r1Er30                   99 	goto	00158$
+      000018                        100 00132$:
+                                    101 ;	../strtol.c: 46: ptr++;
+      000018r0Cr12                  102 	inc	_strtol_sloc1_1_0+0
+      00001Ar0Dr10                  103 	addc	_strtol_sloc1_1_0+1
+      00001Cr08r30                  104 	goto	00101$
+      00001E                        105 00158$:
+      00001Er8Cr0F                  106 	mov	a, _strtol_sloc1_1_0+0
+      000020r8Er0B                  107 	mov	_strtol_sloc2_1_0+0, a
+      000022r8Dr0F                  108 	mov	a, _strtol_sloc1_1_0+1
+      000024r8Fr0B                  109 	mov	_strtol_sloc2_1_0+1, a
+                                    110 ;	../strtol.c: 50: if (*ptr == '-')
+      000026r8Cr0F                  111 	mov	a, _strtol_sloc1_1_0+0
+      000028r80r0B                  112 	mov	p, a
+      00002Ar8Dr0F                  113 	mov	a, _strtol_sloc1_1_0+1
+      00002Cr00r38                  114 	call	__gptrget
+      00002E 2D 2A                  115 	ceqsn	a, #0x2d
+      000030r44r30                  116 	goto	00105$
+                                    117 ;	../strtol.c: 52: neg = true;
+      000032 01 2F                  118 	mov	a, #0x01
+      000034r90r0B                  119 	mov	_strtol_sloc3_1_0+0, a
+                                    120 ;	../strtol.c: 53: ptr++;
+      000036r8Cr0F                  121 	mov	a, _strtol_sloc1_1_0+0
+      000038 01 28                  122 	add	a, #0x01
+      00003Ar8Er0B                  123 	mov	_strtol_sloc2_1_0+0, a
+      00003Cr8Dr0F                  124 	mov	a, _strtol_sloc1_1_0+1
+      00003E 60 00                  125 	addc	a
+      000040r8Fr0B                  126 	mov	_strtol_sloc2_1_0+1, a
+      000042r46r30                  127 	goto	00106$
+      000044                        128 00105$:
+                                    129 ;	../strtol.c: 56: neg = false;
+      000044r10r13                  130 	clear	_strtol_sloc3_1_0+0
+      000046                        131 00106$:
+                                    132 ;	../strtol.c: 59: if (neg && (isblank (*ptr) || *ptr == '-' || *ptr == '+'))
+      000046r90r0F                  133 	mov	a, _strtol_sloc3_1_0+0
+      000048 00 2B                  134 	cneqsn	a, #0x00
+      00004ArAAr30                  135 	goto	00110$
+      00004Cr8Er0F                  136 	mov	a, _strtol_sloc2_1_0+0
+      00004Er80r0B                  137 	mov	p, a
+      000050r8Fr0F                  138 	mov	a, _strtol_sloc2_1_0+1
+      000052r00r38                  139 	call	__gptrget
+      000054r80r0B                  140 	mov	p, a
+                                    141 ;	./../../include/ctype.h: 53: return ((unsigned char)c == ' ' || (unsigned char)c == '\t');
+      000056 20 2B                  142 	cneqsn	a, #0x20
+      000058r6Ar30                  143 	goto	00109$
+      00005A 09 2B                  144 	cneqsn	a, #0x09
+      00005Cr6Ar30                  145 	goto	00109$
+                                    146 ;	../strtol.c: 59: if (neg && (isblank (*ptr) || *ptr == '-' || *ptr == '+'))
+      00005Er80r0F                  147 	mov	a, p
+      000060 2D 2B                  148 	cneqsn	a, #0x2d
+      000062r6Ar30                  149 	goto	00109$
+      000064r80r0F                  150 	mov	a, p
+      000066 2B 2A                  151 	ceqsn	a, #0x2b
+      000068rAAr30                  152 	goto	00110$
+      00006A                        153 00109$:
+                                    154 ;	../strtol.c: 61: if (endptr)
+      00006Ar82r0F                  155 	mov	a, _strtol_PARM_2+0
+      00006Cr83r0E                  156 	or	a, _strtol_PARM_2+1
+      00006E 00 2B                  157 	cneqsn	a, #0x00
+      000070r88r30                  158 	goto	00108$
+                                    159 ;	../strtol.c: 62: *endptr = nptr;
+      000072r82r0F                  160 	mov	a, _strtol_PARM_2+0
+      000074r91r0B                  161 	mov	_strtol_sloc4_1_0+0, a
+      000076r83r0F                  162 	mov	a, _strtol_PARM_2+1
+      000078r92r0B                  163 	mov	_strtol_sloc4_1_0+1, a
+      00007Ar91r0F                  164 	mov	a, _strtol_sloc4_1_0+0
+      00007Cr80r0B                  165 	mov	p, a
+      00007Er80r0F                  166 	mov	a, _strtol_PARM_1+0
+      000080r80r03                  167 	idxm	p, a
+      000082r00r12                  168 	inc	p
+      000084r81r0F                  169 	mov	a, _strtol_PARM_1+1
+      000086r80r03                  170 	idxm	p, a
+      000088                        171 00108$:
+                                    172 ;	../strtol.c: 63: return (0);
+      000088 C2 01                  173 	mov	a, sp
+      00008A FC 28                  174 	add	a, #0xfc
+      00008Cr80r0B                  175 	mov	p, a
+      00008Er81r03                  176 	idxm	a, p
+      000090r80r0B                  177 	mov	p, a
+      000092 00 2F                  178 	mov	a, #0x00
+      000094r80r03                  179 	idxm	p, a
+      000096r00r12                  180 	inc	p
+      000098 00 2F                  181 	mov	a, #0x00
+      00009Ar80r03                  182 	idxm	p, a
+      00009Cr00r12                  183 	inc	p
+      00009E 00 2F                  184 	mov	a, #0x00
+      0000A0r80r03                  185 	idxm	p, a
+      0000A2r00r12                  186 	inc	p
+      0000A4 00 2F                  187 	mov	a, #0x00
+      0000A6r80r03                  188 	idxm	p, a
+      0000A8 7A 00                  189 	ret
+      0000AA                        190 00110$:
+                                    191 ;	../strtol.c: 66: u = strtoul(ptr, &rptr, base);
+      0000AAr06r2F                  192 	mov	a, #(_strtol_rptr_65536_50 + 0)
+      0000ACr80r0B                  193 	mov	_strtoul_PARM_2+0, a
+      0000AEr01r13                  194 	clear	_strtoul_PARM_2+1
+      0000B0r8Er0F                  195 	mov	a, _strtol_sloc2_1_0+0
+      0000B2r80r0B                  196 	mov	_strtoul_PARM_1+0, a
+      0000B4r8Fr0F                  197 	mov	a, _strtol_sloc2_1_0+1
+      0000B6r81r0B                  198 	mov	_strtoul_PARM_1+1, a
+      0000B8r84r0F                  199 	mov	a, _strtol_PARM_3+0
+      0000BAr80r0B                  200 	mov	_strtoul_PARM_3+0, a
+      0000BCr85r0F                  201 	mov	a, _strtol_PARM_3+1
+      0000BEr81r0B                  202 	mov	_strtoul_PARM_3+1, a
+      0000C0r08r2F                  203 	mov	a, #_strtol_sloc0_1_0
+      0000C2 72 00                  204 	push	af
+      0000C4r00r38                  205 	call	_strtoul
+      0000C6 C2 01                  206 	mov	a, sp
+      0000C8 FE 28                  207 	add	a, #-2
+      0000CA 82 01                  208 	mov	sp, a
+      0000CCr88r0F                  209 	mov	a, _strtol_sloc0_1_0+0
+      0000CEr93r0B                  210 	mov	_strtol_sloc5_1_0+0, a
+      0000D0r89r0F                  211 	mov	a, _strtol_sloc0_1_0+1
+      0000D2r94r0B                  212 	mov	_strtol_sloc5_1_0+1, a
+      0000D4r8Ar0F                  213 	mov	a, _strtol_sloc0_1_0+2
+      0000D6r95r0B                  214 	mov	_strtol_sloc5_1_0+2, a
+      0000D8r8Br0F                  215 	mov	a, _strtol_sloc0_1_0+3
+      0000DAr96r0B                  216 	mov	_strtol_sloc5_1_0+3, a
+                                    217 ;	../strtol.c: 69: if (rptr == ptr)
+      0000DCr86r0F                  218 	mov	a, _strtol_rptr_65536_50+0
+      0000DEr0Er17                  219 	ceqsn	a, _strtol_sloc2_1_0+0
+      0000E0r28r31                  220 	goto	00117$
+      0000E2r87r0F                  221 	mov	a, _strtol_rptr_65536_50+1
+      0000E4r0Fr17                  222 	ceqsn	a, _strtol_sloc2_1_0+1
+      0000E6r28r31                  223 	goto	00117$
+                                    224 ;	../strtol.c: 71: if (endptr)
+      0000E8r82r0F                  225 	mov	a, _strtol_PARM_2+0
+      0000EAr83r0E                  226 	or	a, _strtol_PARM_2+1
+      0000EC 00 2B                  227 	cneqsn	a, #0x00
+      0000EEr06r31                  228 	goto	00115$
+                                    229 ;	../strtol.c: 72: *endptr = nptr;
+      0000F0r82r0F                  230 	mov	a, _strtol_PARM_2+0
+      0000F2r97r0B                  231 	mov	_strtol_sloc6_1_0+0, a
+      0000F4r83r0F                  232 	mov	a, _strtol_PARM_2+1
+      0000F6r98r0B                  233 	mov	_strtol_sloc6_1_0+1, a
+      0000F8r97r0F                  234 	mov	a, _strtol_sloc6_1_0+0
+      0000FAr80r0B                  235 	mov	p, a
+      0000FCr80r0F                  236 	mov	a, _strtol_PARM_1+0
+      0000FEr80r03                  237 	idxm	p, a
+      000100r00r12                  238 	inc	p
+      000102r81r0F                  239 	mov	a, _strtol_PARM_1+1
+      000104r80r03                  240 	idxm	p, a
+      000106                        241 00115$:
+                                    242 ;	../strtol.c: 73: return (0);
+      000106 C2 01                  243 	mov	a, sp
+      000108 FC 28                  244 	add	a, #0xfc
+      00010Ar80r0B                  245 	mov	p, a
+      00010Cr81r03                  246 	idxm	a, p
+      00010Er80r0B                  247 	mov	p, a
+      000110 00 2F                  248 	mov	a, #0x00
+      000112r80r03                  249 	idxm	p, a
+      000114r00r12                  250 	inc	p
+      000116 00 2F                  251 	mov	a, #0x00
+      000118r80r03                  252 	idxm	p, a
+      00011Ar00r12                  253 	inc	p
+      00011C 00 2F                  254 	mov	a, #0x00
+      00011Er80r03                  255 	idxm	p, a
+      000120r00r12                  256 	inc	p
+      000122 00 2F                  257 	mov	a, #0x00
+      000124r80r03                  258 	idxm	p, a
+      000126 7A 00                  259 	ret
+      000128                        260 00117$:
+                                    261 ;	../strtol.c: 76: if (endptr)
+      000128r82r0F                  262 	mov	a, _strtol_PARM_2+0
+      00012Ar83r0E                  263 	or	a, _strtol_PARM_2+1
+      00012C 00 2B                  264 	cneqsn	a, #0x00
+      00012Er46r31                  265 	goto	00119$
+                                    266 ;	../strtol.c: 77: *endptr = rptr;
+      000130r82r0F                  267 	mov	a, _strtol_PARM_2+0
+      000132r99r0B                  268 	mov	_strtol_sloc7_1_0+0, a
+      000134r83r0F                  269 	mov	a, _strtol_PARM_2+1
+      000136r9Ar0B                  270 	mov	_strtol_sloc7_1_0+1, a
+      000138r99r0F                  271 	mov	a, _strtol_sloc7_1_0+0
+      00013Ar80r0B                  272 	mov	p, a
+      00013Cr86r0F                  273 	mov	a, _strtol_rptr_65536_50+0
+      00013Er80r03                  274 	idxm	p, a
+      000140r00r12                  275 	inc	p
+      000142r87r0F                  276 	mov	a, _strtol_rptr_65536_50+1
+      000144r80r03                  277 	idxm	p, a
+      000146                        278 00119$:
+                                    279 ;	../strtol.c: 80: if (!neg && u > LONG_MAX)
+      000146r90r0F                  280 	mov	a, _strtol_sloc3_1_0+0
+      000148 00 2A                  281 	ceqsn	a, #0x00
+      00014Ar88r31                  282 	goto	00124$
+      00014C FF 2F                  283 	mov	a, #0xff
+      00014Er93r0C                  284 	sub	a, _strtol_sloc5_1_0+0
+      000150 FF 2F                  285 	mov	a, #0xff
+      000152r94r0D                  286 	subc	a, _strtol_sloc5_1_0+1
+      000154 FF 2F                  287 	mov	a, #0xff
+      000156r95r0D                  288 	subc	a, _strtol_sloc5_1_0+2
+      000158 7F 2F                  289 	mov	a, #0x7f
+      00015Ar96r0D                  290 	subc	a, _strtol_sloc5_1_0+3
+      00015C 40 1A                  291 	t1sn	f, c
+      00015Er88r31                  292 	goto	00124$
+                                    293 ;	../strtol.c: 82: errno = ERANGE;
+      000160 22 2F                  294 	mov	a, #0x22
+      000162r80r0B                  295 	mov	_errno+0, a
+      000164r01r13                  296 	clear	_errno+1
+                                    297 ;	../strtol.c: 83: return (LONG_MAX);
+      000166 C2 01                  298 	mov	a, sp
+      000168 FC 28                  299 	add	a, #0xfc
+      00016Ar80r0B                  300 	mov	p, a
+      00016Cr81r03                  301 	idxm	a, p
+      00016Er80r0B                  302 	mov	p, a
+      000170 FF 2F                  303 	mov	a, #0xff
+      000172r80r03                  304 	idxm	p, a
+      000174r00r12                  305 	inc	p
+      000176 FF 2F                  306 	mov	a, #0xff
+      000178r80r03                  307 	idxm	p, a
+      00017Ar00r12                  308 	inc	p
+      00017C FF 2F                  309 	mov	a, #0xff
+      00017Er80r03                  310 	idxm	p, a
+      000180r00r12                  311 	inc	p
+      000182 7F 2F                  312 	mov	a, #0x7f
+      000184r80r03                  313 	idxm	p, a
+      000186 7A 00                  314 	ret
+      000188                        315 00124$:
+                                    316 ;	../strtol.c: 85: else if (neg && u > -LONG_MIN)
+      000188r90r0F                  317 	mov	a, _strtol_sloc3_1_0+0
+      00018A 00 2B                  318 	cneqsn	a, #0x00
+      00018CrCAr31                  319 	goto	00125$
+      00018E 00 2F                  320 	mov	a, #0x00
+      000190r93r0C                  321 	sub	a, _strtol_sloc5_1_0+0
+      000192 00 2F                  322 	mov	a, #0x00
+      000194r94r0D                  323 	subc	a, _strtol_sloc5_1_0+1
+      000196 00 2F                  324 	mov	a, #0x00
+      000198r95r0D                  325 	subc	a, _strtol_sloc5_1_0+2
+      00019A 80 2F                  326 	mov	a, #0x80
+      00019Cr96r0D                  327 	subc	a, _strtol_sloc5_1_0+3
+      00019E 40 1A                  328 	t1sn	f, c
+      0001A0rCAr31                  329 	goto	00125$
+                                    330 ;	../strtol.c: 87: errno = ERANGE;
+      0001A2 22 2F                  331 	mov	a, #0x22
+      0001A4r80r0B                  332 	mov	_errno+0, a
+      0001A6r01r13                  333 	clear	_errno+1
+                                    334 ;	../strtol.c: 88: return (LONG_MIN);
+      0001A8 C2 01                  335 	mov	a, sp
+      0001AA FC 28                  336 	add	a, #0xfc
+      0001ACr80r0B                  337 	mov	p, a
+      0001AEr81r03                  338 	idxm	a, p
+      0001B0r80r0B                  339 	mov	p, a
+      0001B2 00 2F                  340 	mov	a, #0x00
+      0001B4r80r03                  341 	idxm	p, a
+      0001B6r00r12                  342 	inc	p
+      0001B8 00 2F                  343 	mov	a, #0x00
+      0001BAr80r03                  344 	idxm	p, a
+      0001BCr00r12                  345 	inc	p
+      0001BE 00 2F                  346 	mov	a, #0x00
+      0001C0r80r03                  347 	idxm	p, a
+      0001C2r00r12                  348 	inc	p
+      0001C4 80 2F                  349 	mov	a, #0x80
+      0001C6r80r03                  350 	idxm	p, a
+      0001C8 7A 00                  351 	ret
+      0001CA                        352 00125$:
+                                    353 ;	../strtol.c: 91: return (neg ? -u : u);
+      0001CAr90r0F                  354 	mov	a, _strtol_sloc3_1_0+0
+      0001CC 00 2B                  355 	cneqsn	a, #0x00
+      0001CErEAr31                  356 	goto	00137$
+      0001D0 00 2F                  357 	mov	a, #0x00
+      0001D2r93r0C                  358 	sub	a, _strtol_sloc5_1_0+0
+      0001D4r9Br0B                  359 	mov	_strtol_sloc8_1_0+0, a
+      0001D6 00 2F                  360 	mov	a, #0x00
+      0001D8r94r0D                  361 	subc	a, _strtol_sloc5_1_0+1
+      0001DAr9Cr0B                  362 	mov	_strtol_sloc8_1_0+1, a
+      0001DC 00 2F                  363 	mov	a, #0x00
+      0001DEr95r0D                  364 	subc	a, _strtol_sloc5_1_0+2
+      0001E0r9Dr0B                  365 	mov	_strtol_sloc8_1_0+2, a
+      0001E2 00 2F                  366 	mov	a, #0x00
+      0001E4r96r0D                  367 	subc	a, _strtol_sloc5_1_0+3
+      0001E6r9Er0B                  368 	mov	_strtol_sloc8_1_0+3, a
+      0001E8rFAr31                  369 	goto	00138$
+      0001EA                        370 00137$:
+      0001EAr93r0F                  371 	mov	a, _strtol_sloc5_1_0+0
+      0001ECr9Br0B                  372 	mov	_strtol_sloc8_1_0+0, a
+      0001EEr94r0F                  373 	mov	a, _strtol_sloc5_1_0+1
+      0001F0r9Cr0B                  374 	mov	_strtol_sloc8_1_0+1, a
+      0001F2r95r0F                  375 	mov	a, _strtol_sloc5_1_0+2
+      0001F4r9Dr0B                  376 	mov	_strtol_sloc8_1_0+2, a
+      0001F6r96r0F                  377 	mov	a, _strtol_sloc5_1_0+3
+      0001F8r9Er0B                  378 	mov	_strtol_sloc8_1_0+3, a
+      0001FA                        379 00138$:
+      0001FA C2 01                  380 	mov	a, sp
+      0001FC FC 28                  381 	add	a, #0xfc
+      0001FEr80r0B                  382 	mov	p, a
+      000200r81r03                  383 	idxm	a, p
+      000202r80r0B                  384 	mov	p, a
+      000204r9Br0F                  385 	mov	a, _strtol_sloc8_1_0+0
+      000206r80r03                  386 	idxm	p, a
+      000208r00r12                  387 	inc	p
+      00020Ar9Cr0F                  388 	mov	a, _strtol_sloc8_1_0+1
+      00020Cr80r03                  389 	idxm	p, a
+      00020Er00r12                  390 	inc	p
+      000210r9Dr0F                  391 	mov	a, _strtol_sloc8_1_0+2
+      000212r80r03                  392 	idxm	p, a
+      000214r00r12                  393 	inc	p
+      000216r9Er0F                  394 	mov	a, _strtol_sloc8_1_0+3
+      000218r80r03                  395 	idxm	p, a
+                                    396 ;	../strtol.c: 92: }
+      00021A 7A 00                  397 	ret
+                                    398 	.area CODE
+                                    399 	.area CONST
+                                    400 	.area CABS (ABS)

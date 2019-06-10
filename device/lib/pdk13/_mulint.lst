@@ -1,0 +1,102 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _mulint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __mulint_PARM_2
+                                     17 	.globl __mulint_PARM_1
+                                     18 	.globl __mulint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __mulint_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 __mulint_PARM_2:
+      000002                         31 	.ds 2
+      000004                         32 __mulint_t_65536_2:
+      000004                         33 	.ds 2
+      000006                         34 __mulint_sloc0_1_0:
+      000006                         35 	.ds 1
+      000007                         36 __mulint_sloc1_1_0:
+      000007                         37 	.ds 1
+                                     38 ;--------------------------------------------------------
+                                     39 ; overlayable items in ram 
+                                     40 ;--------------------------------------------------------
+                                     41 ;--------------------------------------------------------
+                                     42 ; absolute external ram data
+                                     43 ;--------------------------------------------------------
+                                     44 	.area DABS (ABS)
+                                     45 ;--------------------------------------------------------
+                                     46 ; global & static initialisations
+                                     47 ;--------------------------------------------------------
+                                     48 	.area HOME
+                                     49 	.area GSINIT
+                                     50 	.area GSFINAL
+                                     51 	.area GSINIT
+                                     52 ;--------------------------------------------------------
+                                     53 ; Home
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area HOME
+                                     57 ;--------------------------------------------------------
+                                     58 ; code
+                                     59 ;--------------------------------------------------------
+                                     60 	.area CODE
+                                     61 ;	../_mulint.c: 226: _mulint (int a, int b)
+                                     62 ;	-----------------------------------------
+                                     63 ;	 function _mulint
+                                     64 ;	-----------------------------------------
+      000000                         65 __mulint:
+                                     66 ;	../_mulint.c: 238: x = (union uu *)&a;
+                                     67 ;	../_mulint.c: 239: y = (union uu *)&b;
+                                     68 ;	../_mulint.c: 243: t.t = (unsigned char)a * (unsigned char)b;
+      000000r80r0F                   69 	mov	a, __mulint_PARM_1+0
+      000002r80r0B                   70 	mov	__muluchar_PARM_1+0, a
+      000004r82r0F                   71 	mov	a, __mulint_PARM_2+0
+      000006r80r0B                   72 	mov	__muluchar_PARM_2+0, a
+      000008r00r38                   73 	call	__muluchar
+      00000Ar84r0B                   74 	mov	__mulint_t_65536_2+0, a
+      00000Cr80r0F                   75 	mov	a, p
+                                     76 ;	../_mulint.c: 244: t.s.hi += ((unsigned char)a * y->s.hi) + (x->s.hi * (unsigned char)b);
+      00000Er85r0B                   77 	mov	__mulint_t_65536_2+1, a
+      000010r86r0B                   78 	mov	__mulint_sloc0_1_0+0, a
+      000012r80r0F                   79 	mov	a, __mulint_PARM_1+0
+      000014r80r0B                   80 	mov	__muluchar_PARM_1+0, a
+      000016r83r0F                   81 	mov	a, __mulint_PARM_2+1
+      000018r80r0B                   82 	mov	__muluchar_PARM_2+0, a
+      00001Ar00r38                   83 	call	__muluchar
+      00001Cr87r0B                   84 	mov	__mulint_sloc1_1_0+0, a
+      00001Er81r0F                   85 	mov	a, __mulint_PARM_1+1
+      000020r80r0B                   86 	mov	__muluchar_PARM_1+0, a
+      000022r82r0F                   87 	mov	a, __mulint_PARM_2+0
+      000024r80r0B                   88 	mov	__muluchar_PARM_2+0, a
+      000026r00r38                   89 	call	__muluchar
+      000028r07r0C                   90 	add	a, __mulint_sloc1_1_0+0
+      00002Ar06r0C                   91 	add	a, __mulint_sloc0_1_0+0
+      00002Cr85r0B                   92 	mov	__mulint_t_65536_2+1, a
+                                     93 ;	../_mulint.c: 246: return t.t;
+      00002Er84r0F                   94 	mov	a, __mulint_t_65536_2+0
+      000030r80r0B                   95 	mov	p, a
+      000032r85r0F                   96 	mov	a, __mulint_t_65536_2+1
+      000034r80r13                   97 	xch	a, p
+                                     98 ;	../_mulint.c: 247: }
+      000036 7A 00                   99 	ret
+                                    100 	.area CODE
+                                    101 	.area CONST
+                                    102 	.area CABS (ABS)

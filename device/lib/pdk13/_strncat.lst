@@ -1,0 +1,165 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strncat
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strncat_PARM_3
+                                     17 	.globl _strncat_PARM_2
+                                     18 	.globl _strncat_PARM_1
+                                     19 	.globl _strncat
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _strncat_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _strncat_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _strncat_PARM_3:
+      000004                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 	.area	OSEG (OVR,DATA)
+      000000                         39 _strncat_sloc0_1_0:
+      000000                         40 	.ds 2
+      000002                         41 _strncat_sloc1_1_0:
+      000002                         42 	.ds 2
+      000004                         43 _strncat_sloc2_1_0:
+      000004                         44 	.ds 2
+      000006                         45 _strncat_sloc3_1_0:
+      000006                         46 	.ds 2
+      000008                         47 _strncat_sloc4_1_0:
+      000008                         48 	.ds 2
+      00000A                         49 _strncat_sloc5_1_0:
+      00000A                         50 	.ds 1
+                                     51 ;--------------------------------------------------------
+                                     52 ; absolute external ram data
+                                     53 ;--------------------------------------------------------
+                                     54 	.area DABS (ABS)
+                                     55 ;--------------------------------------------------------
+                                     56 ; global & static initialisations
+                                     57 ;--------------------------------------------------------
+                                     58 	.area HOME
+                                     59 	.area GSINIT
+                                     60 	.area GSFINAL
+                                     61 	.area GSINIT
+                                     62 ;--------------------------------------------------------
+                                     63 ; Home
+                                     64 ;--------------------------------------------------------
+                                     65 	.area HOME
+                                     66 	.area HOME
+                                     67 ;--------------------------------------------------------
+                                     68 ; code
+                                     69 ;--------------------------------------------------------
+                                     70 	.area CODE
+                                     71 ;	../_strncat.c: 31: char * strncat ( char * front, const char * back, size_t count )
+                                     72 ;	-----------------------------------------
+                                     73 ;	 function strncat
+                                     74 ;	-----------------------------------------
+      000000                         75 _strncat:
+                                     76 ;	../_strncat.c: 33: char *start = front;
+      000000r80r0F                   77 	mov	a, _strncat_PARM_1+0
+      000002r80r0B                   78 	mov	_strncat_sloc0_1_0+0, a
+      000004r81r0F                   79 	mov	a, _strncat_PARM_1+1
+      000006r81r0B                   80 	mov	_strncat_sloc0_1_0+1, a
+                                     81 ;	../_strncat.c: 35: while (*front++);
+      000008r80r0F                   82 	mov	a, _strncat_sloc0_1_0+0
+      00000Ar82r0B                   83 	mov	_strncat_sloc1_1_0+0, a
+      00000Cr81r0F                   84 	mov	a, _strncat_sloc0_1_0+1
+      00000Er83r0B                   85 	mov	_strncat_sloc1_1_0+1, a
+      000010                         86 00101$:
+      000010r82r0F                   87 	mov	a, _strncat_sloc1_1_0+0
+      000012r80r0B                   88 	mov	p, a
+      000014r83r0F                   89 	mov	a, _strncat_sloc1_1_0+1
+      000016r00r38                   90 	call	__gptrget
+      000018r02r12                   91 	inc	_strncat_sloc1_1_0+0
+      00001Ar03r10                   92 	addc	_strncat_sloc1_1_0+1
+      00001C 00 2A                   93 	ceqsn	a, #0x00
+      00001Er10r30                   94 	goto	00101$
+                                     95 ;	../_strncat.c: 37: front--;
+      000020r82r0F                   96 	mov	a, _strncat_sloc1_1_0+0
+      000022 01 29                   97 	sub	a, #0x01
+      000024r80r0B                   98 	mov	_strncat_PARM_1+0, a
+      000026r83r0F                   99 	mov	a, _strncat_sloc1_1_0+1
+      000028 61 00                  100 	subc	a
+      00002Ar81r0B                  101 	mov	_strncat_PARM_1+1, a
+                                    102 ;	../_strncat.c: 39: while (count--)
+      00002Cr82r0F                  103 	mov	a, _strncat_PARM_2+0
+      00002Er84r0B                  104 	mov	_strncat_sloc2_1_0+0, a
+      000030r83r0F                  105 	mov	a, _strncat_PARM_2+1
+      000032r85r0B                  106 	mov	_strncat_sloc2_1_0+1, a
+      000034r80r0F                  107 	mov	a, _strncat_PARM_1+0
+      000036r86r0B                  108 	mov	_strncat_sloc3_1_0+0, a
+      000038r81r0F                  109 	mov	a, _strncat_PARM_1+1
+      00003Ar87r0B                  110 	mov	_strncat_sloc3_1_0+1, a
+      00003Cr84r0F                  111 	mov	a, _strncat_PARM_3+0
+      00003Er88r0B                  112 	mov	_strncat_sloc4_1_0+0, a
+      000040r85r0F                  113 	mov	a, _strncat_PARM_3+1
+      000042r89r0B                  114 	mov	_strncat_sloc4_1_0+1, a
+      000044                        115 00106$:
+      000044r89r0F                  116 	mov	a, _strncat_sloc4_1_0+1
+      000046r80r0B                  117 	mov	p, a
+      000048r88r0F                  118 	mov	a, _strncat_sloc4_1_0+0
+      00004Ar88r12                  119 	dec	_strncat_sloc4_1_0+0
+      00004Cr89r10                  120 	subc	_strncat_sloc4_1_0+1
+      00004Er80r0E                  121 	or	a, p
+      000050 00 2B                  122 	cneqsn	a, #0x00
+      000052r84r30                  123 	goto	00108$
+                                    124 ;	../_strncat.c: 40: if (!(*front++ = *back++))
+      000054r84r0F                  125 	mov	a, _strncat_sloc2_1_0+0
+      000056r80r0B                  126 	mov	p, a
+      000058r85r0F                  127 	mov	a, _strncat_sloc2_1_0+1
+      00005Ar00r38                  128 	call	__gptrget
+      00005Cr8Ar0B                  129 	mov	_strncat_sloc5_1_0+0, a
+      00005Er04r12                  130 	inc	_strncat_sloc2_1_0+0
+      000060r05r10                  131 	addc	_strncat_sloc2_1_0+1
+      000062r86r0F                  132 	mov	a, _strncat_sloc3_1_0+0
+      000064r80r0B                  133 	mov	p, a
+      000066r8Ar0F                  134 	mov	a, _strncat_sloc5_1_0+0
+      000068r80r03                  135 	idxm	p, a
+      00006Ar06r12                  136 	inc	_strncat_sloc3_1_0+0
+      00006Cr07r10                  137 	addc	_strncat_sloc3_1_0+1
+      00006Er86r0F                  138 	mov	a, _strncat_sloc3_1_0+0
+      000070r80r0B                  139 	mov	_strncat_PARM_1+0, a
+      000072r87r0F                  140 	mov	a, _strncat_sloc3_1_0+1
+      000074r81r0B                  141 	mov	_strncat_PARM_1+1, a
+      000076r8Ar0F                  142 	mov	a, _strncat_sloc5_1_0+0
+      000078 00 2A                  143 	ceqsn	a, #0x00
+      00007Ar44r30                  144 	goto	00106$
+                                    145 ;	../_strncat.c: 41: return(start);
+      00007Cr81r0F                  146 	mov	a, _strncat_sloc0_1_0+1
+      00007Er80r0B                  147 	mov	p, a
+      000080r80r0F                  148 	mov	a, _strncat_sloc0_1_0+0
+      000082 7A 00                  149 	ret
+      000084                        150 00108$:
+                                    151 ;	../_strncat.c: 43: *front = '\0';
+      000084r80r0F                  152 	mov	a, _strncat_PARM_1+0
+      000086r80r0B                  153 	mov	p, a
+      000088r81r0F                  154 	mov	a, _strncat_PARM_1+1
+      00008A 00 2F                  155 	mov	a, #0x00
+      00008Cr80r03                  156 	idxm	p, a
+                                    157 ;	../_strncat.c: 44: return(start);
+      00008Er81r0F                  158 	mov	a, _strncat_sloc0_1_0+1
+      000090r80r0B                  159 	mov	p, a
+      000092r80r0F                  160 	mov	a, _strncat_sloc0_1_0+0
+                                    161 ;	../_strncat.c: 45: }
+      000094 7A 00                  162 	ret
+                                    163 	.area CODE
+                                    164 	.area CONST
+                                    165 	.area CABS (ABS)

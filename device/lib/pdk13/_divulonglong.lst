@@ -1,0 +1,200 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divulonglong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divulonglong_PARM_2
+                                     17 	.globl __divulonglong_PARM_1
+                                     18 	.globl __divulonglong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divulonglong_PARM_1:
+      000000                         29 	.ds 8
+      000008                         30 __divulonglong_PARM_2:
+      000008                         31 	.ds 8
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __divulonglong_sloc0_1_0:
+      000000                         37 	.ds 8
+      000008                         38 __divulonglong_sloc1_1_0:
+      000008                         39 	.ds 8
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_divulonglong.c: 39: _divulonglong (unsigned long long x, unsigned long long y)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function _divulonglong
+                                     63 ;	-----------------------------------------
+      000000                         64 __divulonglong:
+                                     65 ;	../_divulonglong.c: 41: unsigned long long reste = 0L;
+      000000r00r13                   66 	clear	__divulonglong_sloc0_1_0+0
+      000002r01r13                   67 	clear	__divulonglong_sloc0_1_0+1
+      000004r02r13                   68 	clear	__divulonglong_sloc0_1_0+2
+      000006r03r13                   69 	clear	__divulonglong_sloc0_1_0+3
+      000008r04r13                   70 	clear	__divulonglong_sloc0_1_0+4
+      00000Ar05r13                   71 	clear	__divulonglong_sloc0_1_0+5
+      00000Cr06r13                   72 	clear	__divulonglong_sloc0_1_0+6
+      00000Er07r13                   73 	clear	__divulonglong_sloc0_1_0+7
+                                     74 ;	../_divulonglong.c: 42: unsigned char count = 64;
+      000010 40 2F                   75 	mov	a, #0x40
+      000012r80r0B                   76 	mov	p, a
+                                     77 ;	../_divulonglong.c: 45: do
+      000014                         78 00105$:
+                                     79 ;	../_divulonglong.c: 48: c = MSB_SET(x);
+      000014r87r0F                   80 	mov	a, __divulonglong_PARM_1+7
+      000016r88r0B                   81 	mov	__divulonglong_sloc1_1_0+0, a
+      000018r09r13                   82 	clear	__divulonglong_sloc1_1_0+1
+      00001Ar0Ar13                   83 	clear	__divulonglong_sloc1_1_0+2
+      00001Cr0Br13                   84 	clear	__divulonglong_sloc1_1_0+3
+      00001Er0Cr13                   85 	clear	__divulonglong_sloc1_1_0+4
+      000020r0Dr13                   86 	clear	__divulonglong_sloc1_1_0+5
+      000022r0Er13                   87 	clear	__divulonglong_sloc1_1_0+6
+      000024r0Fr13                   88 	clear	__divulonglong_sloc1_1_0+7
+      000026 07 2F                   89 	mov	a, #7
+      000028                         90 00126$:
+      000028r08r15                   91 	sr	__divulonglong_sloc1_1_0+0
+      00002A 63 00                   92 	dzsn	a
+      00002Cr28r30                   93 	goto	00126$
+      00002Er88r0F                   94 	mov	a, __divulonglong_sloc1_1_0+0
+      000030 01 2C                   95 	and	a, #0x01
+                                     96 ;	../_divulonglong.c: 49: x <<= 1;
+      000032r80r15                   97 	sl	__divulonglong_PARM_1+0
+      000034r81r16                   98 	slc	__divulonglong_PARM_1+1
+      000036r82r16                   99 	slc	__divulonglong_PARM_1+2
+      000038r83r16                  100 	slc	__divulonglong_PARM_1+3
+      00003Ar84r16                  101 	slc	__divulonglong_PARM_1+4
+      00003Cr85r16                  102 	slc	__divulonglong_PARM_1+5
+      00003Er86r16                  103 	slc	__divulonglong_PARM_1+6
+      000040r87r16                  104 	slc	__divulonglong_PARM_1+7
+                                    105 ;	../_divulonglong.c: 50: reste <<= 1;
+      000042r80r15                  106 	sl	__divulonglong_sloc0_1_0+0
+      000044r81r16                  107 	slc	__divulonglong_sloc0_1_0+1
+      000046r82r16                  108 	slc	__divulonglong_sloc0_1_0+2
+      000048r83r16                  109 	slc	__divulonglong_sloc0_1_0+3
+      00004Ar84r16                  110 	slc	__divulonglong_sloc0_1_0+4
+      00004Cr85r16                  111 	slc	__divulonglong_sloc0_1_0+5
+      00004Er86r16                  112 	slc	__divulonglong_sloc0_1_0+6
+      000050r87r16                  113 	slc	__divulonglong_sloc0_1_0+7
+                                    114 ;	../_divulonglong.c: 51: if (c)
+      000052 00 2B                  115 	cneqsn	a, #0x00
+      000054r5Ar30                  116 	goto	00102$
+                                    117 ;	../_divulonglong.c: 52: reste |= 1L;
+      000056 01 2F                  118 	mov	a, #0x01
+      000058r80r0A                  119 	or	__divulonglong_sloc0_1_0+0, a
+      00005A                        120 00102$:
+                                    121 ;	../_divulonglong.c: 54: if (reste >= y)
+      00005Ar80r0F                  122 	mov	a, __divulonglong_sloc0_1_0+0
+      00005Cr88r0C                  123 	sub	a, __divulonglong_PARM_2+0
+      00005Er81r0F                  124 	mov	a, __divulonglong_sloc0_1_0+1
+      000060r89r0D                  125 	subc	a, __divulonglong_PARM_2+1
+      000062r82r0F                  126 	mov	a, __divulonglong_sloc0_1_0+2
+      000064r8Ar0D                  127 	subc	a, __divulonglong_PARM_2+2
+      000066r83r0F                  128 	mov	a, __divulonglong_sloc0_1_0+3
+      000068r8Br0D                  129 	subc	a, __divulonglong_PARM_2+3
+      00006Ar84r0F                  130 	mov	a, __divulonglong_sloc0_1_0+4
+      00006Cr8Cr0D                  131 	subc	a, __divulonglong_PARM_2+4
+      00006Er85r0F                  132 	mov	a, __divulonglong_sloc0_1_0+5
+      000070r8Dr0D                  133 	subc	a, __divulonglong_PARM_2+5
+      000072r86r0F                  134 	mov	a, __divulonglong_sloc0_1_0+6
+      000074r8Er0D                  135 	subc	a, __divulonglong_PARM_2+6
+      000076r87r0F                  136 	mov	a, __divulonglong_sloc0_1_0+7
+      000078r8Fr0D                  137 	subc	a, __divulonglong_PARM_2+7
+      00007A 40 18                  138 	t0sn	f, c
+      00007CrA2r30                  139 	goto	00106$
+                                    140 ;	../_divulonglong.c: 56: reste -= y;
+      00007Er88r0F                  141 	mov	a, __divulonglong_PARM_2+0
+      000080r80r08                  142 	sub	__divulonglong_sloc0_1_0+0, a
+      000082r89r0F                  143 	mov	a, __divulonglong_PARM_2+1
+      000084r81r09                  144 	subc	__divulonglong_sloc0_1_0+1, a
+      000086r8Ar0F                  145 	mov	a, __divulonglong_PARM_2+2
+      000088r82r09                  146 	subc	__divulonglong_sloc0_1_0+2, a
+      00008Ar8Br0F                  147 	mov	a, __divulonglong_PARM_2+3
+      00008Cr83r09                  148 	subc	__divulonglong_sloc0_1_0+3, a
+      00008Er8Cr0F                  149 	mov	a, __divulonglong_PARM_2+4
+      000090r84r09                  150 	subc	__divulonglong_sloc0_1_0+4, a
+      000092r8Dr0F                  151 	mov	a, __divulonglong_PARM_2+5
+      000094r85r09                  152 	subc	__divulonglong_sloc0_1_0+5, a
+      000096r8Er0F                  153 	mov	a, __divulonglong_PARM_2+6
+      000098r86r09                  154 	subc	__divulonglong_sloc0_1_0+6, a
+      00009Ar8Fr0F                  155 	mov	a, __divulonglong_PARM_2+7
+      00009Cr87r09                  156 	subc	__divulonglong_sloc0_1_0+7, a
+                                    157 ;	../_divulonglong.c: 58: x |= 1L;
+      00009E 01 2F                  158 	mov	a, #0x01
+      0000A0r80r0A                  159 	or	__divulonglong_PARM_1+0, a
+      0000A2                        160 00106$:
+                                    161 ;	../_divulonglong.c: 61: while (--count);
+      0000A2r80r0F                  162 	mov	a, p
+      0000A4 01 29                  163 	sub	a, #0x01
+      0000A6r80r0B                  164 	mov	p, a
+      0000A8 00 2A                  165 	ceqsn	a, #0x00
+      0000AAr14r30                  166 	goto	00105$
+                                    167 ;	../_divulonglong.c: 62: return x;
+      0000AC C2 01                  168 	mov	a, sp
+      0000AE FC 28                  169 	add	a, #0xfc
+      0000B0r80r0B                  170 	mov	p, a
+      0000B2r81r03                  171 	idxm	a, p
+      0000B4r80r0B                  172 	mov	p, a
+      0000B6r80r0F                  173 	mov	a, __divulonglong_PARM_1+0
+      0000B8r80r03                  174 	idxm	p, a
+      0000BAr00r12                  175 	inc	p
+      0000BCr81r0F                  176 	mov	a, __divulonglong_PARM_1+1
+      0000BEr80r03                  177 	idxm	p, a
+      0000C0r00r12                  178 	inc	p
+      0000C2r82r0F                  179 	mov	a, __divulonglong_PARM_1+2
+      0000C4r80r03                  180 	idxm	p, a
+      0000C6r00r12                  181 	inc	p
+      0000C8r83r0F                  182 	mov	a, __divulonglong_PARM_1+3
+      0000CAr80r03                  183 	idxm	p, a
+      0000CCr00r12                  184 	inc	p
+      0000CEr84r0F                  185 	mov	a, __divulonglong_PARM_1+4
+      0000D0r80r03                  186 	idxm	p, a
+      0000D2r00r12                  187 	inc	p
+      0000D4r85r0F                  188 	mov	a, __divulonglong_PARM_1+5
+      0000D6r80r03                  189 	idxm	p, a
+      0000D8r00r12                  190 	inc	p
+      0000DAr86r0F                  191 	mov	a, __divulonglong_PARM_1+6
+      0000DCr80r03                  192 	idxm	p, a
+      0000DEr00r12                  193 	inc	p
+      0000E0r87r0F                  194 	mov	a, __divulonglong_PARM_1+7
+      0000E2r80r03                  195 	idxm	p, a
+                                    196 ;	../_divulonglong.c: 63: }
+      0000E4 7A 00                  197 	ret
+                                    198 	.area CODE
+                                    199 	.area CONST
+                                    200 	.area CABS (ABS)

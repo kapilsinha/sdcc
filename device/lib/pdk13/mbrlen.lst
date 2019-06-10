@@ -1,0 +1,102 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mbrlen
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mbrtowc
+                                     17 	.globl _mbrlen_PARM_3
+                                     18 	.globl _mbrlen_PARM_2
+                                     19 	.globl _mbrlen_PARM_1
+                                     20 	.globl _mbrlen
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _mbrlen_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _mbrlen_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _mbrlen_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _mbrlen_sps_65536_10:
+      000006                         37 	.ds 3
+      000009                         38 _mbrlen_sloc0_1_0:
+      000009                         39 	.ds 2
+                                     40 ;--------------------------------------------------------
+                                     41 ; overlayable items in ram 
+                                     42 ;--------------------------------------------------------
+                                     43 ;--------------------------------------------------------
+                                     44 ; absolute external ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DABS (ABS)
+                                     47 ;--------------------------------------------------------
+                                     48 ; global & static initialisations
+                                     49 ;--------------------------------------------------------
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area GSINIT
+                                     54 ;--------------------------------------------------------
+                                     55 ; Home
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area HOME
+                                     59 ;--------------------------------------------------------
+                                     60 ; code
+                                     61 ;--------------------------------------------------------
+                                     62 	.area CODE
+                                     63 ;	../mbrlen.c: 31: size_t mbrlen(const char *restrict s, size_t n, mbstate_t *restrict ps)
+                                     64 ;	-----------------------------------------
+                                     65 ;	 function mbrlen
+                                     66 ;	-----------------------------------------
+      000000                         67 _mbrlen:
+                                     68 ;	../mbrlen.c: 35: return(mbrtowc(0, s, n, ps ? ps : &sps));
+      000000r84r0F                   69 	mov	a, _mbrlen_PARM_3+0
+      000002r85r0E                   70 	or	a, _mbrlen_PARM_3+1
+      000004 00 2B                   71 	cneqsn	a, #0x00
+      000006r12r30                   72 	goto	00103$
+      000008r84r0F                   73 	mov	a, _mbrlen_PARM_3+0
+      00000Ar89r0B                   74 	mov	_mbrlen_sloc0_1_0+0, a
+      00000Cr85r0F                   75 	mov	a, _mbrlen_PARM_3+1
+      00000Er8Ar0B                   76 	mov	_mbrlen_sloc0_1_0+1, a
+      000010r18r30                   77 	goto	00104$
+      000012                         78 00103$:
+      000012r06r2F                   79 	mov	a, #(_mbrlen_sps_65536_10 + 0)
+      000014r89r0B                   80 	mov	_mbrlen_sloc0_1_0+0, a
+      000016r0Ar13                   81 	clear	_mbrlen_sloc0_1_0+1
+      000018                         82 00104$:
+      000018r00r13                   83 	clear	_mbrtowc_PARM_1+0
+      00001Ar01r13                   84 	clear	_mbrtowc_PARM_1+1
+      00001Cr80r0F                   85 	mov	a, _mbrlen_PARM_1+0
+      00001Er80r0B                   86 	mov	_mbrtowc_PARM_2+0, a
+      000020r81r0F                   87 	mov	a, _mbrlen_PARM_1+1
+      000022r81r0B                   88 	mov	_mbrtowc_PARM_2+1, a
+      000024r82r0F                   89 	mov	a, _mbrlen_PARM_2+0
+      000026r80r0B                   90 	mov	_mbrtowc_PARM_3+0, a
+      000028r83r0F                   91 	mov	a, _mbrlen_PARM_2+1
+      00002Ar81r0B                   92 	mov	_mbrtowc_PARM_3+1, a
+      00002Cr89r0F                   93 	mov	a, _mbrlen_sloc0_1_0+0
+      00002Er80r0B                   94 	mov	_mbrtowc_PARM_4+0, a
+      000030r8Ar0F                   95 	mov	a, _mbrlen_sloc0_1_0+1
+      000032r81r0B                   96 	mov	_mbrtowc_PARM_4+1, a
+      000034r00r38                   97 	call	_mbrtowc
+                                     98 ;	../mbrlen.c: 36: }
+      000036 7A 00                   99 	ret
+                                    100 	.area CODE
+                                    101 	.area CONST
+                                    102 	.area CABS (ABS)

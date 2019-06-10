@@ -1,0 +1,54 @@
+XL3
+H C areas 8 global symbols
+M c32rtomb
+O -mpdk13
+S _wctomb_PARM_1 Ref000000
+S _wctomb_PARM_2 Ref000000
+S .__.ABS. Def000000
+S _wctomb Ref000000
+A _CODE size 0 flags 0 addr 0
+A DATA size 8 flags 0 addr 0
+S _c32rtomb_PARM_1 Def000000
+S _c32rtomb_PARM_2 Def000002
+S _c32rtomb_PARM_3 Def000006
+A OSEG size 0 flags 4 addr 0
+A RSEG size 0 flags 8 addr 0
+A RSEG0 size 0 flags 8 addr 0
+A DABS size 0 flags 8 addr 0
+A HOME size 0 flags 0 addr 0
+A GSINIT size 0 flags 0 addr 0
+A GSFINAL size 0 flags 0 addr 0
+A CODE size 1C flags 0 addr 0
+S _c32rtomb Def000000
+A CONST size 0 flags 0 addr 0
+A CABS size 0 flags 8 addr 0
+T 00 00 00
+R 00 00 04 00
+T 00 00 00
+R 00 00 01 00
+T 00 00 00
+R 00 00 01 00
+T 02 00 00
+R 00 00 01 00
+T 02 00 00
+R 00 00 01 00
+T 06 00 00
+R 00 00 01 00
+T 06 00 00
+R 00 00 01 00
+T 00 00 00
+R 00 00 09 00
+T 00 00 00 00 00 80 0F 0E 00 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 00 00
+T 04 00 00 01 00 80 0F 0E 01 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 00 00
+T 08 00 00 02 00 80 0F 0E 00 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 01 00
+T 0C 00 00 03 00 80 0F 0E 01 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 01 00
+T 10 00 00 04 00 80 0F 0E 02 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 01 00
+T 14 00 00 05 00 80 0F 0E 03 00 80 0B 0E
+R 00 00 09 00 08 03 01 00 0A 08 01 00
+T 18 00 00 00 00 00 38 0E 7A 00
+R 00 00 09 00 0A 03 03 00

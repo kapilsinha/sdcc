@@ -1,0 +1,108 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module labs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _labs_PARM_1
+                                     17 	.globl _labs
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _labs_PARM_1:
+      000000                         28 	.ds 4
+                                     29 ;--------------------------------------------------------
+                                     30 ; overlayable items in ram 
+                                     31 ;--------------------------------------------------------
+                                     32 	.area	OSEG (OVR,DATA)
+      000000                         33 _labs_sloc0_1_0:
+      000000                         34 	.ds 4
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../labs.c: 63: long int labs(long int j)
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function labs
+                                     58 ;	-----------------------------------------
+      000000                         59 _labs:
+                                     60 ;	../labs.c: 65: return (j < 0) ? -j : j;
+      000000r83r0F                   61 	mov	a, _labs_PARM_1+3
+      000002 80 29                   62 	sub	a, #0x80
+      000004 40 18                   63 	t0sn	f, c
+      000006r22r30                   64 	goto	00103$
+      000008 00 2F                   65 	mov	a, #0x00
+      00000Ar80r0C                   66 	sub	a, _labs_PARM_1+0
+      00000Cr80r0B                   67 	mov	_labs_sloc0_1_0+0, a
+      00000E 00 2F                   68 	mov	a, #0x00
+      000010r81r0D                   69 	subc	a, _labs_PARM_1+1
+      000012r81r0B                   70 	mov	_labs_sloc0_1_0+1, a
+      000014 00 2F                   71 	mov	a, #0x00
+      000016r82r0D                   72 	subc	a, _labs_PARM_1+2
+      000018r82r0B                   73 	mov	_labs_sloc0_1_0+2, a
+      00001A 00 2F                   74 	mov	a, #0x00
+      00001Cr83r0D                   75 	subc	a, _labs_PARM_1+3
+      00001Er83r0B                   76 	mov	_labs_sloc0_1_0+3, a
+      000020r32r30                   77 	goto	00104$
+      000022                         78 00103$:
+      000022r80r0F                   79 	mov	a, _labs_PARM_1+0
+      000024r80r0B                   80 	mov	_labs_sloc0_1_0+0, a
+      000026r81r0F                   81 	mov	a, _labs_PARM_1+1
+      000028r81r0B                   82 	mov	_labs_sloc0_1_0+1, a
+      00002Ar82r0F                   83 	mov	a, _labs_PARM_1+2
+      00002Cr82r0B                   84 	mov	_labs_sloc0_1_0+2, a
+      00002Er83r0F                   85 	mov	a, _labs_PARM_1+3
+      000030r83r0B                   86 	mov	_labs_sloc0_1_0+3, a
+      000032                         87 00104$:
+      000032 C2 01                   88 	mov	a, sp
+      000034 FC 28                   89 	add	a, #0xfc
+      000036r80r0B                   90 	mov	p, a
+      000038r81r03                   91 	idxm	a, p
+      00003Ar80r0B                   92 	mov	p, a
+      00003Cr80r0F                   93 	mov	a, _labs_sloc0_1_0+0
+      00003Er80r03                   94 	idxm	p, a
+      000040r00r12                   95 	inc	p
+      000042r81r0F                   96 	mov	a, _labs_sloc0_1_0+1
+      000044r80r03                   97 	idxm	p, a
+      000046r00r12                   98 	inc	p
+      000048r82r0F                   99 	mov	a, _labs_sloc0_1_0+2
+      00004Ar80r03                  100 	idxm	p, a
+      00004Cr00r12                  101 	inc	p
+      00004Er83r0F                  102 	mov	a, _labs_sloc0_1_0+3
+      000050r80r03                  103 	idxm	p, a
+                                    104 ;	../labs.c: 66: }
+      000052 7A 00                  105 	ret
+                                    106 	.area CODE
+                                    107 	.area CONST
+                                    108 	.area CABS (ABS)

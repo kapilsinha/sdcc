@@ -1,0 +1,44 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___sdcc_heap                                                   ****** GX
+    ___sdcc_heap_end                                               ****** GX
+  1 ___sdcc_heap_free                                              000000 GR
+  9 ___sdcc_heap_init                                              000000 GR
+  9 _malloc                                                        000016 GR
+  1 _malloc_PARM_1                                                 000001 GR
+  2 _malloc_sloc0_1_0                                              000000 R
+  2 _malloc_sloc1_1_0                                              000002 R
+  2 _malloc_sloc2_1_0                                              000003 R
+  2 _malloc_sloc3_1_0                                              000004 R
+  2 _malloc_sloc4_1_0                                              000005 R
+  2 _malloc_sloc5_1_0                                              000006 R
+  2 _malloc_sloc6_1_0                                              000008 R
+  2 _malloc_sloc7_1_0                                              00000A R
+    p                                                              ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Padauk 14), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      3   flags    0
+   2 OSEG                                       size      B   flags    4
+   3 RSEG                                       size      0   flags    8
+   4 RSEG0                                      size      0   flags    8
+   5 DABS                                       size      0   flags    8
+   6 HOME                                       size      0   flags    0
+   7 GSINIT                                     size      0   flags    0
+   8 GSFINAL                                    size      0   flags    0
+   9 CODE                                       size    102   flags    0
+   A CONST                                      size      0   flags    0
+   B CABS                                       size      0   flags    8
+

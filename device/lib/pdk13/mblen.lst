@@ -1,0 +1,187 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module mblen
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _mblen_PARM_2
+                                     17 	.globl _mblen_PARM_1
+                                     18 	.globl _mblen
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _mblen_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _mblen_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _mblen_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 _mblen_sloc1_1_0:
+      000002                         39 	.ds 1
+      000003                         40 _mblen_sloc2_1_0:
+      000003                         41 	.ds 2
+      000005                         42 _mblen_sloc3_1_0:
+      000005                         43 	.ds 2
+      000007                         44 _mblen_sloc4_1_0:
+      000007                         45 	.ds 1
+      000008                         46 _mblen_sloc5_1_0:
+      000008                         47 	.ds 2
+                                     48 ;--------------------------------------------------------
+                                     49 ; absolute external ram data
+                                     50 ;--------------------------------------------------------
+                                     51 	.area DABS (ABS)
+                                     52 ;--------------------------------------------------------
+                                     53 ; global & static initialisations
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area GSINIT
+                                     57 	.area GSFINAL
+                                     58 	.area GSINIT
+                                     59 ;--------------------------------------------------------
+                                     60 ; Home
+                                     61 ;--------------------------------------------------------
+                                     62 	.area HOME
+                                     63 	.area HOME
+                                     64 ;--------------------------------------------------------
+                                     65 ; code
+                                     66 ;--------------------------------------------------------
+                                     67 	.area CODE
+                                     68 ;	../mblen.c: 31: int mblen(const char *s, size_t n)
+                                     69 ;	-----------------------------------------
+                                     70 ;	 function mblen
+                                     71 ;	-----------------------------------------
+      000000                         72 _mblen:
+                                     73 ;	../mblen.c: 36: if(!s)
+      000000r80r0F                   74 	mov	a, _mblen_PARM_1+0
+      000002r81r0E                   75 	or	a, _mblen_PARM_1+1
+      000004 00 2A                   76 	ceqsn	a, #0x00
+      000006r0Cr30                   77 	goto	00102$
+                                     78 ;	../mblen.c: 37: return(0);
+      000008r00r13                   79 	clear	p
+      00000A 00 02                   80 	ret	#0x00
+      00000C                         81 00102$:
+                                     82 ;	../mblen.c: 39: if(!n)
+      00000Cr82r0F                   83 	mov	a, _mblen_PARM_2+0
+      00000Er83r0E                   84 	or	a, _mblen_PARM_2+1
+      000010 00 2A                   85 	ceqsn	a, #0x00
+      000012r1Ar30                   86 	goto	00104$
+                                     87 ;	../mblen.c: 40: return(-1);
+      000014 FF 2F                   88 	mov	a, #0xff
+      000016r80r0B                   89 	mov	p, a
+      000018 FF 02                   90 	ret	#0xff
+      00001A                         91 00104$:
+                                     92 ;	../mblen.c: 42: c = *s;
+      00001Ar80r0F                   93 	mov	a, _mblen_PARM_1+0
+      00001Cr80r0B                   94 	mov	_mblen_sloc0_1_0+0, a
+      00001Er81r0F                   95 	mov	a, _mblen_PARM_1+1
+      000020r81r0B                   96 	mov	_mblen_sloc0_1_0+1, a
+      000022r80r0F                   97 	mov	a, _mblen_sloc0_1_0+0
+      000024r80r0B                   98 	mov	p, a
+      000026r81r0F                   99 	mov	a, _mblen_sloc0_1_0+1
+      000028r00r38                  100 	call	__gptrget
+                                    101 ;	../mblen.c: 44: if(!c)
+      00002Ar80r0B                  102 	mov	p, a
+      00002C 00 2A                  103 	ceqsn	a, #0x00
+      00002Er34r30                  104 	goto	00106$
+                                    105 ;	../mblen.c: 45: return(0);
+      000030r00r13                  106 	clear	p
+      000032 00 02                  107 	ret	#0x00
+      000034                        108 00106$:
+                                    109 ;	../mblen.c: 47: if(c <= 0x7f)
+      000034 7F 2F                  110 	mov	a, #0x7f
+      000036r80r0C                  111 	sub	a, p
+      000038 40 18                  112 	t0sn	f, c
+      00003Ar40r30                  113 	goto	00126$
+                                    114 ;	../mblen.c: 48: return(1);
+      00003Cr00r13                  115 	clear	p
+      00003E 01 02                  116 	ret	#0x01
+                                    117 ;	../mblen.c: 50: while(c & 0x80)
+      000040                        118 00126$:
+      000040r02r13                  119 	clear	_mblen_sloc1_1_0+0
+      000042                        120 00109$:
+      000042rC0r23                  121 	t1sn	p, #7
+      000044r4Cr30                  122 	goto	00111$
+                                    123 ;	../mblen.c: 52: c <<= 1;
+      000046r80r15                  124 	sl	p
+                                    125 ;	../mblen.c: 53: m++;
+      000048r02r12                  126 	inc	_mblen_sloc1_1_0+0
+      00004Ar42r30                  127 	goto	00109$
+      00004C                        128 00111$:
+                                    129 ;	../mblen.c: 56: if(m > n)
+      00004Cr82r0F                  130 	mov	a, _mblen_sloc1_1_0+0
+      00004Er83r0B                  131 	mov	_mblen_sloc2_1_0+0, a
+      000050r04r13                  132 	clear	_mblen_sloc2_1_0+1
+      000052r82r0F                  133 	mov	a, _mblen_PARM_2+0
+      000054r83r0C                  134 	sub	a, _mblen_sloc2_1_0+0
+      000056r83r0F                  135 	mov	a, _mblen_PARM_2+1
+      000058r84r0D                  136 	subc	a, _mblen_sloc2_1_0+1
+      00005A 40 1A                  137 	t1sn	f, c
+      00005Cr64r30                  138 	goto	00129$
+                                    139 ;	../mblen.c: 57: return(-1);
+      00005E FF 2F                  140 	mov	a, #0xff
+      000060r80r0B                  141 	mov	p, a
+      000062 FF 02                  142 	ret	#0xff
+                                    143 ;	../mblen.c: 60: while(--m)
+      000064                        144 00129$:
+      000064r80r0F                  145 	mov	a, _mblen_sloc0_1_0+0
+      000066r85r0B                  146 	mov	_mblen_sloc3_1_0+0, a
+      000068r81r0F                  147 	mov	a, _mblen_sloc0_1_0+1
+      00006Ar86r0B                  148 	mov	_mblen_sloc3_1_0+1, a
+      00006Cr82r0F                  149 	mov	a, _mblen_sloc1_1_0+0
+      00006Er87r0B                  150 	mov	_mblen_sloc4_1_0+0, a
+      000070                        151 00116$:
+      000070r87r12                  152 	dec	_mblen_sloc4_1_0+0
+      000072r87r0F                  153 	mov	a, _mblen_sloc4_1_0+0
+      000074 00 2B                  154 	cneqsn	a, #0x00
+      000076r9Er30                  155 	goto	00118$
+                                    156 ;	../mblen.c: 61: if((*++s & 0xc0) != 0x80)
+      000078r05r12                  157 	inc	_mblen_sloc3_1_0+0
+      00007Ar06r10                  158 	addc	_mblen_sloc3_1_0+1
+      00007Cr85r0F                  159 	mov	a, _mblen_sloc3_1_0+0
+      00007Er80r0B                  160 	mov	p, a
+      000080r86r0F                  161 	mov	a, _mblen_sloc3_1_0+1
+      000082r00r38                  162 	call	__gptrget
+      000084r00r13                  163 	clear	p
+      000086 C0 2C                  164 	and	a, #0xc0
+      000088r88r0B                  165 	mov	_mblen_sloc5_1_0+0, a
+      00008Ar09r13                  166 	clear	_mblen_sloc5_1_0+1
+      00008Cr88r0F                  167 	mov	a, _mblen_sloc5_1_0+0
+      00008E 80 2A                  168 	ceqsn	a, #0x80
+      000090r98r30                  169 	goto	00162$
+      000092r89r0F                  170 	mov	a, _mblen_sloc5_1_0+1
+      000094 00 2B                  171 	cneqsn	a, #0x00
+      000096r70r30                  172 	goto	00116$
+      000098                        173 00162$:
+                                    174 ;	../mblen.c: 62: return(-1);
+      000098 FF 2F                  175 	mov	a, #0xff
+      00009Ar80r0B                  176 	mov	p, a
+      00009C FF 02                  177 	ret	#0xff
+      00009E                        178 00118$:
+                                    179 ;	../mblen.c: 64: return(n);
+      00009Er84r0F                  180 	mov	a, _mblen_sloc2_1_0+1
+      0000A0r80r0B                  181 	mov	p, a
+      0000A2r83r0F                  182 	mov	a, _mblen_sloc2_1_0+0
+                                    183 ;	../mblen.c: 65: }
+      0000A4 7A 00                  184 	ret
+                                    185 	.area CODE
+                                    186 	.area CONST
+                                    187 	.area CABS (ABS)

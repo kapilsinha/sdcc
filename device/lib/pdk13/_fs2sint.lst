@@ -1,0 +1,133 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fs2sint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fs2slong
+                                     17 	.globl ___fs2sint_PARM_1
+                                     18 	.globl ___fs2sint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fs2sint_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fs2sint_sloc0_1_0:
+      000004                         31 	.ds 4
+      000008                         32 ___fs2sint_sloc1_1_0:
+      000008                         33 	.ds 4
+                                     34 ;--------------------------------------------------------
+                                     35 ; overlayable items in ram 
+                                     36 ;--------------------------------------------------------
+                                     37 ;--------------------------------------------------------
+                                     38 ; absolute external ram data
+                                     39 ;--------------------------------------------------------
+                                     40 	.area DABS (ABS)
+                                     41 ;--------------------------------------------------------
+                                     42 ; global & static initialisations
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area GSINIT
+                                     46 	.area GSFINAL
+                                     47 	.area GSINIT
+                                     48 ;--------------------------------------------------------
+                                     49 ; Home
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+                                     52 	.area HOME
+                                     53 ;--------------------------------------------------------
+                                     54 ; code
+                                     55 ;--------------------------------------------------------
+                                     56 	.area CODE
+                                     57 ;	../_fs2sint.c: 81: signed int __fs2sint (float f)
+                                     58 ;	-----------------------------------------
+                                     59 ;	 function __fs2sint
+                                     60 ;	-----------------------------------------
+      000000                         61 ___fs2sint:
+                                     62 ;	../_fs2sint.c: 83: signed long sl=__fs2slong(f);
+      000000r80r0F                   63 	mov	a, ___fs2sint_PARM_1+0
+      000002r80r0B                   64 	mov	___fs2slong_PARM_1+0, a
+      000004r81r0F                   65 	mov	a, ___fs2sint_PARM_1+1
+      000006r81r0B                   66 	mov	___fs2slong_PARM_1+1, a
+      000008r82r0F                   67 	mov	a, ___fs2sint_PARM_1+2
+      00000Ar82r0B                   68 	mov	___fs2slong_PARM_1+2, a
+      00000Cr83r0F                   69 	mov	a, ___fs2sint_PARM_1+3
+      00000Er83r0B                   70 	mov	___fs2slong_PARM_1+3, a
+      000010r04r2F                   71 	mov	a, #___fs2sint_sloc0_1_0
+      000012 72 00                   72 	push	af
+      000014r00r38                   73 	call	___fs2slong
+      000016 C2 01                   74 	mov	a, sp
+      000018 FE 28                   75 	add	a, #-2
+      00001A 82 01                   76 	mov	sp, a
+      00001Cr84r0F                   77 	mov	a, ___fs2sint_sloc0_1_0+0
+      00001Er88r0B                   78 	mov	___fs2sint_sloc1_1_0+0, a
+      000020r85r0F                   79 	mov	a, ___fs2sint_sloc0_1_0+1
+      000022r89r0B                   80 	mov	___fs2sint_sloc1_1_0+1, a
+      000024r86r0F                   81 	mov	a, ___fs2sint_sloc0_1_0+2
+      000026r8Ar0B                   82 	mov	___fs2sint_sloc1_1_0+2, a
+      000028r87r0F                   83 	mov	a, ___fs2sint_sloc0_1_0+3
+      00002Ar8Br0B                   84 	mov	___fs2sint_sloc1_1_0+3, a
+                                     85 ;	../_fs2sint.c: 84: if (sl>=INT_MAX)
+      00002Cr88r0F                   86 	mov	a, ___fs2sint_sloc1_1_0+0
+      00002E FF 29                   87 	sub	a, #0xff
+      000030 7F 2F                   88 	mov	a, #0x7f
+      000032r80r0B                   89 	mov	p, a
+      000034r89r0F                   90 	mov	a, ___fs2sint_sloc1_1_0+1
+      000036r80r0D                   91 	subc	a, p
+      000038r8Ar0F                   92 	mov	a, ___fs2sint_sloc1_1_0+2
+      00003A 61 00                   93 	subc	a
+      00003Cr8Br0F                   94 	mov	a, ___fs2sint_sloc1_1_0+3
+      00003E 61 00                   95 	subc	a
+      000040 C0 18                   96 	t0sn	f, ov
+      000042 80 2E                   97 	xor	a, #0x80
+      000044 6B 00                   98 	sl	a
+      000046 40 18                   99 	t0sn	f, c
+      000048r50r30                  100 	goto	00102$
+                                    101 ;	../_fs2sint.c: 85: return INT_MAX;
+      00004A 7F 2F                  102 	mov	a, #0x7f
+      00004Cr80r0B                  103 	mov	p, a
+      00004E FF 02                  104 	ret	#0xff
+      000050                        105 00102$:
+                                    106 ;	../_fs2sint.c: 86: if (sl<=INT_MIN)
+      000050 00 2F                  107 	mov	a, #0x00
+      000052r88r0C                  108 	sub	a, ___fs2sint_sloc1_1_0+0
+      000054 80 2F                  109 	mov	a, #0x80
+      000056r89r0D                  110 	subc	a, ___fs2sint_sloc1_1_0+1
+      000058 FF 2F                  111 	mov	a, #0xff
+      00005Ar8Ar0D                  112 	subc	a, ___fs2sint_sloc1_1_0+2
+      00005C FF 2F                  113 	mov	a, #0xff
+      00005Er8Br0D                  114 	subc	a, ___fs2sint_sloc1_1_0+3
+      000060 C0 18                  115 	t0sn	f, ov
+      000062 80 2E                  116 	xor	a, #0x80
+      000064 6B 00                  117 	sl	a
+      000066 40 18                  118 	t0sn	f, c
+      000068r70r30                  119 	goto	00104$
+                                    120 ;	../_fs2sint.c: 87: return -INT_MIN;
+      00006A 80 2F                  121 	mov	a, #0x80
+      00006Cr80r0B                  122 	mov	p, a
+      00006E 00 02                  123 	ret	#0x00
+      000070                        124 00104$:
+                                    125 ;	../_fs2sint.c: 88: return sl;
+      000070r89r0F                  126 	mov	a, ___fs2sint_sloc1_1_0+1
+      000072r80r0B                  127 	mov	p, a
+      000074r88r0F                  128 	mov	a, ___fs2sint_sloc1_1_0+0
+                                    129 ;	../_fs2sint.c: 89: }
+      000076 7A 00                  130 	ret
+                                    131 	.area CODE
+                                    132 	.area CONST
+                                    133 	.area CABS (ABS)

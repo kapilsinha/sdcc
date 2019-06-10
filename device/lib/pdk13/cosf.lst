@@ -1,0 +1,187 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module cosf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _sincosf
+                                     17 	.globl _cosf
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; overlayable items in ram 
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 ;--------------------------------------------------------
+                                     35 ; global & static initialisations
+                                     36 ;--------------------------------------------------------
+                                     37 	.area HOME
+                                     38 	.area GSINIT
+                                     39 	.area GSFINAL
+                                     40 	.area GSINIT
+                                     41 ;--------------------------------------------------------
+                                     42 ; Home
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area HOME
+                                     46 ;--------------------------------------------------------
+                                     47 ; code
+                                     48 ;--------------------------------------------------------
+                                     49 	.area CODE
+                                     50 ;	../cosf.c: 36: float cosf(float x) _FLOAT_FUNC_REENTRANT
+                                     51 ;	-----------------------------------------
+                                     52 ;	 function cosf
+                                     53 ;	-----------------------------------------
+      000000                         54 _cosf:
+      000000 72 00                   55 	push	af
+      000002 72 00                   56 	push	af
+                                     57 ;	../cosf.c: 38: if (x==0.0) return 1.0;
+      000004 C2 01                   58 	mov	a, sp
+      000006 F7 28                   59 	add	a, #0xf7
+      000008r80r0B                   60 	mov	p, a
+      00000Ar81r03                   61 	idxm	a, p
+      00000C 7F 2C                   62 	and	a, #0x7f
+      00000E 72 00                   63 	push	af
+      000010 FD 2F                   64 	mov	a, #-3
+      000012r00r08                   65 	add	p, a
+      000014r81r03                   66 	idxm	a, p
+      000016r80r0B                   67 	mov	p, a
+      000018 73 00                   68 	pop	af
+      00001Ar80r0E                   69 	or	a, p
+      00001C 72 00                   70 	push	af
+      00001E C2 01                   71 	mov	a, sp
+      000020 F3 28                   72 	add	a, #0xf3
+      000022r80r0B                   73 	mov	p, a
+      000024r81r03                   74 	idxm	a, p
+      000026r80r0B                   75 	mov	p, a
+      000028 73 00                   76 	pop	af
+      00002Ar80r0E                   77 	or	a, p
+      00002C 72 00                   78 	push	af
+      00002E C2 01                   79 	mov	a, sp
+      000030 F4 28                   80 	add	a, #0xf4
+      000032r80r0B                   81 	mov	p, a
+      000034r81r03                   82 	idxm	a, p
+      000036r80r0B                   83 	mov	p, a
+      000038 73 00                   84 	pop	af
+      00003Ar80r0E                   85 	or	a, p
+      00003C 00 2A                   86 	ceqsn	a, #0x00
+      00003Er62r30                   87 	goto	00102$
+      000040 C2 01                   88 	mov	a, sp
+      000042 F8 28                   89 	add	a, #0xf8
+      000044r80r0B                   90 	mov	p, a
+      000046r81r03                   91 	idxm	a, p
+      000048r80r0B                   92 	mov	p, a
+      00004A 00 2F                   93 	mov	a, #0x00
+      00004Cr80r03                   94 	idxm	p, a
+      00004Er00r12                   95 	inc	p
+      000050 00 2F                   96 	mov	a, #0x00
+      000052r80r03                   97 	idxm	p, a
+      000054r00r12                   98 	inc	p
+      000056 80 2F                   99 	mov	a, #0x80
+      000058r80r03                  100 	idxm	p, a
+      00005Ar00r12                  101 	inc	p
+      00005C 3F 2F                  102 	mov	a, #0x3f
+      00005Er80r03                  103 	idxm	p, a
+      000060rF2r30                  104 	goto	00103$
+      000062                        105 00102$:
+                                    106 ;	../cosf.c: 39: return sincosf(x, 1);
+      000062 C2 01                  107 	mov	a, sp
+      000064 F4 28                  108 	add	a, #0xf4
+      000066r80r0B                  109 	mov	p, a
+      000068r81r03                  110 	idxm	a, p
+      00006Ar80r0B                  111 	mov	_sincosf_PARM_1+0, a
+      00006Cr00r12                  112 	inc	p
+      00006Er81r03                  113 	idxm	a, p
+      000070r81r0B                  114 	mov	_sincosf_PARM_1+1, a
+      000072r00r12                  115 	inc	p
+      000074r81r03                  116 	idxm	a, p
+      000076r82r0B                  117 	mov	_sincosf_PARM_1+2, a
+      000078r00r12                  118 	inc	p
+      00007Ar81r03                  119 	idxm	a, p
+      00007Cr83r0B                  120 	mov	_sincosf_PARM_1+3, a
+      00007E 01 2F                  121 	mov	a, #0x01
+      000080r80r0B                  122 	mov	_sincosf_PARM_2+0, a
+      000082 C2 01                  123 	mov	a, sp
+      000084 FC 28                  124 	add	a, #0xfc
+      000086 72 00                  125 	push	af
+      000088r00r38                  126 	call	_sincosf
+      00008A C2 01                  127 	mov	a, sp
+      00008C FE 28                  128 	add	a, #-2
+      00008E 82 01                  129 	mov	sp, a
+      000090 FC 28                  130 	add	a, #0xfc
+      000092r80r0B                  131 	mov	p, a
+      000094r81r03                  132 	idxm	a, p
+      000096 72 00                  133 	push	af
+      000098 FC 2F                  134 	mov	a, #-4
+      00009Ar00r08                  135 	add	p, a
+      00009Cr81r03                  136 	idxm	a, p
+      00009Er80r0B                  137 	mov	p, a
+      0000A0 73 00                  138 	pop	af
+      0000A2r80r03                  139 	idxm	p, a
+      0000A4 C2 01                  140 	mov	a, sp
+      0000A6 FD 28                  141 	add	a, #0xfd
+      0000A8r80r0B                  142 	mov	p, a
+      0000AAr81r03                  143 	idxm	a, p
+      0000AC 72 00                  144 	push	af
+      0000AE FB 2F                  145 	mov	a, #-5
+      0000B0r00r08                  146 	add	p, a
+      0000B2r81r03                  147 	idxm	a, p
+      0000B4r80r0B                  148 	mov	p, a
+      0000B6 73 00                  149 	pop	af
+      0000B8r00r12                  150 	inc	p
+      0000BAr80r03                  151 	idxm	p, a
+      0000BC C2 01                  152 	mov	a, sp
+      0000BE FE 28                  153 	add	a, #0xfe
+      0000C0r80r0B                  154 	mov	p, a
+      0000C2r81r03                  155 	idxm	a, p
+      0000C4 72 00                  156 	push	af
+      0000C6 FA 2F                  157 	mov	a, #-6
+      0000C8r00r08                  158 	add	p, a
+      0000CAr81r03                  159 	idxm	a, p
+      0000CCr80r0B                  160 	mov	p, a
+      0000CE 73 00                  161 	pop	af
+      0000D0r00r12                  162 	inc	p
+      0000D2r00r12                  163 	inc	p
+      0000D4r80r03                  164 	idxm	p, a
+      0000D6 C2 01                  165 	mov	a, sp
+      0000D8 FF 28                  166 	add	a, #0xff
+      0000DAr80r0B                  167 	mov	p, a
+      0000DCr81r03                  168 	idxm	a, p
+      0000DE 72 00                  169 	push	af
+      0000E0 F9 2F                  170 	mov	a, #-7
+      0000E2r00r08                  171 	add	p, a
+      0000E4r81r03                  172 	idxm	a, p
+      0000E6r80r0B                  173 	mov	p, a
+      0000E8 73 00                  174 	pop	af
+      0000EAr00r12                  175 	inc	p
+      0000ECr00r12                  176 	inc	p
+      0000EEr00r12                  177 	inc	p
+      0000F0r80r03                  178 	idxm	p, a
+      0000F2                        179 00103$:
+                                    180 ;	../cosf.c: 40: }
+      0000F2 C2 01                  181 	mov	a, sp
+      0000F4 FC 28                  182 	add	a, #-4
+      0000F6 82 01                  183 	mov	sp, a
+      0000F8 7A 00                  184 	ret
+                                    185 	.area CODE
+                                    186 	.area CONST
+                                    187 	.area CABS (ABS)

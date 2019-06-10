@@ -1,0 +1,196 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module atoi
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _atoi_PARM_1
+                                     17 	.globl _atoi
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+      000000                         27 _atoi_PARM_1:
+      000000                         28 	.ds 2
+      000002                         29 _atoi_sloc0_1_0:
+      000002                         30 	.ds 2
+      000004                         31 _atoi_sloc1_1_0:
+      000004                         32 	.ds 2
+      000006                         33 _atoi_sloc2_1_0:
+      000006                         34 	.ds 1
+      000007                         35 _atoi_sloc3_1_0:
+      000007                         36 	.ds 2
+      000009                         37 _atoi_sloc4_1_0:
+      000009                         38 	.ds 2
+      00000B                         39 _atoi_sloc5_1_0:
+      00000B                         40 	.ds 2
+                                     41 ;--------------------------------------------------------
+                                     42 ; overlayable items in ram 
+                                     43 ;--------------------------------------------------------
+                                     44 ;--------------------------------------------------------
+                                     45 ; absolute external ram data
+                                     46 ;--------------------------------------------------------
+                                     47 	.area DABS (ABS)
+                                     48 ;--------------------------------------------------------
+                                     49 ; global & static initialisations
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+                                     52 	.area GSINIT
+                                     53 	.area GSFINAL
+                                     54 	.area GSINIT
+                                     55 ;--------------------------------------------------------
+                                     56 ; Home
+                                     57 ;--------------------------------------------------------
+                                     58 	.area HOME
+                                     59 	.area HOME
+                                     60 ;--------------------------------------------------------
+                                     61 ; code
+                                     62 ;--------------------------------------------------------
+                                     63 	.area CODE
+                                     64 ;	../atoi.c: 34: int atoi(const char *nptr)
+                                     65 ;	-----------------------------------------
+                                     66 ;	 function atoi
+                                     67 ;	-----------------------------------------
+      000000                         68 _atoi:
+                                     69 ;	../atoi.c: 36: int ret = 0;
+      000000r02r13                   70 	clear	_atoi_sloc0_1_0+0
+      000002r03r13                   71 	clear	_atoi_sloc0_1_0+1
+                                     72 ;	../atoi.c: 39: while (isblank (*nptr))
+      000004r80r0F                   73 	mov	a, _atoi_PARM_1+0
+      000006r84r0B                   74 	mov	_atoi_sloc1_1_0+0, a
+      000008r81r0F                   75 	mov	a, _atoi_PARM_1+1
+      00000Ar85r0B                   76 	mov	_atoi_sloc1_1_0+1, a
+      00000C                         77 00101$:
+      00000Cr84r0F                   78 	mov	a, _atoi_sloc1_1_0+0
+      00000Er80r0B                   79 	mov	p, a
+      000010r85r0F                   80 	mov	a, _atoi_sloc1_1_0+1
+      000012r00r38                   81 	call	__gptrget
+                                     82 ;	./../../include/ctype.h: 53: return ((unsigned char)c == ' ' || (unsigned char)c == '\t');
+      000014 20 2B                   83 	cneqsn	a, #0x20
+      000016r1Cr30                   84 	goto	00115$
+      000018 09 2A                   85 	ceqsn	a, #0x09
+      00001Ar22r30                   86 	goto	00131$
+      00001C                         87 00115$:
+                                     88 ;	../atoi.c: 40: nptr++;
+      00001Cr04r12                   89 	inc	_atoi_sloc1_1_0+0
+      00001Er05r10                   90 	addc	_atoi_sloc1_1_0+1
+      000020r0Cr30                   91 	goto	00101$
+      000022                         92 00131$:
+      000022r84r0F                   93 	mov	a, _atoi_sloc1_1_0+0
+      000024r80r0B                   94 	mov	_atoi_PARM_1+0, a
+      000026r85r0F                   95 	mov	a, _atoi_sloc1_1_0+1
+      000028r81r0B                   96 	mov	_atoi_PARM_1+1, a
+                                     97 ;	../atoi.c: 42: neg = (*nptr == '-');
+      00002Ar84r0F                   98 	mov	a, _atoi_sloc1_1_0+0
+      00002Cr80r0B                   99 	mov	p, a
+      00002Er85r0F                  100 	mov	a, _atoi_sloc1_1_0+1
+      000030r00r38                  101 	call	__gptrget
+      000032 2D 2A                  102 	ceqsn	a, #0x2d
+      000034r3Er30                  103 	goto	00155$
+      000036 72 00                  104 	push	af
+      000038 01 2F                  105 	mov	a, #0x01
+      00003Ar86r0B                  106 	mov	_atoi_sloc2_1_0+0, a
+      00003Cr42r30                  107 	goto	00156$
+      00003E                        108 00155$:
+      00003E 72 00                  109 	push	af
+      000040r06r13                  110 	clear	_atoi_sloc2_1_0+0
+      000042                        111 00156$:
+      000042 73 00                  112 	pop	af
+                                    113 ;	../atoi.c: 44: if (*nptr == '-' || *nptr == '+')
+      000044 2D 2B                  114 	cneqsn	a, #0x2d
+      000046r4Cr30                  115 	goto	00104$
+      000048 2B 2A                  116 	ceqsn	a, #0x2b
+      00004Ar58r30                  117 	goto	00129$
+      00004C                        118 00104$:
+                                    119 ;	../atoi.c: 45: nptr++;
+      00004Cr84r0F                  120 	mov	a, _atoi_sloc1_1_0+0
+      00004E 01 28                  121 	add	a, #0x01
+      000050r80r0B                  122 	mov	_atoi_PARM_1+0, a
+      000052r85r0F                  123 	mov	a, _atoi_sloc1_1_0+1
+      000054 60 00                  124 	addc	a
+      000056r81r0B                  125 	mov	_atoi_PARM_1+1, a
+                                    126 ;	../atoi.c: 47: while (isdigit (*nptr))
+      000058                        127 00129$:
+      000058r80r0F                  128 	mov	a, _atoi_PARM_1+0
+      00005Ar87r0B                  129 	mov	_atoi_sloc3_1_0+0, a
+      00005Cr81r0F                  130 	mov	a, _atoi_PARM_1+1
+      00005Er88r0B                  131 	mov	_atoi_sloc3_1_0+1, a
+      000060                        132 00107$:
+      000060r87r0F                  133 	mov	a, _atoi_sloc3_1_0+0
+      000062r80r0B                  134 	mov	p, a
+      000064r88r0F                  135 	mov	a, _atoi_sloc3_1_0+1
+      000066r00r38                  136 	call	__gptrget
+                                    137 ;	./../../include/ctype.h: 62: return ((unsigned char)c >= '0' && (unsigned char)c <= '9');
+      000068 30 2A                  138 	ceqsn	a, #0x30
+      00006A 00 00                  139 	nop
+      00006C 40 18                  140 	t0sn	f, c
+      00006ErB0r30                  141 	goto	00109$
+      000070 3A 2A                  142 	ceqsn	a, #0x3a
+      000072 40 1A                  143 	t1sn	f, c
+      000074rB0r30                  144 	goto	00109$
+                                    145 ;	../atoi.c: 48: ret = ret * 10 + (*(nptr++) - '0');
+      000076 0A 2F                  146 	mov	a, #0x0a
+      000078r80r0B                  147 	mov	__mulint_PARM_1+0, a
+      00007Ar01r13                  148 	clear	__mulint_PARM_1+1
+      00007Cr82r0F                  149 	mov	a, _atoi_sloc0_1_0+0
+      00007Er80r0B                  150 	mov	__mulint_PARM_2+0, a
+      000080r83r0F                  151 	mov	a, _atoi_sloc0_1_0+1
+      000082r81r0B                  152 	mov	__mulint_PARM_2+1, a
+      000084r00r38                  153 	call	__mulint
+      000086r89r0B                  154 	mov	_atoi_sloc4_1_0+0, a
+      000088r80r0F                  155 	mov	a, p
+      00008Ar8Ar0B                  156 	mov	_atoi_sloc4_1_0+1, a
+      00008Cr87r0F                  157 	mov	a, _atoi_sloc3_1_0+0
+      00008Er80r0B                  158 	mov	p, a
+      000090r88r0F                  159 	mov	a, _atoi_sloc3_1_0+1
+      000092r00r38                  160 	call	__gptrget
+      000094r07r12                  161 	inc	_atoi_sloc3_1_0+0
+      000096r08r10                  162 	addc	_atoi_sloc3_1_0+1
+      000098 30 29                  163 	sub	a, #0x30
+      00009Ar8Br0B                  164 	mov	_atoi_sloc5_1_0+0, a
+      00009C 00 2F                  165 	mov	a, #0x00
+      00009E 61 00                  166 	subc	a
+      0000A0r8Cr0B                  167 	mov	_atoi_sloc5_1_0+1, a
+      0000A2r89r0F                  168 	mov	a, _atoi_sloc4_1_0+0
+      0000A4r0Br0C                  169 	add	a, _atoi_sloc5_1_0+0
+      0000A6r82r0B                  170 	mov	_atoi_sloc0_1_0+0, a
+      0000A8r8Ar0F                  171 	mov	a, _atoi_sloc4_1_0+1
+      0000AAr0Cr0D                  172 	addc	a, _atoi_sloc5_1_0+1
+      0000ACr83r0B                  173 	mov	_atoi_sloc0_1_0+1, a
+      0000AEr60r30                  174 	goto	00107$
+      0000B0                        175 00109$:
+                                    176 ;	../atoi.c: 50: return (neg ? -ret : ret); // Since -INT_MIN is INT_MIN in sdcc, the result value always turns out ok.
+      0000B0r86r0F                  177 	mov	a, _atoi_sloc2_1_0+0
+      0000B2 00 2B                  178 	cneqsn	a, #0x00
+      0000B4rC2r30                  179 	goto	00120$
+      0000B6 00 2F                  180 	mov	a, #0x00
+      0000B8r82r0C                  181 	sub	a, _atoi_sloc0_1_0+0
+      0000BAr80r0B                  182 	mov	p, a
+      0000BC 00 2F                  183 	mov	a, #0x00
+      0000BEr83r0D                  184 	subc	a, _atoi_sloc0_1_0+1
+      0000C0rC8r30                  185 	goto	00121$
+      0000C2                        186 00120$:
+      0000C2r82r0F                  187 	mov	a, _atoi_sloc0_1_0+0
+      0000C4r80r0B                  188 	mov	p, a
+      0000C6r83r0F                  189 	mov	a, _atoi_sloc0_1_0+1
+      0000C8                        190 00121$:
+      0000C8r80r13                  191 	xch	a, p
+                                    192 ;	../atoi.c: 51: }
+      0000CA 7A 00                  193 	ret
+                                    194 	.area CODE
+                                    195 	.area CONST
+                                    196 	.area CABS (ABS)

@@ -1,0 +1,308 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module qsort
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _qsort_PARM_4
+                                     17 	.globl _qsort_PARM_3
+                                     18 	.globl _qsort_PARM_2
+                                     19 	.globl _qsort_PARM_1
+                                     20 	.globl _qsort
+                                     21 ;--------------------------------------------------------
+                                     22 ; special function registers
+                                     23 ;--------------------------------------------------------
+                                     24 	.area RSEG (ABS)
+      000000                         25 	.org 0x0000
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area DATA
+      000000                         30 _swap_PARM_1:
+      000000                         31 	.ds 2
+      000002                         32 _swap_PARM_2:
+      000002                         33 	.ds 2
+      000004                         34 _swap_PARM_3:
+      000004                         35 	.ds 2
+      000006                         36 _qsort_PARM_1:
+      000006                         37 	.ds 2
+      000008                         38 _qsort_PARM_2:
+      000008                         39 	.ds 2
+      00000A                         40 _qsort_PARM_3:
+      00000A                         41 	.ds 2
+      00000C                         42 _qsort_PARM_4:
+      00000C                         43 	.ds 2
+      00000E                         44 _qsort_sloc4_1_0:
+      00000E                         45 	.ds 2
+      000010                         46 _qsort_sloc5_1_0:
+      000010                         47 	.ds 2
+      000012                         48 _qsort_sloc6_1_0:
+      000012                         49 	.ds 2
+      000014                         50 _qsort_sloc7_1_0:
+      000014                         51 	.ds 2
+      000016                         52 _qsort_sloc8_1_0:
+      000016                         53 	.ds 2
+      000018                         54 _qsort_sloc9_1_0:
+      000018                         55 	.ds 2
+      00001A                         56 _qsort_sloc10_1_0:
+      00001A                         57 	.ds 2
+      00001C                         58 _qsort_sloc11_1_0:
+      00001C                         59 	.ds 2
+      00001E                         60 _qsort_sloc12_1_0:
+      00001E                         61 	.ds 2
+      000020                         62 _qsort_sloc13_1_0:
+      000020                         63 	.ds 2
+                                     64 ;--------------------------------------------------------
+                                     65 ; overlayable items in ram 
+                                     66 ;--------------------------------------------------------
+                                     67 	.area	OSEG (OVR,DATA)
+      000000                         68 _swap_sloc0_1_0:
+      000000                         69 	.ds 2
+      000002                         70 _swap_sloc1_1_0:
+      000002                         71 	.ds 2
+      000004                         72 _swap_sloc2_1_0:
+      000004                         73 	.ds 2
+      000006                         74 _swap_sloc3_1_0:
+      000006                         75 	.ds 1
+                                     76 ;--------------------------------------------------------
+                                     77 ; absolute external ram data
+                                     78 ;--------------------------------------------------------
+                                     79 	.area DABS (ABS)
+                                     80 ;--------------------------------------------------------
+                                     81 ; global & static initialisations
+                                     82 ;--------------------------------------------------------
+                                     83 	.area HOME
+                                     84 	.area GSINIT
+                                     85 	.area GSFINAL
+                                     86 	.area GSINIT
+                                     87 ;--------------------------------------------------------
+                                     88 ; Home
+                                     89 ;--------------------------------------------------------
+                                     90 	.area HOME
+                                     91 	.area HOME
+                                     92 ;--------------------------------------------------------
+                                     93 ; code
+                                     94 ;--------------------------------------------------------
+                                     95 	.area CODE
+                                     96 ;	../qsort.c: 33: static void swap(void *restrict dst, void *restrict src, size_t n)
+                                     97 ;	-----------------------------------------
+                                     98 ;	 function swap
+                                     99 ;	-----------------------------------------
+      000000                        100 _swap:
+                                    101 ;	../qsort.c: 35: unsigned char *restrict d = dst;
+      000000r80r0F                  102 	mov	a, _swap_PARM_1+0
+      000002r80r0B                  103 	mov	_swap_sloc0_1_0+0, a
+      000004r81r0F                  104 	mov	a, _swap_PARM_1+1
+      000006r81r0B                  105 	mov	_swap_sloc0_1_0+1, a
+                                    106 ;	../qsort.c: 36: unsigned char *restrict s = src;
+      000008r82r0F                  107 	mov	a, _swap_PARM_2+0
+      00000Ar82r0B                  108 	mov	_swap_sloc1_1_0+0, a
+      00000Cr83r0F                  109 	mov	a, _swap_PARM_2+1
+      00000Er83r0B                  110 	mov	_swap_sloc1_1_0+1, a
+                                    111 ;	../qsort.c: 38: while(n--)
+      000010r84r0F                  112 	mov	a, _swap_PARM_3+0
+      000012r84r0B                  113 	mov	_swap_sloc2_1_0+0, a
+      000014r85r0F                  114 	mov	a, _swap_PARM_3+1
+      000016r85r0B                  115 	mov	_swap_sloc2_1_0+1, a
+      000018                        116 00101$:
+      000018r85r0F                  117 	mov	a, _swap_sloc2_1_0+1
+      00001Ar80r0B                  118 	mov	p, a
+      00001Cr84r0F                  119 	mov	a, _swap_sloc2_1_0+0
+      00001Er84r12                  120 	dec	_swap_sloc2_1_0+0
+      000020r85r10                  121 	subc	_swap_sloc2_1_0+1
+      000022r80r0E                  122 	or	a, p
+      000024 00 2B                  123 	cneqsn	a, #0x00
+      000026r54r30                  124 	goto	00104$
+                                    125 ;	../qsort.c: 40: unsigned char tmp = *d;
+      000028r80r0F                  126 	mov	a, _swap_sloc0_1_0+0
+      00002Ar80r0B                  127 	mov	p, a
+      00002Cr81r0F                  128 	mov	a, _swap_sloc0_1_0+1
+      00002Er00r38                  129 	call	__gptrget
+      000030r86r0B                  130 	mov	_swap_sloc3_1_0+0, a
+                                    131 ;	../qsort.c: 41: *d = *s;
+      000032r82r0F                  132 	mov	a, _swap_sloc1_1_0+0
+      000034r80r0B                  133 	mov	p, a
+      000036r83r0F                  134 	mov	a, _swap_sloc1_1_0+1
+      000038r00r38                  135 	call	__gptrget
+      00003Ar80r0B                  136 	mov	p, a
+      00003Cr80r0F                  137 	mov	a, _swap_sloc0_1_0+0
+      00003Er80r13                  138 	xch	a, p
+      000040r80r03                  139 	idxm	p, a
+                                    140 ;	../qsort.c: 42: *s = tmp;
+      000042r82r0F                  141 	mov	a, _swap_sloc1_1_0+0
+      000044r80r0B                  142 	mov	p, a
+      000046r86r0F                  143 	mov	a, _swap_sloc3_1_0+0
+      000048r80r03                  144 	idxm	p, a
+                                    145 ;	../qsort.c: 43: d++;
+      00004Ar00r12                  146 	inc	_swap_sloc0_1_0+0
+      00004Cr01r10                  147 	addc	_swap_sloc0_1_0+1
+                                    148 ;	../qsort.c: 44: s++;
+      00004Er02r12                  149 	inc	_swap_sloc1_1_0+0
+      000050r03r10                  150 	addc	_swap_sloc1_1_0+1
+      000052r18r30                  151 	goto	00101$
+      000054                        152 00104$:
+                                    153 ;	../qsort.c: 46: }
+      000054 7A 00                  154 	ret
+                                    155 ;	../qsort.c: 48: void qsort(void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *) __reentrant)
+                                    156 ;	-----------------------------------------
+                                    157 ;	 function qsort
+                                    158 ;	-----------------------------------------
+      000056                        159 _qsort:
+                                    160 ;	../qsort.c: 50: unsigned char *b = base;
+      000056r86r0F                  161 	mov	a, _qsort_PARM_1+0
+      000058r8Er0B                  162 	mov	_qsort_sloc4_1_0+0, a
+      00005Ar87r0F                  163 	mov	a, _qsort_PARM_1+1
+      00005Cr8Fr0B                  164 	mov	_qsort_sloc4_1_0+1, a
+      00005Er8Er0F                  165 	mov	a, _qsort_sloc4_1_0+0
+      000060r90r0B                  166 	mov	_qsort_sloc5_1_0+0, a
+      000062r8Fr0F                  167 	mov	a, _qsort_sloc4_1_0+1
+      000064r91r0B                  168 	mov	_qsort_sloc5_1_0+1, a
+                                    169 ;	../qsort.c: 52: if(nmemb <= 1)
+      000066 01 2F                  170 	mov	a, #0x01
+      000068r88r0C                  171 	sub	a, _qsort_PARM_2+0
+      00006A 00 2F                  172 	mov	a, #0x00
+      00006Cr89r0D                  173 	subc	a, _qsort_PARM_2+1
+      00006E 40 18                  174 	t0sn	f, c
+      000070r74r30                  175 	goto	00102$
+                                    176 ;	../qsort.c: 53: return;
+      000072 7A 00                  177 	ret
+      000074                        178 00102$:
+                                    179 ;	../qsort.c: 55: for(unsigned char *i = base; i < b + nmemb * size; i += size)
+      000074r8Er0F                  180 	mov	a, _qsort_sloc4_1_0+0
+      000076r92r0B                  181 	mov	_qsort_sloc6_1_0+0, a
+      000078r8Fr0F                  182 	mov	a, _qsort_sloc4_1_0+1
+      00007Ar93r0B                  183 	mov	_qsort_sloc6_1_0+1, a
+      00007Cr8Ar0F                  184 	mov	a, _qsort_PARM_3+0
+      00007Er94r0B                  185 	mov	_qsort_sloc7_1_0+0, a
+      000080r8Br0F                  186 	mov	a, _qsort_PARM_3+1
+      000082r95r0B                  187 	mov	_qsort_sloc7_1_0+1, a
+      000084r88r0F                  188 	mov	a, _qsort_PARM_2+0
+      000086r80r0B                  189 	mov	__mulint_PARM_1+0, a
+      000088r89r0F                  190 	mov	a, _qsort_PARM_2+1
+      00008Ar81r0B                  191 	mov	__mulint_PARM_1+1, a
+      00008Cr94r0F                  192 	mov	a, _qsort_sloc7_1_0+0
+      00008Er80r0B                  193 	mov	__mulint_PARM_2+0, a
+      000090r95r0F                  194 	mov	a, _qsort_sloc7_1_0+1
+      000092r81r0B                  195 	mov	__mulint_PARM_2+1, a
+      000094r00r38                  196 	call	__mulint
+      000096r10r0C                  197 	add	a, _qsort_sloc5_1_0+0
+      000098r96r0B                  198 	mov	_qsort_sloc8_1_0+0, a
+      00009Ar91r0F                  199 	mov	a, _qsort_sloc5_1_0+1
+      00009Cr00r0D                  200 	addc	a, p
+      00009Er97r0B                  201 	mov	_qsort_sloc8_1_0+1, a
+      0000A0                        202 00110$:
+      0000A0r92r0F                  203 	mov	a, _qsort_sloc6_1_0+0
+      0000A2r96r0C                  204 	sub	a, _qsort_sloc8_1_0+0
+      0000A4r93r0F                  205 	mov	a, _qsort_sloc6_1_0+1
+      0000A6r97r0D                  206 	subc	a, _qsort_sloc8_1_0+1
+      0000A8 40 1A                  207 	t1sn	f, c
+      0000AAr5Ar31                  208 	goto	00112$
+                                    209 ;	../qsort.c: 57: for(unsigned char *j = i; (j > b) && (*compar)(j, j - size) < 0; j -= size)
+      0000ACr92r0F                  210 	mov	a, _qsort_sloc6_1_0+0
+      0000AEr98r0B                  211 	mov	_qsort_sloc9_1_0+0, a
+      0000B0r93r0F                  212 	mov	a, _qsort_sloc6_1_0+1
+      0000B2r99r0B                  213 	mov	_qsort_sloc9_1_0+1, a
+      0000B4                        214 00107$:
+      0000B4r90r0F                  215 	mov	a, _qsort_sloc5_1_0+0
+      0000B6r98r0C                  216 	sub	a, _qsort_sloc9_1_0+0
+      0000B8r91r0F                  217 	mov	a, _qsort_sloc5_1_0+1
+      0000BAr99r0D                  218 	subc	a, _qsort_sloc9_1_0+1
+      0000BC 40 1A                  219 	t1sn	f, c
+      0000BEr50r31                  220 	goto	00111$
+      0000C0r98r0F                  221 	mov	a, _qsort_sloc9_1_0+0
+      0000C2r94r0C                  222 	sub	a, _qsort_sloc7_1_0+0
+      0000C4r9Ar0B                  223 	mov	_qsort_sloc10_1_0+0, a
+      0000C6r99r0F                  224 	mov	a, _qsort_sloc9_1_0+1
+      0000C8r95r0D                  225 	subc	a, _qsort_sloc7_1_0+1
+      0000CAr9Br0B                  226 	mov	_qsort_sloc10_1_0+1, a
+      0000CCr9Ar0F                  227 	mov	a, _qsort_sloc10_1_0+0
+      0000CEr9Cr0B                  228 	mov	_qsort_sloc11_1_0+0, a
+      0000D0r9Br0F                  229 	mov	a, _qsort_sloc10_1_0+1
+      0000D2r9Dr0B                  230 	mov	_qsort_sloc11_1_0+1, a
+      0000D4r98r0F                  231 	mov	a, _qsort_sloc9_1_0+0
+      0000D6r9Er0B                  232 	mov	_qsort_sloc12_1_0+0, a
+      0000D8r99r0F                  233 	mov	a, _qsort_sloc9_1_0+1
+      0000DAr9Fr0B                  234 	mov	_qsort_sloc12_1_0+1, a
+      0000DCr9Cr0F                  235 	mov	a, _qsort_sloc11_1_0+0
+      0000DE 72 00                  236 	push	af
+      0000E0 C2 01                  237 	mov	a, sp
+      0000E2 FF 28                  238 	add	a, #0xff
+      0000E4r80r0B                  239 	mov	p, a
+      0000E6r9Dr0F                  240 	mov	a, _qsort_sloc11_1_0+1
+      0000E8r80r03                  241 	idxm	p, a
+      0000EAr9Er0F                  242 	mov	a, _qsort_sloc12_1_0+0
+      0000EC 72 00                  243 	push	af
+      0000EEr00r12                  244 	inc	p
+      0000F0r00r12                  245 	inc	p
+      0000F2r9Fr0F                  246 	mov	a, _qsort_sloc12_1_0+1
+      0000F4r80r03                  247 	idxm	p, a
+      0000F6r14r2F                  248 	mov	a, #<(00138$)
+      0000F8 72 00                  249 	push	af
+      0000FA C2 01                  250 	mov	a, sp
+      0000FCr80r0B                  251 	mov	p, a
+      0000FEr80r12                  252 	dec	p
+      000100r14r2F                  253 	mov	a, #>(00138$)
+      000102r80r03                  254 	idxm	p, a
+      000104r8Cr0F                  255 	mov	a, _qsort_PARM_4+0
+      000106 72 00                  256 	push	af
+      000108 C2 01                  257 	mov	a, sp
+      00010A FF 28                  258 	add	a, #0xff
+      00010Cr80r0B                  259 	mov	p, a
+      00010Er8Dr0F                  260 	mov	a, _qsort_PARM_4+1
+      000110r80r03                  261 	idxm	p, a
+      000112 7A 00                  262 	ret
+      000114                        263 00138$:
+      000114rA0r0B                  264 	mov	_qsort_sloc13_1_0+0, a
+      000116r80r0F                  265 	mov	a, p
+      000118rA1r0B                  266 	mov	_qsort_sloc13_1_0+1, a
+      00011A C2 01                  267 	mov	a, sp
+      00011C FC 28                  268 	add	a, #-4
+      00011E 82 01                  269 	mov	sp, a
+      000120rA1r0F                  270 	mov	a, _qsort_sloc13_1_0+1
+      000122 80 29                  271 	sub	a, #0x80
+      000124 40 18                  272 	t0sn	f, c
+      000126r50r31                  273 	goto	00111$
+                                    274 ;	../qsort.c: 58: swap(j, j - size, size);
+      000128r98r0F                  275 	mov	a, _qsort_sloc9_1_0+0
+      00012Ar80r0B                  276 	mov	_swap_PARM_1+0, a
+      00012Cr99r0F                  277 	mov	a, _qsort_sloc9_1_0+1
+      00012Er81r0B                  278 	mov	_swap_PARM_1+1, a
+      000130r9Br0F                  279 	mov	a, _qsort_sloc10_1_0+1
+      000132r80r0B                  280 	mov	p, a
+      000134r9Ar0F                  281 	mov	a, _qsort_sloc10_1_0+0
+      000136r82r0B                  282 	mov	_swap_PARM_2+0, a
+      000138r80r0F                  283 	mov	a, p
+      00013Ar83r0B                  284 	mov	_swap_PARM_2+1, a
+      00013Cr94r0F                  285 	mov	a, _qsort_sloc7_1_0+0
+      00013Er84r0B                  286 	mov	_swap_PARM_3+0, a
+      000140r95r0F                  287 	mov	a, _qsort_sloc7_1_0+1
+      000142r85r0B                  288 	mov	_swap_PARM_3+1, a
+      000144r00r38                  289 	call	_swap
+                                    290 ;	../qsort.c: 57: for(unsigned char *j = i; (j > b) && (*compar)(j, j - size) < 0; j -= size)
+      000146r9Ar0F                  291 	mov	a, _qsort_sloc10_1_0+0
+      000148r98r0B                  292 	mov	_qsort_sloc9_1_0+0, a
+      00014Ar9Br0F                  293 	mov	a, _qsort_sloc10_1_0+1
+      00014Cr99r0B                  294 	mov	_qsort_sloc9_1_0+1, a
+      00014ErB4r30                  295 	goto	00107$
+      000150                        296 00111$:
+                                    297 ;	../qsort.c: 55: for(unsigned char *i = base; i < b + nmemb * size; i += size)
+      000150r94r0F                  298 	mov	a, _qsort_sloc7_1_0+0
+      000152r12r08                  299 	add	_qsort_sloc6_1_0+0, a
+      000154r95r0F                  300 	mov	a, _qsort_sloc7_1_0+1
+      000156r13r09                  301 	addc	_qsort_sloc6_1_0+1, a
+      000158rA0r30                  302 	goto	00110$
+      00015A                        303 00112$:
+                                    304 ;	../qsort.c: 60: }
+      00015A 7A 00                  305 	ret
+                                    306 	.area CODE
+                                    307 	.area CONST
+                                    308 	.area CABS (ABS)

@@ -1,0 +1,99 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strcpy
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strcpy_PARM_2
+                                     17 	.globl _strcpy_PARM_1
+                                     18 	.globl _strcpy
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _strcpy_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _strcpy_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _strcpy_sloc0_1_0:
+      000000                         37 	.ds 2
+      000002                         38 _strcpy_sloc1_1_0:
+      000002                         39 	.ds 2
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_strcpy.c: 34: char * strcpy ( char * d, const char * s )
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function strcpy
+                                     63 ;	-----------------------------------------
+      000000                         64 _strcpy:
+                                     65 ;	../_strcpy.c: 44: register char * d1 = d;
+      000000r80r0F                   66 	mov	a, _strcpy_PARM_1+0
+      000002r80r0B                   67 	mov	_strcpy_sloc0_1_0+0, a
+      000004r81r0F                   68 	mov	a, _strcpy_PARM_1+1
+      000006r81r0B                   69 	mov	_strcpy_sloc0_1_0+1, a
+                                     70 ;	../_strcpy.c: 46: while (*d1++ = *s++) ;
+      000008r82r0F                   71 	mov	a, _strcpy_PARM_2+0
+      00000Ar82r0B                   72 	mov	_strcpy_sloc1_1_0+0, a
+      00000Cr83r0F                   73 	mov	a, _strcpy_PARM_2+1
+      00000Er83r0B                   74 	mov	_strcpy_sloc1_1_0+1, a
+      000010                         75 00101$:
+      000010r82r0F                   76 	mov	a, _strcpy_sloc1_1_0+0
+      000012r80r0B                   77 	mov	p, a
+      000014r83r0F                   78 	mov	a, _strcpy_sloc1_1_0+1
+      000016r00r38                   79 	call	__gptrget
+      000018r02r12                   80 	inc	_strcpy_sloc1_1_0+0
+      00001Ar03r10                   81 	addc	_strcpy_sloc1_1_0+1
+      00001C 72 00                   82 	push	af
+      00001Er80r0F                   83 	mov	a, _strcpy_sloc0_1_0+0
+      000020r80r0B                   84 	mov	p, a
+      000022 73 00                   85 	pop	af
+      000024r80r03                   86 	idxm	p, a
+      000026r00r12                   87 	inc	_strcpy_sloc0_1_0+0
+      000028r01r10                   88 	addc	_strcpy_sloc0_1_0+1
+      00002A 00 2A                   89 	ceqsn	a, #0x00
+      00002Cr10r30                   90 	goto	00101$
+                                     91 ;	../_strcpy.c: 48: return d;
+      00002Er81r0F                   92 	mov	a, _strcpy_PARM_1+1
+      000030r80r0B                   93 	mov	p, a
+      000032r80r0F                   94 	mov	a, _strcpy_PARM_1+0
+                                     95 ;	../_strcpy.c: 50: }
+      000034 7A 00                   96 	ret
+                                     97 	.area CODE
+                                     98 	.area CONST
+                                     99 	.area CABS (ABS)

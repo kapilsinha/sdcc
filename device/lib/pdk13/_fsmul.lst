@@ -1,0 +1,811 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _fsmul
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___fsmul_PARM_2
+                                     17 	.globl ___fsmul_PARM_1
+                                     18 	.globl ___fsmul
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___fsmul_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 ___fsmul_PARM_2:
+      000004                         31 	.ds 4
+      000008                         32 ___fsmul_fl1_65536_21:
+      000008                         33 	.ds 4
+      00000C                         34 ___fsmul_fl2_65536_21:
+      00000C                         35 	.ds 4
+      000010                         36 ___fsmul_result_65536_21:
+      000010                         37 	.ds 4
+      000014                         38 ___fsmul_sloc0_1_0:
+      000014                         39 	.ds 4
+      000018                         40 ___fsmul_sloc1_1_0:
+      000018                         41 	.ds 4
+      00001C                         42 ___fsmul_sloc2_1_0:
+      00001C                         43 	.ds 4
+      000020                         44 ___fsmul_sloc3_1_0:
+      000020                         45 	.ds 4
+      000024                         46 ___fsmul_sloc4_1_0:
+      000024                         47 	.ds 4
+      000028                         48 ___fsmul_sloc5_1_0:
+      000028                         49 	.ds 4
+      00002C                         50 ___fsmul_sloc6_1_0:
+      00002C                         51 	.ds 4
+      000030                         52 ___fsmul_sloc7_1_0:
+      000030                         53 	.ds 4
+      000034                         54 ___fsmul_sloc8_1_0:
+      000034                         55 	.ds 4
+      000038                         56 ___fsmul_sloc9_1_0:
+      000038                         57 	.ds 4
+      00003C                         58 ___fsmul_sloc10_1_0:
+      00003C                         59 	.ds 4
+      000040                         60 ___fsmul_sloc11_1_0:
+      000040                         61 	.ds 4
+      000044                         62 ___fsmul_sloc12_1_0:
+      000044                         63 	.ds 1
+      000045                         64 ___fsmul_sloc13_1_0:
+      000045                         65 	.ds 4
+      000049                         66 ___fsmul_sloc14_1_0:
+      000049                         67 	.ds 4
+      00004D                         68 ___fsmul_sloc15_1_0:
+      00004D                         69 	.ds 2
+      00004F                         70 ___fsmul_sloc16_1_0:
+      00004F                         71 	.ds 2
+      000051                         72 ___fsmul_sloc17_1_0:
+      000051                         73 	.ds 4
+      000055                         74 ___fsmul_sloc18_1_0:
+      000055                         75 	.ds 4
+      000059                         76 ___fsmul_sloc19_1_0:
+      000059                         77 	.ds 2
+      00005B                         78 ___fsmul_sloc20_1_0:
+      00005B                         79 	.ds 2
+      00005D                         80 ___fsmul_sloc21_1_0:
+      00005D                         81 	.ds 4
+      000061                         82 ___fsmul_sloc22_1_0:
+      000061                         83 	.ds 4
+      000065                         84 ___fsmul_sloc23_1_0:
+      000065                         85 	.ds 4
+      000069                         86 ___fsmul_sloc24_1_0:
+      000069                         87 	.ds 4
+      00006D                         88 ___fsmul_sloc25_1_0:
+      00006D                         89 	.ds 4
+      000071                         90 ___fsmul_sloc26_1_0:
+      000071                         91 	.ds 4
+      000075                         92 ___fsmul_sloc27_1_0:
+      000075                         93 	.ds 4
+      000079                         94 ___fsmul_sloc28_1_0:
+      000079                         95 	.ds 4
+      00007D                         96 ___fsmul_sloc29_1_0:
+      00007D                         97 	.ds 4
+      000081                         98 ___fsmul_sloc30_1_0:
+      000081                         99 	.ds 4
+      000085                        100 ___fsmul_sloc31_1_0:
+      000085                        101 	.ds 4
+      000089                        102 ___fsmul_sloc32_1_0:
+      000089                        103 	.ds 2
+      00008B                        104 ___fsmul_sloc33_1_0:
+      00008B                        105 	.ds 4
+      00008F                        106 ___fsmul_sloc34_1_0:
+      00008F                        107 	.ds 4
+      000093                        108 ___fsmul_sloc35_1_0:
+      000093                        109 	.ds 4
+      000097                        110 ___fsmul_sloc36_1_0:
+      000097                        111 	.ds 4
+      00009B                        112 ___fsmul_sloc37_1_0:
+      00009B                        113 	.ds 2
+      00009D                        114 ___fsmul_sloc38_1_0:
+      00009D                        115 	.ds 4
+      0000A1                        116 ___fsmul_sloc39_1_0:
+      0000A1                        117 	.ds 4
+      0000A5                        118 ___fsmul_sloc40_1_0:
+      0000A5                        119 	.ds 4
+      0000A9                        120 ___fsmul_sloc41_1_0:
+      0000A9                        121 	.ds 4
+      0000AD                        122 ___fsmul_sloc42_1_0:
+      0000AD                        123 	.ds 4
+      0000B1                        124 ___fsmul_sloc43_1_0:
+      0000B1                        125 	.ds 4
+      0000B5                        126 ___fsmul_sloc44_1_0:
+      0000B5                        127 	.ds 4
+      0000B9                        128 ___fsmul_sloc45_1_0:
+      0000B9                        129 	.ds 4
+      0000BD                        130 ___fsmul_sloc46_1_0:
+      0000BD                        131 	.ds 4
+      0000C1                        132 ___fsmul_sloc47_1_0:
+      0000C1                        133 	.ds 4
+      0000C5                        134 ___fsmul_sloc48_1_0:
+      0000C5                        135 	.ds 4
+                                    136 ;--------------------------------------------------------
+                                    137 ; overlayable items in ram 
+                                    138 ;--------------------------------------------------------
+                                    139 ;--------------------------------------------------------
+                                    140 ; absolute external ram data
+                                    141 ;--------------------------------------------------------
+                                    142 	.area DABS (ABS)
+                                    143 ;--------------------------------------------------------
+                                    144 ; global & static initialisations
+                                    145 ;--------------------------------------------------------
+                                    146 	.area HOME
+                                    147 	.area GSINIT
+                                    148 	.area GSFINAL
+                                    149 	.area GSINIT
+                                    150 ;--------------------------------------------------------
+                                    151 ; Home
+                                    152 ;--------------------------------------------------------
+                                    153 	.area HOME
+                                    154 	.area HOME
+                                    155 ;--------------------------------------------------------
+                                    156 ; code
+                                    157 ;--------------------------------------------------------
+                                    158 	.area CODE
+                                    159 ;	../_fsmul.c: 241: float __fsmul (float a1, float a2) {
+                                    160 ;	-----------------------------------------
+                                    161 ;	 function __fsmul
+                                    162 ;	-----------------------------------------
+      000000                        163 ___fsmul:
+                                    164 ;	../_fsmul.c: 247: fl1.f = a1;
+      000000r80r0F                  165 	mov	a, ___fsmul_PARM_1+0
+      000002r88r0B                  166 	mov	___fsmul_fl1_65536_21+0, a
+      000004r81r0F                  167 	mov	a, ___fsmul_PARM_1+1
+      000006r89r0B                  168 	mov	___fsmul_fl1_65536_21+1, a
+      000008r82r0F                  169 	mov	a, ___fsmul_PARM_1+2
+      00000Ar8Ar0B                  170 	mov	___fsmul_fl1_65536_21+2, a
+      00000Cr83r0F                  171 	mov	a, ___fsmul_PARM_1+3
+      00000Er8Br0B                  172 	mov	___fsmul_fl1_65536_21+3, a
+                                    173 ;	../_fsmul.c: 248: fl2.f = a2;
+      000010r84r0F                  174 	mov	a, ___fsmul_PARM_2+0
+      000012r8Cr0B                  175 	mov	___fsmul_fl2_65536_21+0, a
+      000014r85r0F                  176 	mov	a, ___fsmul_PARM_2+1
+      000016r8Dr0B                  177 	mov	___fsmul_fl2_65536_21+1, a
+      000018r86r0F                  178 	mov	a, ___fsmul_PARM_2+2
+      00001Ar8Er0B                  179 	mov	___fsmul_fl2_65536_21+2, a
+      00001Cr87r0F                  180 	mov	a, ___fsmul_PARM_2+3
+      00001Er8Fr0B                  181 	mov	___fsmul_fl2_65536_21+3, a
+                                    182 ;	../_fsmul.c: 250: if (!fl1.l || !fl2.l)
+      000020r88r0F                  183 	mov	a, ___fsmul_fl1_65536_21+0
+      000022rA0r0B                  184 	mov	___fsmul_sloc3_1_0+0, a
+      000024r89r0F                  185 	mov	a, ___fsmul_fl1_65536_21+1
+      000026rA1r0B                  186 	mov	___fsmul_sloc3_1_0+1, a
+      000028r8Ar0F                  187 	mov	a, ___fsmul_fl1_65536_21+2
+      00002ArA2r0B                  188 	mov	___fsmul_sloc3_1_0+2, a
+      00002Cr8Br0F                  189 	mov	a, ___fsmul_fl1_65536_21+3
+      00002ErA3r0B                  190 	mov	___fsmul_sloc3_1_0+3, a
+      000030rA0r0F                  191 	mov	a, ___fsmul_sloc3_1_0+0
+      000032rA1r0E                  192 	or	a, ___fsmul_sloc3_1_0+1
+      000034rA2r0E                  193 	or	a, ___fsmul_sloc3_1_0+2
+      000036rA3r0E                  194 	or	a, ___fsmul_sloc3_1_0+3
+      000038 00 2B                  195 	cneqsn	a, #0x00
+      00003Ar58r30                  196 	goto	00101$
+      00003Cr8Cr0F                  197 	mov	a, ___fsmul_fl2_65536_21+0
+      00003ErA4r0B                  198 	mov	___fsmul_sloc4_1_0+0, a
+      000040r8Dr0F                  199 	mov	a, ___fsmul_fl2_65536_21+1
+      000042rA5r0B                  200 	mov	___fsmul_sloc4_1_0+1, a
+      000044r8Er0F                  201 	mov	a, ___fsmul_fl2_65536_21+2
+      000046rA6r0B                  202 	mov	___fsmul_sloc4_1_0+2, a
+      000048r8Fr0F                  203 	mov	a, ___fsmul_fl2_65536_21+3
+      00004ArA7r0B                  204 	mov	___fsmul_sloc4_1_0+3, a
+      00004CrA4r0F                  205 	mov	a, ___fsmul_sloc4_1_0+0
+      00004ErA5r0E                  206 	or	a, ___fsmul_sloc4_1_0+1
+      000050rA6r0E                  207 	or	a, ___fsmul_sloc4_1_0+2
+      000052rA7r0E                  208 	or	a, ___fsmul_sloc4_1_0+3
+      000054 00 2A                  209 	ceqsn	a, #0x00
+      000056r7Ar30                  210 	goto	00102$
+      000058                        211 00101$:
+                                    212 ;	../_fsmul.c: 251: return (0);
+      000058 C2 01                  213 	mov	a, sp
+      00005A FC 28                  214 	add	a, #0xfc
+      00005Cr80r0B                  215 	mov	p, a
+      00005Er81r03                  216 	idxm	a, p
+      000060r80r0B                  217 	mov	p, a
+      000062 00 2F                  218 	mov	a, #0x00
+      000064r80r03                  219 	idxm	p, a
+      000066r00r12                  220 	inc	p
+      000068 00 2F                  221 	mov	a, #0x00
+      00006Ar80r03                  222 	idxm	p, a
+      00006Cr00r12                  223 	inc	p
+      00006E 00 2F                  224 	mov	a, #0x00
+      000070r80r03                  225 	idxm	p, a
+      000072r00r12                  226 	inc	p
+      000074 00 2F                  227 	mov	a, #0x00
+      000076r80r03                  228 	idxm	p, a
+      000078 7A 00                  229 	ret
+      00007A                        230 00102$:
+                                    231 ;	../_fsmul.c: 254: sign = SIGN (fl1.l) ^ SIGN (fl2.l);
+      00007Ar88r0F                  232 	mov	a, ___fsmul_fl1_65536_21+0
+      00007CrA8r0B                  233 	mov	___fsmul_sloc5_1_0+0, a
+      00007Er89r0F                  234 	mov	a, ___fsmul_fl1_65536_21+1
+      000080rA9r0B                  235 	mov	___fsmul_sloc5_1_0+1, a
+      000082r8Ar0F                  236 	mov	a, ___fsmul_fl1_65536_21+2
+      000084rAAr0B                  237 	mov	___fsmul_sloc5_1_0+2, a
+      000086r8Br0F                  238 	mov	a, ___fsmul_fl1_65536_21+3
+      000088rABr0B                  239 	mov	___fsmul_sloc5_1_0+3, a
+      00008ArACr0B                  240 	mov	___fsmul_sloc6_1_0+0, a
+      00008Cr2Dr13                  241 	clear	___fsmul_sloc6_1_0+1
+      00008Er2Er13                  242 	clear	___fsmul_sloc6_1_0+2
+      000090r2Fr13                  243 	clear	___fsmul_sloc6_1_0+3
+      000092 07 2F                  244 	mov	a, #7
+      000094                        245 00149$:
+      000094r2Cr15                  246 	sr	___fsmul_sloc6_1_0+0
+      000096 63 00                  247 	dzsn	a
+      000098r94r30                  248 	goto	00149$
+      00009ArACr0F                  249 	mov	a, ___fsmul_sloc6_1_0+0
+      00009C 01 2C                  250 	and	a, #0x01
+      00009ErB0r0B                  251 	mov	___fsmul_sloc7_1_0+0, a
+      0000A0r31r13                  252 	clear	___fsmul_sloc7_1_0+1
+      0000A2r32r13                  253 	clear	___fsmul_sloc7_1_0+2
+      0000A4r33r13                  254 	clear	___fsmul_sloc7_1_0+3
+      0000A6r8Cr0F                  255 	mov	a, ___fsmul_fl2_65536_21+0
+      0000A8rB4r0B                  256 	mov	___fsmul_sloc8_1_0+0, a
+      0000AAr8Dr0F                  257 	mov	a, ___fsmul_fl2_65536_21+1
+      0000ACrB5r0B                  258 	mov	___fsmul_sloc8_1_0+1, a
+      0000AEr8Er0F                  259 	mov	a, ___fsmul_fl2_65536_21+2
+      0000B0rB6r0B                  260 	mov	___fsmul_sloc8_1_0+2, a
+      0000B2r8Fr0F                  261 	mov	a, ___fsmul_fl2_65536_21+3
+      0000B4rB7r0B                  262 	mov	___fsmul_sloc8_1_0+3, a
+      0000B6rB8r0B                  263 	mov	___fsmul_sloc9_1_0+0, a
+      0000B8r39r13                  264 	clear	___fsmul_sloc9_1_0+1
+      0000BAr3Ar13                  265 	clear	___fsmul_sloc9_1_0+2
+      0000BCr3Br13                  266 	clear	___fsmul_sloc9_1_0+3
+      0000BE 07 2F                  267 	mov	a, #7
+      0000C0                        268 00150$:
+      0000C0r38r15                  269 	sr	___fsmul_sloc9_1_0+0
+      0000C2 63 00                  270 	dzsn	a
+      0000C4rC0r30                  271 	goto	00150$
+      0000C6rB8r0F                  272 	mov	a, ___fsmul_sloc9_1_0+0
+      0000C8 01 2C                  273 	and	a, #0x01
+      0000CArBCr0B                  274 	mov	___fsmul_sloc10_1_0+0, a
+      0000CCr3Dr13                  275 	clear	___fsmul_sloc10_1_0+1
+      0000CEr3Er13                  276 	clear	___fsmul_sloc10_1_0+2
+      0000D0r3Fr13                  277 	clear	___fsmul_sloc10_1_0+3
+      0000D2rB0r0F                  278 	mov	a, ___fsmul_sloc7_1_0+0
+      0000D4r3Cr0F                  279 	xor	a, ___fsmul_sloc10_1_0+0
+      0000D6rC0r0B                  280 	mov	___fsmul_sloc11_1_0+0, a
+      0000D8rB1r0F                  281 	mov	a, ___fsmul_sloc7_1_0+1
+      0000DAr3Dr0F                  282 	xor	a, ___fsmul_sloc10_1_0+1
+      0000DCrC1r0B                  283 	mov	___fsmul_sloc11_1_0+1, a
+      0000DErB2r0F                  284 	mov	a, ___fsmul_sloc7_1_0+2
+      0000E0r3Er0F                  285 	xor	a, ___fsmul_sloc10_1_0+2
+      0000E2rC2r0B                  286 	mov	___fsmul_sloc11_1_0+2, a
+      0000E4rB3r0F                  287 	mov	a, ___fsmul_sloc7_1_0+3
+      0000E6r3Fr0F                  288 	xor	a, ___fsmul_sloc10_1_0+3
+      0000E8rC3r0B                  289 	mov	___fsmul_sloc11_1_0+3, a
+      0000EArC0r0F                  290 	mov	a, ___fsmul_sloc11_1_0+0
+      0000ECrC4r0B                  291 	mov	___fsmul_sloc12_1_0+0, a
+                                    292 ;	../_fsmul.c: 255: exp = EXP (fl1.l) - EXCESS;
+      0000EEr88r0F                  293 	mov	a, ___fsmul_fl1_65536_21+0
+      0000F0rC5r0B                  294 	mov	___fsmul_sloc13_1_0+0, a
+      0000F2r89r0F                  295 	mov	a, ___fsmul_fl1_65536_21+1
+      0000F4rC6r0B                  296 	mov	___fsmul_sloc13_1_0+1, a
+      0000F6r8Ar0F                  297 	mov	a, ___fsmul_fl1_65536_21+2
+      0000F8rC7r0B                  298 	mov	___fsmul_sloc13_1_0+2, a
+      0000FAr8Br0F                  299 	mov	a, ___fsmul_fl1_65536_21+3
+      0000FCrC8r0B                  300 	mov	___fsmul_sloc13_1_0+3, a
+      0000FErC7r0F                  301 	mov	a, ___fsmul_sloc13_1_0+2
+      000100rC9r0B                  302 	mov	___fsmul_sloc14_1_0+0, a
+      000102rC8r0F                  303 	mov	a, ___fsmul_sloc13_1_0+3
+      000104rCAr0B                  304 	mov	___fsmul_sloc14_1_0+1, a
+      000106r4Br13                  305 	clear	___fsmul_sloc14_1_0+2
+      000108r4Cr13                  306 	clear	___fsmul_sloc14_1_0+3
+      00010A 07 2F                  307 	mov	a, #7
+      00010C                        308 00151$:
+      00010Cr4Ar15                  309 	sr	___fsmul_sloc14_1_0+1
+      00010Er49r16                  310 	src	___fsmul_sloc14_1_0+0
+      000110 63 00                  311 	dzsn	a
+      000112r0Cr31                  312 	goto	00151$
+      000114rCAr0F                  313 	mov	a, ___fsmul_sloc14_1_0+1
+      000116r80r0B                  314 	mov	p, a
+      000118rC9r0F                  315 	mov	a, ___fsmul_sloc14_1_0+0
+      00011ArCDr0B                  316 	mov	___fsmul_sloc15_1_0+0, a
+      00011Cr4Er13                  317 	clear	___fsmul_sloc15_1_0+1
+      00011ErCDr0F                  318 	mov	a, ___fsmul_sloc15_1_0+0
+      000120 7E 29                  319 	sub	a, #0x7e
+      000122rCFr0B                  320 	mov	___fsmul_sloc16_1_0+0, a
+      000124rCEr0F                  321 	mov	a, ___fsmul_sloc15_1_0+1
+      000126 61 00                  322 	subc	a
+      000128rD0r0B                  323 	mov	___fsmul_sloc16_1_0+1, a
+                                    324 ;	../_fsmul.c: 256: exp += EXP (fl2.l);
+      00012Ar8Cr0F                  325 	mov	a, ___fsmul_fl2_65536_21+0
+      00012CrD1r0B                  326 	mov	___fsmul_sloc17_1_0+0, a
+      00012Er8Dr0F                  327 	mov	a, ___fsmul_fl2_65536_21+1
+      000130rD2r0B                  328 	mov	___fsmul_sloc17_1_0+1, a
+      000132r8Er0F                  329 	mov	a, ___fsmul_fl2_65536_21+2
+      000134rD3r0B                  330 	mov	___fsmul_sloc17_1_0+2, a
+      000136r8Fr0F                  331 	mov	a, ___fsmul_fl2_65536_21+3
+      000138rD4r0B                  332 	mov	___fsmul_sloc17_1_0+3, a
+      00013ArD3r0F                  333 	mov	a, ___fsmul_sloc17_1_0+2
+      00013CrD5r0B                  334 	mov	___fsmul_sloc18_1_0+0, a
+      00013ErD4r0F                  335 	mov	a, ___fsmul_sloc17_1_0+3
+      000140rD6r0B                  336 	mov	___fsmul_sloc18_1_0+1, a
+      000142r57r13                  337 	clear	___fsmul_sloc18_1_0+2
+      000144r58r13                  338 	clear	___fsmul_sloc18_1_0+3
+      000146 07 2F                  339 	mov	a, #7
+      000148                        340 00152$:
+      000148r56r15                  341 	sr	___fsmul_sloc18_1_0+1
+      00014Ar55r16                  342 	src	___fsmul_sloc18_1_0+0
+      00014C 63 00                  343 	dzsn	a
+      00014Er48r31                  344 	goto	00152$
+      000150rD6r0F                  345 	mov	a, ___fsmul_sloc18_1_0+1
+      000152r80r0B                  346 	mov	p, a
+      000154rD5r0F                  347 	mov	a, ___fsmul_sloc18_1_0+0
+      000156rD9r0B                  348 	mov	___fsmul_sloc19_1_0+0, a
+      000158r5Ar13                  349 	clear	___fsmul_sloc19_1_0+1
+      00015ArCFr0F                  350 	mov	a, ___fsmul_sloc16_1_0+0
+      00015Cr59r0C                  351 	add	a, ___fsmul_sloc19_1_0+0
+      00015ErDBr0B                  352 	mov	___fsmul_sloc20_1_0+0, a
+      000160rD0r0F                  353 	mov	a, ___fsmul_sloc16_1_0+1
+      000162r5Ar0D                  354 	addc	a, ___fsmul_sloc19_1_0+1
+      000164rDCr0B                  355 	mov	___fsmul_sloc20_1_0+1, a
+                                    356 ;	../_fsmul.c: 258: fl1.l = MANT (fl1.l);
+      000166r88r0F                  357 	mov	a, ___fsmul_fl1_65536_21+0
+      000168rDDr0B                  358 	mov	___fsmul_sloc21_1_0+0, a
+      00016Ar89r0F                  359 	mov	a, ___fsmul_fl1_65536_21+1
+      00016CrDEr0B                  360 	mov	___fsmul_sloc21_1_0+1, a
+      00016Er8Ar0F                  361 	mov	a, ___fsmul_fl1_65536_21+2
+      000170rDFr0B                  362 	mov	___fsmul_sloc21_1_0+2, a
+      000172r8Br0F                  363 	mov	a, ___fsmul_fl1_65536_21+3
+      000174rE0r0B                  364 	mov	___fsmul_sloc21_1_0+3, a
+      000176rDDr0F                  365 	mov	a, ___fsmul_sloc21_1_0+0
+      000178rE1r0B                  366 	mov	___fsmul_sloc22_1_0+0, a
+      00017ArDEr0F                  367 	mov	a, ___fsmul_sloc21_1_0+1
+      00017CrE2r0B                  368 	mov	___fsmul_sloc22_1_0+1, a
+      00017ErDFr0F                  369 	mov	a, ___fsmul_sloc21_1_0+2
+      000180 7F 2C                  370 	and	a, #0x7f
+      000182rE3r0B                  371 	mov	___fsmul_sloc22_1_0+2, a
+      000184r64r13                  372 	clear	___fsmul_sloc22_1_0+3
+      000186rE1r0F                  373 	mov	a, ___fsmul_sloc22_1_0+0
+      000188rE5r0B                  374 	mov	___fsmul_sloc23_1_0+0, a
+      00018ArE2r0F                  375 	mov	a, ___fsmul_sloc22_1_0+1
+      00018CrE6r0B                  376 	mov	___fsmul_sloc23_1_0+1, a
+      00018ErE3r0F                  377 	mov	a, ___fsmul_sloc22_1_0+2
+      000190 80 2D                  378 	or	a, #0x80
+      000192rE7r0B                  379 	mov	___fsmul_sloc23_1_0+2, a
+      000194rE4r0F                  380 	mov	a, ___fsmul_sloc22_1_0+3
+      000196rE8r0B                  381 	mov	___fsmul_sloc23_1_0+3, a
+      000198rE5r0F                  382 	mov	a, ___fsmul_sloc23_1_0+0
+      00019Ar88r0B                  383 	mov	___fsmul_fl1_65536_21+0, a
+      00019CrE6r0F                  384 	mov	a, ___fsmul_sloc23_1_0+1
+      00019Er89r0B                  385 	mov	___fsmul_fl1_65536_21+1, a
+      0001A0rE7r0F                  386 	mov	a, ___fsmul_sloc23_1_0+2
+      0001A2r8Ar0B                  387 	mov	___fsmul_fl1_65536_21+2, a
+      0001A4rE8r0F                  388 	mov	a, ___fsmul_sloc23_1_0+3
+      0001A6r8Br0B                  389 	mov	___fsmul_fl1_65536_21+3, a
+                                    390 ;	../_fsmul.c: 259: fl2.l = MANT (fl2.l);
+      0001A8r8Cr0F                  391 	mov	a, ___fsmul_fl2_65536_21+0
+      0001AArE9r0B                  392 	mov	___fsmul_sloc24_1_0+0, a
+      0001ACr8Dr0F                  393 	mov	a, ___fsmul_fl2_65536_21+1
+      0001AErEAr0B                  394 	mov	___fsmul_sloc24_1_0+1, a
+      0001B0r8Er0F                  395 	mov	a, ___fsmul_fl2_65536_21+2
+      0001B2rEBr0B                  396 	mov	___fsmul_sloc24_1_0+2, a
+      0001B4r8Fr0F                  397 	mov	a, ___fsmul_fl2_65536_21+3
+      0001B6rECr0B                  398 	mov	___fsmul_sloc24_1_0+3, a
+      0001B8rE9r0F                  399 	mov	a, ___fsmul_sloc24_1_0+0
+      0001BArEDr0B                  400 	mov	___fsmul_sloc25_1_0+0, a
+      0001BCrEAr0F                  401 	mov	a, ___fsmul_sloc24_1_0+1
+      0001BErEEr0B                  402 	mov	___fsmul_sloc25_1_0+1, a
+      0001C0rEBr0F                  403 	mov	a, ___fsmul_sloc24_1_0+2
+      0001C2 7F 2C                  404 	and	a, #0x7f
+      0001C4rEFr0B                  405 	mov	___fsmul_sloc25_1_0+2, a
+      0001C6r70r13                  406 	clear	___fsmul_sloc25_1_0+3
+      0001C8rEDr0F                  407 	mov	a, ___fsmul_sloc25_1_0+0
+      0001CArF1r0B                  408 	mov	___fsmul_sloc26_1_0+0, a
+      0001CCrEEr0F                  409 	mov	a, ___fsmul_sloc25_1_0+1
+      0001CErF2r0B                  410 	mov	___fsmul_sloc26_1_0+1, a
+      0001D0rEFr0F                  411 	mov	a, ___fsmul_sloc25_1_0+2
+      0001D2 80 2D                  412 	or	a, #0x80
+      0001D4rF3r0B                  413 	mov	___fsmul_sloc26_1_0+2, a
+      0001D6rF0r0F                  414 	mov	a, ___fsmul_sloc25_1_0+3
+      0001D8rF4r0B                  415 	mov	___fsmul_sloc26_1_0+3, a
+      0001DArF1r0F                  416 	mov	a, ___fsmul_sloc26_1_0+0
+      0001DCr8Cr0B                  417 	mov	___fsmul_fl2_65536_21+0, a
+      0001DErF2r0F                  418 	mov	a, ___fsmul_sloc26_1_0+1
+      0001E0r8Dr0B                  419 	mov	___fsmul_fl2_65536_21+1, a
+      0001E2rF3r0F                  420 	mov	a, ___fsmul_sloc26_1_0+2
+      0001E4r8Er0B                  421 	mov	___fsmul_fl2_65536_21+2, a
+      0001E6rF4r0F                  422 	mov	a, ___fsmul_sloc26_1_0+3
+      0001E8r8Fr0B                  423 	mov	___fsmul_fl2_65536_21+3, a
+                                    424 ;	../_fsmul.c: 262: result = (unsigned long)((unsigned short)(fl1.l >> 8)) * (unsigned short)(fl2.l >> 8);
+      0001EAr88r0F                  425 	mov	a, ___fsmul_fl1_65536_21+0
+      0001ECrF5r0B                  426 	mov	___fsmul_sloc27_1_0+0, a
+      0001EEr89r0F                  427 	mov	a, ___fsmul_fl1_65536_21+1
+      0001F0rF6r0B                  428 	mov	___fsmul_sloc27_1_0+1, a
+      0001F2r8Ar0F                  429 	mov	a, ___fsmul_fl1_65536_21+2
+      0001F4rF7r0B                  430 	mov	___fsmul_sloc27_1_0+2, a
+      0001F6r8Br0F                  431 	mov	a, ___fsmul_fl1_65536_21+3
+      0001F8rF8r0B                  432 	mov	___fsmul_sloc27_1_0+3, a
+      0001FArF6r0F                  433 	mov	a, ___fsmul_sloc27_1_0+1
+      0001FCrF9r0B                  434 	mov	___fsmul_sloc28_1_0+0, a
+      0001FErF7r0F                  435 	mov	a, ___fsmul_sloc27_1_0+2
+      000200rFAr0B                  436 	mov	___fsmul_sloc28_1_0+1, a
+      000202rF8r0F                  437 	mov	a, ___fsmul_sloc27_1_0+3
+      000204rFBr0B                  438 	mov	___fsmul_sloc28_1_0+2, a
+      000206r7Cr13                  439 	clear	___fsmul_sloc28_1_0+3
+      000208rFAr0F                  440 	mov	a, ___fsmul_sloc28_1_0+1
+      00020Ar80r0B                  441 	mov	p, a
+      00020CrF9r0F                  442 	mov	a, ___fsmul_sloc28_1_0+0
+      00020Er80r0B                  443 	mov	__mullong_PARM_1+0, a
+      000210r80r0F                  444 	mov	a, p
+      000212r81r0B                  445 	mov	__mullong_PARM_1+1, a
+      000214r02r13                  446 	clear	__mullong_PARM_1+2
+      000216r03r13                  447 	clear	__mullong_PARM_1+3
+      000218r8Cr0F                  448 	mov	a, ___fsmul_fl2_65536_21+0
+      00021ArFDr0B                  449 	mov	___fsmul_sloc29_1_0+0, a
+      00021Cr8Dr0F                  450 	mov	a, ___fsmul_fl2_65536_21+1
+      00021ErFEr0B                  451 	mov	___fsmul_sloc29_1_0+1, a
+      000220r8Er0F                  452 	mov	a, ___fsmul_fl2_65536_21+2
+      000222rFFr0B                  453 	mov	___fsmul_sloc29_1_0+2, a
+      000224r8Fr0F                  454 	mov	a, ___fsmul_fl2_65536_21+3
+      000226r80r0B                  455 	mov	___fsmul_sloc29_1_0+3, a
+      000228rFEr0F                  456 	mov	a, ___fsmul_sloc29_1_0+1
+      00022Ar81r0B                  457 	mov	___fsmul_sloc30_1_0+0, a
+      00022CrFFr0F                  458 	mov	a, ___fsmul_sloc29_1_0+2
+      00022Er82r0B                  459 	mov	___fsmul_sloc30_1_0+1, a
+      000230r80r0F                  460 	mov	a, ___fsmul_sloc29_1_0+3
+      000232r83r0B                  461 	mov	___fsmul_sloc30_1_0+2, a
+      000234r04r13                  462 	clear	___fsmul_sloc30_1_0+3
+      000236r82r0F                  463 	mov	a, ___fsmul_sloc30_1_0+1
+      000238r80r0B                  464 	mov	p, a
+      00023Ar81r0F                  465 	mov	a, ___fsmul_sloc30_1_0+0
+      00023Cr80r0B                  466 	mov	__mullong_PARM_2+0, a
+      00023Er80r0F                  467 	mov	a, p
+      000240r81r0B                  468 	mov	__mullong_PARM_2+1, a
+      000242r02r13                  469 	clear	__mullong_PARM_2+2
+      000244r03r13                  470 	clear	__mullong_PARM_2+3
+      000246r14r2F                  471 	mov	a, #___fsmul_sloc0_1_0
+      000248 72 00                  472 	push	af
+      00024Ar00r38                  473 	call	__mullong
+      00024C C2 01                  474 	mov	a, sp
+      00024E FE 28                  475 	add	a, #-2
+      000250 82 01                  476 	mov	sp, a
+      000252r94r0F                  477 	mov	a, ___fsmul_sloc0_1_0+0
+      000254r90r0B                  478 	mov	___fsmul_result_65536_21+0, a
+      000256r95r0F                  479 	mov	a, ___fsmul_sloc0_1_0+1
+      000258r91r0B                  480 	mov	___fsmul_result_65536_21+1, a
+      00025Ar96r0F                  481 	mov	a, ___fsmul_sloc0_1_0+2
+      00025Cr92r0B                  482 	mov	___fsmul_result_65536_21+2, a
+      00025Er97r0F                  483 	mov	a, ___fsmul_sloc0_1_0+3
+      000260r93r0B                  484 	mov	___fsmul_result_65536_21+3, a
+                                    485 ;	../_fsmul.c: 263: result += ((unsigned long)((unsigned short)(fl1.l & 0xff)) * (unsigned short)(fl2.l >> 8)) >> 8;
+      000262r88r0F                  486 	mov	a, ___fsmul_fl1_65536_21+0
+      000264r85r0B                  487 	mov	___fsmul_sloc31_1_0+0, a
+      000266r89r0F                  488 	mov	a, ___fsmul_fl1_65536_21+1
+      000268r86r0B                  489 	mov	___fsmul_sloc31_1_0+1, a
+      00026Ar8Ar0F                  490 	mov	a, ___fsmul_fl1_65536_21+2
+      00026Cr87r0B                  491 	mov	___fsmul_sloc31_1_0+2, a
+      00026Er8Br0F                  492 	mov	a, ___fsmul_fl1_65536_21+3
+      000270r88r0B                  493 	mov	___fsmul_sloc31_1_0+3, a
+      000272r86r0F                  494 	mov	a, ___fsmul_sloc31_1_0+1
+      000274r80r0B                  495 	mov	p, a
+      000276r85r0F                  496 	mov	a, ___fsmul_sloc31_1_0+0
+      000278r89r0B                  497 	mov	___fsmul_sloc32_1_0+0, a
+      00027Ar0Ar13                  498 	clear	___fsmul_sloc32_1_0+1
+      00027Cr89r0F                  499 	mov	a, ___fsmul_sloc32_1_0+0
+      00027Er80r0B                  500 	mov	__mullong_PARM_1+0, a
+      000280r8Ar0F                  501 	mov	a, ___fsmul_sloc32_1_0+1
+      000282r81r0B                  502 	mov	__mullong_PARM_1+1, a
+      000284r02r13                  503 	clear	__mullong_PARM_1+2
+      000286r03r13                  504 	clear	__mullong_PARM_1+3
+      000288r8Cr0F                  505 	mov	a, ___fsmul_fl2_65536_21+0
+      00028Ar8Br0B                  506 	mov	___fsmul_sloc33_1_0+0, a
+      00028Cr8Dr0F                  507 	mov	a, ___fsmul_fl2_65536_21+1
+      00028Er8Cr0B                  508 	mov	___fsmul_sloc33_1_0+1, a
+      000290r8Er0F                  509 	mov	a, ___fsmul_fl2_65536_21+2
+      000292r8Dr0B                  510 	mov	___fsmul_sloc33_1_0+2, a
+      000294r8Fr0F                  511 	mov	a, ___fsmul_fl2_65536_21+3
+      000296r8Er0B                  512 	mov	___fsmul_sloc33_1_0+3, a
+      000298r8Cr0F                  513 	mov	a, ___fsmul_sloc33_1_0+1
+      00029Ar8Fr0B                  514 	mov	___fsmul_sloc34_1_0+0, a
+      00029Cr8Dr0F                  515 	mov	a, ___fsmul_sloc33_1_0+2
+      00029Er90r0B                  516 	mov	___fsmul_sloc34_1_0+1, a
+      0002A0r8Er0F                  517 	mov	a, ___fsmul_sloc33_1_0+3
+      0002A2r91r0B                  518 	mov	___fsmul_sloc34_1_0+2, a
+      0002A4r12r13                  519 	clear	___fsmul_sloc34_1_0+3
+      0002A6r90r0F                  520 	mov	a, ___fsmul_sloc34_1_0+1
+      0002A8r80r0B                  521 	mov	p, a
+      0002AAr8Fr0F                  522 	mov	a, ___fsmul_sloc34_1_0+0
+      0002ACr80r0B                  523 	mov	__mullong_PARM_2+0, a
+      0002AEr80r0F                  524 	mov	a, p
+      0002B0r81r0B                  525 	mov	__mullong_PARM_2+1, a
+      0002B2r02r13                  526 	clear	__mullong_PARM_2+2
+      0002B4r03r13                  527 	clear	__mullong_PARM_2+3
+      0002B6r18r2F                  528 	mov	a, #___fsmul_sloc1_1_0
+      0002B8 72 00                  529 	push	af
+      0002BAr00r38                  530 	call	__mullong
+      0002BC C2 01                  531 	mov	a, sp
+      0002BE FE 28                  532 	add	a, #-2
+      0002C0 82 01                  533 	mov	sp, a
+      0002C2r99r0F                  534 	mov	a, ___fsmul_sloc1_1_0+1
+      0002C4r93r0B                  535 	mov	___fsmul_sloc35_1_0+0, a
+      0002C6r9Ar0F                  536 	mov	a, ___fsmul_sloc1_1_0+2
+      0002C8r94r0B                  537 	mov	___fsmul_sloc35_1_0+1, a
+      0002CAr9Br0F                  538 	mov	a, ___fsmul_sloc1_1_0+3
+      0002CCr95r0B                  539 	mov	___fsmul_sloc35_1_0+2, a
+      0002CEr16r13                  540 	clear	___fsmul_sloc35_1_0+3
+      0002D0r93r0F                  541 	mov	a, ___fsmul_sloc35_1_0+0
+      0002D2r10r08                  542 	add	___fsmul_result_65536_21+0, a
+      0002D4r94r0F                  543 	mov	a, ___fsmul_sloc35_1_0+1
+      0002D6r11r09                  544 	addc	___fsmul_result_65536_21+1, a
+      0002D8r95r0F                  545 	mov	a, ___fsmul_sloc35_1_0+2
+      0002DAr12r09                  546 	addc	___fsmul_result_65536_21+2, a
+      0002DCr96r0F                  547 	mov	a, ___fsmul_sloc35_1_0+3
+      0002DEr13r09                  548 	addc	___fsmul_result_65536_21+3, a
+                                    549 ;	../_fsmul.c: 264: result += ((unsigned long)((unsigned short)(fl2.l & 0xff)) * (unsigned short)(fl1.l >> 8)) >> 8;
+      0002E0r8Cr0F                  550 	mov	a, ___fsmul_fl2_65536_21+0
+      0002E2r97r0B                  551 	mov	___fsmul_sloc36_1_0+0, a
+      0002E4r8Dr0F                  552 	mov	a, ___fsmul_fl2_65536_21+1
+      0002E6r98r0B                  553 	mov	___fsmul_sloc36_1_0+1, a
+      0002E8r8Er0F                  554 	mov	a, ___fsmul_fl2_65536_21+2
+      0002EAr99r0B                  555 	mov	___fsmul_sloc36_1_0+2, a
+      0002ECr8Fr0F                  556 	mov	a, ___fsmul_fl2_65536_21+3
+      0002EEr9Ar0B                  557 	mov	___fsmul_sloc36_1_0+3, a
+      0002F0r98r0F                  558 	mov	a, ___fsmul_sloc36_1_0+1
+      0002F2r80r0B                  559 	mov	p, a
+      0002F4r97r0F                  560 	mov	a, ___fsmul_sloc36_1_0+0
+      0002F6r9Br0B                  561 	mov	___fsmul_sloc37_1_0+0, a
+      0002F8r1Cr13                  562 	clear	___fsmul_sloc37_1_0+1
+      0002FAr9Br0F                  563 	mov	a, ___fsmul_sloc37_1_0+0
+      0002FCr80r0B                  564 	mov	__mullong_PARM_1+0, a
+      0002FEr9Cr0F                  565 	mov	a, ___fsmul_sloc37_1_0+1
+      000300r81r0B                  566 	mov	__mullong_PARM_1+1, a
+      000302r02r13                  567 	clear	__mullong_PARM_1+2
+      000304r03r13                  568 	clear	__mullong_PARM_1+3
+      000306r88r0F                  569 	mov	a, ___fsmul_fl1_65536_21+0
+      000308r9Dr0B                  570 	mov	___fsmul_sloc38_1_0+0, a
+      00030Ar89r0F                  571 	mov	a, ___fsmul_fl1_65536_21+1
+      00030Cr9Er0B                  572 	mov	___fsmul_sloc38_1_0+1, a
+      00030Er8Ar0F                  573 	mov	a, ___fsmul_fl1_65536_21+2
+      000310r9Fr0B                  574 	mov	___fsmul_sloc38_1_0+2, a
+      000312r8Br0F                  575 	mov	a, ___fsmul_fl1_65536_21+3
+      000314rA0r0B                  576 	mov	___fsmul_sloc38_1_0+3, a
+      000316r9Er0F                  577 	mov	a, ___fsmul_sloc38_1_0+1
+      000318rA1r0B                  578 	mov	___fsmul_sloc39_1_0+0, a
+      00031Ar9Fr0F                  579 	mov	a, ___fsmul_sloc38_1_0+2
+      00031CrA2r0B                  580 	mov	___fsmul_sloc39_1_0+1, a
+      00031ErA0r0F                  581 	mov	a, ___fsmul_sloc38_1_0+3
+      000320rA3r0B                  582 	mov	___fsmul_sloc39_1_0+2, a
+      000322r24r13                  583 	clear	___fsmul_sloc39_1_0+3
+      000324rA2r0F                  584 	mov	a, ___fsmul_sloc39_1_0+1
+      000326r80r0B                  585 	mov	p, a
+      000328rA1r0F                  586 	mov	a, ___fsmul_sloc39_1_0+0
+      00032Ar80r0B                  587 	mov	__mullong_PARM_2+0, a
+      00032Cr80r0F                  588 	mov	a, p
+      00032Er81r0B                  589 	mov	__mullong_PARM_2+1, a
+      000330r02r13                  590 	clear	__mullong_PARM_2+2
+      000332r03r13                  591 	clear	__mullong_PARM_2+3
+      000334r1Cr2F                  592 	mov	a, #___fsmul_sloc2_1_0
+      000336 72 00                  593 	push	af
+      000338r00r38                  594 	call	__mullong
+      00033A C2 01                  595 	mov	a, sp
+      00033C FE 28                  596 	add	a, #-2
+      00033E 82 01                  597 	mov	sp, a
+      000340r9Dr0F                  598 	mov	a, ___fsmul_sloc2_1_0+1
+      000342rA5r0B                  599 	mov	___fsmul_sloc40_1_0+0, a
+      000344r9Er0F                  600 	mov	a, ___fsmul_sloc2_1_0+2
+      000346rA6r0B                  601 	mov	___fsmul_sloc40_1_0+1, a
+      000348r9Fr0F                  602 	mov	a, ___fsmul_sloc2_1_0+3
+      00034ArA7r0B                  603 	mov	___fsmul_sloc40_1_0+2, a
+      00034Cr28r13                  604 	clear	___fsmul_sloc40_1_0+3
+      00034ErA5r0F                  605 	mov	a, ___fsmul_sloc40_1_0+0
+      000350r10r08                  606 	add	___fsmul_result_65536_21+0, a
+      000352rA6r0F                  607 	mov	a, ___fsmul_sloc40_1_0+1
+      000354r11r09                  608 	addc	___fsmul_result_65536_21+1, a
+      000356rA7r0F                  609 	mov	a, ___fsmul_sloc40_1_0+2
+      000358r12r09                  610 	addc	___fsmul_result_65536_21+2, a
+      00035ArA8r0F                  611 	mov	a, ___fsmul_sloc40_1_0+3
+      00035Cr13r09                  612 	addc	___fsmul_result_65536_21+3, a
+                                    613 ;	../_fsmul.c: 267: result += 0x40;
+      00035E 40 2F                  614 	mov	a, #0x40
+      000360r10r08                  615 	add	___fsmul_result_65536_21+0, a
+      000362r11r10                  616 	addc	___fsmul_result_65536_21+1
+      000364r12r10                  617 	addc	___fsmul_result_65536_21+2
+      000366r13r10                  618 	addc	___fsmul_result_65536_21+3
+                                    619 ;	../_fsmul.c: 269: if (result & SIGNBIT)
+      000368r93r0F                  620 	mov	a, ___fsmul_result_65536_21+3
+      00036A 80 2C                  621 	and	a, #0x80
+      00036C 00 2B                  622 	cneqsn	a, #0x00
+      00036Er8Ar33                  623 	goto	00105$
+                                    624 ;	../_fsmul.c: 272: result += 0x40;
+      000370 40 2F                  625 	mov	a, #0x40
+      000372r10r08                  626 	add	___fsmul_result_65536_21+0, a
+      000374r11r10                  627 	addc	___fsmul_result_65536_21+1
+      000376r12r10                  628 	addc	___fsmul_result_65536_21+2
+      000378r13r10                  629 	addc	___fsmul_result_65536_21+3
+                                    630 ;	../_fsmul.c: 273: result >>= 8;
+      00037Ar91r0F                  631 	mov	a, ___fsmul_result_65536_21+1
+      00037Cr90r0B                  632 	mov	___fsmul_result_65536_21+0, a
+      00037Er92r0F                  633 	mov	a, ___fsmul_result_65536_21+2
+      000380r91r0B                  634 	mov	___fsmul_result_65536_21+1, a
+      000382r93r0F                  635 	mov	a, ___fsmul_result_65536_21+3
+      000384r92r0B                  636 	mov	___fsmul_result_65536_21+2, a
+      000386r13r13                  637 	clear	___fsmul_result_65536_21+3
+      000388r9Cr33                  638 	goto	00106$
+      00038A                        639 00105$:
+                                    640 ;	../_fsmul.c: 277: result >>= 7;
+      00038A 07 2F                  641 	mov	a, #7
+      00038C                        642 00153$:
+      00038Cr13r15                  643 	sr	___fsmul_result_65536_21+3
+      00038Er12r16                  644 	src	___fsmul_result_65536_21+2
+      000390r11r16                  645 	src	___fsmul_result_65536_21+1
+      000392r10r16                  646 	src	___fsmul_result_65536_21+0
+      000394 63 00                  647 	dzsn	a
+      000396r8Cr33                  648 	goto	00153$
+                                    649 ;	../_fsmul.c: 278: exp--;
+      000398rDBr12                  650 	dec	___fsmul_sloc20_1_0+0
+      00039ArDCr10                  651 	subc	___fsmul_sloc20_1_0+1
+      00039C                        652 00106$:
+                                    653 ;	../_fsmul.c: 281: result &= ~HIDDEN;
+      00039C 7F 2F                  654 	mov	a, #0x7f
+      00039Er12r0A                  655 	and	___fsmul_result_65536_21+2, a
+                                    656 ;	../_fsmul.c: 284: if (exp >= 0x100)
+      0003A0rDCr0F                  657 	mov	a, ___fsmul_sloc20_1_0+1
+      0003A2 01 29                  658 	sub	a, #0x01
+      0003A4 C0 18                  659 	t0sn	f, ov
+      0003A6 80 2E                  660 	xor	a, #0x80
+      0003A8 6B 00                  661 	sl	a
+      0003AA 40 18                  662 	t0sn	f, c
+      0003ACrEEr33                  663 	goto	00111$
+                                    664 ;	../_fsmul.c: 285: fl1.l = (sign ? SIGNBIT : 0) | __INFINITY;
+      0003AErC4r0F                  665 	mov	a, ___fsmul_sloc12_1_0+0
+      0003B0 00 2B                  666 	cneqsn	a, #0x00
+      0003B2rC0r33                  667 	goto	00115$
+      0003B4r29r13                  668 	clear	___fsmul_sloc41_1_0+0
+      0003B6r2Ar13                  669 	clear	___fsmul_sloc41_1_0+1
+      0003B8r2Br13                  670 	clear	___fsmul_sloc41_1_0+2
+      0003BA 80 2F                  671 	mov	a, #0x80
+      0003BCrACr0B                  672 	mov	___fsmul_sloc41_1_0+3, a
+      0003BErC8r33                  673 	goto	00116$
+      0003C0                        674 00115$:
+      0003C0r29r13                  675 	clear	___fsmul_sloc41_1_0+0
+      0003C2r2Ar13                  676 	clear	___fsmul_sloc41_1_0+1
+      0003C4r2Br13                  677 	clear	___fsmul_sloc41_1_0+2
+      0003C6r2Cr13                  678 	clear	___fsmul_sloc41_1_0+3
+      0003C8                        679 00116$:
+      0003C8rA9r0F                  680 	mov	a, ___fsmul_sloc41_1_0+0
+      0003CArADr0B                  681 	mov	___fsmul_sloc42_1_0+0, a
+      0003CCrAAr0F                  682 	mov	a, ___fsmul_sloc41_1_0+1
+      0003CErAEr0B                  683 	mov	___fsmul_sloc42_1_0+1, a
+      0003D0rABr0F                  684 	mov	a, ___fsmul_sloc41_1_0+2
+      0003D2 80 2D                  685 	or	a, #0x80
+      0003D4rAFr0B                  686 	mov	___fsmul_sloc42_1_0+2, a
+      0003D6rACr0F                  687 	mov	a, ___fsmul_sloc41_1_0+3
+      0003D8 7F 2D                  688 	or	a, #0x7f
+      0003DArB0r0B                  689 	mov	___fsmul_sloc42_1_0+3, a
+      0003DCrADr0F                  690 	mov	a, ___fsmul_sloc42_1_0+0
+      0003DEr88r0B                  691 	mov	___fsmul_fl1_65536_21+0, a
+      0003E0rAEr0F                  692 	mov	a, ___fsmul_sloc42_1_0+1
+      0003E2r89r0B                  693 	mov	___fsmul_fl1_65536_21+1, a
+      0003E4rAFr0F                  694 	mov	a, ___fsmul_sloc42_1_0+2
+      0003E6r8Ar0B                  695 	mov	___fsmul_fl1_65536_21+2, a
+      0003E8rB0r0F                  696 	mov	a, ___fsmul_sloc42_1_0+3
+      0003EAr8Br0B                  697 	mov	___fsmul_fl1_65536_21+3, a
+      0003ECr82r34                  698 	goto	00112$
+      0003EE                        699 00111$:
+                                    700 ;	../_fsmul.c: 286: else if (exp < 0)
+      0003EErDCr0F                  701 	mov	a, ___fsmul_sloc20_1_0+1
+      0003F0 80 29                  702 	sub	a, #0x80
+      0003F2 40 18                  703 	t0sn	f, c
+      0003F4r00r34                  704 	goto	00108$
+                                    705 ;	../_fsmul.c: 287: fl1.l = 0;
+      0003F6r08r13                  706 	clear	___fsmul_fl1_65536_21+0
+      0003F8r09r13                  707 	clear	___fsmul_fl1_65536_21+1
+      0003FAr0Ar13                  708 	clear	___fsmul_fl1_65536_21+2
+      0003FCr0Br13                  709 	clear	___fsmul_fl1_65536_21+3
+      0003FEr82r34                  710 	goto	00112$
+      000400                        711 00108$:
+                                    712 ;	../_fsmul.c: 289: fl1.l = PACK (sign ? SIGNBIT : 0 , exp, result);
+      000400rC4r0F                  713 	mov	a, ___fsmul_sloc12_1_0+0
+      000402 00 2B                  714 	cneqsn	a, #0x00
+      000404r12r34                  715 	goto	00117$
+      000406r31r13                  716 	clear	___fsmul_sloc43_1_0+0
+      000408r32r13                  717 	clear	___fsmul_sloc43_1_0+1
+      00040Ar33r13                  718 	clear	___fsmul_sloc43_1_0+2
+      00040C 80 2F                  719 	mov	a, #0x80
+      00040ErB4r0B                  720 	mov	___fsmul_sloc43_1_0+3, a
+      000410r1Ar34                  721 	goto	00118$
+      000412                        722 00117$:
+      000412r31r13                  723 	clear	___fsmul_sloc43_1_0+0
+      000414r32r13                  724 	clear	___fsmul_sloc43_1_0+1
+      000416r33r13                  725 	clear	___fsmul_sloc43_1_0+2
+      000418r34r13                  726 	clear	___fsmul_sloc43_1_0+3
+      00041A                        727 00118$:
+      00041ArDBr0F                  728 	mov	a, ___fsmul_sloc20_1_0+0
+      00041CrB5r0B                  729 	mov	___fsmul_sloc44_1_0+0, a
+      00041ErDCr0F                  730 	mov	a, ___fsmul_sloc20_1_0+1
+      000420rB6r0B                  731 	mov	___fsmul_sloc44_1_0+1, a
+      000422 6B 00                  732 	sl	a
+      000424 00 2F                  733 	mov	a, #0x00
+      000426 61 00                  734 	subc	a
+      000428rB7r0B                  735 	mov	___fsmul_sloc44_1_0+2, a
+      00042ArB8r0B                  736 	mov	___fsmul_sloc44_1_0+3, a
+      00042CrB5r0F                  737 	mov	a, ___fsmul_sloc44_1_0+0
+      00042ErBBr0B                  738 	mov	___fsmul_sloc45_1_0+2, a
+      000430rB6r0F                  739 	mov	a, ___fsmul_sloc44_1_0+1
+      000432rBCr0B                  740 	mov	___fsmul_sloc45_1_0+3, a
+      000434r39r13                  741 	clear	___fsmul_sloc45_1_0+0
+      000436r3Ar13                  742 	clear	___fsmul_sloc45_1_0+1
+      000438 07 2F                  743 	mov	a, #7
+      00043A                        744 00154$:
+      00043ArBBr15                  745 	sl	___fsmul_sloc45_1_0+2
+      00043CrBCr16                  746 	slc	___fsmul_sloc45_1_0+3
+      00043E 63 00                  747 	dzsn	a
+      000440r3Ar34                  748 	goto	00154$
+      000442rB1r0F                  749 	mov	a, ___fsmul_sloc43_1_0+0
+      000444rB9r0E                  750 	or	a, ___fsmul_sloc45_1_0+0
+      000446rBDr0B                  751 	mov	___fsmul_sloc46_1_0+0, a
+      000448rB2r0F                  752 	mov	a, ___fsmul_sloc43_1_0+1
+      00044ArBAr0E                  753 	or	a, ___fsmul_sloc45_1_0+1
+      00044CrBEr0B                  754 	mov	___fsmul_sloc46_1_0+1, a
+      00044ErB3r0F                  755 	mov	a, ___fsmul_sloc43_1_0+2
+      000450rBBr0E                  756 	or	a, ___fsmul_sloc45_1_0+2
+      000452rBFr0B                  757 	mov	___fsmul_sloc46_1_0+2, a
+      000454rB4r0F                  758 	mov	a, ___fsmul_sloc43_1_0+3
+      000456rBCr0E                  759 	or	a, ___fsmul_sloc45_1_0+3
+      000458rC0r0B                  760 	mov	___fsmul_sloc46_1_0+3, a
+      00045ArBDr0F                  761 	mov	a, ___fsmul_sloc46_1_0+0
+      00045Cr90r0E                  762 	or	a, ___fsmul_result_65536_21+0
+      00045ErC1r0B                  763 	mov	___fsmul_sloc47_1_0+0, a
+      000460rBEr0F                  764 	mov	a, ___fsmul_sloc46_1_0+1
+      000462r91r0E                  765 	or	a, ___fsmul_result_65536_21+1
+      000464rC2r0B                  766 	mov	___fsmul_sloc47_1_0+1, a
+      000466rBFr0F                  767 	mov	a, ___fsmul_sloc46_1_0+2
+      000468r92r0E                  768 	or	a, ___fsmul_result_65536_21+2
+      00046ArC3r0B                  769 	mov	___fsmul_sloc47_1_0+2, a
+      00046CrC0r0F                  770 	mov	a, ___fsmul_sloc46_1_0+3
+      00046Er93r0E                  771 	or	a, ___fsmul_result_65536_21+3
+      000470rC4r0B                  772 	mov	___fsmul_sloc47_1_0+3, a
+      000472rC1r0F                  773 	mov	a, ___fsmul_sloc47_1_0+0
+      000474r88r0B                  774 	mov	___fsmul_fl1_65536_21+0, a
+      000476rC2r0F                  775 	mov	a, ___fsmul_sloc47_1_0+1
+      000478r89r0B                  776 	mov	___fsmul_fl1_65536_21+1, a
+      00047ArC3r0F                  777 	mov	a, ___fsmul_sloc47_1_0+2
+      00047Cr8Ar0B                  778 	mov	___fsmul_fl1_65536_21+2, a
+      00047ErC4r0F                  779 	mov	a, ___fsmul_sloc47_1_0+3
+      000480r8Br0B                  780 	mov	___fsmul_fl1_65536_21+3, a
+      000482                        781 00112$:
+                                    782 ;	../_fsmul.c: 290: return (fl1.f);
+      000482r88r0F                  783 	mov	a, ___fsmul_fl1_65536_21+0
+      000484rC5r0B                  784 	mov	___fsmul_sloc48_1_0+0, a
+      000486r89r0F                  785 	mov	a, ___fsmul_fl1_65536_21+1
+      000488rC6r0B                  786 	mov	___fsmul_sloc48_1_0+1, a
+      00048Ar8Ar0F                  787 	mov	a, ___fsmul_fl1_65536_21+2
+      00048CrC7r0B                  788 	mov	___fsmul_sloc48_1_0+2, a
+      00048Er8Br0F                  789 	mov	a, ___fsmul_fl1_65536_21+3
+      000490rC8r0B                  790 	mov	___fsmul_sloc48_1_0+3, a
+      000492 C2 01                  791 	mov	a, sp
+      000494 FC 28                  792 	add	a, #0xfc
+      000496r80r0B                  793 	mov	p, a
+      000498r81r03                  794 	idxm	a, p
+      00049Ar80r0B                  795 	mov	p, a
+      00049CrC5r0F                  796 	mov	a, ___fsmul_sloc48_1_0+0
+      00049Er80r03                  797 	idxm	p, a
+      0004A0r00r12                  798 	inc	p
+      0004A2rC6r0F                  799 	mov	a, ___fsmul_sloc48_1_0+1
+      0004A4r80r03                  800 	idxm	p, a
+      0004A6r00r12                  801 	inc	p
+      0004A8rC7r0F                  802 	mov	a, ___fsmul_sloc48_1_0+2
+      0004AAr80r03                  803 	idxm	p, a
+      0004ACr00r12                  804 	inc	p
+      0004AErC8r0F                  805 	mov	a, ___fsmul_sloc48_1_0+3
+      0004B0r80r03                  806 	idxm	p, a
+                                    807 ;	../_fsmul.c: 291: }
+      0004B2 7A 00                  808 	ret
+                                    809 	.area CODE
+                                    810 	.area CONST
+                                    811 	.area CABS (ABS)

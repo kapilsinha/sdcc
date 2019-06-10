@@ -1,0 +1,182 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module log10f
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _logf
+                                     17 	.globl _log10f
+                                     18 ;--------------------------------------------------------
+                                     19 ; special function registers
+                                     20 ;--------------------------------------------------------
+                                     21 	.area RSEG (ABS)
+      000000                         22 	.org 0x0000
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; overlayable items in ram 
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 ;--------------------------------------------------------
+                                     35 ; global & static initialisations
+                                     36 ;--------------------------------------------------------
+                                     37 	.area HOME
+                                     38 	.area GSINIT
+                                     39 	.area GSFINAL
+                                     40 	.area GSINIT
+                                     41 ;--------------------------------------------------------
+                                     42 ; Home
+                                     43 ;--------------------------------------------------------
+                                     44 	.area HOME
+                                     45 	.area HOME
+                                     46 ;--------------------------------------------------------
+                                     47 ; code
+                                     48 ;--------------------------------------------------------
+                                     49 	.area CODE
+                                     50 ;	../log10f.c: 34: float log10f(float x) _FLOAT_FUNC_REENTRANT
+                                     51 ;	-----------------------------------------
+                                     52 ;	 function log10f
+                                     53 ;	-----------------------------------------
+      000000                         54 _log10f:
+      000000 C2 01                   55 	mov	a, sp
+      000002 08 28                   56 	add	a, #8
+      000004 82 01                   57 	mov	sp, a
+                                     58 ;	../log10f.c: 36: return logf(x)*0.4342944819;
+      000006 72 00                   59 	push	af
+      000008 72 00                   60 	push	af
+      00000A C2 01                   61 	mov	a, sp
+      00000C EF 28                   62 	add	a, #0xef
+      00000Er80r0B                   63 	mov	p, a
+      000010r81r03                   64 	idxm	a, p
+      000012r80r13                   65 	xch	a, p
+      000014 10 28                   66 	add	a, #16
+      000016r80r13                   67 	xch	a, p
+      000018r80r03                   68 	idxm	p, a
+      00001A EF 2F                   69 	mov	a, #-17
+      00001Cr00r08                   70 	add	p, a
+      00001Er81r03                   71 	idxm	a, p
+      000020r80r13                   72 	xch	a, p
+      000022 10 28                   73 	add	a, #16
+      000024r80r13                   74 	xch	a, p
+      000026r80r03                   75 	idxm	p, a
+      000028 EF 2F                   76 	mov	a, #-17
+      00002Ar00r08                   77 	add	p, a
+      00002Cr81r03                   78 	idxm	a, p
+      00002Er80r13                   79 	xch	a, p
+      000030 10 28                   80 	add	a, #16
+      000032r80r13                   81 	xch	a, p
+      000034r80r03                   82 	idxm	p, a
+      000036 EF 2F                   83 	mov	a, #-17
+      000038r00r08                   84 	add	p, a
+      00003Ar81r03                   85 	idxm	a, p
+      00003Cr80r13                   86 	xch	a, p
+      00003E 10 28                   87 	add	a, #16
+      000040r80r13                   88 	xch	a, p
+      000042r80r03                   89 	idxm	p, a
+      000044 C2 01                   90 	mov	a, sp
+      000046 F4 28                   91 	add	a, #0xf4
+      000048 72 00                   92 	push	af
+      00004Ar00r38                   93 	call	_logf
+      00004C C2 01                   94 	mov	a, sp
+      00004E FA 28                   95 	add	a, #-6
+      000050 82 01                   96 	mov	sp, a
+      000052 D9 2F                   97 	mov	a, #0xd9
+      000054r80r0B                   98 	mov	___fsmul_PARM_1+0, a
+      000056 5B 2F                   99 	mov	a, #0x5b
+      000058r81r0B                  100 	mov	___fsmul_PARM_1+1, a
+      00005A DE 2F                  101 	mov	a, #0xde
+      00005Cr82r0B                  102 	mov	___fsmul_PARM_1+2, a
+      00005E 3E 2F                  103 	mov	a, #0x3e
+      000060r83r0B                  104 	mov	___fsmul_PARM_1+3, a
+      000062 C2 01                  105 	mov	a, sp
+      000064 F8 28                  106 	add	a, #0xf8
+      000066r80r0B                  107 	mov	p, a
+      000068r81r03                  108 	idxm	a, p
+      00006Ar80r0B                  109 	mov	___fsmul_PARM_2+0, a
+      00006Cr00r12                  110 	inc	p
+      00006Er81r03                  111 	idxm	a, p
+      000070r81r0B                  112 	mov	___fsmul_PARM_2+1, a
+      000072r00r12                  113 	inc	p
+      000074r81r03                  114 	idxm	a, p
+      000076r82r0B                  115 	mov	___fsmul_PARM_2+2, a
+      000078r00r12                  116 	inc	p
+      00007Ar81r03                  117 	idxm	a, p
+      00007Cr83r0B                  118 	mov	___fsmul_PARM_2+3, a
+      00007E C2 01                  119 	mov	a, sp
+      000080 FC 28                  120 	add	a, #0xfc
+      000082 72 00                  121 	push	af
+      000084r00r38                  122 	call	___fsmul
+      000086 C2 01                  123 	mov	a, sp
+      000088 FE 28                  124 	add	a, #-2
+      00008A 82 01                  125 	mov	sp, a
+      00008C FC 28                  126 	add	a, #0xfc
+      00008Er80r0B                  127 	mov	p, a
+      000090r81r03                  128 	idxm	a, p
+      000092 72 00                  129 	push	af
+      000094 F8 2F                  130 	mov	a, #-8
+      000096r00r08                  131 	add	p, a
+      000098r81r03                  132 	idxm	a, p
+      00009Ar80r0B                  133 	mov	p, a
+      00009C 73 00                  134 	pop	af
+      00009Er80r03                  135 	idxm	p, a
+      0000A0 C2 01                  136 	mov	a, sp
+      0000A2 FD 28                  137 	add	a, #0xfd
+      0000A4r80r0B                  138 	mov	p, a
+      0000A6r81r03                  139 	idxm	a, p
+      0000A8 72 00                  140 	push	af
+      0000AA F7 2F                  141 	mov	a, #-9
+      0000ACr00r08                  142 	add	p, a
+      0000AEr81r03                  143 	idxm	a, p
+      0000B0r80r0B                  144 	mov	p, a
+      0000B2 73 00                  145 	pop	af
+      0000B4r00r12                  146 	inc	p
+      0000B6r80r03                  147 	idxm	p, a
+      0000B8 C2 01                  148 	mov	a, sp
+      0000BA FE 28                  149 	add	a, #0xfe
+      0000BCr80r0B                  150 	mov	p, a
+      0000BEr81r03                  151 	idxm	a, p
+      0000C0 72 00                  152 	push	af
+      0000C2 F6 2F                  153 	mov	a, #-10
+      0000C4r00r08                  154 	add	p, a
+      0000C6r81r03                  155 	idxm	a, p
+      0000C8r80r0B                  156 	mov	p, a
+      0000CA 73 00                  157 	pop	af
+      0000CCr00r12                  158 	inc	p
+      0000CEr00r12                  159 	inc	p
+      0000D0r80r03                  160 	idxm	p, a
+      0000D2 C2 01                  161 	mov	a, sp
+      0000D4 FF 28                  162 	add	a, #0xff
+      0000D6r80r0B                  163 	mov	p, a
+      0000D8r81r03                  164 	idxm	a, p
+      0000DA 72 00                  165 	push	af
+      0000DC F5 2F                  166 	mov	a, #-11
+      0000DEr00r08                  167 	add	p, a
+      0000E0r81r03                  168 	idxm	a, p
+      0000E2r80r0B                  169 	mov	p, a
+      0000E4 73 00                  170 	pop	af
+      0000E6r00r12                  171 	inc	p
+      0000E8r00r12                  172 	inc	p
+      0000EAr00r12                  173 	inc	p
+      0000ECr80r03                  174 	idxm	p, a
+                                    175 ;	../log10f.c: 37: }
+      0000EE C2 01                  176 	mov	a, sp
+      0000F0 F8 28                  177 	add	a, #-8
+      0000F2 82 01                  178 	mov	sp, a
+      0000F4 7A 00                  179 	ret
+                                    180 	.area CODE
+                                    181 	.area CONST
+                                    182 	.area CABS (ABS)

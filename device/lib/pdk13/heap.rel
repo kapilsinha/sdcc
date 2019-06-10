@@ -1,0 +1,19 @@
+XL3
+H 3 areas 4 global symbols
+S ___sdcc_heap_init Ref000000
+S .__.ABS. Def000000
+A _CODE size 0 flags 0 addr 0
+A GSINIT size 2 flags 0 addr 0
+A DATA size 40 flags 0 addr 0
+S ___sdcc_heap_end Def00003F
+S ___sdcc_heap Def000000
+T 00 00 00 00 00 00 38 0D
+R 00 00 01 00 0A 03 00 00
+T 00 00 00
+R 00 00 02 00
+T 00 00 00
+R 00 00 02 00
+T 3F 00 00
+R 00 00 02 00
+T 3F 00 00
+R 00 00 02 00

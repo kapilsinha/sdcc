@@ -1,0 +1,263 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module fabsf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _fabsf
+                                     17 ;--------------------------------------------------------
+                                     18 ; special function registers
+                                     19 ;--------------------------------------------------------
+                                     20 	.area RSEG (ABS)
+      000000                         21 	.org 0x0000
+                                     22 ;--------------------------------------------------------
+                                     23 ; ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area DATA
+                                     26 ;--------------------------------------------------------
+                                     27 ; overlayable items in ram 
+                                     28 ;--------------------------------------------------------
+                                     29 ;--------------------------------------------------------
+                                     30 ; absolute external ram data
+                                     31 ;--------------------------------------------------------
+                                     32 	.area DABS (ABS)
+                                     33 ;--------------------------------------------------------
+                                     34 ; global & static initialisations
+                                     35 ;--------------------------------------------------------
+                                     36 	.area HOME
+                                     37 	.area GSINIT
+                                     38 	.area GSFINAL
+                                     39 	.area GSINIT
+                                     40 ;--------------------------------------------------------
+                                     41 ; Home
+                                     42 ;--------------------------------------------------------
+                                     43 	.area HOME
+                                     44 	.area HOME
+                                     45 ;--------------------------------------------------------
+                                     46 ; code
+                                     47 ;--------------------------------------------------------
+                                     48 	.area CODE
+                                     49 ;	../fabsf.c: 34: float fabsf(float x) _FLOAT_FUNC_REENTRANT
+                                     50 ;	-----------------------------------------
+                                     51 ;	 function fabsf
+                                     52 ;	-----------------------------------------
+      000000                         53 _fabsf:
+      000000 C2 01                   54 	mov	a, sp
+      000002 12 28                   55 	add	a, #18
+                                     56 ;	../fabsf.c: 38: fl.f = x;
+      000004 82 01                   57 	mov	sp, a
+      000006 FB 28                   58 	add	a, #0xfb
+      000008r80r0B                   59 	mov	p, a
+      00000A C2 01                   60 	mov	a, sp
+      00000C E6 28                   61 	add	a, #0xe6
+      00000Er80r0B                   62 	mov	p, a
+      000010r81r03                   63 	idxm	a, p
+      000012r80r03                   64 	idxm	p, a
+      000014r00r12                   65 	inc	p
+      000016r81r03                   66 	idxm	a, p
+      000018r00r12                   67 	inc	p
+      00001Ar80r03                   68 	idxm	p, a
+      00001Cr00r12                   69 	inc	p
+      00001Er81r03                   70 	idxm	a, p
+      000020r00r12                   71 	inc	p
+      000022r00r12                   72 	inc	p
+      000024r80r03                   73 	idxm	p, a
+      000026r00r12                   74 	inc	p
+      000028r81r03                   75 	idxm	a, p
+      00002Ar00r12                   76 	inc	p
+      00002Cr00r12                   77 	inc	p
+      00002Er00r12                   78 	inc	p
+      000030r80r03                   79 	idxm	p, a
+                                     80 ;	../fabsf.c: 39: fl.l &= 0x7fffffff;
+      000032 C2 01                   81 	mov	a, sp
+      000034 FB 28                   82 	add	a, #0xfb
+      000036r80r13                   83 	xch	a, p
+      000038 05 28                   84 	add	a, #5
+      00003Ar80r13                   85 	xch	a, p
+      00003Cr80r03                   86 	idxm	p, a
+      00003Er81r03                   87 	idxm	a, p
+      000040r80r0B                   88 	mov	p, a
+      000042r81r03                   89 	idxm	a, p
+      000044r80r13                   90 	xch	a, p
+      000046 C2 01                   91 	mov	a, sp
+      000048 EF 28                   92 	add	a, #0xef
+      00004Ar80r13                   93 	xch	a, p
+      00004Cr80r03                   94 	idxm	p, a
+      00004Er00r12                   95 	inc	p
+      000050r81r03                   96 	idxm	a, p
+      000052r00r12                   97 	inc	p
+      000054r80r03                   98 	idxm	p, a
+      000056r00r12                   99 	inc	p
+      000058r81r03                  100 	idxm	a, p
+      00005Ar00r12                  101 	inc	p
+      00005Cr80r03                  102 	idxm	p, a
+      00005Er00r12                  103 	inc	p
+      000060r81r03                  104 	idxm	a, p
+      000062r00r12                  105 	inc	p
+      000064r80r03                  106 	idxm	p, a
+      000066 FD 2F                  107 	mov	a, #-3
+      000068r00r08                  108 	add	p, a
+      00006Ar81r03                  109 	idxm	a, p
+      00006Cr80r13                  110 	xch	a, p
+      00006E 04 28                  111 	add	a, #4
+      000070r80r13                  112 	xch	a, p
+      000072r80r03                  113 	idxm	p, a
+      000074 FD 2F                  114 	mov	a, #-3
+      000076r00r08                  115 	add	p, a
+      000078r81r03                  116 	idxm	a, p
+      00007Ar80r13                  117 	xch	a, p
+      00007C 04 28                  118 	add	a, #4
+      00007Er80r13                  119 	xch	a, p
+      000080r80r03                  120 	idxm	p, a
+      000082 FD 2F                  121 	mov	a, #-3
+      000084r00r08                  122 	add	p, a
+      000086r81r03                  123 	idxm	a, p
+      000088r80r13                  124 	xch	a, p
+      00008A 04 28                  125 	add	a, #4
+      00008Cr80r13                  126 	xch	a, p
+      00008Er80r03                  127 	idxm	p, a
+      000090 FD 2F                  128 	mov	a, #-3
+      000092r00r08                  129 	add	p, a
+      000094r81r03                  130 	idxm	a, p
+      000096 7F 2C                  131 	and	a, #0x7f
+      000098r80r13                  132 	xch	a, p
+      00009A 04 28                  133 	add	a, #4
+      00009Cr80r13                  134 	xch	a, p
+      00009Er80r03                  135 	idxm	p, a
+      0000A0 FD 2F                  136 	mov	a, #-3
+      0000A2r00r08                  137 	add	p, a
+      0000A4r81r03                  138 	idxm	a, p
+      0000A6 72 00                  139 	push	af
+      0000A8 FB 2F                  140 	mov	a, #-5
+      0000AAr00r08                  141 	add	p, a
+      0000ACr81r03                  142 	idxm	a, p
+      0000AEr80r0B                  143 	mov	p, a
+      0000B0 73 00                  144 	pop	af
+      0000B2r80r03                  145 	idxm	p, a
+      0000B4 C2 01                  146 	mov	a, sp
+      0000B6 F4 28                  147 	add	a, #0xf4
+      0000B8r80r0B                  148 	mov	p, a
+      0000BAr81r03                  149 	idxm	a, p
+      0000BC 72 00                  150 	push	af
+      0000BE FA 2F                  151 	mov	a, #-6
+      0000C0r00r08                  152 	add	p, a
+      0000C2r81r03                  153 	idxm	a, p
+      0000C4r80r0B                  154 	mov	p, a
+      0000C6 73 00                  155 	pop	af
+      0000C8r00r12                  156 	inc	p
+      0000CAr80r03                  157 	idxm	p, a
+      0000CC C2 01                  158 	mov	a, sp
+      0000CE F5 28                  159 	add	a, #0xf5
+      0000D0r80r0B                  160 	mov	p, a
+      0000D2r81r03                  161 	idxm	a, p
+      0000D4 72 00                  162 	push	af
+      0000D6 F9 2F                  163 	mov	a, #-7
+      0000D8r00r08                  164 	add	p, a
+      0000DAr81r03                  165 	idxm	a, p
+      0000DCr80r0B                  166 	mov	p, a
+      0000DE 73 00                  167 	pop	af
+      0000E0r00r12                  168 	inc	p
+      0000E2r00r12                  169 	inc	p
+      0000E4r80r03                  170 	idxm	p, a
+      0000E6 C2 01                  171 	mov	a, sp
+      0000E8 F6 28                  172 	add	a, #0xf6
+      0000EAr80r0B                  173 	mov	p, a
+      0000ECr81r03                  174 	idxm	a, p
+      0000EE 72 00                  175 	push	af
+      0000F0 F8 2F                  176 	mov	a, #-8
+      0000F2r00r08                  177 	add	p, a
+      0000F4r81r03                  178 	idxm	a, p
+      0000F6r80r0B                  179 	mov	p, a
+      0000F8 73 00                  180 	pop	af
+      0000FAr00r12                  181 	inc	p
+      0000FCr00r12                  182 	inc	p
+      0000FEr00r12                  183 	inc	p
+      000100r80r03                  184 	idxm	p, a
+                                    185 ;	../fabsf.c: 40: return fl.f;
+      000102 C2 01                  186 	mov	a, sp
+      000104 FB 28                  187 	add	a, #0xfb
+      000106r80r0B                  188 	mov	p, a
+      000108r81r03                  189 	idxm	a, p
+      00010Ar80r13                  190 	xch	a, p
+      00010C C2 01                  191 	mov	a, sp
+      00010E F7 28                  192 	add	a, #0xf7
+      000110r80r13                  193 	xch	a, p
+      000112r80r03                  194 	idxm	p, a
+      000114r00r12                  195 	inc	p
+      000116r81r03                  196 	idxm	a, p
+      000118r00r12                  197 	inc	p
+      00011Ar80r03                  198 	idxm	p, a
+      00011Cr00r12                  199 	inc	p
+      00011Er81r03                  200 	idxm	a, p
+      000120r00r12                  201 	inc	p
+      000122r80r03                  202 	idxm	p, a
+      000124r00r12                  203 	inc	p
+      000126r81r03                  204 	idxm	a, p
+      000128r00r12                  205 	inc	p
+      00012Ar80r03                  206 	idxm	p, a
+      00012C FD 2F                  207 	mov	a, #-3
+      00012Er00r08                  208 	add	p, a
+      000130r81r03                  209 	idxm	a, p
+      000132 72 00                  210 	push	af
+      000134 F3 2F                  211 	mov	a, #-13
+      000136r00r08                  212 	add	p, a
+      000138r81r03                  213 	idxm	a, p
+      00013Ar80r0B                  214 	mov	p, a
+      00013C 73 00                  215 	pop	af
+      00013Er80r03                  216 	idxm	p, a
+      000140 C2 01                  217 	mov	a, sp
+      000142 F8 28                  218 	add	a, #0xf8
+      000144r80r0B                  219 	mov	p, a
+      000146r81r03                  220 	idxm	a, p
+      000148 72 00                  221 	push	af
+      00014A F2 2F                  222 	mov	a, #-14
+      00014Cr00r08                  223 	add	p, a
+      00014Er81r03                  224 	idxm	a, p
+      000150r80r0B                  225 	mov	p, a
+      000152 73 00                  226 	pop	af
+      000154r00r12                  227 	inc	p
+      000156r80r03                  228 	idxm	p, a
+      000158 C2 01                  229 	mov	a, sp
+      00015A F9 28                  230 	add	a, #0xf9
+      00015Cr80r0B                  231 	mov	p, a
+      00015Er81r03                  232 	idxm	a, p
+      000160 72 00                  233 	push	af
+      000162 F1 2F                  234 	mov	a, #-15
+      000164r00r08                  235 	add	p, a
+      000166r81r03                  236 	idxm	a, p
+      000168r80r0B                  237 	mov	p, a
+      00016A 73 00                  238 	pop	af
+      00016Cr00r12                  239 	inc	p
+      00016Er00r12                  240 	inc	p
+      000170r80r03                  241 	idxm	p, a
+      000172 C2 01                  242 	mov	a, sp
+      000174 FA 28                  243 	add	a, #0xfa
+      000176r80r0B                  244 	mov	p, a
+      000178r81r03                  245 	idxm	a, p
+      00017A 72 00                  246 	push	af
+      00017C F0 2F                  247 	mov	a, #-16
+      00017Er00r08                  248 	add	p, a
+      000180r81r03                  249 	idxm	a, p
+      000182r80r0B                  250 	mov	p, a
+      000184 73 00                  251 	pop	af
+      000186r00r12                  252 	inc	p
+      000188r00r12                  253 	inc	p
+      00018Ar00r12                  254 	inc	p
+      00018Cr80r03                  255 	idxm	p, a
+                                    256 ;	../fabsf.c: 41: }
+      00018E C2 01                  257 	mov	a, sp
+      000190 EE 28                  258 	add	a, #-18
+      000192 82 01                  259 	mov	sp, a
+      000194 7A 00                  260 	ret
+                                    261 	.area CODE
+                                    262 	.area CONST
+                                    263 	.area CABS (ABS)

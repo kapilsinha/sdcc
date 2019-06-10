@@ -1,0 +1,156 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _divulong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __divulong_PARM_2
+                                     17 	.globl __divulong_PARM_1
+                                     18 	.globl __divulong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __divulong_PARM_1:
+      000000                         29 	.ds 4
+      000004                         30 __divulong_PARM_2:
+      000004                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __divulong_sloc0_1_0:
+      000000                         37 	.ds 4
+      000004                         38 __divulong_sloc1_1_0:
+      000004                         39 	.ds 4
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_divulong.c: 331: _divulong (unsigned long x, unsigned long y)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function _divulong
+                                     63 ;	-----------------------------------------
+      000000                         64 __divulong:
+                                     65 ;	../_divulong.c: 333: unsigned long reste = 0L;
+      000000r00r13                   66 	clear	__divulong_sloc0_1_0+0
+      000002r01r13                   67 	clear	__divulong_sloc0_1_0+1
+      000004r02r13                   68 	clear	__divulong_sloc0_1_0+2
+      000006r03r13                   69 	clear	__divulong_sloc0_1_0+3
+                                     70 ;	../_divulong.c: 334: unsigned char count = 32;
+      000008 20 2F                   71 	mov	a, #0x20
+      00000Ar80r0B                   72 	mov	p, a
+                                     73 ;	../_divulong.c: 337: do
+      00000C                         74 00105$:
+                                     75 ;	../_divulong.c: 340: c = MSB_SET(x);
+      00000Cr83r0F                   76 	mov	a, __divulong_PARM_1+3
+      00000Er84r0B                   77 	mov	__divulong_sloc1_1_0+0, a
+      000010r05r13                   78 	clear	__divulong_sloc1_1_0+1
+      000012r06r13                   79 	clear	__divulong_sloc1_1_0+2
+      000014r07r13                   80 	clear	__divulong_sloc1_1_0+3
+      000016 07 2F                   81 	mov	a, #7
+      000018                         82 00126$:
+      000018r04r15                   83 	sr	__divulong_sloc1_1_0+0
+      00001A 63 00                   84 	dzsn	a
+      00001Cr18r30                   85 	goto	00126$
+      00001Er84r0F                   86 	mov	a, __divulong_sloc1_1_0+0
+      000020 01 2C                   87 	and	a, #0x01
+                                     88 ;	../_divulong.c: 341: x <<= 1;
+      000022r80r15                   89 	sl	__divulong_PARM_1+0
+      000024r81r16                   90 	slc	__divulong_PARM_1+1
+      000026r82r16                   91 	slc	__divulong_PARM_1+2
+      000028r83r16                   92 	slc	__divulong_PARM_1+3
+                                     93 ;	../_divulong.c: 342: reste <<= 1;
+      00002Ar80r15                   94 	sl	__divulong_sloc0_1_0+0
+      00002Cr81r16                   95 	slc	__divulong_sloc0_1_0+1
+      00002Er82r16                   96 	slc	__divulong_sloc0_1_0+2
+      000030r83r16                   97 	slc	__divulong_sloc0_1_0+3
+                                     98 ;	../_divulong.c: 343: if (c)
+      000032 00 2B                   99 	cneqsn	a, #0x00
+      000034r3Ar30                  100 	goto	00102$
+                                    101 ;	../_divulong.c: 344: reste |= 1L;
+      000036 01 2F                  102 	mov	a, #0x01
+      000038r80r0A                  103 	or	__divulong_sloc0_1_0+0, a
+      00003A                        104 00102$:
+                                    105 ;	../_divulong.c: 346: if (reste >= y)
+      00003Ar80r0F                  106 	mov	a, __divulong_sloc0_1_0+0
+      00003Cr84r0C                  107 	sub	a, __divulong_PARM_2+0
+      00003Er81r0F                  108 	mov	a, __divulong_sloc0_1_0+1
+      000040r85r0D                  109 	subc	a, __divulong_PARM_2+1
+      000042r82r0F                  110 	mov	a, __divulong_sloc0_1_0+2
+      000044r86r0D                  111 	subc	a, __divulong_PARM_2+2
+      000046r83r0F                  112 	mov	a, __divulong_sloc0_1_0+3
+      000048r87r0D                  113 	subc	a, __divulong_PARM_2+3
+      00004A 40 18                  114 	t0sn	f, c
+      00004Cr62r30                  115 	goto	00106$
+                                    116 ;	../_divulong.c: 348: reste -= y;
+      00004Er84r0F                  117 	mov	a, __divulong_PARM_2+0
+      000050r80r08                  118 	sub	__divulong_sloc0_1_0+0, a
+      000052r85r0F                  119 	mov	a, __divulong_PARM_2+1
+      000054r81r09                  120 	subc	__divulong_sloc0_1_0+1, a
+      000056r86r0F                  121 	mov	a, __divulong_PARM_2+2
+      000058r82r09                  122 	subc	__divulong_sloc0_1_0+2, a
+      00005Ar87r0F                  123 	mov	a, __divulong_PARM_2+3
+      00005Cr83r09                  124 	subc	__divulong_sloc0_1_0+3, a
+                                    125 ;	../_divulong.c: 350: x |= 1L;
+      00005E 01 2F                  126 	mov	a, #0x01
+      000060r80r0A                  127 	or	__divulong_PARM_1+0, a
+      000062                        128 00106$:
+                                    129 ;	../_divulong.c: 353: while (--count);
+      000062r80r0F                  130 	mov	a, p
+      000064 01 29                  131 	sub	a, #0x01
+      000066r80r0B                  132 	mov	p, a
+      000068 00 2A                  133 	ceqsn	a, #0x00
+      00006Ar0Cr30                  134 	goto	00105$
+                                    135 ;	../_divulong.c: 354: return x;
+      00006C C2 01                  136 	mov	a, sp
+      00006E FC 28                  137 	add	a, #0xfc
+      000070r80r0B                  138 	mov	p, a
+      000072r81r03                  139 	idxm	a, p
+      000074r80r0B                  140 	mov	p, a
+      000076r80r0F                  141 	mov	a, __divulong_PARM_1+0
+      000078r80r03                  142 	idxm	p, a
+      00007Ar00r12                  143 	inc	p
+      00007Cr81r0F                  144 	mov	a, __divulong_PARM_1+1
+      00007Er80r03                  145 	idxm	p, a
+      000080r00r12                  146 	inc	p
+      000082r82r0F                  147 	mov	a, __divulong_PARM_1+2
+      000084r80r03                  148 	idxm	p, a
+      000086r00r12                  149 	inc	p
+      000088r83r0F                  150 	mov	a, __divulong_PARM_1+3
+      00008Ar80r03                  151 	idxm	p, a
+                                    152 ;	../_divulong.c: 355: }
+      00008C 7A 00                  153 	ret
+                                    154 	.area CODE
+                                    155 	.area CONST
+                                    156 	.area CABS (ABS)

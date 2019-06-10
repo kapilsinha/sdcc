@@ -1,0 +1,111 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strchr
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strchr_PARM_2
+                                     17 	.globl _strchr_PARM_1
+                                     18 	.globl _strchr
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 _strchr_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 _strchr_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 _strchr_sloc0_1_0:
+      000000                         37 	.ds 2
+                                     38 ;--------------------------------------------------------
+                                     39 ; absolute external ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area DABS (ABS)
+                                     42 ;--------------------------------------------------------
+                                     43 ; global & static initialisations
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area GSINIT
+                                     47 	.area GSFINAL
+                                     48 	.area GSINIT
+                                     49 ;--------------------------------------------------------
+                                     50 ; Home
+                                     51 ;--------------------------------------------------------
+                                     52 	.area HOME
+                                     53 	.area HOME
+                                     54 ;--------------------------------------------------------
+                                     55 ; code
+                                     56 ;--------------------------------------------------------
+                                     57 	.area CODE
+                                     58 ;	../_strchr.c: 36: char * strchr ( const char * string, int ch )
+                                     59 ;	-----------------------------------------
+                                     60 ;	 function strchr
+                                     61 ;	-----------------------------------------
+      000000                         62 _strchr:
+                                     63 ;	../_strchr.c: 39: while (*string && *string != ch)
+      000000r80r0F                   64 	mov	a, _strchr_PARM_1+0
+      000002r80r0B                   65 	mov	_strchr_sloc0_1_0+0, a
+      000004r81r0F                   66 	mov	a, _strchr_PARM_1+1
+      000006r81r0B                   67 	mov	_strchr_sloc0_1_0+1, a
+      000008                         68 00102$:
+      000008r80r0F                   69 	mov	a, _strchr_sloc0_1_0+0
+      00000Ar80r0B                   70 	mov	p, a
+      00000Cr81r0F                   71 	mov	a, _strchr_sloc0_1_0+1
+      00000Er00r38                   72 	call	__gptrget
+      000010 00 2B                   73 	cneqsn	a, #0x00
+      000012r26r30                   74 	goto	00104$
+      000014r00r13                   75 	clear	p
+      000016r02r17                   76 	ceqsn	a, _strchr_PARM_2+0
+      000018r20r30                   77 	goto	00126$
+      00001Ar80r0F                   78 	mov	a, p
+      00001Cr83r17                   79 	cneqsn	a, _strchr_PARM_2+1
+      00001Er26r30                   80 	goto	00104$
+      000020                         81 00126$:
+                                     82 ;	../_strchr.c: 40: string++;
+      000020r00r12                   83 	inc	_strchr_sloc0_1_0+0
+      000022r01r10                   84 	addc	_strchr_sloc0_1_0+1
+      000024r08r30                   85 	goto	00102$
+      000026                         86 00104$:
+                                     87 ;	../_strchr.c: 42: if (*string == ch)
+      000026r80r0F                   88 	mov	a, _strchr_sloc0_1_0+0
+      000028r80r0B                   89 	mov	p, a
+      00002Ar81r0F                   90 	mov	a, _strchr_sloc0_1_0+1
+      00002Cr00r38                   91 	call	__gptrget
+      00002Er00r13                   92 	clear	p
+      000030r02r17                   93 	ceqsn	a, _strchr_PARM_2+0
+      000032r42r30                   94 	goto	00106$
+      000034r80r0F                   95 	mov	a, p
+      000036r03r17                   96 	ceqsn	a, _strchr_PARM_2+1
+      000038r42r30                   97 	goto	00106$
+                                     98 ;	../_strchr.c: 43: return((char *)string);
+      00003Ar81r0F                   99 	mov	a, _strchr_sloc0_1_0+1
+      00003Cr80r0B                  100 	mov	p, a
+      00003Er80r0F                  101 	mov	a, _strchr_sloc0_1_0+0
+      000040 7A 00                  102 	ret
+      000042                        103 00106$:
+                                    104 ;	../_strchr.c: 44: return ( NULL );
+      000042r00r13                  105 	clear	p
+      000044 00 02                  106 	ret	#0x00
+                                    107 ;	../_strchr.c: 45: }
+      000046 7A 00                  108 	ret
+                                    109 	.area CODE
+                                    110 	.area CONST
+                                    111 	.area CABS (ABS)

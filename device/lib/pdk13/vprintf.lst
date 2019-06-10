@@ -1,0 +1,127 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module vprintf
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _putchar
+                                     17 	.globl __print_format
+                                     18 	.globl _vprintf_PARM_2
+                                     19 	.globl _vprintf_PARM_1
+                                     20 	.globl _vprintf
+                                     21 	.globl _printf
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 	.area RSEG (ABS)
+      000000                         26 	.org 0x0000
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area DATA
+      000000                         31 _vprintf_PARM_1:
+      000000                         32 	.ds 2
+      000002                         33 _vprintf_PARM_2:
+      000002                         34 	.ds 2
+                                     35 ;--------------------------------------------------------
+                                     36 ; overlayable items in ram 
+                                     37 ;--------------------------------------------------------
+                                     38 ;--------------------------------------------------------
+                                     39 ; absolute external ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area DABS (ABS)
+                                     42 ;--------------------------------------------------------
+                                     43 ; global & static initialisations
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area GSINIT
+                                     47 	.area GSFINAL
+                                     48 	.area GSINIT
+                                     49 ;--------------------------------------------------------
+                                     50 ; Home
+                                     51 ;--------------------------------------------------------
+                                     52 	.area HOME
+                                     53 	.area HOME
+                                     54 ;--------------------------------------------------------
+                                     55 ; code
+                                     56 ;--------------------------------------------------------
+                                     57 	.area CODE
+                                     58 ;	../vprintf.c: 34: put_char_to_stdout (char c, void* p) _REENTRANT
+                                     59 ;	-----------------------------------------
+                                     60 ;	 function put_char_to_stdout
+                                     61 ;	-----------------------------------------
+      000000                         62 _put_char_to_stdout:
+                                     63 ;	../vprintf.c: 37: putchar (c);
+      000000 C2 01                   64 	mov	a, sp
+      000002 FC 28                   65 	add	a, #0xfc
+      000004r80r0B                   66 	mov	p, a
+      000006r81r03                   67 	idxm	a, p
+      000008r80r0B                   68 	mov	_putchar_PARM_1+0, a
+      00000Ar01r13                   69 	clear	_putchar_PARM_1+1
+      00000Cr00r38                   70 	call	_putchar
+                                     71 ;	../vprintf.c: 38: }
+      00000E 7A 00                   72 	ret
+                                     73 ;	../vprintf.c: 41: vprintf (const char *format, va_list ap)
+                                     74 ;	-----------------------------------------
+                                     75 ;	 function vprintf
+                                     76 ;	-----------------------------------------
+      000010                         77 _vprintf:
+                                     78 ;	../vprintf.c: 43: return _print_format (put_char_to_stdout, NULL, format, ap);
+      000010r00r2F                   79 	mov	a, #<(_put_char_to_stdout + 0)
+      000012r80r0B                   80 	mov	__print_format_PARM_1+0, a
+      000014r00r2F                   81 	mov	a, #>(_put_char_to_stdout + 0)
+      000016r81r0B                   82 	mov	__print_format_PARM_1+1, a
+      000018r00r13                   83 	clear	__print_format_PARM_2+0
+      00001Ar01r13                   84 	clear	__print_format_PARM_2+1
+      00001Cr80r0F                   85 	mov	a, _vprintf_PARM_1+0
+      00001Er80r0B                   86 	mov	__print_format_PARM_3+0, a
+      000020r81r0F                   87 	mov	a, _vprintf_PARM_1+1
+      000022r81r0B                   88 	mov	__print_format_PARM_3+1, a
+      000024r82r0F                   89 	mov	a, _vprintf_PARM_2+0
+      000026r80r0B                   90 	mov	__print_format_PARM_4+0, a
+      000028r83r0F                   91 	mov	a, _vprintf_PARM_2+1
+      00002Ar81r0B                   92 	mov	__print_format_PARM_4+1, a
+      00002Cr00r38                   93 	call	__print_format
+                                     94 ;	../vprintf.c: 44: }
+      00002E 7A 00                   95 	ret
+                                     96 ;	../vprintf.c: 47: printf (const char *format, ...)
+                                     97 ;	-----------------------------------------
+                                     98 ;	 function printf
+                                     99 ;	-----------------------------------------
+      000030                        100 _printf:
+                                    101 ;	../vprintf.c: 52: va_start (arg, format);
+      000030 C2 01                  102 	mov	a, sp
+      000032 FC 28                  103 	add	a, #0xfc
+      000034r80r0B                  104 	mov	__print_format_PARM_4+0, a
+      000036r01r13                  105 	clear	__print_format_PARM_4+1
+                                    106 ;	../vprintf.c: 53: i = _print_format (put_char_to_stdout, NULL, format, arg);
+      000038r00r2F                  107 	mov	a, #<(_put_char_to_stdout + 0)
+      00003Ar80r0B                  108 	mov	__print_format_PARM_1+0, a
+      00003Cr00r2F                  109 	mov	a, #>(_put_char_to_stdout + 0)
+      00003Er81r0B                  110 	mov	__print_format_PARM_1+1, a
+      000040r00r13                  111 	clear	__print_format_PARM_2+0
+      000042r01r13                  112 	clear	__print_format_PARM_2+1
+      000044 C2 01                  113 	mov	a, sp
+      000046 FC 28                  114 	add	a, #0xfc
+      000048r80r0B                  115 	mov	p, a
+      00004Ar81r03                  116 	idxm	a, p
+      00004Cr80r0B                  117 	mov	__print_format_PARM_3+0, a
+      00004Er00r12                  118 	inc	p
+      000050r81r03                  119 	idxm	a, p
+      000052r81r0B                  120 	mov	__print_format_PARM_3+1, a
+      000054r00r38                  121 	call	__print_format
+                                    122 ;	../vprintf.c: 56: return i;
+                                    123 ;	../vprintf.c: 57: }
+      000056 7A 00                  124 	ret
+                                    125 	.area CODE
+                                    126 	.area CONST
+                                    127 	.area CABS (ABS)

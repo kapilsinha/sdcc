@@ -1,0 +1,325 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _rrslonglong
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __rrslonglong_PARM_2
+                                     17 	.globl __rrslonglong_PARM_1
+                                     18 	.globl __rrslonglong
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __rrslonglong_PARM_1:
+      000000                         29 	.ds 8
+      000008                         30 __rrslonglong_PARM_2:
+      000008                         31 	.ds 1
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __rrslonglong_sloc0_1_0:
+      000000                         37 	.ds 4
+      000004                         38 __rrslonglong_sloc1_1_0:
+      000004                         39 	.ds 4
+      000008                         40 __rrslonglong_sloc2_1_0:
+      000008                         41 	.ds 2
+      00000A                         42 __rrslonglong_sloc3_1_0:
+      00000A                         43 	.ds 2
+      00000C                         44 __rrslonglong_sloc4_1_0:
+      00000C                         45 	.ds 4
+      000010                         46 __rrslonglong_sloc5_1_0:
+      000010                         47 	.ds 4
+      000014                         48 __rrslonglong_sloc6_1_0:
+      000014                         49 	.ds 4
+      000018                         50 __rrslonglong_sloc7_1_0:
+      000018                         51 	.ds 4
+      00001C                         52 __rrslonglong_sloc8_1_0:
+      00001C                         53 	.ds 4
+      000020                         54 __rrslonglong_sloc9_1_0:
+      000020                         55 	.ds 4
+      000024                         56 __rrslonglong_sloc10_1_0:
+      000024                         57 	.ds 4
+      000028                         58 __rrslonglong_sloc11_1_0:
+      000028                         59 	.ds 4
+                                     60 ;--------------------------------------------------------
+                                     61 ; absolute external ram data
+                                     62 ;--------------------------------------------------------
+                                     63 	.area DABS (ABS)
+                                     64 ;--------------------------------------------------------
+                                     65 ; global & static initialisations
+                                     66 ;--------------------------------------------------------
+                                     67 	.area HOME
+                                     68 	.area GSINIT
+                                     69 	.area GSFINAL
+                                     70 	.area GSINIT
+                                     71 ;--------------------------------------------------------
+                                     72 ; Home
+                                     73 ;--------------------------------------------------------
+                                     74 	.area HOME
+                                     75 	.area HOME
+                                     76 ;--------------------------------------------------------
+                                     77 ; code
+                                     78 ;--------------------------------------------------------
+                                     79 	.area CODE
+                                     80 ;	../_rrslonglong.c: 62: long long _rrslonglong(long long l, char s)
+                                     81 ;	-----------------------------------------
+                                     82 ;	 function _rrslonglong
+                                     83 ;	-----------------------------------------
+      000000                         84 __rrslonglong:
+                                     85 ;	../_rrslonglong.c: 64: int32_t *top = (uint32_t *)((char *)(&l) + 4);
+                                     86 ;	../_rrslonglong.c: 65: uint16_t *middle = (uint16_t *)((char *)(&l) + 3);
+                                     87 ;	../_rrslonglong.c: 66: uint32_t *bottom = (uint32_t *)(&l);
+                                     88 ;	../_rrslonglong.c: 67: uint16_t *b = (uint16_t *)(&l);
+                                     89 ;	../_rrslonglong.c: 77: (*bottom) >>= s;
+      000000                         90 00103$:
+                                     91 ;	../_rrslonglong.c: 69: for(;s >= 16; s-= 16)
+      000000r88r0F                   92 	mov	a, __rrslonglong_PARM_2+0
+      000002 10 29                   93 	sub	a, #0x10
+      000004 40 18                   94 	t0sn	f, c
+      000006r52r30                   95 	goto	00101$
+                                     96 ;	../_rrslonglong.c: 71: b[0] = b[1];
+      000008r82r0F                   97 	mov	a, __rrslonglong_PARM_1+2
+      00000Ar80r0B                   98 	mov	p, a
+      00000Cr83r0F                   99 	mov	a, __rrslonglong_PARM_1+3
+      00000Er81r0B                  100 	mov	__rrslonglong_PARM_1+1, a
+      000010r80r0F                  101 	mov	a, p
+      000012r80r0B                  102 	mov	__rrslonglong_PARM_1+0, a
+                                    103 ;	../_rrslonglong.c: 72: b[1] = b[2];
+      000014r84r0F                  104 	mov	a, __rrslonglong_PARM_1+4
+      000016r80r0B                  105 	mov	p, a
+      000018r85r0F                  106 	mov	a, __rrslonglong_PARM_1+5
+      00001Ar83r0B                  107 	mov	__rrslonglong_PARM_1+3, a
+      00001Cr80r0F                  108 	mov	a, p
+      00001Er82r0B                  109 	mov	__rrslonglong_PARM_1+2, a
+                                    110 ;	../_rrslonglong.c: 73: b[2] = b[3];
+      000020r86r0F                  111 	mov	a, __rrslonglong_PARM_1+6
+      000022r80r0B                  112 	mov	p, a
+      000024r87r0F                  113 	mov	a, __rrslonglong_PARM_1+7
+      000026r85r0B                  114 	mov	__rrslonglong_PARM_1+5, a
+      000028r80r0F                  115 	mov	a, p
+      00002Ar84r0B                  116 	mov	__rrslonglong_PARM_1+4, a
+                                    117 ;	../_rrslonglong.c: 74: b[3] = (b[3] & 0x8000) ? 0xffff : 0x000000;
+      00002Cr86r0F                  118 	mov	a, __rrslonglong_PARM_1+6
+      00002E 72 00                  119 	push	af
+      000030r87r0F                  120 	mov	a, __rrslonglong_PARM_1+7
+      000032r80r0B                  121 	mov	p, a
+      000034 73 00                  122 	pop	af
+      000036rC0r23                  123 	t1sn	p, #7
+      000038r42r30                  124 	goto	00107$
+      00003A FF 2F                  125 	mov	a, #0xff
+      00003Cr80r0B                  126 	mov	p, a
+      00003E FF 2F                  127 	mov	a, #0xff
+      000040r46r30                  128 	goto	00108$
+      000042                        129 00107$:
+      000042r00r13                  130 	clear	p
+      000044 00 2F                  131 	mov	a, #0x00
+      000046                        132 00108$:
+      000046r87r0B                  133 	mov	__rrslonglong_PARM_1+7, a
+      000048r80r0F                  134 	mov	a, p
+      00004Ar86r0B                  135 	mov	__rrslonglong_PARM_1+6, a
+                                    136 ;	../_rrslonglong.c: 69: for(;s >= 16; s-= 16)
+      00004C 10 2F                  137 	mov	a, #0x10
+      00004Er88r08                  138 	sub	__rrslonglong_PARM_2+0, a
+      000050r00r30                  139 	goto	00103$
+      000052                        140 00101$:
+                                    141 ;	../_rrslonglong.c: 77: (*bottom) >>= s;
+      000052r80r0F                  142 	mov	a, __rrslonglong_PARM_1+0
+      000054r80r0B                  143 	mov	__rrslonglong_sloc0_1_0+0, a
+      000056r81r0F                  144 	mov	a, __rrslonglong_PARM_1+1
+      000058r81r0B                  145 	mov	__rrslonglong_sloc0_1_0+1, a
+      00005Ar82r0F                  146 	mov	a, __rrslonglong_PARM_1+2
+      00005Cr82r0B                  147 	mov	__rrslonglong_sloc0_1_0+2, a
+      00005Er83r0F                  148 	mov	a, __rrslonglong_PARM_1+3
+      000060r83r0B                  149 	mov	__rrslonglong_sloc0_1_0+3, a
+      000062r80r0F                  150 	mov	a, __rrslonglong_sloc0_1_0+0
+      000064r84r0B                  151 	mov	__rrslonglong_sloc1_1_0+0, a
+      000066r81r0F                  152 	mov	a, __rrslonglong_sloc0_1_0+1
+      000068r85r0B                  153 	mov	__rrslonglong_sloc1_1_0+1, a
+      00006Ar82r0F                  154 	mov	a, __rrslonglong_sloc0_1_0+2
+      00006Cr86r0B                  155 	mov	__rrslonglong_sloc1_1_0+2, a
+      00006Er83r0F                  156 	mov	a, __rrslonglong_sloc0_1_0+3
+      000070r87r0B                  157 	mov	__rrslonglong_sloc1_1_0+3, a
+      000072r88r0F                  158 	mov	a, __rrslonglong_PARM_2+0
+      000074                        159 00121$:
+      000074 01 29                  160 	sub	a, #1
+      000076 40 18                  161 	t0sn	f, c
+      000078r84r30                  162 	goto	00122$
+      00007Ar07r15                  163 	sr	__rrslonglong_sloc1_1_0+3
+      00007Cr06r16                  164 	src	__rrslonglong_sloc1_1_0+2
+      00007Er05r16                  165 	src	__rrslonglong_sloc1_1_0+1
+      000080r04r16                  166 	src	__rrslonglong_sloc1_1_0+0
+      000082r74r30                  167 	goto	00121$
+      000084                        168 00122$:
+      000084r84r0F                  169 	mov	a, __rrslonglong_sloc1_1_0+0
+      000086r80r0B                  170 	mov	__rrslonglong_PARM_1+0, a
+      000088r85r0F                  171 	mov	a, __rrslonglong_sloc1_1_0+1
+      00008Ar81r0B                  172 	mov	__rrslonglong_PARM_1+1, a
+      00008Cr86r0F                  173 	mov	a, __rrslonglong_sloc1_1_0+2
+      00008Er82r0B                  174 	mov	__rrslonglong_PARM_1+2, a
+      000090r87r0F                  175 	mov	a, __rrslonglong_sloc1_1_0+3
+                                    176 ;	../_rrslonglong.c: 78: (*bottom) |= ((uint32_t)((*middle) >> s) << 16);
+      000092r83r0B                  177 	mov	__rrslonglong_PARM_1+3, a
+      000094r88r0B                  178 	mov	__rrslonglong_sloc2_1_0+0, a
+      000096r84r0F                  179 	mov	a, __rrslonglong_PARM_1+4
+      000098r89r0B                  180 	mov	__rrslonglong_sloc2_1_0+1, a
+      00009Ar88r0F                  181 	mov	a, __rrslonglong_sloc2_1_0+0
+      00009Cr8Ar0B                  182 	mov	__rrslonglong_sloc3_1_0+0, a
+      00009Er89r0F                  183 	mov	a, __rrslonglong_sloc2_1_0+1
+      0000A0r8Br0B                  184 	mov	__rrslonglong_sloc3_1_0+1, a
+      0000A2r88r0F                  185 	mov	a, __rrslonglong_PARM_2+0
+      0000A4                        186 00123$:
+      0000A4 01 29                  187 	sub	a, #1
+      0000A6 40 18                  188 	t0sn	f, c
+      0000A8rB0r30                  189 	goto	00124$
+      0000AAr0Br15                  190 	sr	__rrslonglong_sloc3_1_0+1
+      0000ACr0Ar16                  191 	src	__rrslonglong_sloc3_1_0+0
+      0000AErA4r30                  192 	goto	00123$
+      0000B0                        193 00124$:
+      0000B0r8Ar0F                  194 	mov	a, __rrslonglong_sloc3_1_0+0
+      0000B2r8Er0B                  195 	mov	__rrslonglong_sloc4_1_0+2, a
+      0000B4r8Br0F                  196 	mov	a, __rrslonglong_sloc3_1_0+1
+      0000B6r8Fr0B                  197 	mov	__rrslonglong_sloc4_1_0+3, a
+      0000B8r0Cr13                  198 	clear	__rrslonglong_sloc4_1_0+0
+      0000BAr0Dr13                  199 	clear	__rrslonglong_sloc4_1_0+1
+      0000BCr84r0F                  200 	mov	a, __rrslonglong_sloc1_1_0+0
+      0000BEr8Cr0E                  201 	or	a, __rrslonglong_sloc4_1_0+0
+      0000C0r90r0B                  202 	mov	__rrslonglong_sloc5_1_0+0, a
+      0000C2r85r0F                  203 	mov	a, __rrslonglong_sloc1_1_0+1
+      0000C4r8Dr0E                  204 	or	a, __rrslonglong_sloc4_1_0+1
+      0000C6r91r0B                  205 	mov	__rrslonglong_sloc5_1_0+1, a
+      0000C8r86r0F                  206 	mov	a, __rrslonglong_sloc1_1_0+2
+      0000CAr8Er0E                  207 	or	a, __rrslonglong_sloc4_1_0+2
+      0000CCr92r0B                  208 	mov	__rrslonglong_sloc5_1_0+2, a
+      0000CEr87r0F                  209 	mov	a, __rrslonglong_sloc1_1_0+3
+      0000D0r8Fr0E                  210 	or	a, __rrslonglong_sloc4_1_0+3
+      0000D2r93r0B                  211 	mov	__rrslonglong_sloc5_1_0+3, a
+      0000D4r90r0F                  212 	mov	a, __rrslonglong_sloc5_1_0+0
+      0000D6r80r0B                  213 	mov	__rrslonglong_PARM_1+0, a
+      0000D8r91r0F                  214 	mov	a, __rrslonglong_sloc5_1_0+1
+      0000DAr81r0B                  215 	mov	__rrslonglong_PARM_1+1, a
+      0000DCr92r0F                  216 	mov	a, __rrslonglong_sloc5_1_0+2
+      0000DEr82r0B                  217 	mov	__rrslonglong_PARM_1+2, a
+      0000E0r93r0F                  218 	mov	a, __rrslonglong_sloc5_1_0+3
+      0000E2r83r0B                  219 	mov	__rrslonglong_PARM_1+3, a
+                                    220 ;	../_rrslonglong.c: 79: (*top) |= (((*middle) & 0xffff0000) >> s);
+      0000E4r84r0F                  221 	mov	a, __rrslonglong_PARM_1+4
+      0000E6r94r0B                  222 	mov	__rrslonglong_sloc6_1_0+0, a
+      0000E8r85r0F                  223 	mov	a, __rrslonglong_PARM_1+5
+      0000EAr95r0B                  224 	mov	__rrslonglong_sloc6_1_0+1, a
+      0000ECr86r0F                  225 	mov	a, __rrslonglong_PARM_1+6
+      0000EEr96r0B                  226 	mov	__rrslonglong_sloc6_1_0+2, a
+      0000F0r87r0F                  227 	mov	a, __rrslonglong_PARM_1+7
+      0000F2r97r0B                  228 	mov	__rrslonglong_sloc6_1_0+3, a
+      0000F4r83r0F                  229 	mov	a, __rrslonglong_PARM_1+3
+      0000F6 72 00                  230 	push	af
+      0000F8r84r0F                  231 	mov	a, __rrslonglong_PARM_1+4
+      0000FAr80r0B                  232 	mov	p, a
+      0000FC 73 00                  233 	pop	af
+      0000FEr98r0B                  234 	mov	__rrslonglong_sloc7_1_0+0, a
+      000100r80r0F                  235 	mov	a, p
+      000102r99r0B                  236 	mov	__rrslonglong_sloc7_1_0+1, a
+      000104r1Ar13                  237 	clear	__rrslonglong_sloc7_1_0+2
+      000106r1Br13                  238 	clear	__rrslonglong_sloc7_1_0+3
+      000108r1Cr13                  239 	clear	__rrslonglong_sloc8_1_0+0
+      00010Ar1Dr13                  240 	clear	__rrslonglong_sloc8_1_0+1
+      00010Cr9Ar0F                  241 	mov	a, __rrslonglong_sloc7_1_0+2
+      00010Er9Er0B                  242 	mov	__rrslonglong_sloc8_1_0+2, a
+      000110r9Br0F                  243 	mov	a, __rrslonglong_sloc7_1_0+3
+      000112r9Fr0B                  244 	mov	__rrslonglong_sloc8_1_0+3, a
+      000114r9Cr0F                  245 	mov	a, __rrslonglong_sloc8_1_0+0
+      000116rA0r0B                  246 	mov	__rrslonglong_sloc9_1_0+0, a
+      000118r9Dr0F                  247 	mov	a, __rrslonglong_sloc8_1_0+1
+      00011ArA1r0B                  248 	mov	__rrslonglong_sloc9_1_0+1, a
+      00011Cr9Er0F                  249 	mov	a, __rrslonglong_sloc8_1_0+2
+      00011ErA2r0B                  250 	mov	__rrslonglong_sloc9_1_0+2, a
+      000120r9Fr0F                  251 	mov	a, __rrslonglong_sloc8_1_0+3
+      000122rA3r0B                  252 	mov	__rrslonglong_sloc9_1_0+3, a
+      000124r88r0F                  253 	mov	a, __rrslonglong_PARM_2+0
+      000126                        254 00125$:
+      000126 01 29                  255 	sub	a, #1
+      000128 40 18                  256 	t0sn	f, c
+      00012Ar36r31                  257 	goto	00126$
+      00012Cr23r15                  258 	sr	__rrslonglong_sloc9_1_0+3
+      00012Er22r16                  259 	src	__rrslonglong_sloc9_1_0+2
+      000130r21r16                  260 	src	__rrslonglong_sloc9_1_0+1
+      000132r20r16                  261 	src	__rrslonglong_sloc9_1_0+0
+      000134r26r31                  262 	goto	00125$
+      000136                        263 00126$:
+      000136r94r0F                  264 	mov	a, __rrslonglong_sloc6_1_0+0
+      000138rA4r0B                  265 	mov	__rrslonglong_sloc10_1_0+0, a
+      00013Ar95r0F                  266 	mov	a, __rrslonglong_sloc6_1_0+1
+      00013CrA5r0B                  267 	mov	__rrslonglong_sloc10_1_0+1, a
+      00013Er96r0F                  268 	mov	a, __rrslonglong_sloc6_1_0+2
+      000140rA6r0B                  269 	mov	__rrslonglong_sloc10_1_0+2, a
+      000142r97r0F                  270 	mov	a, __rrslonglong_sloc6_1_0+3
+      000144rA7r0B                  271 	mov	__rrslonglong_sloc10_1_0+3, a
+      000146rA4r0F                  272 	mov	a, __rrslonglong_sloc10_1_0+0
+      000148rA0r0E                  273 	or	a, __rrslonglong_sloc9_1_0+0
+      00014ArA8r0B                  274 	mov	__rrslonglong_sloc11_1_0+0, a
+      00014CrA5r0F                  275 	mov	a, __rrslonglong_sloc10_1_0+1
+      00014ErA1r0E                  276 	or	a, __rrslonglong_sloc9_1_0+1
+      000150rA9r0B                  277 	mov	__rrslonglong_sloc11_1_0+1, a
+      000152rA6r0F                  278 	mov	a, __rrslonglong_sloc10_1_0+2
+      000154rA2r0E                  279 	or	a, __rrslonglong_sloc9_1_0+2
+      000156rAAr0B                  280 	mov	__rrslonglong_sloc11_1_0+2, a
+      000158rA7r0F                  281 	mov	a, __rrslonglong_sloc10_1_0+3
+      00015ArA3r0E                  282 	or	a, __rrslonglong_sloc9_1_0+3
+      00015CrABr0B                  283 	mov	__rrslonglong_sloc11_1_0+3, a
+      00015ErA8r0F                  284 	mov	a, __rrslonglong_sloc11_1_0+0
+      000160r84r0B                  285 	mov	__rrslonglong_PARM_1+4, a
+      000162rA9r0F                  286 	mov	a, __rrslonglong_sloc11_1_0+1
+      000164r85r0B                  287 	mov	__rrslonglong_PARM_1+5, a
+      000166rAAr0F                  288 	mov	a, __rrslonglong_sloc11_1_0+2
+      000168r86r0B                  289 	mov	__rrslonglong_PARM_1+6, a
+      00016ArABr0F                  290 	mov	a, __rrslonglong_sloc11_1_0+3
+      00016Cr87r0B                  291 	mov	__rrslonglong_PARM_1+7, a
+                                    292 ;	../_rrslonglong.c: 81: return(l);
+      00016E C2 01                  293 	mov	a, sp
+      000170 FC 28                  294 	add	a, #0xfc
+      000172r80r0B                  295 	mov	p, a
+      000174r81r03                  296 	idxm	a, p
+      000176r80r0B                  297 	mov	p, a
+      000178r80r0F                  298 	mov	a, __rrslonglong_PARM_1+0
+      00017Ar80r03                  299 	idxm	p, a
+      00017Cr00r12                  300 	inc	p
+      00017Er81r0F                  301 	mov	a, __rrslonglong_PARM_1+1
+      000180r80r03                  302 	idxm	p, a
+      000182r00r12                  303 	inc	p
+      000184r82r0F                  304 	mov	a, __rrslonglong_PARM_1+2
+      000186r80r03                  305 	idxm	p, a
+      000188r00r12                  306 	inc	p
+      00018Ar83r0F                  307 	mov	a, __rrslonglong_PARM_1+3
+      00018Cr80r03                  308 	idxm	p, a
+      00018Er00r12                  309 	inc	p
+      000190r84r0F                  310 	mov	a, __rrslonglong_PARM_1+4
+      000192r80r03                  311 	idxm	p, a
+      000194r00r12                  312 	inc	p
+      000196r85r0F                  313 	mov	a, __rrslonglong_PARM_1+5
+      000198r80r03                  314 	idxm	p, a
+      00019Ar00r12                  315 	inc	p
+      00019Cr86r0F                  316 	mov	a, __rrslonglong_PARM_1+6
+      00019Er80r03                  317 	idxm	p, a
+      0001A0r00r12                  318 	inc	p
+      0001A2r87r0F                  319 	mov	a, __rrslonglong_PARM_1+7
+      0001A4r80r03                  320 	idxm	p, a
+                                    321 ;	../_rrslonglong.c: 82: }
+      0001A6 7A 00                  322 	ret
+                                    323 	.area CODE
+                                    324 	.area CONST
+                                    325 	.area CABS (ABS)

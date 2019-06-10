@@ -1,0 +1,132 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _moduint
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl __moduint_PARM_2
+                                     17 	.globl __moduint_PARM_1
+                                     18 	.globl __moduint
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 __moduint_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 __moduint_PARM_2:
+      000002                         31 	.ds 2
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 	.area	OSEG (OVR,DATA)
+      000000                         36 __moduint_sloc0_1_0:
+      000000                         37 	.ds 1
+      000001                         38 __moduint_sloc1_1_0:
+      000001                         39 	.ds 1
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 ;--------------------------------------------------------
+                                     45 ; global & static initialisations
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area GSINIT
+                                     49 	.area GSFINAL
+                                     50 	.area GSINIT
+                                     51 ;--------------------------------------------------------
+                                     52 ; Home
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area HOME
+                                     56 ;--------------------------------------------------------
+                                     57 ; code
+                                     58 ;--------------------------------------------------------
+                                     59 	.area CODE
+                                     60 ;	../_moduint.c: 173: _moduint (unsigned int a, unsigned int b)
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function _moduint
+                                     63 ;	-----------------------------------------
+      000000                         64 __moduint:
+                                     65 ;	../_moduint.c: 175: unsigned char count = 0;
+      000000r00r13                   66 	clear	__moduint_sloc0_1_0+0
+                                     67 ;	../_moduint.c: 177: while (!MSB_SET(b))
+      000002r01r13                   68 	clear	__moduint_sloc1_1_0+0
+      000004                         69 00103$:
+      000004r00r13                   70 	clear	p
+      000006r83r0F                   71 	mov	a, __moduint_PARM_2+1
+      000008 6B 00                   72 	sl	a
+      00000A 00 2F                   73 	mov	a, #0x00
+      00000C 6D 00                   74 	slc	a
+      00000E 00 2A                   75 	ceqsn	a, #0x00
+      000010r30r30                   76 	goto	00117$
+                                     77 ;	../_moduint.c: 179: b <<= 1;
+      000012r82r15                   78 	sl	__moduint_PARM_2+0
+      000014r83r16                   79 	slc	__moduint_PARM_2+1
+                                     80 ;	../_moduint.c: 180: if (b > a)
+      000016r80r0F                   81 	mov	a, __moduint_PARM_1+0
+      000018r82r0C                   82 	sub	a, __moduint_PARM_2+0
+      00001Ar81r0F                   83 	mov	a, __moduint_PARM_1+1
+      00001Cr83r0D                   84 	subc	a, __moduint_PARM_2+1
+      00001E 40 1A                   85 	t1sn	f, c
+      000020r28r30                   86 	goto	00102$
+                                     87 ;	../_moduint.c: 182: b >>=1;
+      000022r03r15                   88 	sr	__moduint_PARM_2+1
+      000024r02r16                   89 	src	__moduint_PARM_2+0
+                                     90 ;	../_moduint.c: 183: break;
+      000026r30r30                   91 	goto	00117$
+      000028                         92 00102$:
+                                     93 ;	../_moduint.c: 185: count++;
+      000028r01r12                   94 	inc	__moduint_sloc1_1_0+0
+      00002Ar81r0F                   95 	mov	a, __moduint_sloc1_1_0+0
+      00002Cr80r0B                   96 	mov	__moduint_sloc0_1_0+0, a
+      00002Er04r30                   97 	goto	00103$
+                                     98 ;	../_moduint.c: 187: do
+      000030                         99 00117$:
+      000030r80r0F                  100 	mov	a, __moduint_sloc0_1_0+0
+      000032r80r0B                  101 	mov	p, a
+      000034                        102 00108$:
+                                    103 ;	../_moduint.c: 189: if (a >= b)
+      000034r80r0F                  104 	mov	a, __moduint_PARM_1+0
+      000036r82r0C                  105 	sub	a, __moduint_PARM_2+0
+      000038r81r0F                  106 	mov	a, __moduint_PARM_1+1
+      00003Ar83r0D                  107 	subc	a, __moduint_PARM_2+1
+      00003C 40 18                  108 	t0sn	f, c
+      00003Er48r30                  109 	goto	00107$
+                                    110 ;	../_moduint.c: 190: a -= b;
+      000040r82r0F                  111 	mov	a, __moduint_PARM_2+0
+      000042r80r08                  112 	sub	__moduint_PARM_1+0, a
+      000044r83r0F                  113 	mov	a, __moduint_PARM_2+1
+      000046r81r09                  114 	subc	__moduint_PARM_1+1, a
+      000048                        115 00107$:
+                                    116 ;	../_moduint.c: 191: b >>= 1;
+      000048r03r15                  117 	sr	__moduint_PARM_2+1
+      00004Ar02r16                  118 	src	__moduint_PARM_2+0
+                                    119 ;	../_moduint.c: 193: while (count--);
+      00004Cr80r0F                  120 	mov	a, p
+      00004Er80r12                  121 	dec	p
+      000050 00 2A                  122 	ceqsn	a, #0x00
+      000052r34r30                  123 	goto	00108$
+                                    124 ;	../_moduint.c: 194: return a;
+      000054r81r0F                  125 	mov	a, __moduint_PARM_1+1
+      000056r80r0B                  126 	mov	p, a
+      000058r80r0F                  127 	mov	a, __moduint_PARM_1+0
+                                    128 ;	../_moduint.c: 195: }
+      00005A 7A 00                  129 	ret
+                                    130 	.area CODE
+                                    131 	.area CONST
+                                    132 	.area CABS (ABS)

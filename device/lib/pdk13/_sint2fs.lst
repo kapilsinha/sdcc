@@ -1,0 +1,95 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _sint2fs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___slong2fs
+                                     17 	.globl ___sint2fs_PARM_1
+                                     18 	.globl ___sint2fs
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___sint2fs_PARM_1:
+      000000                         29 	.ds 2
+      000002                         30 ___sint2fs_sloc0_1_0:
+      000002                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../_sint2fs.c: 54: float __sint2fs (signed int si) {
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function __sint2fs
+                                     58 ;	-----------------------------------------
+      000000                         59 ___sint2fs:
+                                     60 ;	../_sint2fs.c: 55: return __slong2fs(si);
+      000000r80r0F                   61 	mov	a, ___sint2fs_PARM_1+0
+      000002r80r0B                   62 	mov	___slong2fs_PARM_1+0, a
+      000004r81r0F                   63 	mov	a, ___sint2fs_PARM_1+1
+      000006r81r0B                   64 	mov	___slong2fs_PARM_1+1, a
+      000008 6B 00                   65 	sl	a
+      00000A 00 2F                   66 	mov	a, #0x00
+      00000C 61 00                   67 	subc	a
+      00000Er82r0B                   68 	mov	___slong2fs_PARM_1+2, a
+      000010r83r0B                   69 	mov	___slong2fs_PARM_1+3, a
+      000012r02r2F                   70 	mov	a, #___sint2fs_sloc0_1_0
+      000014 72 00                   71 	push	af
+      000016r00r38                   72 	call	___slong2fs
+      000018 C2 01                   73 	mov	a, sp
+      00001A FE 28                   74 	add	a, #-2
+      00001C 82 01                   75 	mov	sp, a
+      00001E FC 28                   76 	add	a, #0xfc
+      000020r80r0B                   77 	mov	p, a
+      000022r81r03                   78 	idxm	a, p
+      000024r80r0B                   79 	mov	p, a
+      000026r82r0F                   80 	mov	a, ___sint2fs_sloc0_1_0+0
+      000028r80r03                   81 	idxm	p, a
+      00002Ar00r12                   82 	inc	p
+      00002Cr83r0F                   83 	mov	a, ___sint2fs_sloc0_1_0+1
+      00002Er80r03                   84 	idxm	p, a
+      000030r00r12                   85 	inc	p
+      000032r84r0F                   86 	mov	a, ___sint2fs_sloc0_1_0+2
+      000034r80r03                   87 	idxm	p, a
+      000036r00r12                   88 	inc	p
+      000038r85r0F                   89 	mov	a, ___sint2fs_sloc0_1_0+3
+      00003Ar80r03                   90 	idxm	p, a
+                                     91 ;	../_sint2fs.c: 56: }
+      00003C 7A 00                   92 	ret
+                                     93 	.area CODE
+                                     94 	.area CONST
+                                     95 	.area CABS (ABS)

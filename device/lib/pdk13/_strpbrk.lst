@@ -1,0 +1,130 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _strpbrk
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl _strchr
+                                     17 	.globl _strpbrk_PARM_2
+                                     18 	.globl _strpbrk_PARM_1
+                                     19 	.globl _strpbrk
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area RSEG (ABS)
+      000000                         24 	.org 0x0000
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area DATA
+      000000                         29 _strpbrk_PARM_1:
+      000000                         30 	.ds 2
+      000002                         31 _strpbrk_PARM_2:
+      000002                         32 	.ds 2
+      000004                         33 _strpbrk_sloc0_1_0:
+      000004                         34 	.ds 2
+      000006                         35 _strpbrk_sloc1_1_0:
+      000006                         36 	.ds 2
+      000008                         37 _strpbrk_sloc2_1_0:
+      000008                         38 	.ds 2
+                                     39 ;--------------------------------------------------------
+                                     40 ; overlayable items in ram 
+                                     41 ;--------------------------------------------------------
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area DABS (ABS)
+                                     46 ;--------------------------------------------------------
+                                     47 ; global & static initialisations
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area GSINIT
+                                     51 	.area GSFINAL
+                                     52 	.area GSINIT
+                                     53 ;--------------------------------------------------------
+                                     54 ; Home
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area HOME
+                                     58 ;--------------------------------------------------------
+                                     59 ; code
+                                     60 ;--------------------------------------------------------
+                                     61 	.area CODE
+                                     62 ;	../_strpbrk.c: 31: char * strpbrk ( const char * string, const char * control )
+                                     63 ;	-----------------------------------------
+                                     64 ;	 function strpbrk
+                                     65 ;	-----------------------------------------
+      000000                         66 _strpbrk:
+                                     67 ;	../_strpbrk.c: 33: char *ret = NULL;
+      000000r04r13                   68 	clear	_strpbrk_sloc0_1_0+0
+      000002r05r13                   69 	clear	_strpbrk_sloc0_1_0+1
+                                     70 ;	../_strpbrk.c: 36: while (ch = *control) {
+      000004r82r0F                   71 	mov	a, _strpbrk_PARM_2+0
+      000006r86r0B                   72 	mov	_strpbrk_sloc1_1_0+0, a
+      000008r83r0F                   73 	mov	a, _strpbrk_PARM_2+1
+      00000Ar87r0B                   74 	mov	_strpbrk_sloc1_1_0+1, a
+      00000C                         75 00105$:
+      00000Cr86r0F                   76 	mov	a, _strpbrk_sloc1_1_0+0
+      00000Er80r0B                   77 	mov	p, a
+      000010r87r0F                   78 	mov	a, _strpbrk_sloc1_1_0+1
+      000012r00r38                   79 	call	__gptrget
+      000014r80r0B                   80 	mov	p, a
+      000016 00 2B                   81 	cneqsn	a, #0x00
+      000018r5Ar30                   82 	goto	00107$
+                                     83 ;	../_strpbrk.c: 37: char * p = strchr(string, ch);
+      00001Ar80r0F                   84 	mov	a, p
+      00001Cr80r0B                   85 	mov	_strchr_PARM_2+0, a
+      00001Er01r13                   86 	clear	_strchr_PARM_2+1
+      000020r80r0F                   87 	mov	a, _strpbrk_PARM_1+0
+      000022r80r0B                   88 	mov	_strchr_PARM_1+0, a
+      000024r81r0F                   89 	mov	a, _strpbrk_PARM_1+1
+      000026r81r0B                   90 	mov	_strchr_PARM_1+1, a
+      000028r00r38                   91 	call	_strchr
+      00002Ar88r0B                   92 	mov	_strpbrk_sloc2_1_0+0, a
+      00002Cr80r0F                   93 	mov	a, p
+      00002Er89r0B                   94 	mov	_strpbrk_sloc2_1_0+1, a
+                                     95 ;	../_strpbrk.c: 38: if (p != NULL && (ret == NULL || p < ret)) {
+      000030r88r0F                   96 	mov	a, _strpbrk_sloc2_1_0+0
+      000032r89r0E                   97 	or	a, _strpbrk_sloc2_1_0+1
+      000034 00 2B                   98 	cneqsn	a, #0x00
+      000036r54r30                   99 	goto	00102$
+      000038r84r0F                  100 	mov	a, _strpbrk_sloc0_1_0+0
+      00003Ar85r0E                  101 	or	a, _strpbrk_sloc0_1_0+1
+      00003C 00 2B                  102 	cneqsn	a, #0x00
+      00003Er4Cr30                  103 	goto	00101$
+      000040r88r0F                  104 	mov	a, _strpbrk_sloc2_1_0+0
+      000042r84r0C                  105 	sub	a, _strpbrk_sloc0_1_0+0
+      000044r89r0F                  106 	mov	a, _strpbrk_sloc2_1_0+1
+      000046r85r0D                  107 	subc	a, _strpbrk_sloc0_1_0+1
+      000048 40 1A                  108 	t1sn	f, c
+      00004Ar54r30                  109 	goto	00102$
+      00004C                        110 00101$:
+                                    111 ;	../_strpbrk.c: 39: ret = p;
+      00004Cr88r0F                  112 	mov	a, _strpbrk_sloc2_1_0+0
+      00004Er84r0B                  113 	mov	_strpbrk_sloc0_1_0+0, a
+      000050r89r0F                  114 	mov	a, _strpbrk_sloc2_1_0+1
+      000052r85r0B                  115 	mov	_strpbrk_sloc0_1_0+1, a
+      000054                        116 00102$:
+                                    117 ;	../_strpbrk.c: 41: control++;
+      000054r06r12                  118 	inc	_strpbrk_sloc1_1_0+0
+      000056r07r10                  119 	addc	_strpbrk_sloc1_1_0+1
+      000058r0Cr30                  120 	goto	00105$
+      00005A                        121 00107$:
+                                    122 ;	../_strpbrk.c: 44: return (ret);
+      00005Ar85r0F                  123 	mov	a, _strpbrk_sloc0_1_0+1
+      00005Cr80r0B                  124 	mov	p, a
+      00005Er84r0F                  125 	mov	a, _strpbrk_sloc0_1_0+0
+                                    126 ;	../_strpbrk.c: 45: }
+      000060 7A 00                  127 	ret
+                                    128 	.area CODE
+                                    129 	.area CONST
+                                    130 	.area CABS (ABS)

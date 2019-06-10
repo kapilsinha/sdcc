@@ -1,0 +1,94 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.1 #11255 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module _schar2fs
+                                      6 	.optsdcc -mpdk13
+                                      7 	
+                                      8 
+                                      9 ; default segment ordering in RAM for linker
+                                     10 	.area DATA
+                                     11 	.area OSEG (OVR,DATA)
+                                     12 
+                                     13 ;--------------------------------------------------------
+                                     14 ; Public variables in this module
+                                     15 ;--------------------------------------------------------
+                                     16 	.globl ___slong2fs
+                                     17 	.globl ___schar2fs_PARM_1
+                                     18 	.globl ___schar2fs
+                                     19 ;--------------------------------------------------------
+                                     20 ; special function registers
+                                     21 ;--------------------------------------------------------
+                                     22 	.area RSEG (ABS)
+      000000                         23 	.org 0x0000
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DATA
+      000000                         28 ___schar2fs_PARM_1:
+      000000                         29 	.ds 1
+      000001                         30 ___schar2fs_sloc0_1_0:
+      000001                         31 	.ds 4
+                                     32 ;--------------------------------------------------------
+                                     33 ; overlayable items in ram 
+                                     34 ;--------------------------------------------------------
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area HOME
+                                     43 	.area GSINIT
+                                     44 	.area GSFINAL
+                                     45 	.area GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area HOME
+                                     50 	.area HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area CODE
+                                     55 ;	../_schar2fs.c: 55: float __schar2fs (signed char sc) {
+                                     56 ;	-----------------------------------------
+                                     57 ;	 function __schar2fs
+                                     58 ;	-----------------------------------------
+      000000                         59 ___schar2fs:
+                                     60 ;	../_schar2fs.c: 56: return __slong2fs(sc);
+      000000r80r0F                   61 	mov	a, ___schar2fs_PARM_1+0
+      000002r80r0B                   62 	mov	___slong2fs_PARM_1+0, a
+      000004 6B 00                   63 	sl	a
+      000006 00 2F                   64 	mov	a, #0x00
+      000008 61 00                   65 	subc	a
+      00000Ar81r0B                   66 	mov	___slong2fs_PARM_1+1, a
+      00000Cr82r0B                   67 	mov	___slong2fs_PARM_1+2, a
+      00000Er83r0B                   68 	mov	___slong2fs_PARM_1+3, a
+      000010r01r2F                   69 	mov	a, #___schar2fs_sloc0_1_0
+      000012 72 00                   70 	push	af
+      000014r00r38                   71 	call	___slong2fs
+      000016 C2 01                   72 	mov	a, sp
+      000018 FE 28                   73 	add	a, #-2
+      00001A 82 01                   74 	mov	sp, a
+      00001C FC 28                   75 	add	a, #0xfc
+      00001Er80r0B                   76 	mov	p, a
+      000020r81r03                   77 	idxm	a, p
+      000022r80r0B                   78 	mov	p, a
+      000024r81r0F                   79 	mov	a, ___schar2fs_sloc0_1_0+0
+      000026r80r03                   80 	idxm	p, a
+      000028r00r12                   81 	inc	p
+      00002Ar82r0F                   82 	mov	a, ___schar2fs_sloc0_1_0+1
+      00002Cr80r03                   83 	idxm	p, a
+      00002Er00r12                   84 	inc	p
+      000030r83r0F                   85 	mov	a, ___schar2fs_sloc0_1_0+2
+      000032r80r03                   86 	idxm	p, a
+      000034r00r12                   87 	inc	p
+      000036r84r0F                   88 	mov	a, ___schar2fs_sloc0_1_0+3
+      000038r80r03                   89 	idxm	p, a
+                                     90 ;	../_schar2fs.c: 57: }
+      00003A 7A 00                   91 	ret
+                                     92 	.area CODE
+                                     93 	.area CONST
+                                     94 	.area CABS (ABS)
