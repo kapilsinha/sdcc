@@ -30,7 +30,7 @@
 #include "ralloc.h"
 #include "gen.h"
 
-char *aopLiteral (value * val, int offset);
+const char *aopLiteral (value * val, int offset);
 extern int allocInfo;
 
 /* this is the down and dirty file with all kinds of
@@ -224,6 +224,7 @@ outAcc (operand * result)
 /*-----------------------------------------------------------------*/
 /* emitcode - writes the code into a file : for now it is simple    */
 /*-----------------------------------------------------------------*/
+/*
 static void
 emitcode (char *inst, char *fmt, ...)
 {
@@ -246,6 +247,7 @@ emitcode (char *inst, char *fmt, ...)
 
         va_end (ap);
 }
+*/
 
 /*-----------------------------------------------------------------*/
 /* avr_emitDebuggerSymbol - associate the current code location  */
@@ -293,7 +295,7 @@ hasInc (operand *op, iCode *ic)
 /*-----------------------------------------------------------------*/
 /* getFreePtr - returns X or Z whichever is free or can be pushed  */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 getFreePtr (iCode * ic, asmop ** aopp, bool result, bool zonly)
 {
         bool xiu = FALSE, ziu = FALSE;
@@ -495,7 +497,8 @@ aopForSym (iCode * ic, symbol * sym, bool result)
                 sym->aop = aop = newAsmop (AOP_IMMD);
                 aop->aopu.aop_immd = Safe_calloc (1, strlen (sym->rname) + 1);
                 strcpy (aop->aopu.aop_immd, sym->rname);
-                aop->size = FPTRSIZE;
+                /* aop->size = FPTRSIZE; // 2 */
+                aop->size = getSize (sym->type);
                 return aop;
         }
 
@@ -984,7 +987,7 @@ aopGet (asmop * aop, int offset)
                 break;
 
         case AOP_LIT:
-                s = aopLiteral (aop->aopu.aop_lit, offset);
+                s = (char *) aopLiteral (aop->aopu.aop_lit, offset);
                 emitcode ("ldi", "%s,<(%s)",
                           (rs = ((offset & 1) ? "r24" : "r25")), s);
                 return rs;
@@ -1360,7 +1363,7 @@ static void
 genUminus (iCode * ic)
 {
         int offset, size;
-        sym_link *optype, *rtype;
+        sym_link *optype; //, *rtype;
         int samer;
 
         /* assign asmops */
@@ -1368,7 +1371,7 @@ genUminus (iCode * ic)
         aopOp (IC_RESULT (ic), ic, TRUE);
 
         optype = operandType (IC_LEFT (ic));
-        rtype = operandType (IC_RESULT (ic));
+        //rtype = operandType (IC_RESULT (ic));
 
         /* if float then do float stuff */
         if (IS_FLOAT (optype)) {
@@ -2545,16 +2548,17 @@ genCmpLe (iCode * ic, iCode * ifx)
 /*-----------------------------------------------------------------*/
 /* ifxForOp - returns the icode containing the ifx for operand     */
 /*-----------------------------------------------------------------*/
+/*
 static iCode *
 ifxForOp (operand * op, iCode * ic)
 {
-        /* if true symbol then needs to be assigned */
+        // if true symbol then needs to be assigned
         if (IS_TRUE_SYMOP (op))
                 return NULL;
 
-        /* if this has register type condition and
-           the next instruction is ifx with the same operand
-           and live to of the operand is upto the ifx only then */
+        // if this has register type condition and
+        //   the next instruction is ifx with the same operand
+        //  and live to of the operand is upto the ifx only then
         if (ic->next &&
             ic->next->op == IFX &&
             IC_COND (ic->next)->key == op->key &&
@@ -2562,6 +2566,7 @@ ifxForOp (operand * op, iCode * ic)
 
         return NULL;
 }
+*/
 
 /*-----------------------------------------------------------------*/
 /* genAndOp - for && operation                                     */
@@ -2930,6 +2935,7 @@ genXor (iCode * ic, iCode * ifx)
 /*-----------------------------------------------------------------*/
 /* genInline - write the inline code out                           */
 /*-----------------------------------------------------------------*/
+/*
 static void
 genInline (iCode * ic)
 {
@@ -2940,7 +2946,7 @@ genInline (iCode * ic)
 
   buffer = bp = bp1 = Safe_strdup (IC_INLINE (ic));
 
-  /* emit each line as a code */
+  // emit each line as a code
   while (*bp)
     {
       switch (*bp)
@@ -2958,7 +2964,7 @@ genInline (iCode * ic)
           break;
 
         default:
-          /* Add \n for labels, not dirs such as c:\mydir */
+          // Add \n for labels, not dirs such as c:\mydir
           if (!inComment && (*bp == ':') && (isspace((unsigned char)bp[1])))
             {
               ++bp;
@@ -2977,11 +2983,12 @@ genInline (iCode * ic)
 
   Safe_free (buffer);
 
-  /* consumed; we can free it here */
+  // consumed; we can free it here
   dbuf_free (IC_INLINE (ic));
 
   _G.inLine -= (!options.asmpeep);
 }
+*/
 
 /*-----------------------------------------------------------------*/
 /* genRotC - rotate right/left with carry , lr = 1 rotate right    */
@@ -3865,7 +3872,7 @@ static void
 genMemPointerGet (operand * left, operand * result, iCode * ic, iCode *pi)
 {
         asmop *aop = NULL;
-        regs *preg = NULL;
+        // regs *preg = NULL;
         int gotFreePtr = 0;
         char *rname, *frname = NULL;
         sym_link *rtype, *retype;
@@ -3891,7 +3898,7 @@ genMemPointerGet (operand * left, operand * result, iCode * ic, iCode *pi)
         if (!AOP_INPREG (AOP (left))) {
                 /* otherwise get a free pointer register */
                 aop = newAsmop (0);
-                preg = getFreePtr (ic, &aop, FALSE, 0);
+                // preg = getFreePtr (ic, &aop, FALSE, 0);
                 if (isRegPair (AOP (left) )) {
                         emitcode ("movw", "%s,%s",
                                   aop->aopu.aop_ptr->name,
@@ -4734,12 +4741,10 @@ genFarFarAssign (operand * result, operand * right, iCode * ic)
 {
         int size = AOP_SIZE (right);
         int offset = 0;
-        char *l;
         /* first push the right side on to the stack */
         while (size--) {
-                l = aopGet (AOP (right), offset++);
-                MOVA (l);
-                emitcode ("push", "acc");
+            MOVA (aopGet (AOP (right), offset++));
+            emitcode ("push", "acc");
         }
 
         freeAsmop (right, NULL, ic, FALSE);
@@ -4852,12 +4857,10 @@ static void
 genJumpTab (iCode * ic)
 {
         symbol *jtab;
-        char *l;
 
         aopOp (IC_JTCOND (ic), ic, FALSE);
         /* get the condition into accumulator */
-        l = aopGet (AOP (IC_JTCOND (ic)), 0);
-        MOVA (l);
+        MOVA (aopGet (AOP (IC_JTCOND (ic)), 0));
         /* multiply by three */
         emitcode ("add", "a,acc");
         emitcode ("add", "a,%s", aopGet (AOP (IC_JTCOND (ic)), 0));

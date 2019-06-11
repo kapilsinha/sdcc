@@ -54,7 +54,7 @@ static struct {
 int avr_ptrRegReq;		/* pointer register required */
 
 /* AVR registers */
-regs regsAVR[] = {
+reg_info regsAVR[] = {
 	{REG_GPR|REG_PAIR, R0_IDX, REG_GPR|REG_PAIR, "r0", "r0", "", 0, 0, 0},	/* scratch */
 	{REG_GPR, R1_IDX, REG_GPR	  , "r1", "r1", "", 0, 0, 0},		/* scratch */
 	{REG_GPR|REG_PAIR, R2_IDX, REG_GPR|REG_PAIR, "r2", "r2", "", 0, 1, 1},	/* gpr */
@@ -395,7 +395,7 @@ static void
 spillLRWithPtrReg (symbol * forSym)
 {
 	symbol *lrsym;
-	regs *X, *Z, *X1, *Z1;
+	reg_info *X, *Z, *X1, *Z1;
 	int k;
 
 	if (!_G.regAssigned || bitVectIsZero (_G.regAssigned))
@@ -435,7 +435,7 @@ spillLRWithPtrReg (symbol * forSym)
 /*-----------------------------------------------------------------*/
 /* allocReg - allocates register of given type                     */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 allocReg (short type)
 {
 	int i;
@@ -468,7 +468,7 @@ allocReg (short type)
 /*-----------------------------------------------------------------*/
 /* allocRegPair - allocates register pair of given                 */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 allocRegPair (short type)
 {
 	int i;
@@ -496,7 +496,7 @@ allocRegPair (short type)
 /*-----------------------------------------------------------------*/
 /* avr_regWithIdx - returns pointer to register wit index number   */
 /*-----------------------------------------------------------------*/
-regs *
+reg_info *
 avr_regWithIdx (int idx)
 {
 	int i;
@@ -513,7 +513,7 @@ avr_regWithIdx (int idx)
 /* freeReg - frees a register                                      */
 /*-----------------------------------------------------------------*/
 static void
-freeReg (regs * reg)
+freeReg (reg_info * reg)
 {
 	reg->isFree = 1;
 }
@@ -1010,10 +1010,10 @@ spilSomething (iCode * ic, eBBlock * ebp, symbol * forSym)
 /*-----------------------------------------------------------------*/
 /* getRegPtr - will try for PTR if not a GPR type if not spil      */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 getRegPtr (iCode * ic, eBBlock * ebp, symbol * sym)
 {
-	regs *reg;
+	reg_info *reg;
 
       tryAgain:
 	/* try for a ptr type */
@@ -1040,10 +1040,10 @@ getRegPtr (iCode * ic, eBBlock * ebp, symbol * sym)
 /*-----------------------------------------------------------------*/
 /* getRegScr - will try for SCR if not a GPR type if not spil      */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 getRegScr (iCode * ic, eBBlock * ebp, symbol * sym)
 {
-	regs *reg;
+	reg_info *reg;
 
       tryAgain:
 
@@ -1066,10 +1066,10 @@ getRegScr (iCode * ic, eBBlock * ebp, symbol * sym)
 /*-----------------------------------------------------------------*/
 /* getRegGpr - will try for GPR if not spil                        */
 /*-----------------------------------------------------------------*/
-static regs *
+static reg_info *
 getRegGpr (iCode * ic, eBBlock * ebp, symbol * sym )
 {
-	regs *reg;
+	reg_info *reg;
 
       tryAgain:
 	/* try for gpr type */
@@ -1093,7 +1093,7 @@ getRegGpr (iCode * ic, eBBlock * ebp, symbol * sym )
 /* symHasReg - symbol has a given register                         */
 /*-----------------------------------------------------------------*/
 static bool
-symHasReg (symbol * sym, regs * reg)
+symHasReg (symbol * sym, reg_info * reg)
 {
 	int i;
 
@@ -1279,7 +1279,7 @@ positionRegs (symbol * result, symbol * opsym, int lineno)
 	}
  xchgPositions:
 	if (shared) {
-		regs *tmp = result->regs[i];
+		reg_info *tmp = result->regs[i];
 		result->regs[i] = result->regs[j];
 		result->regs[j] = tmp;
 		goto again;
@@ -1436,7 +1436,7 @@ serialRegAssign (eBBlock ** ebbs, int count)
 				_G.regAssigned = bitVectSetBit (_G.regAssigned, sym->key);
 				if (needsPair(ic)) {
 					short regtype ;
-					regs *preg;
+					reg_info *preg;
 					if (sym->regType == REG_PTR) regtype = REG_PTR;
 					else if (sym->regType == REG_SCR) regtype = REG_SCR;
 					else regtype = REG_GPR;
@@ -2227,7 +2227,7 @@ setDefaultRegs (eBBlock ** ebbs, int count)
 		preAssignParms (ebbs[0]->sch);
 	}
 	/* Y - is not allocated (it is the stack frame) */
-	regsAVR[R28_IDX].isFree = regsAVR[R28_IDX].isFree = 0;
+	regsAVR[R28_IDX].isFree = 0;
 }
 
 /*-----------------------------------------------------------------*/
@@ -2251,7 +2251,7 @@ avr_assignRegisters (ebbIndex * ebbi)
 
 	/* liveranges probably changed by register packing
 	   so we compute them again */
-	recomputeLiveRanges (ebbs, count);
+	recomputeLiveRanges (ebbs, count, FALSE);
 
 	if (options.dump_i_code)
 		dumpEbbsToFileExt (DUMP_PACK, ebbi);

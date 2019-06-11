@@ -405,6 +405,12 @@ _validatePorts (void)
   int i;
   for (i = 0; i < NUM_PORTS; i++)
     {
+      /* Debugging the port structs
+      printf ("%s : %s, %d, %d, %d, %d, %p\n", 
+        _ports[i]->target, _ports[i]->fun_prefix,
+        _ports[i]->little_endian, _ports[i]->reset_labelKey, _ports[i]->globals_allowed, 
+        _ports[i]->num_regs, _ports[i]->magic);
+      */
       if (_ports[i]->magic != PORT_MAGIC)
         {
           /* Uncomment this line to debug which port is causing the problem

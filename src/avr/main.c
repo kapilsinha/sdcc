@@ -111,7 +111,7 @@ _avr_setDefaultOptions (void)
 }
 
 static const char *
-_avr_getRegName (struct regs *reg)
+_avr_getRegName (struct reg_info *reg)
 {
     if (reg)
         return reg->name;
@@ -205,7 +205,7 @@ PORT avr_port = {
      1
     },
     
-    /* Default peephole rules */
+    /* Peephole rules */
     {
      _defaultRules
     },
@@ -256,8 +256,7 @@ PORT avr_port = {
 
     /* Support information
     /* avr has an 8 bit mul */
-    /* TODO: This seems wrong. There should be one number and then boolean... */
-    { 1, -1, FALSE },
+    { 1, FALSE },
     
     /* Debugger */
     {
@@ -286,6 +285,8 @@ PORT avr_port = {
     _avr_setDefaultOptions,
     avr_assignRegisters,
     _avr_getRegName,
+    0,
+    NULL,
     _avr_keywords,
     _avr_genAssemblerPreamble,
     NULL,               /* no genAssemblerEnd */
@@ -313,5 +314,7 @@ PORT avr_port = {
     GPOINTER,           /* treat unqualified pointers as "generic" pointers */
     1,                  /* reset labelKey to 1 */
     1,                  /* globals & local static allowed */
+    30,                 /* reserve R0 and R1 as fixed registers, as in avr-gcc:
+                         * https://gcc.gnu.org/wiki/avr-gcc#Register_Layout */
     PORT_MAGIC
 };

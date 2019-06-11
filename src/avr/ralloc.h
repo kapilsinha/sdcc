@@ -47,7 +47,7 @@ enum
 #define REG_PAIR 0x10
 
 /* definition for the registers */
-typedef struct regs
+typedef struct reg_info
   {
     short type;			/* can have value 
 				   REG_GPR, REG_PTR or REG_CND */
@@ -60,9 +60,9 @@ typedef struct regs
     unsigned isFree:1;		/* is currently unassigned  */
     unsigned saveReq:1;		/* save required @ function entry ? */
   }
-regs;
-extern regs regsAVR[];
+reg_info;
+extern reg_info regsAVR[];
 
-regs *avr_regWithIdx (int);
+reg_info *avr_regWithIdx (int);
 
 #endif

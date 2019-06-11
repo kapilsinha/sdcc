@@ -61,15 +61,15 @@ typedef struct asmop
     union
       {
 	value *aop_lit;		/* if literal */
-	regs *aop_reg[4];	/* array of registers */
+	reg_info *aop_reg[4];	/* array of registers */
 	char *aop_dir;		/* if direct  */
-	regs *aop_ptr;		/* either -> R26 or R30 */
+	reg_info *aop_ptr;		/* either -> R26 or R30 */
 	char *aop_immd;		/* if immediate others are implied */
 	int aop_stk;		/* stack offset when AOP_STK */
 	char *aop_str[4];	/* just a string array containing the location */
       }
     aopu;
-    regs *aop_ptr2;		/* either -> R27 or R31 */
+    reg_info *aop_ptr2;		/* either -> R27 or R31 */
   }
 asmop;
 
